@@ -22,7 +22,8 @@
 ##
 ## Note that if $DISPLAY != $HOSTNAME:n then a remote shell is opened
 ## to the host specified in $HOSTNAME to play the audio.  See manual
-## pages for rsh and .rhosts for your system to learn how to set it up.
+## pages for ssh, ssh-keygen, ssh-agent and ssh-add to learn how to 
+## set it up.
 ##
 ## This function writes the audio data through a pipe to the program
 ## "play" from the sox distribution.  sox runs pretty much anywhere,
@@ -78,18 +79,18 @@ function sound(data, rate)
     host=getenv("HOSTNAME");
     if isempty(host), 
       host = system("uname -n");
-				# trim newline from end of hostname
+      ## trim newline from end of hostname
       if !isempty(host), host = host(1:length(host)-1); endif
     endif
     islocal = strcmp(tolower(host),tolower(display));
   endif
 
-  ## If not running locally, then must use rsh to execute play command
+  ## If not running locally, then must use ssh to execute play command
   global sound_play_utility="play -t AU -";
   if islocal
     fid=popen(sound_play_utility, "w");
   else
-    fid=popen(["rsh ", host, " ", sound_play_utility], "w");
+    fid=popen(["ssh ", host, " ", sound_play_utility], "w");
   end
   if fid < 0,
     warning("sound could not open play process");
@@ -107,12 +108,12 @@ function sound(data, rate)
 end
 
 ###### auplay based version: not needed if using sox
-##  ## If not running locally, then must use rsh to execute play command
+##  ## If not running locally, then must use ssh to execute play command
 ##  global sound_play_utility="~/bin/auplay"
 ##  if islocal
 ##    fid=popen(sound_play_utility, "w");
 ##  else
-##    fid=popen(["rsh ", host, " ", sound_play_utility], "w");
+##    fid=popen(["ssh ", host, " ", sound_play_utility], "w");
 ##  end
 ##  fwrite(fid, rate, 'long');
 ##  fwrite(fid, channels, 'long');
