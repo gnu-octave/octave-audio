@@ -18,12 +18,26 @@
 ##
 ## Writes an audio file with the appropriate header. The extension on
 ## the filename determines the layout of the header. Currently supports
-## .wav and .au layouts.  Data is a matrix of audio samples, one row
-## time step, one column per channel. Fs defaults to 8000 Hz.  Format
-## is one of ulaw, alaw, char, short, long, float, double
+## .wav and .au layouts.  Data is a matrix of audio samples in the
+## range [-1,1] (inclusive), one row per time step, one column per 
+## channel. Fs defaults to 8000 Hz.  Format is one of ulaw, alaw, char, 
+## short, long, float, double
+##
+## Note that translating the symmetric range [-1,1] into the asymmetric
+## range [-2^n,2^n-1] requires a DC offset of -2/2^n.  The inverse 
+## process used by auload requires a DC offset of 2/2^n, so loading and 
+## saving a file will not change the contents.  Other applications may 
+## compensate for the asymmetry in a different way (including previous 
+## versions of auload/ausave) so you may find small differences in 
+## calculated DC offsets for the same file.
+
 
 ## 2001-10-23 Paul Kienzle
 ## * force lin2mu to use [-1:1] regardless of its default
+## 2001-12-11 Paul Kienzle <pkienzle@users.sf.net>
+## * use closed interval [-1,1] rather than open interval [-1,1) internally
+## * rescale data if it exceeds the range
+
 function ausave(path, data, rate, sampleformat)
 
   if nargin < 2 || nargin>4
@@ -206,7 +220,14 @@ function ausave(path, data, rate, sampleformat)
     error('ausave(filename.ext,...) understands .wav .au and .aiff only');
   end
 
-  ## convert samples from range [-1, 1)
+  ## Make sure the data fits into the sample range
+  scale = max(abs(data(:)));
+  if (scale > 1.0)
+    warning("ausave: audio data exceeds range [-1,1] --- rescaling");
+    data = data / scale;
+  endif
+
+  ## convert samples from range [-1, 1]
   if strcmp(sampleformat, 'alaw')
     error("FIXME: ausave needs linear to alaw conversion\n");
     precision = 'uchar';
@@ -214,13 +235,13 @@ function ausave(path, data, rate, sampleformat)
     data = lin2mu(data, 0);
     precision = 'uchar'
   elseif strcmp(sampleformat, 'uchar')
-    data = data*128 + 128;
+    data = round((data+1)*127.5);
     precision = 'uchar';
   elseif strcmp(sampleformat, 'short')
-    data = data*32768;
+    data = round(data*32767.5 - 0.5);
     precision = 'short';
   elseif strcmp(sampleformat, 'long')
-    data = data*2^31;
+    data = round(data*(2^31-0.5) - 0.5);
     precision = 'long';
   else
     precision = sampleformat;

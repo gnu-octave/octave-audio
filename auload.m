@@ -20,18 +20,27 @@
 ## data, one column per channel, one row per time slice.  Also returns
 ## the sample rate and stored format (one of ulaw, alaw, char, short,
 ## long, float, double). The sample value will be normalized to the
-## range [-1,1) regardless of the stored format.  This does not do any
-## level correction or DC offset correction on the samples.
+## range [-1,1] regardless of the stored format.
 ##
 ## Example
 ##    [x, fs] = auload(file_in_loadpath("sample.wav"));
 ##    auplot(x,fs);
+##
+## Note that translating the asymmetric range [-2^n,2^n-1] into the 
+## symmetric range [-1,1] requires a DC offset of 2/2^n. The inverse 
+## process used by ausave requires a DC offset of -2/2^n, so loading and 
+## saving a file will not change the contents.  Other applications may 
+## compensate for the asymmetry in a different way (including previous 
+## versions of auload/ausave) so you may find small differences in 
+## calculated DC offsets for the same file.
 
 ## 2001-09-04 Paul Kienzle <pkienzle@users.sf.net>
 ## * skip unknown blocks in WAVE format.
 ## 2001-09-05 Paul Kienzle <pkienzle@users.sf.net>
 ## * remove debugging stuff from AIFF format.
 ## * use data length if it is given rather than reading to the end of file.
+## 2001-12-11 Paul Kienzle <pkienzle@users.sf.net>
+## * use closed interval [-1,1] rather than open interval [-1,1) internally
 
 function [data, rate, sampleformat] = auload(path)
 
@@ -324,16 +333,19 @@ function [data, rate, sampleformat] = auload(path)
 	     -1888,  -1824,  -2016,  -1952,  -1632,  -1568,  -1760,  -1696, \
 	      -688,   -656,   -752,   -720,   -560,   -528,   -624,   -592, \
 	      -944,   -912,  -1008,   -976,   -816,   -784,   -880,   -848 ];
-    alaw = [ alaw, -alaw]/32768;
+    alaw = ([ alaw,-alaw]+0.5)/32767.5;
     data = alaw(data+1);
   elseif strcmp(sampleformat, 'ulaw')
-    data = mu2lin(data, 16)/32768;
+    data = mu2lin(data, 0);
   elseif strcmp(sampleformat, 'uchar')
-    data = data/128 - 1;
+    ## [ 0, 255 ] -> [ -1, 1 ]
+    data = data/127.5 - 1;
   elseif strcmp(sampleformat, 'short')
-    data = data/32768;
+    ## [ -32768, 32767 ] -> [ -1, 1 ]
+    data = (data+0.5)/32767.5;
   elseif strcmp(sampleformat, 'long')
-    data = data/2^31;
+    ## [ -2^31, 2^31-1 ] -> [ -1, 1 ]
+    data = (data+0.5)/(2^31-0.5);
   end
   data = reshape(data, channels, length(data)/channels)';
 
