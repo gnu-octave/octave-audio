@@ -47,7 +47,7 @@ function [data, rate, sampleformat] = auload(path)
   end
   ext = tolower(substr(path, ext+1, length(path)-ext));
 
-  [file, msg] = fopen(path, 'r');
+  [file, msg] = fopen(path, 'rb');
   if (file == -1)
     error([ msg, ": ", path]);
   end

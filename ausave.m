@@ -72,7 +72,7 @@ function ausave(path, data, rate, sampleformat)
     end
     datasize = channels*samplesize*samples;
 
-    [file, msg] = fopen(path, 'w');
+    [file, msg] = fopen(path, 'wb');
     if (file == -1)
       error("%s: %s", msg, path);
     end
@@ -131,7 +131,7 @@ function ausave(path, data, rate, sampleformat)
     end
     datasize = channels*samplesize*samples;
 
-    [file, msg] = fopen(path, 'w');
+    [file, msg] = fopen(path, 'wb');
     if (file == -1)
       error("%s: %s", msg, path);
     end
@@ -175,7 +175,7 @@ function ausave(path, data, rate, sampleformat)
     end
     datasize = channels*samplesize*samples;
 
-    [file, msg] = fopen(path, 'w');
+    [file, msg] = fopen(path, 'wb');
     if (file == -1)
       error("%s: %s", msg, path);
     end
