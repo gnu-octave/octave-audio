@@ -137,6 +137,18 @@ function [data, rate, sampleformat] = auload(path)
       else
        	error(msg);
       endif
+    elseif (formatid == 3)
+      if bits == 32
+	sampleformat = 'float';
+	precision = 'float';
+	samples = len/4;
+      elseif bits == 64
+	sampleformat = 'double';
+	precision = 'double';
+	samples = len/8;
+      else
+	error(msg);
+      endif
     elseif (formatid == 6 && bits == 8)
       sampleformat = 'alaw';
       precision = 'uchar';

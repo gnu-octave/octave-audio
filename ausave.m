@@ -75,6 +75,12 @@ function ausave(path, data, rate, sampleformat)
     elseif (strcmp(sampleformat, 'long'))
       formatid = 1;
       samplesize = 4;
+    elseif (strcmp(sampleformat, 'float'))
+      formatid = 3;
+      samplesize = 4;
+    elseif (strcmp(sampleformat, 'double'))
+      formatid = 3;
+      samplesize = 8;
     elseif (strcmp(sampleformat, 'alaw'))
       formatid = 6;
       samplesize = 1;
