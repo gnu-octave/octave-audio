@@ -1,6 +1,10 @@
 include ../../Makeconf
 
-all: bin/aurecord
+ifdef HAVE_LINUX_SOUNDCARD
+	PROG=bin/aurecord
+endif
+
+all: $(PROG)
 
 bin/aurecord: aurecord.o endpoint.o
 	$(CXX) $(CXXFLAGS) -o $@ aurecord.o endpoint.o
