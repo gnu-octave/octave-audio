@@ -11,7 +11,7 @@ else
 	if test $have_oss = yes ; then
 	    STATUS="yes"
 	    AC_SUBST(DEFHAVE_LINUX_SOUNDCARD)
-	    DEFHAVE_OSS="HAVE_LINUX_SOUNDCARD=1"
+	    DEFHAVE_LINUX_SOUNDCARD="HAVE_LINUX_SOUNDCARD=1"
 	else
 	    STATUS="linux/soundcard.h not found"
 	fi
