@@ -231,7 +231,7 @@ function [data, rate, sampleformat] = auload(path)
     end
       
   ## Apple/SGI .aiff format
-  elseif strcmp(ext,'aiff')
+  elseif strcmp(ext,'aiff') || strcmp(ext,'aif')
 
     ## Header format obtained from sox/aiff.c
     ## September 25, 1991

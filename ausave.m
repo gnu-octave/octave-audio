@@ -52,7 +52,12 @@ function ausave(path, data, rate, sampleformat)
   end
   ext = tolower(substr(path, ext+1, length(path)-ext));
 
+  # determine data size and orientation
   [samples, channels] = size(data);
+  if (samples < channels)
+    data = data.';
+    [samples, channels] = size(data);
+  endif
 
   ## Microsoft .wav format
   if strcmp(ext,'wav') 
@@ -165,7 +170,7 @@ function ausave(path, data, rate, sampleformat)
     fwrite(file, channels, 'long', 0, arch);
 
   ## Apple/SGI .aiff format
-  elseif strcmp(ext,'aiff')
+  elseif strcmp(ext,'aiff') || strcmp(ext,'aif')
 
     ## Header format obtained from sox/aiff.c
     ## September 25, 1991
