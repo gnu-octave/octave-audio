@@ -21,6 +21,9 @@
 ## .wav and .au layouts.  Data is a matrix of audio samples, one row
 ## time step, one column per channel. Fs defaults to 8000 Hz.  Format
 ## is one of ulaw, alaw, char, short, long, float, double
+
+## 2001-10-23 Paul Kienzle
+## * force lin2mu to use [-1:1] regardless of its default
 function ausave(path, data, rate, sampleformat)
 
   if nargin < 2 || nargin>4
@@ -208,7 +211,7 @@ function ausave(path, data, rate, sampleformat)
     error("FIXME: ausave needs linear to alaw conversion\n");
     precision = 'uchar';
   elseif strcmp(sampleformat, 'ulaw')
-    data = lin2mu(data);
+    data = lin2mu(data, 0);
     precision = 'uchar'
   elseif strcmp(sampleformat, 'uchar')
     data = data*128 + 128;
