@@ -1,4 +1,4 @@
-include ../../Makeconf
+sinclude ../../Makeconf
 
 ifdef HAVE_LINUX_SOUNDCARD
 	PROG=bin/aurecord
