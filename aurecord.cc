@@ -19,8 +19,6 @@
 #include <fcntl.h>
 #include <sys/ioctl.h>
 #include <signal.h>
-#include <X11/X.h>
-#include <X11/Xlib.h>
 #include "endpoint.h" 
 
 /* ==================================================================== */
@@ -269,6 +267,10 @@ void audioabort()
 // This is an attempt at showing the capture interaction in an X window,
 // programmed in raw Xlib.  It doesn't work yet.  Instead, the interaction
 // is done on stderr.  Too bad *Inferior Octave* doesn't handle ^M properly.
+
+#include <X11/X.h>
+#include <X11/Xlib.h>
+
 void inform(char str[])
 {
   static int first = 1;
