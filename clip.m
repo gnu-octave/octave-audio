@@ -42,13 +42,20 @@ function x = clip (x, range)
   else
     usage("X = clip(X [, range])");
   end
-  dfi = do_fortran_indexing;
+  try dfi = do_fortran_indexing;
+  catch dfi = 0;
+  end
+  try wfi = warn_fortran_indexing;
+  catch wfi = 0;
+  end
   unwind_protect
     do_fortran_indexing = 1;
+    warn_fortran_indexing = 0;
     x (find (x > range (2))) = range (2);
     x (find (x < range (1))) = range (1);
   unwind_protect_cleanup
     do_fortran_indexing = dfi;
+    warn_fortran_indexing = wfi;
   end_unwind_protect
 
 endfunction
