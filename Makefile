@@ -1,6 +1,6 @@
 include ../../Makeconf
 
-all: bin/record
+all: bin/aurecord
 
 bin/aurecord: aurecord.o endpoint.o
 	$(CXX) $(CXXFLAGS) -o $@ aurecord.o endpoint.o
