@@ -4,8 +4,11 @@
 // Bruce T. Lowerre, Public domain, 1995, 1997
 //
 // $Log$
-// Revision 1.1  2001/10/10 19:54:49  pkienzle
-// Initial revision
+// Revision 1.2  2002/01/04 15:53:56  pkienzle
+// Changes required to compile for gcc-3.0 in debian hppa/unstable
+//
+// Revision 1.1.1.1  2001/10/10 19:54:49  pkienzle
+// revised heirarchy
 //
 // Revision 1.1  2001/04/22 08:29:30  pkienzle
 // adding in all of matcompat
@@ -64,6 +67,7 @@
 #include <iostream>
 #include <cmath>
 #include "endpoint.h"
+using namespace std;
 
 
 /* ENDPOINTER::ENDPOINTER - class constructor, set initial values */
