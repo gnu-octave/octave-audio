@@ -14,19 +14,23 @@
 ## along with this program; if not, write to the Free Software
 ## Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-## usage: [y, t, scale] = auplot(x [, fs [, offset]] [, plotstr])
+## -*- texinfo -*-
+## @deftypefn {Function File} {[@var{y},@var{t},@var{scale}] = } auplot (@var{x})
+## @deftypefnx {Function File} {[@var{y},@var{t},@var{scale}] = } auplot (@var{x},@var{fs})
+## @deftypefnx {Function File} {[@var{y},@var{t},@var{scale}] = } auplot (@var{x},@var{fs},@var{offset})
+## @deftypefnx {Function File} {[@var{y},@var{t},@var{scale}] = } auplot (@var{...},@var{plotstr})
 ##
-## Plot the waveform data, displaying time on the x axis.  If you are
+## Plot the waveform data, displaying time on the @var{x} axis.  If you are
 ## plotting a slice from the middle of an array, you may want to specify
-## the offset into the array to retain the appropriate time index. If
+## the @var{offset} into the array to retain the appropriate time index. If
 ## the waveform contains multiple channels, then the data are scaled to
-## the range [-1,1] and shifted so that they do not overlap. If a plot
-## string is given, it is passed as the third argument to the plot
-## command. This allows you to set the linestyle easily. Fs defaults to
-## 8000 Hz, and offset defaults to 0 samples.
+## the range [-1,1] and shifted so that they do not overlap. If a @var{plotstr}
+## is given, it is passed as the third argument to the plot command. This 
+## allows you to set the linestyle easily. @var{fs} defaults to 8000 Hz, and 
+## @var{offset} defaults to 0 samples.
 ##
 ## Instead of plotting directly, you can ask for the returned processed 
-## vectors. If y has multiple channels, the plot should have the y-range
+## vectors. If @var{y} has multiple channels, the plot should have the y-range
 ## [-1 2*size(y,2)-1]. scale specifies how much the matrix was scaled
 ## so that each signal would fit in the specified range.
 ##
@@ -48,6 +52,7 @@
 ## will not add any information.  auplot_format, auplot_points and
 ## auplot_window may be set in .octaverc.  By default auplot_format is
 ## 'outline', auplot_points=1000 and auplot_window=7.
+## @end deftypefn
 
 ## 2000-03 Paul Kienzle
 ##     accept either row or column data

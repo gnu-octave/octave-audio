@@ -14,18 +14,20 @@
 ## along with this program; if not, write to the Free Software
 ## Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-## usage: [x, fs] = aucapture(t, fs, channels)
+## -*- texinfo -*-
+## @deftypefn {Function File} {[@var{x},@var{rate}] =} aucapture (@var{t},@var{fs},@var{channels})
 ##
-## Capture an audio event at the given sample rate fs.  This uses an
+## Capture an audio event at the given sample rate @var{fs}.  This uses an
 ## endpoint detection routine to eliminate the silence surrounding the
-## event. On return, data contains the samples, one column per channel
-## and rate contains the sample rate used. Note that the sample rate
+## event. On return, @var{x} contains the samples, one column per channel
+## and @var{rate} contains the sample rate used. Note that the sample rate
 ## used may not match the requested sample rate. Use the returned rate
 ## for further processing.  Similarly, the actual number of samples and
 ## channels may not match the request.
 ##
-## Time defaults to 10s, rate defaults to 8000 Hz, and channels defaults
-## to 1
+## @var{t} defaults to 10s, @var{fs} defaults to 8000 Hz, and @var{channels}
+## defaults to 1
+## @end deftypefn
 
 ## TODO: Consider combining with aurecord.m, with capture indicated by
 ## TODO:      time t=[] or t=0 or t<0, or maybe aurecord_usecapture

@@ -14,17 +14,19 @@
 ## along with this program; if not, write to the Free Software
 ## Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-## usage: [x, fs, sampleformat] = auload('filename.ext')
+## -*- texinfo -*-
+## @deftypefn {Function File} {[@var{x},@var{fs},@var{sampleformat}] =} auload (@var{filename})
 ##
-## Reads an audio waveform from a file.  Returns the audio samples in
-## data, one column per channel, one row per time slice.  Also returns
-## the sample rate and stored format (one of ulaw, alaw, char, short,
-## long, float, double). The sample value will be normalized to the
-## range [-1,1] regardless of the stored format.
+## Reads an audio waveform from a file given by the string @var{filename}.  
+## Returns the audio samples in data, one column per channel, one row per 
+## time slice.  Also returns the sample rate and stored format (one of ulaw, 
+## alaw, char, short, long, float, double). The sample value will be 
+## normalized to the range [-1,1] regardless of the stored format.
 ##
-## Example
+## @example
 ##    [x, fs] = auload(file_in_loadpath("sample.wav"));
 ##    auplot(x,fs);
+## @end example
 ##
 ## Note that translating the asymmetric range [-2^n,2^n-1] into the 
 ## symmetric range [-1,1] requires a DC offset of 2/2^n. The inverse 
@@ -33,6 +35,7 @@
 ## compensate for the asymmetry in a different way (including previous 
 ## versions of auload/ausave) so you may find small differences in 
 ## calculated DC offsets for the same file.
+## @end deftypefn
 
 ## 2001-09-04 Paul Kienzle <pkienzle@users.sf.net>
 ## * skip unknown blocks in WAVE format.
