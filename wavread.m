@@ -8,7 +8,8 @@ function [snd, srate, nbits] = wavread(infile,nframes);
 %   (default = all samples in file).
 
 % XXX FIXME XXX merge with auload
-% public domain
+% This program is public domain
+% Author: Julius Smith ??
 
 fpi = fopen(infile,'r');
 id = fread(fpi, 1,'int32');

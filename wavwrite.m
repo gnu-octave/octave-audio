@@ -7,7 +7,8 @@ function wavwrite(snd,fs,nbits,outfile);
 % Input sound snd should be scaled to lie in [-1.0, 1.0).
 
 % merge with ausave.m
-% public domain
+% This program is public domain
+% Author: Julius Smith
 
 if nargin==3, outfile=nbits; nbits=16; end
 if nargin==2, outfile=fs; fs=8000; nbits=16; end

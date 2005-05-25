@@ -1,9 +1,14 @@
 //
 // ENDPOINT.CC - The endpoint class member routines.
 //
-// Bruce T. Lowerre, Public domain, 1995, 1997
+// Author: Bruce T. Lowerre
+// This program is public domain. 
+// Date: 1995, 1997
 //
 // $Log$
+// Revision 1.3  2005/05/25 03:43:39  pkienzle
+// Author/Copyright consistency
+//
 // Revision 1.2  2002/01/04 15:53:56  pkienzle
 // Changes required to compile for gcc-3.0 in debian hppa/unstable
 //

@@ -3,7 +3,7 @@
  *    May, 1999 - separate audio open/close from wave play
  *    Feb. 1999 - first public release.
  *
- * Copyright 1999 Paul Kienzle, <pkienzle@cs.indiana.edu>
+ * Copyright 1999 Paul Kienzle <pkienzle@users.sf.net>
  * This source code is freely redistributable and may be used for
  * any purpose.  This copyright notice must be maintained. 
  * Paul Kienzle is not responsible for the consequences of using
