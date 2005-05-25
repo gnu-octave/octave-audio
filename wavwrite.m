@@ -8,7 +8,7 @@ function wavwrite(snd,fs,nbits,outfile);
 
 % merge with ausave.m
 % This program is public domain
-% Author: Julius Smith
+% Author: Julius O. Smith III
 
 if nargin==3, outfile=nbits; nbits=16; end
 if nargin==2, outfile=fs; fs=8000; nbits=16; end

@@ -9,7 +9,7 @@ function [snd, srate, nbits] = wavread(infile,nframes);
 
 % XXX FIXME XXX merge with auload
 % This program is public domain
-% Author: Julius Smith ??
+% Author: Julius O. Smith III
 
 fpi = fopen(infile,'r');
 id = fread(fpi, 1,'int32');
