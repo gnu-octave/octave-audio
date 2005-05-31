@@ -16,7 +16,7 @@ id = fread(fpi, 1,'int32');
 if (strcmp(id,'RIFF')!=0) 
   error(sprintf('%s not a WAV file',infile));
 end
-disp(sprintf('Input file \'%s\' is RIFF format:',infile));
+disp(sprintf("Input file '%s' is RIFF format:",infile));
 nbytes = fread(fpi, 1,'int32');
 disp(sprintf('\tTotal length = %d bytes',nbytes));
 subfmt = fread(fpi, 1,'int32');
@@ -26,7 +26,7 @@ if (strcmp(subfmt,'WAVE')!=0)
 end
 fmt = fread(fpi, 1,'int32');
 if (strcmp(fmt,'fmt ')!=0)
-  error(sprintf('*** Expected \'fmt \' in header, but got \'',...
+  error(sprintf("*** Expected 'fmt ' in header, but got '",...
                 fmt));
 end
 
@@ -55,7 +55,7 @@ nbits = fread(fpi,1,'int16');
 
 id = fread(fpi,1,'int32');
 if (strcmp(id,'data')!=0) 
-  error(sprintf('Did not find \'data\' ID where expected'));
+  error(sprintf("Did not find 'data' ID where expected"));
 end
 nbytes = fread(fpi,1,'int32');
 if (mod(nbytes,2)==1) 
