@@ -11,7 +11,7 @@ function [snd, srate, nbits] = wavread(infile,nframes);
 % This program is public domain
 % Author: Julius O. Smith III
 
-fpi = fopen(infile,'r');
+fpi = fopen(infile,'rb','ieee-le');
 id = fread(fpi, 1,'int32');
 if (strcmp(id,'RIFF')!=0) 
   error(sprintf('%s not a WAV file',infile));
