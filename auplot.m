@@ -76,8 +76,8 @@ function [y_r, t_r, scale_r] = auplot(x, fs, offset, plotstr)
   if nargin<2, fs = 8000; offset=0; plotstr = []; endif
   if nargin<3, offset=0; plotstr = []; endif
   if nargin<4, plotstr = []; endif
-  if isstr(fs), plotstr=fs; fs=8000; endif
-  if isstr(offset), plotstr=offset; offset=0; endif
+  if ischar(fs), plotstr=fs; fs=8000; endif
+  if ischar(offset), plotstr=offset; offset=0; endif
   if isempty(plotstr), plotstr=";;"; endif
   
 
