@@ -79,12 +79,12 @@ function [data, rate, sampleformat] = auload(path)
 
     ## check the file magic header bytes
     arch = 'ieee-le';
-    str = setstr(fread(file, 4, 'char')');
+    str = char(fread(file, 4, 'char')');
     if !strcmp(str, 'RIFF')
       error(msg);
     end
     len = fread(file, 1, 'long', 0, arch);
-    str = setstr(fread(file, 4, 'char')');
+    str = char(fread(file, 4, 'char')');
     if !strcmp(str, 'WAVE')
       error(msg);
     end
@@ -94,7 +94,7 @@ function [data, rate, sampleformat] = auload(path)
       if feof(file)
       	error(msg);
       end
-      str = setstr(fread(file, 4, 'char')');
+      str = char(fread(file, 4, 'char')');
       len = fread(file, 1, 'long', 0, arch);
       if strcmp(str, 'fmt ')
 	break;
@@ -116,7 +116,7 @@ function [data, rate, sampleformat] = auload(path)
       if feof(file)
       	error(msg);
       end
-      str = setstr(fread(file, 4, 'char')');
+      str = char(fread(file, 4, 'char')');
       len = fread(file, 1, 'long', 0, arch);
       if strcmp(str, 'data')
 	break;
@@ -176,11 +176,11 @@ function [data, rate, sampleformat] = auload(path)
     ## Guido van Rossum And Sundry Contributors are not responsible for 
     ## the consequences of using this software.
 
-    str = setstr(fread(file, 4, 'char')');
+    str = char(fread(file, 4, 'char')');
     magic=' ds.';
     invmagic='ds. ';
-    magic(1) = setstr(0);
-    invmagic(1) = setstr(0);
+    magic(1) = char(0);
+    invmagic(1) = char(0);
     if strcmp(str, 'dns.') || strcmp(str, magic)
       arch = 'ieee-le';
     elseif strcmp(str, '.snd') || strcmp(str, invmagic)
@@ -252,12 +252,12 @@ function [data, rate, sampleformat] = auload(path)
  
     ## check the file magic header bytes
     arch = 'ieee-be';
-    str = setstr(fread(file, 4, 'char')');
+    str = char(fread(file, 4, 'char')');
     if !strcmp(str, 'FORM')
       error(msg);
     end
     len = fread(file, 1, 'long', 0, arch);
-    str = setstr(fread(file, 4, 'char')');
+    str = char(fread(file, 4, 'char')');
     if !strcmp(str, 'AIFF')
       error(msg);
     end
@@ -267,7 +267,7 @@ function [data, rate, sampleformat] = auload(path)
       if feof(file)
       	error(msg);
       end
-      str = setstr(fread(file, 4, 'char')');
+      str = char(fread(file, 4, 'char')');
       len = fread(file, 1, 'long', 0, arch);
       if strcmp(str, 'COMM')
 	break;
@@ -292,7 +292,7 @@ function [data, rate, sampleformat] = auload(path)
       if feof(file)
       	error(msg);
       end
-      str = setstr(fread(file, 4, 'char')');
+      str = char(fread(file, 4, 'char')');
       len = fread(file, 1, 'long', 0, arch);
       if strcmp(str, 'SSND')
 	break;
