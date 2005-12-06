@@ -45,7 +45,7 @@ disp(sprintf('\tNumber of channels = %d',nchans));
 srate = fread(fpi,1,'int32');
 disp(sprintf('\tSampling rate = %d Hz',srate));
 tmpi = fread(fpi,1,'int32');
-if (tmpi != 2*srate) 
+if (tmpi != 2*srate*nchans) 
   error(sprintf('*** %d bytes per second looks wrong. Expect %d',
   tmpi,2*srate));
 end
