@@ -20,7 +20,7 @@
 ## Reads an audio waveform from a file given by the string @var{filename}.  
 ## Returns the audio samples in data, one column per channel, one row per 
 ## time slice.  Also returns the sample rate and stored format (one of ulaw, 
-## alaw, char, short, long, float, double). The sample value will be 
+## alaw, char, int16, int32, float, double). The sample value will be 
 ## normalized to the range [-1,1] regardless of the stored format.
 ##
 ## @example
@@ -83,7 +83,7 @@ function [data, rate, sampleformat] = auload(path)
     if !strcmp(str, 'RIFF')
       error(msg);
     end
-    len = fread(file, 1, 'long', 0, arch);
+    len = fread(file, 1, 'int32', 0, arch);
     str = char(fread(file, 4, 'char')');
     if !strcmp(str, 'WAVE')
       error(msg);
@@ -95,7 +95,7 @@ function [data, rate, sampleformat] = auload(path)
       	error(msg);
       end
       str = char(fread(file, 4, 'char')');
-      len = fread(file, 1, 'long', 0, arch);
+      len = fread(file, 1, 'int32', 0, arch);
       if strcmp(str, 'fmt ')
 	break;
       end
@@ -103,12 +103,12 @@ function [data, rate, sampleformat] = auload(path)
     end
 
     ## read the "fmt " section
-    formatid = fread(file, 1, 'short', 0, arch);
-    channels = fread(file, 1, 'short', 0, arch);
-    rate = fread(file, 1, 'long', 0, arch);
-    fread(file, 1, 'long', 0, arch);
-    fread(file, 1, 'short', 0, arch);
-    bits = fread(file, 1, 'short', 0, arch);
+    formatid = fread(file, 1, 'int16', 0, arch);
+    channels = fread(file, 1, 'int16', 0, arch);
+    rate = fread(file, 1, 'int32', 0, arch);
+    fread(file, 1, 'int32', 0, arch);
+    fread(file, 1, 'int16', 0, arch);
+    bits = fread(file, 1, 'int16', 0, arch);
     fseek(file, len-16, SEEK_CUR);
 
     ## skip to the "data" section, ignoring everything else
@@ -117,7 +117,7 @@ function [data, rate, sampleformat] = auload(path)
       	error(msg);
       end
       str = char(fread(file, 4, 'char')');
-      len = fread(file, 1, 'long', 0, arch);
+      len = fread(file, 1, 'int32', 0, arch);
       if strcmp(str, 'data')
 	break;
       end
@@ -130,12 +130,12 @@ function [data, rate, sampleformat] = auload(path)
 	precision = 'uchar';
         samples = len;
       elseif bits == 16
-      	sampleformat = 'short';
-	precision = 'short';
+      	sampleformat = 'int16';
+	precision = 'int16';
         samples = len/2;
       elseif bits == 32
-	sampleformat = 'long';
-	precision = 'long';
+	sampleformat = 'int32';
+	precision = 'int32';
         samples = len/4;
       else
        	error(msg);
@@ -188,11 +188,11 @@ function [data, rate, sampleformat] = auload(path)
     else
       error(msg);
     end
-    header = fread(file, 1, 'long', 0, 'ieee-be');
-    len = fread(file, 1, 'long', 0, 'ieee-be');
-    formatid = fread(file, 1, 'long', 0, 'ieee-be');
-    rate = fread(file, 1, 'long', 0, 'ieee-be');
-    channels = fread(file, 1, 'long', 0, 'ieee-be');
+    header = fread(file, 1, 'int32', 0, 'ieee-be');
+    len = fread(file, 1, 'int32', 0, 'ieee-be');
+    formatid = fread(file, 1, 'int32', 0, 'ieee-be');
+    rate = fread(file, 1, 'int32', 0, 'ieee-be');
+    channels = fread(file, 1, 'int32', 0, 'ieee-be');
     fseek(file, header-24, SEEK_CUR); % skip file comment
 
     ## interpret the sample format
@@ -207,13 +207,13 @@ function [data, rate, sampleformat] = auload(path)
       bits = 8;
       samples = len;
     elseif formatid == 3
-      sampleformat = 'short';
-      precision = 'short';
+      sampleformat = 'int16';
+      precision = 'int16';
       bits = 16;
       samples = len/2;
     elseif formatid == 5
-      sampleformat = 'long';
-      precision = 'long';
+      sampleformat = 'int32';
+      precision = 'int32';
       bits = 32;
       samples = len/4;
     elseif formatid == 6
@@ -256,7 +256,7 @@ function [data, rate, sampleformat] = auload(path)
     if !strcmp(str, 'FORM')
       error(msg);
     end
-    len = fread(file, 1, 'long', 0, arch);
+    len = fread(file, 1, 'int32', 0, arch);
     str = char(fread(file, 4, 'char')');
     if !strcmp(str, 'AIFF')
       error(msg);
@@ -268,7 +268,7 @@ function [data, rate, sampleformat] = auload(path)
       	error(msg);
       end
       str = char(fread(file, 4, 'char')');
-      len = fread(file, 1, 'long', 0, arch);
+      len = fread(file, 1, 'int32', 0, arch);
       if strcmp(str, 'COMM')
 	break;
       end
@@ -276,11 +276,11 @@ function [data, rate, sampleformat] = auload(path)
     end
 
     ## read the "COMM" section
-    channels = fread(file, 1, 'short', 0, arch);
-    frames = fread(file, 1, 'long', 0, arch);
-    bits = fread(file, 1, 'short', 0, arch);
-    exp = fread(file, 1, 'ushort', 0, arch);    % read a 10-byte float
-    mant = fread(file, 2, 'ulong', 0, arch);
+    channels = fread(file, 1, 'int16', 0, arch);
+    frames = fread(file, 1, 'int32', 0, arch);
+    bits = fread(file, 1, 'int16', 0, arch);
+    exp = fread(file, 1, 'uint16', 0, arch);    % read a 10-byte float
+    mant = fread(file, 2, 'uint32', 0, arch);
     mant = mant(1) / 2^31 + mant(2) / 2^63;
     if (exp >= 32768), mant = -mant; exp = exp - 32768; end
     exp = exp - 16383;
@@ -293,14 +293,14 @@ function [data, rate, sampleformat] = auload(path)
       	error(msg);
       end
       str = char(fread(file, 4, 'char')');
-      len = fread(file, 1, 'long', 0, arch);
+      len = fread(file, 1, 'int32', 0, arch);
       if strcmp(str, 'SSND')
 	break;
       end
       fseek(file, len, SEEK_CUR);
     end
-    offset = fread(file, 1, 'long', 0, arch);
-    fread(file, 1, 'long', 0, arch);
+    offset = fread(file, 1, 'int32', 0, arch);
+    fread(file, 1, 'int32', 0, arch);
     fseek(file, offset, SEEK_CUR);
 
     if bits == 8
@@ -308,12 +308,12 @@ function [data, rate, sampleformat] = auload(path)
       sampleformat = 'uchar';
       samples = len - 8;
     elseif bits == 16
-      precision = 'short';
-      sampleformat = 'short';
+      precision = 'int16';
+      sampleformat = 'int16';
       samples = (len - 8)/2;
     elseif bits == 32
-      precision = 'long';
-      sampleformat = 'long';
+      precision = 'int32';
+      sampleformat = 'int32';
       samples = (len - 8)/4;
     else
       error(msg);
@@ -355,10 +355,10 @@ function [data, rate, sampleformat] = auload(path)
   elseif strcmp(sampleformat, 'uchar')
     ## [ 0, 255 ] -> [ -1, 1 ]
     data = data/127.5 - 1;
-  elseif strcmp(sampleformat, 'short')
+  elseif strcmp(sampleformat, 'int16')
     ## [ -32768, 32767 ] -> [ -1, 1 ]
     data = (data+0.5)/32767.5;
-  elseif strcmp(sampleformat, 'long')
+  elseif strcmp(sampleformat, 'int32')
     ## [ -2^31, 2^31-1 ] -> [ -1, 1 ]
     data = (data+0.5)/(2^31-0.5);
   end
