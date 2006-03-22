@@ -78,7 +78,7 @@ function sound(data, rate)
     if colon, display = display(1:colon-1); endif
     host=getenv("HOSTNAME");
     if isempty(host), 
-      host = system("uname -n");
+      [status, host] = system("uname -n");
       ## trim newline from end of hostname
       if !isempty(host), host = host(1:length(host)-1); endif
     endif
