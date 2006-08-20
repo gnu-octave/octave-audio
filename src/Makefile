@@ -1,12 +1,12 @@
-sinclude ../../Makeconf
+sinclude Makeconf
 
 ifdef HAVE_LINUX_SOUNDCARD
-	PROG=bin/aurecord
+	PROG=aurecord
 endif
 
 all: $(PROG)
 
-bin/aurecord: aurecord.o endpoint.o
+aurecord: aurecord.o endpoint.o
 	$(CXX) $(CXXFLAGS) -o $@ aurecord.o endpoint.o
 
 aurecord.o endpoint.o : endpoint.h

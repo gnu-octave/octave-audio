@@ -6,6 +6,9 @@
 // Date: 1995, 1997
 //
 // $Log$
+// Revision 1.1  2006/08/20 11:50:37  hauberg
+// Converted directory structure to match the new package system.
+//
 // Revision 1.3  2005/05/25 03:43:39  pkienzle
 // Author/Copyright consistency
 //

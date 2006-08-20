@@ -4,8 +4,11 @@
  * Bruce T. Lowerre, Public domain, 1995, 1997
  *
  * $Log$
- * Revision 1.1  2001/10/10 19:54:49  pkienzle
- * Initial revision
+ * Revision 1.1  2006/08/20 11:50:37  hauberg
+ * Converted directory structure to match the new package system.
+ *
+ * Revision 1.1.1.1  2001/10/10 19:54:49  pkienzle
+ * revised heirarchy
  *
  * Revision 1.1  2001/04/22 08:29:30  pkienzle
  * adding in all of matcompat
