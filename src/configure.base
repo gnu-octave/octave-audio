@@ -268,7 +268,6 @@ dnl grab SHLEXT from octave config
 OCTAVE_EVAL(octave_config_info('SHLEXT'),SHLEXT)
 
 AC_PROG_LN_S
-AC_PROG_INSTALL
 AC_PROG_RANLIB
 
 dnl Use $(COPY_FLAGS) to set options for cp when installing .oct files.
@@ -309,7 +308,7 @@ else
     OSS_STATUS="linux/soundcard.h not found"
 fi
 
-CONFIGURE_OUTPUTS="Makeconf octinst.sh"
+CONFIGURE_OUTPUTS="Makeconf"
 STATUS_MSG="
 octave commands will install into the following directories:
    m-files:   $mpath
@@ -328,4 +327,4 @@ shell commands will install into the following directories:
 octave-forge is configured with
    octave:      $OCTAVE (version $OCTAVE_VERSION)
    mkoctfile:	$MKOCTFILE for Octave $subver
-   audio capture: $OSS_STATUS
+   audio capture: $OSS_STATUS"
