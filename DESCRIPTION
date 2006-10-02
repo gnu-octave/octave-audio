@@ -4,7 +4,7 @@ Date: 2006-08-05
 Author: Bruce T. Lowerre and Paul Kienzle
 Maintainer: Bruce T. Lowerre and Paul Kienzle
 Title: Audio.
-Description: Add a description to this package!
+Description: Audio recording, processing and playing tools.
 Depends: octave (>= 2.9.7)
 License: GPL version 2 or later
 Url: http://octave.sf.net
