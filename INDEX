@@ -2,21 +2,10 @@ audio >> Audio
 Record and play
  sound 
  soundsc 
- speak 
- recordsound 
- wavrecord 
- soundcap 
  aurecord aucapture
- loadaudio saveaudio playaudio record setaudio
 Read and write
  auload ausave 
- wavwrite 
- wavread 
- readsnd 
- writesnd 
 Process
- mu2lin 
- lin2mu
  auplot
  au 
 
