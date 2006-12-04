@@ -1,8 +1,8 @@
 Name: Audio
 Version: 1.0.0
 Date: 2006-08-05
-Author: Bruce T. Lowerre and Paul Kienzle
-Maintainer: Bruce T. Lowerre and Paul Kienzle
+Author: Paul Kienzle
+Maintainer: Paul Kienzle
 Title: Audio.
 Description: Audio recording, processing and playing tools.
 Depends: octave (>= 2.9.7)
