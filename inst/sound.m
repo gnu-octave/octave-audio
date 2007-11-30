@@ -97,12 +97,12 @@ function sound(data, rate)
   else
     ## write sun .au format header to the pipe
     fwrite(fid, toascii(".snd"), 'char');
-    fwrite(fid, 24, 'long', 0, 'ieee-be');
-    fwrite(fid, -1, 'long', 0, 'ieee-be');
-    fwrite(fid, 3, 'long', 0, 'ieee-be');
-    fwrite(fid, rate, 'long', 0, 'ieee-be');
-    fwrite(fid, channels, 'long', 0, 'ieee-be');
-    fwrite(fid, 32767*clip(data,[-1, 1])', 'short', 0, 'ieee-be');
+    fwrite(fid, 24, 'int32', 0, 'ieee-be');
+    fwrite(fid, -1, 'int32', 0, 'ieee-be');
+    fwrite(fid, 3, 'int32', 0, 'ieee-be');
+    fwrite(fid, rate, 'int32', 0, 'ieee-be');
+    fwrite(fid, channels, 'int32', 0, 'ieee-be');
+    fwrite(fid, 32767*clip(data,[-1, 1])', 'int16', 0, 'ieee-be');
     pclose(fid);
   endif
 end
@@ -115,9 +115,9 @@ end
 ##  else
 ##    fid=popen(["ssh ", host, " ", sound_play_utility], "w");
 ##  end
-##  fwrite(fid, rate, 'long');
-##  fwrite(fid, channels, 'long');
-##  fwrite(fid, 32767*clip(data,[-1, 1])', 'short');
+##  fwrite(fid, rate, 'int32');
+##  fwrite(fid, channels, 'int32');
+##  fwrite(fid, 32767*clip(data,[-1, 1])', 'int16');
 ##  pclose(fid);
 
 %!demo
