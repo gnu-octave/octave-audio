@@ -21,6 +21,28 @@
 #include <signal.h>
 #include "endpoint.h" 
 
+
+#ifdef TEST
+#include <stdarg.h>
+
+void mymessage (const char *fmt, ...)
+{
+  va_list args;
+  va_start (args, fmt);
+  fprintf (stderr, fmt, args);
+  va_end (args);
+}
+#else
+#include <octave/oct.h>
+void mymessage (const char *fmt, ...)
+{
+  va_list args;
+  va_start (args, fmt);
+  message ("aurecord", fmt, args);
+  va_end (args);
+}
+#endif
+
 /* ==================================================================== */
 /* Input conversion routines (audio file -> machine representation) */
 
@@ -261,76 +283,18 @@ void audioabort()
 }
 #endif
 
-
-
-#if 0
-// This is an attempt at showing the capture interaction in an X window,
-// programmed in raw Xlib.  It doesn't work yet.  Instead, the interaction
-// is done on stderr.  Too bad *Inferior Octave* doesn't handle ^M properly.
-
-#include <X11/X.h>
-#include <X11/Xlib.h>
-
-void inform(char str[])
-{
-  static int first = 1;
-  static Display *display = NULL;
-  static int screen;
-  static Window window;
-  static GC gc;
-  static XFontStruct *fontstruct;
-  static Font font; 
-
-  if (display == NULL && !first) return;
-  if (first) {
-    XGCValues gcvalues;
-
-    first = 0;
-    if (str == NULL) return;
-    display = XOpenDisplay(NULL);
-    if (display == NULL) return;
-    screen = DefaultScreen(display);
-    gc = XDefaultGC(display,screen);
-    XGetGCValues(display, gc, GCFont, &gcvalues);
-    //    font = gcvalues.font;
-    //    fontstruct = XQueryFont(display, font);
-    window = XCreateWindow(display, XDefaultRootWindow(display),
-			   0,0,640,20,2,
-			   CopyFromParent, InputOutput, CopyFromParent, 
-			   0, NULL);
-    XStoreName(display, window, "Audio Capture");
-    XMapWindow(display, window);
-  }
-
-  if (str == NULL) {
-    XDestroyWindow(display, window);
-    XCloseDisplay(display);
-  }
-  else {
-    XTextItem txt;
-
-    XClearArea(display, window, 0, 0, 640, 20, 1);
-    txt.chars = str;
-    txt.nchars = strlen(str);
-    txt.delta = 1;
-    txt.font = None;
-    //    XDrawText(display, window, gc, 0, 20-fontstruct->descent, &txt, 1);
-  }
-}
-#else
 void inform(char *str)
 {
   if (str != NULL) {
 #if 0
-    fprintf(stderr, "\r%-38s", str);
+    mymessage ("\r%-38s", str);
 #else
-    fprintf(stderr, "%s\n", str);
+    mymessage ("%s\n", str);
 #endif
   }
   else
-    fprintf(stderr, "\n");
+    mymessage ("\n");
 }
-#endif
 
 int capture(int rate, short *capturebuf, int capturelen)
 {
@@ -362,8 +326,8 @@ int capture(int rate, short *capturebuf, int capturelen)
     /* Process frame through the end point detector */
     tag = ep -> getendpoint (frame);// get endpoint tag
 #if 0
-    fprintf(stderr, "     tag=%s, state=%s\n", 
-	    ep->gettagname(tag), ep->gettagname(state));
+    mymessage ("     tag=%s, state=%s\n", 
+	     ep->gettagname(tag), ep->gettagname(state));
 #endif
     switch (tag) {	// determine what to do with this frame
     case EP_NOSTARTSILENCE:	// error condition --- restart process
@@ -442,6 +406,8 @@ void cleanup(int sig)
   exit(2);
 }
 
+#ifdef TEST
+
 int main(int argc, char *argv[]) 
 {
    int do_endpoint = 0;
@@ -493,3 +459,97 @@ int main(int argc, char *argv[])
    fwrite(buf, 2, samples, stdout);
    return 0;
 }
+
+#else
+
+DEFUN_DLD (aurecord, args, nargout,
+  "-*- texinfo -*-\n\
+@deftypefn {Loadable Function} {[@var{x}, @var{fs}, @var{chan}] =} aurecord (@var{t}, @var{fs}, @var{chan})\n\
+@deftypefnx {Loadable Function} {[@var{x}, @var{fs}, @var{chan}] =} aurecord (@var{t}, @var{fs}, @var{chan}, 'endpoint')\n\
+\n\
+Record for the specified time at the given sample rate. Note that\n\
+the sample rate used may not match the requested sample rate.  Use\n\
+the returned rate instead of the requested value in further\n\
+processing. Similarly, the actual number of samples and channels\n\
+may not match the request, so check the size of the returned matrix.\n\
+\n\
+@var{fs} defaults to 8000 Hz and @var{chan} defaults to 1. @var{time} is\n\
+measured in seconds. @code{aurecord} can return the actual number of\n\
+channels and the rate that is used, that may different from the ones\n\
+selected.\n\
+\n\
+If the argument 'endpoint' is given, we attempt to wait for audio event\n\
+before grabbing samples\n\
+@end deftypefn")
+{
+  int nargin = args.length ();
+  octave_value_list retval;
+
+  if (nargin < 1 || nargin > 4)
+    print_usage ();
+  else
+    {
+      double time = args (0).double_value ();
+      int rate = 16000;
+      int channels = 1;
+      int do_endpoint = 0;
+      short *buf;
+      int i, c, samples;
+      
+
+      if (nargin > 1)
+	rate = args (1).nint_value ();
+
+      if (nargin > 2)
+	channels = args (2).nint_value ();
+
+      if (nargin > 3)
+	{
+	  std::string arg = args(3).string_value ();
+	  if (arg == "endpoint")
+	    do_endpoint = 1;
+	}
+
+      if (! error_state)
+	{
+	  /* Prepare for interrupt. */
+	  signal(SIGINT, cleanup);
+
+	  /* open audio device and skip the first bunch of samples */
+	  if (audioopen (rate, channels) < 0) 
+	    error ("aurecord: can not open device");
+
+	  for (i = 0; i < 1024; i++) 
+	    audiosample();
+
+	  retval (2) = octave_value (audiochannels);
+	  retval (1) = octave_value (audiorate);
+
+	  samples = (long)((double)audiorate * time)*audiochannels;
+	  OCTAVE_LOCAL_BUFFER (short, buf, samples);
+
+	  if (do_endpoint) {
+	    /* wait for audio event before grabbing samples */
+	    samples = capture(audiorate, buf, samples);
+	  }
+	  else {
+	    /* grab all the samples you need directly */
+	    for (i = 0; i < samples; i++) buf[i] = audiosample();
+	  }
+
+	  /* close the audio device */
+	  audioclose();
+
+	  /* output the captured samples */
+	  Matrix buf2 (samples / audiochannels, audiochannels);
+	  for (i = 0; i < samples; i++)
+	    buf2.xelem (i) = static_cast <double> (buf[i]) / 32768.; 
+
+	  retval(0) = buf2;
+	}
+    }
+
+  return retval;
+}
+
+#endif

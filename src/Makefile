@@ -1,13 +1,20 @@
 sinclude Makeconf
 
-ifdef HAVE_LINUX_SOUNDCARD
-PROG = aurecord
+ifneq (,$(findstring test,$(MAKECMDGOALS)))
+CXXFLAGS := $(CXXFLAGS) -DTEST
+TEST = -DTEST
+endif
 
-all: $(PROG)
-	if [ ! -d ../bin ]; then mkdir ../bin; fi
-	cp -pr $(PROG) ../bin
+ifdef HAVE_LINUX_SOUNDCARD
+all: aurecord.oct
+	$(MKOCTFILE) -DHAVE_CONFIG_H aurecord.cc endpoint.cc
+
+test: aurecord
+
 else
 all:
+
+test:
 
 endif
 
@@ -16,4 +23,6 @@ aurecord: aurecord.o endpoint.o
 
 aurecord.o endpoint.o : endpoint.h
 
-clean: ; -$(RM) *.o core octave-core ../bin/* *~
+%.o: %.cc ; $(MKOCTFILE) $(TEST) -c $<
+
+clean: ; -$(RM) *.o core octave-core ../bin/* *~ *.oct
