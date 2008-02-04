@@ -1,28 +1,19 @@
 sinclude Makeconf
 
-ifneq (,$(findstring test,$(MAKECMDGOALS)))
-CXXFLAGS := $(CXXFLAGS) -DTEST
-TEST = -DTEST
-endif
-
-ifdef HAVE_LINUX_SOUNDCARD
-all: aurecord.oct
-	$(MKOCTFILE) -DHAVE_CONFIG_H aurecord.cc endpoint.cc
-
-test: aurecord
-
-else
 all:
+ifdef HAVE_LINUX_SOUNDCARD
+	$(MAKE) -f Makefile.linux
+endif # HAVE_LINUX_SOUNDCARD is not defined
+ifeq (apple-darwin,$(findstring apple-darwin,$(canonical_host_type)))
+	$(MAKE) -f Makefile.macosx
+endif # ifeq (apple-darwin)
 
-test:
+clean:
+	@echo "Cleaning..."; \
+	$(RM) -rf *.o core octave-core ../bin/* *~ *.oct
 
-endif
+distclean realclean: clean
+	@echo "Really Cleaning..."; \
+	$(RM) -rf ../bin configure config.status config.log autom4te.cache Makeconf
 
-aurecord: aurecord.o endpoint.o
-	$(CXX) $(CXXFLAGS) -o $@ aurecord.o endpoint.o
-
-aurecord.o endpoint.o : endpoint.h
-
-%.o: %.cc ; $(MKOCTFILE) $(TEST) -c $<
-
-clean: ; -$(RM) *.o core octave-core ../bin/* *~ *.oct
+dist : all
