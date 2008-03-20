@@ -19,7 +19,7 @@
 ## Reads an audio waveform from a file given by the string @var{filename}.  
 ## Returns the audio samples in data, one column per channel, one row per 
 ## time slice.  Also returns the sample rate and stored format (one of ulaw, 
-## alaw, char, int16, int32, float, double). The sample value will be 
+## alaw, char, int16, int24, int32, float, double). The sample value will be 
 ## normalized to the range [-1,1] regardless of the stored format.
 ##
 ## @example
@@ -132,6 +132,10 @@ function [data, rate, sampleformat] = auload(path)
       	sampleformat = 'int16';
 	precision = 'int16';
         samples = len/2;
+      elseif bits == 24
+      	sampleformat = 'int24';
+	precision = 'int24';
+        samples = len/3;
       elseif bits == 32
 	sampleformat = 'int32';
 	precision = 'int32';
@@ -325,7 +329,16 @@ function [data, rate, sampleformat] = auload(path)
 
   ## suck in all the samples
   if (samples <= 0) samples = Inf; end
-  data = fread(file, samples, precision, 0, arch);
+  if (precision == 'int24')
+    data = fread(file, 3*samples, 'uint8', 0, arch);
+    if (arch == 'ieee-le')
+      data = data(1:3:end) + data(2:3:end) * 2^8 + cast(typecast(cast(data(3:3:end), 'uint8'), 'int8'), 'double') * 2^16;
+    else
+      data = data(3:3:end) + data(2:3:end) * 2^8 + cast(typecast(cast(data(1:3:end), 'uint8'), 'int8'), 'double') * 2^16;
+    endif
+  else
+    data = fread(file, samples, precision, 0, arch);
+  endif
   fclose(file);
 
   ## convert samples into range [-1, 1)
