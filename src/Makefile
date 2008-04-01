@@ -12,8 +12,12 @@ clean:
 	@echo "Cleaning..."; \
 	$(RM) -rf *.o core octave-core ../bin/* *~ *.oct
 
-distclean realclean: clean
+distclean: clean
 	@echo "Really Cleaning..."; \
-	$(RM) -rf ../bin configure config.status config.log autom4te.cache Makeconf
+	$(RM) -rf ../bin config.status config.log autom4te.cache Makeconf
+
+maintainer-clean realclean: distclean
+	@echo "Cleaning maintainer files..."; \
+	$(RM) -rf ../bin configure	
 
 dist : all
