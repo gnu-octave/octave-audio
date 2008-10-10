@@ -11,8 +11,6 @@
  *     Moved this file file from the MacOSX package to the audio package.
  */
 
-// PKG_ADD: global sound_play_utility="ofsndplay -";
-
 #import <Foundation/Foundation.h>
 #import <AppKit/AppKit.h>
 

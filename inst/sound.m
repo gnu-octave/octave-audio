@@ -84,8 +84,21 @@ function sound(data, rate)
     islocal = strcmp(tolower(host),tolower(display));
   endif
 
+  ## What do we use for playing?
+  if (exist("sound_play_utility", "var"))
+    ## The user is always right, so just declare the set variable as global
+    global sound_play_utility;
+  elseif  (file_in_path(EXEC_PATH, "ofsndplay"))
+    ## Mac
+    sound_play_utility = "ofsndplay -"
+  elseif (file_in_path(EXEC_PATH, "play"))
+    ## Linux (sox)
+    sound_play_utility = "play -t AU -";
+  else
+    error("sound.m: No command line utility found for sound playing");
+  endif
+
   ## If not running locally, then must use ssh to execute play command
-  global sound_play_utility="play -t AU -";
   if islocal
     fid=popen(sound_play_utility, "w");
   else
