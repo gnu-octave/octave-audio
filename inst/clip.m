@@ -41,9 +41,6 @@ function x = clip (x, range)
   else
     usage("X = clip(X [, range])");
   end
-  try dfi = do_fortran_indexing;
-  catch dfi = 0;
-  end
   try wfi = warn_fortran_indexing;
   catch wfi = 0;
   end
