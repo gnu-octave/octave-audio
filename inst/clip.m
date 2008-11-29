@@ -41,17 +41,15 @@ function x = clip (x, range)
   else
     usage("X = clip(X [, range])");
   end
-  try wfi = warn_fortran_indexing;
-  catch wfi = 0;
+  try wfi = warning("query", "Octave:fortran-indexing").state;
+  catch wfi = "off";
   end
   unwind_protect
-    do_fortran_indexing = 1;
-    warn_fortran_indexing = 0;
+    warn_fortran_indexing = "off";
     x (find (x > range (2))) = range (2);
     x (find (x < range (1))) = range (1);
   unwind_protect_cleanup
-    do_fortran_indexing = dfi;
-    warn_fortran_indexing = wfi;
+    warning(wfi, "Octave:fortran-indexing");
   end_unwind_protect
 
 endfunction
