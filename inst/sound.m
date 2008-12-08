@@ -13,11 +13,13 @@
 ## You should have received a copy of the GNU General Public License
 ## along with this program; If not, see <http://www.gnu.org/licenses/>.
 
-## usage: sound(x [, fs])
+## usage: sound(x [, fs, bs])
 ##
 ## Play the signal through the speakers.  Data is a matrix with
 ## one column per channel.  Rate fs defaults to 8000 Hz.  The signal
-## is clipped to [-1, 1].
+## is clipped to [-1, 1].  Buffer size bs controls how many audio samples 
+## are clipped and buffered before sending them to the audio player.  bs 
+## defaults to fs, which is equivalent to 1 second of audio.  
 ##
 ## Note that if $DISPLAY != $HOSTNAME:n then a remote shell is opened
 ## to the host specified in $HOSTNAME to play the audio.  See manual
@@ -55,12 +57,20 @@
 ## as your sound_play_utility.  Things you may want to do are resample
 ## so that the rate is appropriate for your machine and convert the data
 ## to mulaw and output as bytes.
-function sound(data, rate)
+## 
+## If you experience buffer underruns while playing audio data, the bs
+## buffer size parameter can be increased to tradeoff interactivity
+## for smoother playback.  If bs=Inf, then all the data is clipped and 
+## buffered before sending it to the audio player pipe.  By default, 1 
+## sec of audio is buffered.
 
-  if nargin<1 || nargin>2
-    usage("sound(x [, fs])");
+function sound(data, rate, buffer_size)
+
+  if nargin<1 || nargin>3
+    usage("sound(x [, fs, bs])");
   endif
   if nargin<2 || isempty(rate), rate = 8000; endif
+  if nargin<3 || isempty(buffer_size), buffer_size = rate; endif
   if rows(data) != length(data), data=data'; endif
   [samples, channels] = size(data);
 
@@ -114,7 +124,19 @@ function sound(data, rate)
     fwrite(fid, 3, 'int32', 0, 'ieee-be');
     fwrite(fid, rate, 'int32', 0, 'ieee-be');
     fwrite(fid, channels, 'int32', 0, 'ieee-be');
-    fwrite(fid, 32767*clip(data,[-1, 1])', 'int16', 0, 'ieee-be');
+
+    if isinf(buffer_size),
+      fwrite(fid, 32767*clip(data,[-1, 1])', 'int16', 0, 'ieee-be');
+    else
+      ## write data in blocks rather than all at once
+      nblocks = ceil(samples/buffer_size);
+      block_start = 1;
+      for i=1:nblocks,
+        block_end = min(size(data,1), block_start+buffer_size-1);
+        fwrite(fid, 32767*clip(data(block_start:block_end,:),[-1, 1])', 'int16', 0, 'ieee-be');
+        block_start = block_end + 1;
+      end
+    endif
     pclose(fid);
   endif
 end
