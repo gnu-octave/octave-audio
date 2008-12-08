@@ -95,9 +95,9 @@ function sound(data, rate, buffer_size)
   endif
 
   ## What do we use for playing?
-  if (exist("sound_play_utility", "var"))
-    ## The user is always right, so just declare the set variable as global
-    global sound_play_utility;
+  global sound_play_utility;
+  if ~isempty(sound_play_utility),
+    ## User specified command
   elseif  (file_in_path(EXEC_PATH, "ofsndplay"))
     ## Mac
     sound_play_utility = "ofsndplay -"
