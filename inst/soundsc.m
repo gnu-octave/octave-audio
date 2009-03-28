@@ -43,7 +43,7 @@ function data_r = soundsc(data, rate, range)
   if nargin < 1 || nargin > 3, usage("soundsc(x, fs, [lo, hi])") endif
   if nargin < 2, rate = []; endif
   if nargin < 3, range = [min(data(:)), max(data(:))]; endif
-  if is_scalar(range), range = [-abs(range), abs(range)]; endif
+  if isscalar(range), range = [-abs(range), abs(range)]; endif
   
   data=(data - mean(range))/((range(2)-range(1))/2);
   if nargout > 0
