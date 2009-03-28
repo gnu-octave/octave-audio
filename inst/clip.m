@@ -45,7 +45,6 @@ function x = clip (x, range)
   catch wfi = "off";
   end
   unwind_protect
-    warn_fortran_indexing = "off";
     x (find (x > range (2))) = range (2);
     x (find (x < range (1))) = range (1);
   unwind_protect_cleanup
