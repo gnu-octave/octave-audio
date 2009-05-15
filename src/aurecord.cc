@@ -283,7 +283,7 @@ void audioabort()
 }
 #endif
 
-void inform(char *str)
+void inform(const char *str)
 {
   if (str != NULL) {
 #if 0
