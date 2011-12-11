@@ -1,0 +1,8 @@
+Summary of important user-visible changes for releases of the audio package
+
+===============================================================================
+audio-X.Y.Z   Release Date: 2011-YY-XX   Release Manager:
+===============================================================================
+
+* Created this NEWS file.
+* Fuction clip was moved to miscellaneous package.
