@@ -2,10 +2,10 @@ Name: Audio
 Version: 1.1.4
 Date: 2011-12-11
 Author: Paul Kienzle <pkienzle@users.sf.net>
-Title: Miscellaneous functions
+Maintainer: Octave-Forge community <octave-dev@lists.sourceforge.net>
 Title: Audio
 Description: Audio recording, processing and playing tools.
 Depends: octave (>= 2.9.7), miscellaneous (>= 1.1.0)
-Autoload: yes
+Autoload: no
 License: GPL version 2 or later
 Url: http://octave.sf.net

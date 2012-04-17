@@ -6,3 +6,5 @@ audio-X.Y.Z   Release Date: 2011-YY-XX   Release Manager:
 
  ** The function `clip' was been moved to the miscellaneous package. For
     this, the audio package is now dependent on miscellaneous (>= 1.1.0).
+
+ ** Package is no longer automatically loaded.
