@@ -1,14 +1,9 @@
+// Author: Per Persson <persquare@users.sf.net>
+// This program is granted to the public domain.
+
 /* ofsndplay
- * Author: Per Persson <persquare@users.sf.net>
  * Based on code by Chuck Bennet <chuck@benatong.com>
  * and Matthew McCabe <mlm@escapement.net>
- *
- * This program is granted to the public domain
- * 
- * 2004-07-05 Per Persson:
- *     Initial revision.
- * 2008-02-02 Thomas Treichl:
- *     Moved this file file from the MacOSX package to the audio package.
  */
 
 #import <Foundation/Foundation.h>

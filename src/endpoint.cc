@@ -1,43 +1,10 @@
-//
-// ENDPOINT.CC - The endpoint class member routines.
-//
 // Author: Bruce T. Lowerre
-// This program is public domain. 
-// Date: 1995, 1997
-//
-// $Log$
-// Revision 1.1  2006/08/20 11:50:37  hauberg
-// Converted directory structure to match the new package system.
-//
-// Revision 1.3  2005/05/25 03:43:39  pkienzle
-// Author/Copyright consistency
-//
-// Revision 1.2  2002/01/04 15:53:56  pkienzle
-// Changes required to compile for gcc-3.0 in debian hppa/unstable
-//
-// Revision 1.1.1.1  2001/10/10 19:54:49  pkienzle
-// revised heirarchy
-//
-// Revision 1.1  2001/04/22 08:29:30  pkienzle
-// adding in all of matcompat
-//
-// Revision 1.4  2001/03/22 Paul Kienzle
-// added #include <math.h>
-//
-// Revision 1.3  1997/07/31 18:32:13  lowerre
-// fixed bug with EP_INUTT
-//
-// Revision 1.2  1997/05/23 20:01:32  lowerre
-// renamed endpoint to endpointer, conflicts with <rpcsvc/nis.h>
-//
-// Revision 1.1  1997/05/14 20:34:38  lowerre
-// Initial revision
-//
-//
-//
+// This program is granted to the public domain.
 
-
-/* The endpointer is used to determine the start and end of a live
+/*
+ * ENDPOINT.CC - The endpoint class member routines.
+ *
+ * The endpointer is used to determine the start and end of a live
  * input signal.  Unlike a pre-recorded utterance, a live input signal
  * is open-ended in that the actual start and end of the signal is
  * totally unknown.  The search will usually do a fairly good job of

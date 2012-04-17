@@ -1,28 +1,10 @@
+// Author: Bruce T. Lowerre
+// This program is granted to the public domain.
+
 /*
  * ENDPOINT.H - endpoint class definition
  *
- * Bruce T. Lowerre, Public domain, 1995, 1997
- *
- * $Log$
- * Revision 1.1  2006/08/20 11:50:37  hauberg
- * Converted directory structure to match the new package system.
- *
- * Revision 1.1.1.1  2001/10/10 19:54:49  pkienzle
- * revised heirarchy
- *
- * Revision 1.1  2001/04/22 08:29:30  pkienzle
- * adding in all of matcompat
- *
- * Revision 1.2  1997/05/23 19:59:01  lowerre
- * renamed class endpoint to endpointer, conflicts with <rpcsvc/nis.h>
- *
- * Revision 1.1  1997/05/14 20:34:34  lowerre
- * Initial revision
- *
- *
- */
-
-/* The endpointer is used to determine the start and end of a live
+ * The endpointer is used to determine the start and end of a live
  * input signal.  Unlike a pre-recorded utterance, a live input signal
  * is open-ended in that the actual start and end of the signal is
  * totally unknown.  The search, using HMM techniques with a silence

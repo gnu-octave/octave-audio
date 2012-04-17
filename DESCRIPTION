@@ -7,5 +7,5 @@ Title: Audio
 Description: Audio recording, processing and playing tools.
 Depends: octave (>= 2.9.7), miscellaneous (>= 1.1.0)
 Autoload: no
-License: GPL version 2 or later
+License: GPLv3+, public domain
 Url: http://octave.sf.net
