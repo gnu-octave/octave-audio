@@ -19,7 +19,7 @@
 ## the filename determines the layout of the header. Currently supports
 ## .wav and .au layouts.  Data is a matrix of audio samples in the
 ## range [-1,1] (inclusive), one row per time step, one column per 
-## channel. Fs defaults to 8000 Hz.  Format is one of ulaw, alaw, char, 
+## channel. Fs defaults to 8000 Hz.  Format is one of ulaw, alaw, uchar, 
 ## short, long, float, double
 ##
 ## Note that translating the symmetric range [-1,1] into the asymmetric
@@ -43,7 +43,7 @@ function ausave(path, data, rate, sampleformat)
     usage("ausave('filename.ext', x [, fs, sampleformat])");
   end
   if nargin < 3, rate = 8000; end
-  if nargin < 4, sampleformat = 'short'; end
+  if nargin < 4, sampleformat = 'int16'; end
 
   ext = rindex(path, '.');
   if (ext == 0)
@@ -103,23 +103,23 @@ function ausave(path, data, rate, sampleformat)
 
     ## write the magic header
     arch = 'ieee-le';
-    fwrite(file, toascii('RIFF'), 'char');
-    fwrite(file, datasize+36, 'long', 0, arch);
-    fwrite(file, toascii('WAVE'), 'char');
+    fwrite(file, toascii('RIFF'), 'int8');
+    fwrite(file, datasize+36, 'int32', 0, arch);
+    fwrite(file, toascii('WAVE'), 'int8');
 
     ## write the "fmt " section
-    fwrite(file, toascii('fmt '), 'char');
-    fwrite(file, 16, 'long', 0, arch);
-    fwrite(file, formatid, 'short', 0, arch);
-    fwrite(file, channels, 'short', 0, arch);
-    fwrite(file, rate, 'long', 0, arch);
-    fwrite(file, rate*channels*samplesize, 'long', 0, arch);
-    fwrite(file, channels*samplesize, 'short', 0, arch);
-    fwrite(file, samplesize*8, 'short', 0, arch);
+    fwrite(file, toascii('fmt '), 'int8');
+    fwrite(file, 16, 'int32', 0, arch);
+    fwrite(file, formatid, 'int16', 0, arch);
+    fwrite(file, channels, 'int16', 0, arch);
+    fwrite(file, rate, 'int32', 0, arch);
+    fwrite(file, rate*channels*samplesize, 'int32', 0, arch);
+    fwrite(file, channels*samplesize, 'int16', 0, arch);
+    fwrite(file, samplesize*8, 'int16', 0, arch);
 
     ## write the "data" section
-    fwrite(file, toascii('data'), 'char');
-    fwrite(file, datasize, 'long', 0, arch);
+    fwrite(file, toascii('data'), 'int8');
+    fwrite(file, datasize, 'int32', 0, arch);
 
   ## Sun .au format
   elseif strcmp(ext, 'au')
@@ -161,12 +161,12 @@ function ausave(path, data, rate, sampleformat)
     end
 
     arch = 'ieee-be';
-    fwrite(file, toascii('.snd'), 'char');
-    fwrite(file, 24, 'long', 0, arch);
-    fwrite(file, datasize, 'long', 0, arch);
-    fwrite(file, formatid, 'long', 0, arch);
-    fwrite(file, rate, 'long', 0, arch);
-    fwrite(file, channels, 'long', 0, arch);
+    fwrite(file, toascii('.snd'), 'int8');
+    fwrite(file, 24, 'int32', 0, arch);
+    fwrite(file, datasize, 'int32', 0, arch);
+    fwrite(file, formatid, 'int32', 0, arch);
+    fwrite(file, rate, 'int32', 0, arch);
+    fwrite(file, channels, 'int32', 0, arch);
 
   ## Apple/SGI .aiff format
   elseif strcmp(ext,'aiff') || strcmp(ext,'aif')
@@ -206,24 +206,24 @@ function ausave(path, data, rate, sampleformat)
 
     ## write the magic header
     arch = 'ieee-be';
-    fwrite(file, toascii('FORM'), 'char');
-    fwrite(file, datasize+46, 'long', 0, arch);
-    fwrite(file, toascii('AIFF'), 'char');
+    fwrite(file, toascii('FORM'), 'int8');
+    fwrite(file, datasize+46, 'int32', 0, arch);
+    fwrite(file, toascii('AIFF'), 'int8');
 
     ## write the "COMM" section
-    fwrite(file, toascii('COMM'), 'char');
-    fwrite(file, 18, 'long', 0, arch);
-    fwrite(file, channels, 'short', 0, arch);
-    fwrite(file, samples, 'long', 0, arch);
-    fwrite(file, 8*samplesize, 'short', 0, arch);
-    fwrite(file, 16414, 'ushort', 0, arch);         % sample rate exponent
-    fwrite(file, [rate, 0], 'ulong', 0, arch);       % sample rate mantissa
+    fwrite(file, toascii('COMM'), 'int8');
+    fwrite(file, 18, 'int32', 0, arch);
+    fwrite(file, channels, 'int16', 0, arch);
+    fwrite(file, samples, 'int32', 0, arch);
+    fwrite(file, 8*samplesize, 'int16', 0, arch);
+    fwrite(file, 16414, 'uint16', 0, arch);         % sample rate exponent
+    fwrite(file, [rate, 0], 'uint32', 0, arch);       % sample rate mantissa
 
     ## write the "SSND" section
-    fwrite(file, toascii('SSND'), 'char');
-    fwrite(file, datasize+8, 'long', 0, arch); # section length
-    fwrite(file, 0, 'long', 0, arch); # block size
-    fwrite(file, 0, 'long', 0, arch); # offset
+    fwrite(file, toascii('SSND'), 'int8');
+    fwrite(file, datasize+8, 'int32', 0, arch); # section length
+    fwrite(file, 0, 'int32', 0, arch); # block size
+    fwrite(file, 0, 'int32', 0, arch); # offset
 
   ## file extension unknown
   else
@@ -240,19 +240,19 @@ function ausave(path, data, rate, sampleformat)
   ## convert samples from range [-1, 1]
   if strcmp(sampleformat, 'alaw')
     error("FIXME: ausave needs linear to alaw conversion\n");
-    precision = 'uchar';
+    precision = 'uint8';
   elseif strcmp(sampleformat, 'ulaw')
     data = lin2mu(data, 0);
-    precision = 'uchar'
+    precision = 'uint8'
   elseif strcmp(sampleformat, 'uchar')
     data = round((data+1)*127.5);
-    precision = 'uchar';
+    precision = 'uint8';
   elseif strcmp(sampleformat, 'short')
     data = round(data*32767.5 - 0.5);
-    precision = 'short';
+    precision = 'int16';
   elseif strcmp(sampleformat, 'long')
     data = round(data*(2^31-0.5) - 0.5);
-    precision = 'long';
+    precision = 'int32';
   else
     precision = sampleformat;
   end
