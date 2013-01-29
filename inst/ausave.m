@@ -19,47 +19,50 @@
 ## the filename determines the layout of the header. Currently supports
 ## .wav and .au layouts.  Data is a matrix of audio samples in the
 ## range [-1,1] (inclusive), one row per time step, one column per 
-## channel. Fs defaults to 8000 Hz.  Format is one of ulaw, alaw, uchar, 
+## channel. Fs defaults to 8000 Hz.  Format is one of ulaw, alaw, uchar,
 ## short, long, float, double
 ##
 ## Note that translating the symmetric range [-1,1] into the asymmetric
-## range [-2^n,2^n-1] requires a DC offset of -2/2^n.  The inverse 
-## process used by auload requires a DC offset of 2/2^n, so loading and 
-## saving a file will not change the contents.  Other applications may 
-## compensate for the asymmetry in a different way (including previous 
-## versions of auload/ausave) so you may find small differences in 
+## range [-2^n,2^n-1] requires a DC offset of -2/2^n.  The inverse
+## process used by auload requires a DC offset of 2/2^n, so loading and
+## saving a file will not change the contents.  Other applications may
+## compensate for the asymmetry in a different way (including previous
+## versions of auload/ausave) so you may find small differences in
 ## calculated DC offsets for the same file.
 
+function ausave (filename, data, rate = 8000, sampleformat = "int16")
 
-## 2001-10-23 Paul Kienzle
-## * force lin2mu to use [-1:1] regardless of its default
-## 2001-12-11 Paul Kienzle <pkienzle@users.sf.net>
-## * use closed interval [-1,1] rather than open interval [-1,1) internally
-## * rescale data if it exceeds the range
-
-function ausave(path, data, rate, sampleformat)
-
-  if nargin < 2 || nargin>4
-    usage("ausave('filename.ext', x [, fs, sampleformat])");
+  if (nargin < 2 || nargin > 4)
+    print_usage ();
+  elseif (! ischar (filename))
+    error ("ausave: FILENAME must be a string");
+  elseif (! isnumeric (data) || ndims (data) != 2)
+    error ("ausave: DATA must be a numeric 2D matrix");
   end
-  if nargin < 3, rate = 8000; end
-  if nargin < 4, sampleformat = 'int16'; end
 
-  ext = rindex(path, '.');
+  ext = rindex (filename, '.');
   if (ext == 0)
-    usage("ausave('filename.ext', x [, fs, sampleformat])");
+    error ("ausave: FILENAME `%s' has no extension", filename);
   end
-  ext = tolower(substr(path, ext+1, length(path)-ext));
+  ext = tolower (substr (filename, ext+1, length (filename) -ext));
 
   # determine data size and orientation
-  [samples, channels] = size(data);
+  [samples, channels] = size (data);
   if (samples < channels)
     data = data.';
-    [samples, channels] = size(data);
+    [samples, channels] = size (data);
+  endif
+
+  ## FIXME: should we give an error instead on input check?
+  ## Make sure the data fits into the sample range
+  scale = max (abs (data(:)));
+  if (scale > 1)
+    warning ("ausave: DATA exceeds range [-1,1] --- rescaling");
+    data = data / scale;
   endif
 
   ## Microsoft .wav format
-  if strcmp(ext,'wav') 
+  if (strcmp (ext,'wav'))
 
     ## Header format obtained from sox/wav.c
     ## April 15, 1992
@@ -70,35 +73,22 @@ function ausave(path, data, rate, sampleformat)
     ## Lance Norskog And Sundry Contributors are not responsible for 
     ## the consequences of using this software.
 
-    if (strcmp(sampleformat,'uchar'))
-      formatid = 1;
-      samplesize = 1;
-    elseif (strcmp(sampleformat,'short'))
-      formatid = 1;
-      samplesize = 2;
-    elseif (strcmp(sampleformat, 'long'))
-      formatid = 1;
-      samplesize = 4;
-    elseif (strcmp(sampleformat, 'float'))
-      formatid = 3;
-      samplesize = 4;
-    elseif (strcmp(sampleformat, 'double'))
-      formatid = 3;
-      samplesize = 8;
-    elseif (strcmp(sampleformat, 'alaw'))
-      formatid = 6;
-      samplesize = 1;
-    elseif (strcmp(sampleformat, 'ulaw'))
-      formatid = 7;
-      samplesize = 1;
-    else
-      error("%s is invalid format for .wav file\n", sampleformat);
+    switch (sampleformat)
+      case "uchar",   formatid = 1; samplesize = 1;
+      case "short",   formatid = 1; samplesize = 2;
+      case "long",    formatid = 1; samplesize = 4;
+      case "float",   formatid = 3; samplesize = 4;
+      case "double",  formatid = 3; samplesize = 8;
+      case "alaw",    formatid = 6; samplesize = 1;
+      case "ulaw",    formatid = 7; samplesize = 1;
+      otherwise,      error ("ausave: SAMPLEFORMAT `%s' is invalid for .wav file", sampleformat);
     end
+
     datasize = channels*samplesize*samples;
 
-    [file, msg] = fopen(path, 'wb');
+    [file, msg] = fopen (filename, 'wb');
     if (file == -1)
-      error("%s: %s", msg, path);
+      error ("ausave: unable to fopen `%s' for writing: %s", filename, msg);
     end
 
     ## write the magic header
@@ -122,7 +112,7 @@ function ausave(path, data, rate, sampleformat)
     fwrite(file, datasize, 'int32', 0, arch);
 
   ## Sun .au format
-  elseif strcmp(ext, 'au')
+  elseif (strcmp (ext, 'au'))
 
     ## Header format obtained from sox/au.c
     ## September 25, 1991
@@ -132,32 +122,21 @@ function ausave(path, data, rate, sampleformat)
     ## Guido van Rossum And Sundry Contributors are not responsible for 
     ## the consequences of using this software.
 
-    if (strcmp(sampleformat, 'ulaw'))
-      formatid = 1;
-      samplesize = 1;
-    elseif (strcmp(sampleformat,'uchar'))
-      formatid = 2;
-      samplesize = 1;
-    elseif (strcmp(sampleformat,'short'))
-      formatid = 3;
-      samplesize = 2;
-    elseif (strcmp(sampleformat, 'long'))
-      formatid = 5;
-      samplesize = 4;
-    elseif (strcmp(sampleformat, 'float'))
-      formatid = 6;
-      samplesize = 4;
-    elseif (strcmp(sampleformat, 'double'))
-      formatid = 7;
-      samplesize = 8;
-    else
-      error("%s is invalid format for .au file\n", sampleformat);
+    switch (sampleformat)
+      case "ulaw",    formatid = 1; samplesize = 1;
+      case "uchar",   formatid = 2; samplesize = 1;
+      case "short",   formatid = 3; samplesize = 2;
+      case "long",    formatid = 5; samplesize = 4;
+      case "float",   formatid = 6; samplesize = 4;
+      case "double",  formatid = 7; samplesize = 8;
+      otherwise,      error ("ausave: SAMPLEFORMAT `%s' is invalid for .au file", sampleformat);
     end
+
     datasize = channels*samplesize*samples;
 
-    [file, msg] = fopen(path, 'wb');
+    [file, msg] = fopen (filename, 'wb');
     if (file == -1)
-      error("%s: %s", msg, path);
+      error ("ausave: unable to fopen `%s' for writing: %s", filename, msg);
     end
 
     arch = 'ieee-be';
@@ -169,7 +148,7 @@ function ausave(path, data, rate, sampleformat)
     fwrite(file, channels, 'int32', 0, arch);
 
   ## Apple/SGI .aiff format
-  elseif strcmp(ext,'aiff') || strcmp(ext,'aif')
+  elseif (any (strcmp (ext, {"aiff", "aif"})))
 
     ## Header format obtained from sox/aiff.c
     ## September 25, 1991
@@ -188,20 +167,17 @@ function ausave(path, data, rate, sampleformat)
     ##        Monterey Bay Aquarium Research Institute
     ##        7700 Sandholdt Road
 
-    if (strcmp(sampleformat,'uchar'))
-      samplesize = 1;
-    elseif (strcmp(sampleformat,'short'))
-      samplesize = 2;
-    elseif (strcmp(sampleformat, 'long'))
-      samplesize = 4;
-    else
-      error("%s is invalid format for .aiff file\n", sampleformat);
+    switch (sampleformat)
+      case "uchar", samplesize = 1;
+      case "short", samplesize = 2;
+      case "long",  samplesize = 4;
+      otherwise,    error ("ausave: SAMPLEFORMAT `%s' is invalid for .aiff file", sampleformat);
     end
     datasize = channels*samplesize*samples;
 
-    [file, msg] = fopen(path, 'wb');
+    [file, msg] = fopen (filename, 'wb');
     if (file == -1)
-      error("%s: %s", msg, path);
+      error ("ausave: unable to fopen `%s' for writing: %s", filename, msg);
     end
 
     ## write the magic header
@@ -227,36 +203,20 @@ function ausave(path, data, rate, sampleformat)
 
   ## file extension unknown
   else
-    error('ausave(filename.ext,...) understands .wav .au and .aiff only');
+    error ("ausave: unsupported extension `%s' in FILENAME `%s'", ext, filename);
   end
-
-  ## Make sure the data fits into the sample range
-  scale = max(abs(data(:)));
-  if (scale > 1.0)
-    warning("ausave: audio data exceeds range [-1,1] --- rescaling");
-    data = data / scale;
-  endif
 
   ## convert samples from range [-1, 1]
-  if strcmp(sampleformat, 'alaw')
-    error("FIXME: ausave needs linear to alaw conversion\n");
-    precision = 'uint8';
-  elseif strcmp(sampleformat, 'ulaw')
-    data = lin2mu(data, 0);
-    precision = 'uint8'
-  elseif strcmp(sampleformat, 'uchar')
-    data = round((data+1)*127.5);
-    precision = 'uint8';
-  elseif strcmp(sampleformat, 'short')
-    data = round(data*32767.5 - 0.5);
-    precision = 'int16';
-  elseif strcmp(sampleformat, 'long')
-    data = round(data*(2^31-0.5) - 0.5);
-    precision = 'int32';
-  else
-    precision = sampleformat;
-  end
-  fwrite(file, data', precision, 0, arch);
-  fclose(file);
+  switch (sampleformat)
+    case "alaw"   precision = "uint8"; error("FIXME: ausave needs linear to alaw conversion\n");
+    case "ulaw"   precision = "uint8"; data = lin2mu (data, 0);
+    case "uchar"  precision = "uint8"; data = round ((data+1)*127.5);
+    case "short"  precision = "in16";  data = round (data*32767.5 - 0.5);
+    case "long"   precision = "int32"; data = round (data*(2^31-0.5) - 0.5);
+    otherwise,    precision = sampleformat;
+  endswitch
+
+  fwrite (file, data', precision, 0, arch);
+  fclose (file);
 
 endfunction
