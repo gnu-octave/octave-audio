@@ -130,7 +130,7 @@ function [y_r, t_r, scale_r] = auplot(x, fs, offset, plotstr)
       head=reshape(x(1:r*c,chan),r,c);
       if hastail
       	tail=x(r*c+1:samples,chan);
-      	y(:,chan)=[max(head), max(tail), min(tail), \
+      	y(:,chan)=[max(head), max(tail), min(tail), ...
 		   fliplr(min(head)),  max(head(:,1))]';
       else
       	y(:,chan)=[max(head), fliplr(min(head)), max(head(:,1))]';
