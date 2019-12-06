@@ -1,0 +1,232 @@
+\input texinfo @c -*-texinfo-*-
+@c Copyright (c) 2019, John Donoghue <john.donoghue@ieee.org>
+@c Octave Audio - Audio Toolkit for GNU octave.
+
+@c For manually generating the documentation use
+@c   LANGUAGE=en makeinfo --html --no-split midi.texi
+
+@c %*** Start of HEADER
+@setfilename midi.info
+@settitle Octave Audio - Audio Toolkit for GNU octave
+@afourpaper
+@paragraphindent 0
+@finalout
+@set VERSION 2.0.0
+@c @afourwide
+@c %*** End of the HEADER
+
+@c The following macro is used for the on-line help system, but we don't
+@c want lots of `See also: foo, bar, and baz' strings cluttering the
+@c printed manual (that information should be in the supporting text for
+@c each group of functions and variables).
+
+@macro seealso {args}
+@iftex
+@vskip 2pt
+@end iftex
+@ifnottex
+@c Texinfo @sp should work but in practice produces ugly results for HTML.
+@c A simple blank line produces the correct behavior.
+@c @sp 1
+
+@end ifnottex
+@noindent
+@strong{See also:} \args\.
+@end macro
+
+@c %*** Start of TITLEPAGE
+@titlepage
+@title Audio Toolkit @value{VERSION}
+@subtitle Audio and MIDI functionality for @acronym{GNU} Octave.
+@author John Donoghue
+@page
+@vskip 0pt plus 1filll
+Copyright @copyright{} 2019 John Donoghue
+
+Permission is granted to make and distribute verbatim copies of
+this manual provided the copyright notice and this permission notice
+are preserved on all copies.
+
+Permission is granted to copy and distribute modified versions of this
+manual under the conditions for verbatim copying, provided that the entire
+resulting derived work is distributed under the terms of a permission
+notice identical to this one.
+
+Permission is granted to copy and distribute translations of this manual
+into another language, under the same conditions as for modified versions.
+
+@page
+@heading Distribution
+The @acronym{GNU} Octave Audio package is @dfn{free} software.
+Free software is a matter of the users' freedom to run, copy, distribute,
+study, change and improve the software.
+This means that everyone is free to use it and free to redistribute it
+on certain conditions.  The @acronym{GNU} Octave Audio package
+is not, however, in the public domain.  It is copyrighted and there are
+restrictions on its distribution, but the restrictions are designed to
+ensure that others will have the same freedom to use and redistribute
+Octave that you have.  The precise conditions can be found in the
+@acronym{GNU} General Public License that comes with the @acronym{GNU}
+Octave Audio package and that also appears in @ref{Copying}.
+
+To download a copy of the @acronym{GNU} Octave Audio package, please visit
+@url{http://octave.sourceforge.net/midi/}.
+
+@end titlepage
+@c %*** End of TITLEPAGE
+
+@dircategory Math
+@direntry
+* Octave Audio: (midi).          Audio Toolkit for Octave
+@end direntry
+
+@c %*** Start of BODY
+@contents
+@ifnottex
+@node Top
+@top Introduction
+The Audio toolkit is a set of functions for manipulating MIDI devices and files for GNU Octave
+@end ifnottex
+
+@menu
+* Installing and loading::    Installing and loading the Audio toolkit
+* Basic Usage Overview::      Basic Usage Overview
+* Function Reference::        Audio toolkit functions
+* Copying::                   Copying
+* Index::                     Index
+@end menu
+
+@c -------------------------------------------------------------------------
+@node Installing and loading
+@chapter Installing and loading
+@cindex Installing and loading
+
+The Audio toolkit must be installed and then loaded to be used.
+
+It can be installed in @acronym{GNU} Octave directly from octave-forge,
+or can be installed in an off-line mode via a downloaded tarball.
+
+
+The toolkit has a dependency on the RTMIDI library (@url{https://github.com/thestk/rtmidi}), so it must be installed in order
+to successfully install the toolkit.
+
+For fedora: @code{yum install rtmidi-devel} 
+
+For ubuntu: @code{apt install librtmidi-dev} 
+
+The toolkit must be then be loaded once per each @acronym{GNU} Octave session in order to use its functionality.
+
+@section Windows install
+@cindex Windows install
+If running in Windows, the package may already be installed, to check run:
+
+@example
+pkg list audio
+@end example
+
+Otherwise it can be installed by installing the requirements and then using the online or offline install method.
+
+@section Online Direct install
+@cindex Online install
+With an internet connection available, the Audio package can be installed from
+octave-forge using the following command within @acronym{GNU} Octave:
+
+@example
+pkg install -forge audio
+@end example
+
+The latest released version of the toolkit will be downloaded and installed.
+
+@section Off-line install
+@cindex Off-line install
+With the Audio toolkit package already downloaded, and in the current directory when running
+@acronym{GNU} Octave, the package can be installed using the following command within @acronym{GNU} Octave:
+
+@example
+pkg install audio-@value{VERSION}.tar.gz
+@end example
+
+@section Loading
+@cindex Loading
+Regardless of the method of installing the Audio toolkit, in order to use its functions,
+the toolkit must be loaded using the pkg load command:
+
+@example
+pkg load audio
+@end example
+
+The toolkit must be loaded on each @acronym{GNU} Octave session.
+
+@c -------------------------------------------------------------------------
+@node Basic Usage Overview
+@chapter Basic Usage Overview
+@cindex Basic Usage Overview
+
+The Audio package must be loaded each time a @acronym{GNU} Octave session is started:
+@example
+pkg load audio
+@end example
+
+The Audio toolkit provides 3 main types of MIDI functionality:
+
+@table @asis
+@item device functions
+These are functions that directly allow opening, sending and receiving midi messages
+@item controller functions
+Funtions that provide a layer on top of the device functions for using midi controls.
+@item file functions
+Basic functions that allow read and write of Audio files
+@end table
+
+To read and write to a MIDI device, a midi device object must be created, using the name or id of a known midi device as provided by the
+mididevlist function.
+
+MIDI devices can then be read using the midisend and midirecieve functions that use midimsg type to encapsulate the midi data.
+
+@example
+
+%% list the midi devices
+devs = mididevinfo
+
+%% open a midi device, specifying the first input and output midi device
+dev = mididevice("input", devs.Input{1}.ID, "output", devs.Output{1}.ID)
+
+%% recieve data and echo it through the output port
+while True
+  msg = midirecieve(dev, 1);
+  if !empty(msg)
+    midisend(msg);
+  endif
+endwhile
+
+@end example
+
+An overview of the package can be displayed by running @code{help audio}
+
+Help for each function can be displayed by  @code{help thefunctionname}
+
+ie: 
+@example
+help mididevice
+@end example
+
+@c -------------------------------------------------------------------------
+@node Function Reference
+@chapter Function Reference
+@cindex Function Reference
+
+The functions currently available in the Audio toolkit are described below;
+
+@include functions.texi
+
+@c -------------------------------------------------------------------------
+
+@include gpl.texi
+
+@c -------------------------------------------------------------------------
+@node Index 
+@unnumbered Index 
+ 
+@printindex cp
+ 
+@bye

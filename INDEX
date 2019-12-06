@@ -1,11 +1,16 @@
-audio >> Audio
-Record and play
- sound 
- soundsc 
- aurecord aucapture
-Read and write
- auload ausave 
-Process
- auplot
- au 
-
+audio >> Audio and MIDI Toolbox
+MIDI Device Interface
+  mididevice
+  mididevinfo
+  midimsg
+  midireceive
+  midisend
+MIDI Controller Interface
+  midiid
+  midicontrols
+  midisync
+  midiread
+MIDI File I/O
+  midifileinfo
+  midifileread
+  midifilewrite

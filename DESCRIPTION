@@ -1,11 +1,13 @@
 Name: audio
-Version: 1.1.4
-Date: 2011-12-11
-Author: Paul Kienzle <pkienzle@users.sf.net>
-Maintainer: Octave-Forge community <octave-dev@lists.sourceforge.net>
-Title: Audio
-Description: Audio recording, processing and playing tools.
-Depends: octave (>= 2.9.7), miscellaneous (>= 1.1.0)
+Version: 2.0.0
+Date: 2019-08-01
+Author: John Donoghue <john.donoghue@ieee.org>
+Maintainer: John Donoghue <john.donoghue@ieee.org>
+Title: Audio Toolbox
+Description: Audio and MIDI Toolbox for GNU Octave
+Categories: Midi, Audio
+Depends: octave (>= 4.0.0)
+SystemRequirements: rtmidi
 Autoload: no
-License: GPLv3+, public domain
-Url: http://octave.sf.net
+License: GPLv3+
+Url: http://octave.sourceforge.net

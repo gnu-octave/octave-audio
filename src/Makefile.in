@@ -1,0 +1,28 @@
+MKOCTFILE := @MKOCTFILE@
+CXXFLAGS  := @CXXFLAGS@ @DEFS@
+LIBS      := @LIBS@
+LDFLAGS   := @LDFLAGS@
+
+SRC := mididevinfo.cc mididevice.cc midi.cc midi_object.cc midisend.cc midirecv.cc
+
+OBJ := $(SRC:.cc=.o)
+
+all: __midi__.oct
+
+%.o: %.cc
+	$(MKOCTFILE) -c $< $(CXXFLAGS)
+
+__midi__.oct: $(OBJ)
+	$(MKOCTFILE) -o __midi__.oct $(OBJ) $(LDFLAGS) $(LIBS)
+
+.PHONY: clean
+.PHONY: distclean
+.PHONY: all
+
+clean:
+	rm -f *.o
+	rm -f *.oct
+
+distclean: clean
+	rm -rf autom4te.cache
+	rm -f Makefile config.status config.log config.h configure

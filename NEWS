@@ -1,10 +1,9 @@
 Summary of important user-visible changes for releases of the audio package
 
 ===============================================================================
-audio-X.Y.Z   Release Date: 2011-YY-XX   Release Manager:
+audio-2.0.0   Release Date: 2020-YY-XX   Release Manager:
 ===============================================================================
 
- ** The function `clip' was been moved to the miscellaneous package. For
-    this, the audio package is now dependent on miscellaneous (>= 1.1.0).
+ ** Added midi functions
 
- ** Package is no longer automatically loaded.
+ ** remove obsolete / old audio functions
