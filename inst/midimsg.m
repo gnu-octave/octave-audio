@@ -74,7 +74,7 @@
 ## @var{timevalue} - timecode value number for a miditimecodequarterframe message.@*
 ##
 ## @subsubheading Outputs
-## @var{msg} - a midimsg object containign the midi data of the message
+## @var{msg} - a midimsg object containing the midi data of the message
 ##
 ## @subsubheading Examples
 ## Create a note on/off pair with a duration of 1.5 seconds
@@ -373,7 +373,7 @@ classdef midimsg
         case "miditimecodequarterframe"
           # channel,  monochan, timestamp
           if nargin < 3
-            error ('miditimecodequarterfram expects at least seq and value')
+            error ('miditimecodequarterframe expects at least seq and value')
           endif
           seq = bitand(uint8(varargin{1}), 3);
           val = bitand(uint8(varargin{2}), 7);

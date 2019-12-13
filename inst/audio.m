@@ -22,7 +22,7 @@
 ## @subsubheading Device query:
 ## @table @asis
 ## @item mididevinfo
-## list any MIDI devices detectec in the system
+## list any MIDI devices detected in the system
 ## @end table
 ##
 ## @subsubheading Device creation and manipulation:
@@ -32,7 +32,7 @@
 ## @item midimsg
 ## Create a MIDI message or group of messages
 ## @item midireceive
-## recieve a MIDI message from a device
+## receive a MIDI message from a device
 ## @item midisend
 ## Send a MIDI message to a device
 ## @end table
@@ -54,14 +54,14 @@
 ## mididevinfo
 ## @end example
 ##
-## Then selecting the device(s) to connct to, and creating a mididevice to perform read and write functionality:
+## Then selecting the device(s) to connect to, and creating a mididevice to perform read and write functionality:
 ## @example
-## dev = middevice(0);
+## dev = mididevice(0);
 ## @end example
 ##
 ## And then performing I/O on the device:
 ## @example
-## msg = midirecieve(dev)
+## msg = midireceive(dev)
 ## @end example
 
 function audio()
