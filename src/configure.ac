@@ -41,6 +41,8 @@ if test "$have_rtmidi" = "yes"; then
   AC_DEFINE(HAVE_RTMIDI, 1, [Define to 1 to use the rtmidi library.])
   CXXFLAGS="$CXXFLAGS $RTMIDI_CFLAGS"
   LIBS="$LIBS $RTMIDI_LIBS"
+else
+  AC_MSG_ERROR([RTMIDI required to install $PACKAGE_NAME])
 fi
 
 # Checks for octave depreciated symbols
