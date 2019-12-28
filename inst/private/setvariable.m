@@ -27,14 +27,14 @@ function setvariable (fd, value)
     v = uint8(t);
     fwrite(fd, v, 'uint8');
   else
-    tmp = num2bin(t);
+    tmp = dec2bin(t);
     while mod(length(tmp), 7) != 0
       tmp = [ "0" tmp ];
     endwhile
-    for i=length(tmp):-7:1
-      v = tmp(i:i-6)
-      v = uint8(bin2dec(v))
-      if i > 7
+    for i=1:7:length(tmp)
+      v = tmp(i:i+6);
+      v = uint8(bin2dec(v));
+      if i < length(tmp) -7
         v = 128 + v;
       endif
 

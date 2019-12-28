@@ -27,7 +27,7 @@
 ## @seealso{midifileread, midimsg}
 ## @end deftypefn
 
-function msg = midifilewrite(filename, msg)
+function midifilewrite(filename, msg)
 
   if nargin < 2
     error ("Expected filename and messages");
@@ -48,12 +48,15 @@ function msg = midifilewrite(filename, msg)
     # info
     format = 0;
     tracks = 1;
-    frames = 0;
-    ticks = 120;
+    ticks_per_qtr = 1e3;
+    frames = floor(ticks_per_qtr/256);
+    ticks = mod(ticks_per_qtr, 256);
     fwrite (fd, format, "uint16", 0, "ieee-be");
     fwrite (fd, tracks, "uint16", 0, "ieee-be");
     fwrite (fd, frames, "uint8");
     fwrite (fd, ticks, "uint8");
+
+    tempo = 6e7/120;
 
     # the tracks
     fixpos = ftell (fd);
@@ -61,11 +64,24 @@ function msg = midifilewrite(filename, msg)
     hdr.blocktype = "MTrk";
     writeheader (fd, hdr);
 
+    lasttime = 0;
     for i=1:length(msg)
       a = msg(i);
-      setvariable (fd, a.timestamp);
+      if a.timestamp >= lasttime
+        ts = (a.timestamp - lasttime);
+      else
+        ts = a.timestamp;
+      endif
+      lasttime = lasttime + ts;
+      ts = (ts*1e6)/(tempo/ticks_per_qtr);
+      setvariable (fd, ts);
       fwrite (fd, a.msgbytes);
+
+      # TODO: if come across any tempo message, set tempo to it
     endfor
+
+    # write eot
+    fwrite (fd, uint8([0x01 0xff 0x2f 0x00]));
 
     # fix the size of the track
     cpos = ftell (fd);

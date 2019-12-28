@@ -63,10 +63,9 @@ function mi = midifileinfo(filename)
           ticks = fread (fd, 1, "uint8");
 
 	  if frames > 127
-	    frames = 255-frames;
+	    hdr.tick_resolution = double(256-frames) * ticks;
 	  else
-	    ticks = uint16 (bitshift (frames, -8)) + ticks;
-	    frames = 0;
+	    hdr.ticks_per_qtr = polyval(double([frames ticks]), 256)
 	  endif
 
 	  hdr.ticks = ticks;

@@ -34,6 +34,7 @@ function msg = midifileread(filename)
 
   abstime = 0;
   format = 0;
+  tempo = 6e7/120;
   msg = midimsg(0);
 
   # TODO: handle time stamp AND fact that different formats offset time stamp differently between tracks
@@ -54,10 +55,9 @@ function msg = midifileread(filename)
           ticks = fread (fd, 1, "uint8");
 
 	  if frames > 127
-	    frames = 255-frames;
+	    tick_resolution = double(256-frames) * ticks;
 	  else
-	    ticks = uint16 (bitshift (frames, -8)) + ticks;
-	    frames = 0;
+	    ticks_per_qtr = polyval(double([frames ticks]), 256);
 	  endif
         endif
         if strcmp (blockhdr.blocktype, "MTrk")
@@ -67,10 +67,14 @@ function msg = midifileread(filename)
           cmd = 0;
 	  while ftell (fd) < nextpos
 	    t = getvariable(fd);
-            abstime = abstime + t;
 
-            #te = dec2hex (fread(fd,5, "uint8"))
-            #fseek (fd, -5, 'cof');
+	    if frames > 127
+              t = t / tick_resolution;
+            else
+              t = t * (tempo/ticks_per_qtr)/1e6;
+            endif
+
+            abstime = abstime + t;
 
             tcmd  = fread (fd,1, "uint8");
 	    if tcmd >= 0x80
@@ -87,6 +91,7 @@ function msg = midifileread(filename)
 	    endif
 
             switch subcmd
+	      # TODO: convert to midi messages
 	      case 0xff
 		# example
                 # ff00 1003 7741 7961 6920 0000020 206e 2061 614d 676e 7265
@@ -109,14 +114,31 @@ function msg = midifileread(filename)
 	          [ "marker: " char(data) ]
 	        elseif ctype == 7
 	          [ "cue: " char(data) ]
+	        elseif ctype == 0x21
+	          [ "midiport: " sprintf("%02X ", data) ]
+	        elseif ctype == 0x51
+	          t = polyval(double(data), 256);
+	          [ "tempo: " num2str(t) ]
+	        elseif ctype == 0x54
+	          [ "smtpe: " sprintf("%02X ", data) ]
+	        elseif ctype == 0x58
+	          [ "timesig: " sprintf("%02X ", data) ]
+	        elseif ctype == 0x2f
+	          [ "eot:" ]
+	        elseif ctype == 0x59
+	          [ "keysig: " sprintf("%02X ", data) ]
 	        else
-	          [ num2str(ctype) ": " data ]
+	          [ "unknown: " sprintf("%d (%02X): ", ctype, ctype) sprintf("%02X ", data)  ]
 	        endif
+	      case {0xf1}
+                sz = 1;
+	        data = fread(fd, [1 sz], "uint8");
+		msg = [msg midimsg.createMessage(uint8([cmd data]), abstime)];
 	      case {0xf0, 0xf7}
                 ct = getvariable (fd);
 	        data = fread (fd, [1 ct], "uint8");
 		msg = [msg midimsg.createMessage(uint8([cmd data]), abstime)];
-	      case { 0x80,  0x90, 0xB0, 0xE0}
+	      case { 0x80,  0x90, 0xA0, 0xB0, 0xE0}
                 sz = 2;
 	        data = fread (fd, [1 sz], "uint8");
 		msg = [msg midimsg.createMessage(uint8([cmd data]), abstime)];
@@ -131,10 +153,15 @@ function msg = midifileread(filename)
 	    endswitch
           endwhile
         endif
-
         fseek (fd, nextpos, 'bof');
+
       endif
     endwhile
+
+    # so now should have list of midi data using absolute time in secs
+    # with all channels concated together
+    # so sort into time order
+    msg = sort(msg);
   unwind_protect_cleanup
     fclose (fd);
   end_unwind_protect

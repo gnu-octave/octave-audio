@@ -594,6 +594,21 @@ classdef midimsg
       endif
     endfunction
 
+    function msg = sort (this)
+      msg = midimsg(0);
+
+      # TODO: store timestamp as matrix not a cell
+      # then could just use sort, and no swaps ?
+      [~, s_idx] = sortrows(this.timestamp');
+      s_idx = s_idx';
+
+      for i = 1:numel(s_idx)
+        msg.timestamp{end+1} = this.timestamp{s_idx(i)};
+        msg.data{end+1} = this.data{s_idx(i)};
+      endfor
+
+    endfunction
+
     function short_disp (this)
       printf("MIDI Msg\n");
     endfunction
