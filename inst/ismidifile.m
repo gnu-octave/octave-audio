@@ -18,10 +18,10 @@
 ## @deftypefn {} {@var{ismidi} =} ismidifile (@var{filename})
 ## Check if @var{filename} is a midi file.
 ##
-## The funtion only checks whether it is an existing file and the
-## file starts with a valid MThd header.
+## The function only checks whether it is an existing file and the
+## file starts with a valid 'MThd' header.
 ##
-## Non existing files, or files that do not meet that criteria will return false.
+## Non existing files, or files that do not meet the header criteria will return false.
 ##
 ## @subsubheading Inputs
 ## @var{filename} - filename of file to check.@*
