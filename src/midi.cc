@@ -18,15 +18,15 @@
 
 static std::string api_name(RtMidi::Api api)
 {
-	switch(api)
-	{
-		case RtMidi::Api::MACOSX_CORE: return "MacOS Core";
-		case RtMidi::Api::LINUX_ALSA: return "Alsa";
-		case RtMidi::Api::UNIX_JACK: return "Jack";
-		case RtMidi::Api::WINDOWS_MM: return "MMSystem";
-		default: break;
-	}
-	return "Unknown";
+  switch(api)
+    {
+      case RtMidi::Api::MACOSX_CORE: return "MacOS Core";
+      case RtMidi::Api::LINUX_ALSA: return "Alsa";
+      case RtMidi::Api::UNIX_JACK: return "Jack";
+      case RtMidi::Api::WINDOWS_MM: return "MMSystem";
+      default: break;
+    }
+  return "Unknown";
 }
 
 class midi_device
@@ -134,7 +134,7 @@ recv_midi (midi_device *dev, double *ts, unsigned char *data, size_t sz)
         double stamp = dev->in->getMessage (&message);
         if (message.size() > 0)
           {
-            for (size_t i=0;i<message.size() && i<sz;i++)
+            for (size_t i=0;i<message.size() && i<sz; i++)
               data[i] = message[i];
 
             *ts = stamp;
@@ -169,24 +169,24 @@ get_midi_devices (midi_device_list &devs)
 
        for (size_t i=0; i<numoutput; i++)
          {
-	   midi_device_info inf;
-	   inf.name = midiout->getPortName(i).c_str();
+           midi_device_info inf;
+           inf.name = midiout->getPortName(i).c_str();
            inf.driver = api_name(midiout->getCurrentApi());
            inf.id = i;
-	   inf.devid = i;
-	   inf.output = true;
-	   devs.push_back(inf);
+           inf.devid = i;
+           inf.output = true;
+           devs.push_back(inf);
          }
 
        for (size_t i=0; i<numinput; i++)
          {
-	   midi_device_info inf;
-	   inf.name = midiin->getPortName(i).c_str();
+           midi_device_info inf;
+           inf.name = midiin->getPortName(i).c_str();
            inf.driver = api_name(midiin->getCurrentApi());
            inf.id = numoutput + i;
-	   inf.devid = i;
-	   inf.output = false;
-	   devs.push_back(inf);
+           inf.devid = i;
+           inf.output = false;
+           devs.push_back(inf);
          }
 
        ok = true;
