@@ -102,10 +102,6 @@ CXXFLAGS=$save_altsyms_CXXFLAGS
 LDFLAGS=$save_altsyms_LDFLAGS
 LIBS=$save_altsyms_LIBS
 
-
-TARGETS=midi.oct
-AC_SUBST(TARGETS)
-
 AC_CONFIG_FILES([Makefile])
 AC_OUTPUT
 
@@ -114,6 +110,5 @@ AC_MSG_NOTICE([
 $PACKAGE_NAME is configured with:
   LIBS:     $LIBS
   CXXFLAGS: $CXXFLAGS $DEFS
-  TARGETS:  $TARGETS
 ])
 
