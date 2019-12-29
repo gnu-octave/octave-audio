@@ -149,7 +149,7 @@ function mi = midifileinfo(filename)
 endfunction
 
 %!shared testname
-%! testname = file_in_loadpath("data/c_maj_melody.mid")
+%! testname = file_in_loadpath("data/c_maj_melody.mid");
 
 %!test
 %! info = midifileinfo(testname);

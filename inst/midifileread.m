@@ -32,6 +32,8 @@ function msg = midifileread(filename)
     error ("Expected filename");
   endif
 
+  debug = 0;
+
   abstime = 0;
   format = 0;
   tempo = 6e7/120;
@@ -98,38 +100,43 @@ function msg = midifileread(filename)
                 ctype  = fread (fd, 1, "uint8");
                 ct = getvariable (fd);
 	        data = fread (fd, [1 ct], "uint8");
-	        if ctype == 0
-	          [ "seq: " char(data) ]
-	        elseif ctype == 1
-	          [ "text: " char(data) ]
-	        elseif ctype == 2
-	          [ "copyright: " char(data) ]
-	        elseif ctype == 3
-	          [ "track name: " char(data) ]
-	        elseif ctype == 4
-	          [ "instrument: " char(data) ]
-	        elseif ctype == 5
-	          [ "lyric: " char(data) ]
-	        elseif ctype == 6
-	          [ "marker: " char(data) ]
-	        elseif ctype == 7
-	          [ "cue: " char(data) ]
-	        elseif ctype == 0x21
-	          [ "midiport: " sprintf("%02X ", data) ]
-	        elseif ctype == 0x51
-	          t = polyval(double(data), 256);
-	          [ "tempo: " num2str(t) ]
-	        elseif ctype == 0x54
-	          [ "smtpe: " sprintf("%02X ", data) ]
-	        elseif ctype == 0x58
-	          [ "timesig: " sprintf("%02X ", data) ]
-	        elseif ctype == 0x2f
-	          [ "eot:" ]
-	        elseif ctype == 0x59
-	          [ "keysig: " sprintf("%02X ", data) ]
-	        else
-	          [ "unknown: " sprintf("%d (%02X): ", ctype, ctype) sprintf("%02X ", data)  ]
-	        endif
+		if debug
+                  if ctype == 0
+                    [ "seq: " char(data) ]
+                  elseif ctype == 1
+                    [ "text: " char(data) ]
+                  elseif ctype == 2
+                    [ "copyright: " char(data) ]
+                  elseif ctype == 3
+                    [ "track name: " char(data) ]
+                  elseif ctype == 4
+                    [ "instrument: " char(data) ]
+                  elseif ctype == 5
+                    [ "lyric: " char(data) ]
+                  elseif ctype == 6
+                    [ "marker: " char(data) ]
+                  elseif ctype == 7
+                    [ "cue: " char(data) ]
+                  elseif ctype == 0x21
+                    [ "midiport: " sprintf("%02X ", data) ]
+                  elseif ctype == 0x51
+                    t = polyval(double(data), 256);
+                    [ "tempo: " num2str(t) ]
+                  elseif ctype == 0x54
+                    [ "smtpe: " sprintf("%02X ", data) ]
+                  elseif ctype == 0x58
+                    [ "timesig: " sprintf("%02X ", data) ]
+                  elseif ctype == 0x2f
+                    [ "eot:" ]
+                  elseif ctype == 0x59
+                    [ "keysig: " sprintf("%02X ", data) ]
+                  else
+                    [ "unknown: " sprintf("%d (%02X): ", ctype, ctype) sprintf("%02X ", data)  ]
+                  endif
+                endif
+                if ctype == 0x51
+                  tempo = polyval(double(data), 256);
+                endif
 	      case {0xf1}
                 sz = 1;
 	        data = fread(fd, [1 sz], "uint8");
@@ -169,7 +176,7 @@ function msg = midifileread(filename)
 endfunction
 
 %!shared testname
-%! testname = file_in_loadpath("data/c_maj_melody.mid")
+%! testname = file_in_loadpath("data/c_maj_melody.mid");
 
 %!test
 %! msg = midifileread(testname);
