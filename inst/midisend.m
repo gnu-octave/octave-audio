@@ -66,22 +66,33 @@ function midisend (dev, varargin)
     msg_ts = { msg_ts };
   endif
 
-  timestamp = 0;
+  # TODO: determine if is 'recent' or not for what timestamp to use
+  # currently, we 'assume' that the 1st midi msg must go NOW
+  if length(msg_ts) > 0
+    timestamp = msg_ts{1};
+  else
+    timestamp = 0;
+  endif
 
   # loop thru data and send each message
   for i=1:length(msg_ts)
      ts = msg_ts{i};
 
      if ts < timestamp
-       timestamp  = ts;
+       ts = timestamp - ts;
      endif
 
      delta = (ts - timestamp);
+     if delta < 0
+       delta = 0;
+     endif
 
      pause(delta);
 
      data = msg_data{i};
      __midisend__(dev, ts, data);
+
+     timestamp = timestamp + delta
   endfor
 
 endfunction
