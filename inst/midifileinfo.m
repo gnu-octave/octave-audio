@@ -65,7 +65,7 @@ function mi = midifileinfo(filename)
 	  if frames > 127
 	    hdr.tick_resolution = double(256-frames) * ticks;
 	  else
-	    hdr.ticks_per_qtr = polyval(double([frames ticks]), 256)
+	    hdr.ticks_per_qtr = polyval(double([frames ticks]), 256);
 	  endif
 
 	  hdr.ticks = ticks;
@@ -149,16 +149,14 @@ function mi = midifileinfo(filename)
 endfunction
 
 %!shared testname
-%! testname = tempname;
+%! testname = file_in_loadpath("data/c_maj_melody.mid")
 
 %!test
-%! data = midimsg("note", 1, 60, 100, 2);
-%! midifilewrite(testname, data);
 %! info = midifileinfo(testname);
 %! t = info.header;
-%! assert(info.header.format, 0);
+%! assert(info.header.format, 1);
+%! assert(info.header.tracks, 2);
+%! assert(info.header.ticks_per_qtr, 480);
+%! assert(info.header.ticks, 224);
+%! assert(info.header.frames, 1);
 
-%!test
-%! if exist (testname, 'file');
-%!   delete (testname);
-%! end

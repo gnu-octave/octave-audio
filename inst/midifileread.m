@@ -168,3 +168,14 @@ function msg = midifileread(filename)
 
 endfunction
 
+%!shared testname
+%! testname = file_in_loadpath("data/c_maj_melody.mid")
+
+%!test
+%! msg = midifileread(testname);
+%! assert(length(msg), 70);
+%! assert(msg(1).type, "ResetAllControllers");
+%! assert(msg(1).timestamp, 0);
+%! assert(msg(length(msg)).type, "NoteOn");
+%! assert(msg(length(msg)).timestamp, 7.9739583, 5e-7);
+

@@ -106,6 +106,10 @@ endfunction
 %!test
 %! data = midimsg("note", 1, 60, 100, 2);
 %! midifilewrite(testname, data);
+%! info = midifileinfo(testname);
+%! t = info.header;
+%! assert(info.header.format, 0);
+%! assert(info.header.tracks, 1);
 %! msg = midifileread(testname);
 %! assert(msg(1).msgbytes, uint8([0x90 0x3C 0x64]));
 %! assert(msg(2).msgbytes, uint8([0x90 0x3C 0x00]));
