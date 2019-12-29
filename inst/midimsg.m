@@ -49,9 +49,10 @@
 ## Create a midimsg object
 ##
 ## If the input parameter is 0, create an empty midi message object
-## Otherwise the first variable if the type of message to create, followed by the additional parameters for the message.
+## Otherwise the first variable is the type of message to create, followed by the additional
+## parameters for the message.
 ##
-## For each message type, the timestamp value if optional.
+## For each message type, the timestamp value is optional.
 ##
 ## @subsubheading Inputs
 ## @var{type} - string message type.@*
@@ -67,7 +68,8 @@
 ## @var{chanpressure} - channel pressure value when creating a chanpressure message.@*
 ## @var{pitchchange} - pitch change value when creating a pitch change message.@*
 ## @var{monochannels} - channels specified for a mono on message.@*
-## @var{bytes} - array of data in range of 0 to 127 specified as part of a data message or system exclusive message.@*
+## @var{bytes} - array of data in range of 0 to 127 specified as part of a data message or
+## system exclusive message.@*
 ## @var{song} - song selection number for a song selection message.@*
 ## @var{songposition} - song position value for a song position message.@*
 ## @var{timeseq} - timecode sequence number for a miditimecodequarterframe message.@*
@@ -75,6 +77,14 @@
 ##
 ## @subsubheading Outputs
 ## @var{msg} - a midimsg object containing the midi data of the message
+##
+## @subsubheading Properties
+## @var{timestamp} - timestamp of the message, or an array or timestamps if the the message is a
+## compound message.@*
+## @var{msgbytes} - the raw message bytes that make up the MIDI message.@*
+## @var{nummsgbytes} - the number of message bytes that make up the MIDI message.@*
+## @var{type} - string that represents the message type.@*
+## @var{channel} - the channel number for message.@*
 ##
 ## @subsubheading Examples
 ## Create a note on/off pair with a duration of 1.5 seconds
