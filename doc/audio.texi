@@ -110,9 +110,9 @@ or can be installed in an off-line mode via a downloaded tarball.
 The toolkit has a dependency on the RTMIDI library (@url{https://github.com/thestk/rtmidi}), so it must be installed in order
 to successfully install the toolkit.
 
-For fedora: @code{yum install rtmidi-devel} 
+For Fedora: @code{yum install rtmidi-devel} 
 
-For ubuntu: @code{apt install librtmidi-dev} 
+For Ubuntu: @code{apt install librtmidi-dev} 
 
 The toolkit must be then be loaded once per each @acronym{GNU} Octave session in order to use its functionality.
 
@@ -173,7 +173,7 @@ The Audio toolkit provides 3 main types of MIDI functionality:
 @item Device functions
 These are functions that directly allow opening, sending and receiving MIDI messages.
 @item Controller functions
-Funtions that provide a layer on top of the device functions for using MIDI controls.
+Functions that provide a layer on top of the device functions for using MIDI controls.
 @item File functions
 Basic functions that allow read and write of MIDI files.
 @end table
@@ -181,7 +181,7 @@ Basic functions that allow read and write of MIDI files.
 To read and write to a MIDI device, a MIDI device object must be created, using the name or id
 of a known MIDI device as provided by the mididevinfo function.
 
-MIDI devices can then be read using the midisend and midirecieve functions that use midimsg type to encapsulate the MIDI data.
+MIDI devices can then be read using the midisend and midireceive functions that use midimsg type to encapsulate the MIDI data.
 
 @example
 
@@ -191,9 +191,9 @@ devs = mididevinfo
 % open a midi device, specifying the first input and output MIDI device
 dev = mididevice("input", devs.Input{1}.ID, "output", devs.Output{1}.ID)
 
-% recieve data and echo it through the output port
+% receive data and echo it through the output port
 while True
-  msg = midirecieve(dev, 1);
+  msg = midireceive(dev, 1);
   if !empty(msg)
     midisend(msg);
   endif
@@ -215,7 +215,7 @@ help mididevice
 @chapter Function Reference
 @cindex Function Reference
 
-The functions currently available in the Audio toolkit are described below;
+The functions currently available in the Audio toolkit are described below:
 
 @include functions.texi
 
