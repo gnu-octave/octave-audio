@@ -33,7 +33,13 @@
 ## @subsubheading Outputs
 ## @var{dev} - octave_midi class for opened device
 ##
-## @subsubheading Example
+## @subsubheading Properties
+## @var{Input} - Input device name (read only).@*
+## @var{Output} - Output device name (read only).@*
+## @var{InputID} - Input device id (read only).@*
+## @var{OutputID} - Output device id (read only).@*
+##
+## @subsubheading Examples
 ## Open midi device with ID of 0.
 ## @example
 ## @command{>} dev = mididevice(0);

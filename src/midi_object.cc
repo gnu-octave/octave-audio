@@ -25,13 +25,12 @@
 DEFINE_OV_TYPEID_FUNCTIONS_AND_DATA (octave_midi, "octave_midi", "octave_midi");
 
 octave_midi::octave_midi ()
- : fieldnames(5)
+ : fieldnames(4)
 {
-  fieldnames[0] = "type";
-  fieldnames[1] = "endpoint";
-  fieldnames[2] = "identity";
-  fieldnames[3] = "recvmore";
-  fieldnames[4] = "events";
+  fieldnames[0] = "Input";
+  fieldnames[1] = "Output";
+  fieldnames[2] = "InputID";
+  fieldnames[3] = "OutputID";
 
   dev = 0;
 }
@@ -127,7 +126,32 @@ octave_midi::subsref (const std::string& type, const std::list<octave_value_list
 {
   octave_value_list retval;
 
-  error ("octave_midi object cannot be indexed with %c", type[0]);
+  int skip = 1;
+
+  switch (type[0])
+    {
+    default:
+      error ("octave_midi object cannot be indexed with %c", type[0]);
+      break;
+    case '.':
+      {
+        std::string propname = (((idx.front()) (0)).string_value ());
+        if (propname == "Input")
+          retval(0) = get_midi_info(dev, false).name;
+        else if (propname == "Output")
+          retval(0) = get_midi_info(dev, true).name;
+        else if (propname == "InputID")
+          retval(0) = get_midi_info(dev, false).id;
+        else if (propname == "OutputID")
+          retval(0) = get_midi_info(dev, true).id;
+        else
+          error ("octave_midi object unknown property '%s'", propname.c_str());
+      }
+      break;
+    }
+
+  if (idx.size () > 1 && type.length () > 1)
+    retval = retval (0).next_subsref (nargout, type, idx, skip);
 
   return retval;
 }
