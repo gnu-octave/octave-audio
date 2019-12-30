@@ -219,7 +219,7 @@ classdef midicontrols < handle
 
     function display (this)
       printf ("%s = \n", inputname (1));
-      printf ("  midicontrols object: listening for events on\n");
+      printf ("  midicontrols object: listening for events on %s\n",  this.device.Input);
       if ( isempty(this.controls))
         printf ("    any control"); % any control on {devname}
       else
