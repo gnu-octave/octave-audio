@@ -48,6 +48,13 @@
 ## }
 ## @end example
 ##
+## Create a midicontrols object monitoring control id 2001 on a a non default device
+## @example
+## @code {
+## ctrl = midicontrols(2001, 'mididevice', 1)
+## }
+## @end example
+##
 ## @seealso{midiread, midisync}
 ## @end deftypefn
 

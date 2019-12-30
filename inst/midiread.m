@@ -25,10 +25,18 @@
 ## @var{ret} single value or array of current values from the midi device.
 ##
 ## @subsubheading Examples
-## Read current value of midicontrols with a ctrlid 2001.
+## Read current value of midicontrols with a ctrlid 2001 on the default midi device.
 ## @example
 ## @code {
 ## ctrl = midicontrols(2001)
+## val = midiread(ctrl);
+## }
+## @end example
+##
+## Read current value of midicontrols with a ctrlid 2001 on a non default midi device.
+## @example
+## @code {
+## ctrl = midicontrols(2001, 'mididevice', 1)
 ## val = midiread(ctrl);
 ## }
 ## @end example
