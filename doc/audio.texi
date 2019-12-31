@@ -184,12 +184,11 @@ of a known MIDI device as provided by the mididevinfo function.
 MIDI devices can then be read using the midisend and midireceive functions that use midimsg type to encapsulate the MIDI data.
 
 @example
-
 % list the midi devices
 devs = mididevinfo
 
 % open a midi device, specifying the first input and output MIDI device
-dev = mididevice("input", devs.Input{1}.ID, "output", devs.Output{1}.ID)
+dev = mididevice("input", devs.Input@{1@}.ID, "output", devs.Output@{1@}.ID)
 
 % receive data and echo it through the output port
 while True
@@ -198,7 +197,6 @@ while True
     midisend(msg);
   endif
 endwhile
-
 @end example
 
 An overview of the package can be displayed by running @code{help audio}

@@ -172,10 +172,10 @@ doc/functions.texi:
 run_in_place = $(OCTAVE) --eval ' pkg ("local_list", "$(package_list)"); ' \
                          --eval ' pkg ("load", "$(package)"); '
 
-html_options = --eval 'options = get_html_options ("octave-forge");'
+#html_options = --eval 'options = get_html_options ("octave-forge");'
 ## Uncomment this for package documentation.
-#html_options = --eval 'options = get_html_options ("octave-forge");' \
-#               --eval 'options.package_doc = "$(package).texi";'
+html_options = --eval 'options = get_html_options ("octave-forge");' \
+               --eval 'options.package_doc = "$(package).texi";'
 $(html_dir): $(install_stamp)
 	$(RM) -r "$@";
 	$(run_in_place)                    \
