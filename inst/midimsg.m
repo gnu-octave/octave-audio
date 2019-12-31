@@ -85,6 +85,8 @@
 ## @var{nummsgbytes} - the number of message bytes that make up the MIDI message.@*
 ## @var{type} - string that represents the message type.@*
 ## @var{channel} - the channel number for message.@*
+## @var{note} - the note value for message (Only valid for noteon/off and polykeypressure).@*
+## @var{velocity} - the velocity value for message (Only valid for noteon/off).@*
 ##
 ## @subsubheading Examples
 ## Create a note on/off pair with a duration of 1.5 seconds
@@ -592,6 +594,51 @@ classdef midimsg
               endif
               val = double(val);
             endif
+          case "note"
+            if length(p.data) > 0
+              data = p.data{1};
+              cmd = bitand(data(1), 0xF0);
+              if cmd == 0x80 || cmd == 0x90 || cmd == 0xA0
+                val = data(2);
+              else
+                error ("note property only valid for noteon/off and polykeypressure");
+              endif
+              if length(p.data) > 1
+                for i = 2:length(p.data)
+                  data = p.data{i};
+                  cmd = bitand(data(1), 0xF0);
+                  if cmd == 0x80 || cmd == 0x90 || cmd == 0xA0
+                    val = [val data(2)];
+                  else
+                    error ("note property only valid for noteon/off and polykeypressure");
+                  endif
+                endfor
+              endif
+              val = double(val);
+            endif
+          case "velocity"
+            if length(p.data) > 0
+              data = p.data{1};
+              cmd = bitand(data(1), 0xF0);
+              if cmd == 0x80 || cmd == 0x90
+                val = data(3);
+              else
+                error ("velocity property only valid for noteon/off");
+              endif
+              if length(p.data) > 1
+                for i = 2:length(p.data)
+                  data = p.data{i};
+                  cmd = bitand(data(1), 0xF0);
+                  if cmd == 0x80 || cmd == 0x90
+                    val = [val data(3)];
+                  else
+                    error ("velocity property only valid for noteon/off");
+                  endif
+                endfor
+              endif
+              val = double(val);
+            endif
+
           otherwise
             error("unimplemented midimsg.subsref property '%s'", s(1).subs);
           endswitch
@@ -875,6 +922,7 @@ endclassdef
 %! assert(length(a) == 1);
 %! assert(a.type, "PolyKeyPressure");
 %! assert(a.nummsgbytes, 3);
+%! assert(a.note, 60);
 %! assert(!isempty(a));
 
 %!test
@@ -1107,17 +1155,27 @@ endclassdef
 %! assert(isa(a, "midimsg"));
 %! assert(length(a) == 1);
 %! assert(a.type, "NoteOn");
-%! b = midimsg("noteoff", 2, 60, 20, 5.0);
+%! assert(a.note, 60);
+%! assert(a.velocity, 20);
+%! b = midimsg("noteoff", 2, 60, 10, 5.0);
 %! assert(isa(b, "midimsg"));
 %! assert(length(b) == 1);
 %! assert(b.type, "NoteOff");
+%! assert(b.note, 60);
+%! assert(b.velocity, 10);
 %! c = [a b];
 %! assert(isa(c, "midimsg"));
 %! assert(length(c) == 2);
 %! assert(c.nummsgbytes, [3 3]);
 %! assert(c.channel, [1 2]);
+%! assert(c.note, [60 60]);
+%! assert(c.velocity, [20 10]);
 %! assert(c(1).type, "NoteOn");
 %! assert(c(1).channel, 1);
+%! assert(c(1).note, 60);
+%! assert(c(1).velocity, 20);
 %! assert(c(2).type, "NoteOff");
 %! assert(c(2).timestamp, 5.0);
 %! assert(c(2).channel, 2);
+%! assert(c(2).note, 60);
+%! assert(c(2).velocity, 10);
