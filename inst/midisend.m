@@ -92,7 +92,7 @@ function midisend (dev, varargin)
      data = msg_data{i};
      __midisend__(dev, ts, data);
 
-     timestamp = timestamp + delta
+     timestamp = timestamp + delta;
   endfor
 
 endfunction
