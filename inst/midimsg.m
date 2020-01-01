@@ -24,6 +24,7 @@
 ## @deftypefnx {} {@var{msg} =} midimsg ("controlchange", @var{channel}, @var{ccnum}, @var{ccval}, @var{timestamp})
 ## @deftypefnx {} {@var{msg} =} midimsg ("polykeypressure", @var{channel}, @var{note}, @var{keypressure}, @var{timestamp})
 ## @deftypefnx {} {@var{msg} =} midimsg ("channelpressure", @var{channel}, @var{chanpressure}, @var{timestamp})
+## @deftypefnx {} {@var{msg} =} midimsg ("localcontrol", @var{channel}, @var{localcontrol}, @var{timestamp})
 ## @deftypefnx {} {@var{msg} =} midimsg ("pitchbend", @var{channel}, @var{pitchchange}, @var{timestamp})
 ## @deftypefnx {} {@var{msg} =} midimsg ("polyon", @var{channel}, @var{timestamp})
 ## @deftypefnx {} {@var{msg} =} midimsg ("monoon", @var{channel}, @var{monochannels}, @var{timestamp})
@@ -67,6 +68,7 @@
 ## @var{keypressure} - key pressure value when creating a key pressure message.@*
 ## @var{chanpressure} - channel pressure value when creating a chanpressure message.@*
 ## @var{pitchchange} - pitch change value when creating a pitch change message.@*
+## @var{localcontrol} - boolean value when creating a localcontrol message.@*
 ## @var{monochannels} - channels specified for a mono on message.@*
 ## @var{bytes} - array of data in range of 0 to 127 specified as part of a data message or
 ## system exclusive message.@*
@@ -87,6 +89,10 @@
 ## @var{channel} - the channel number for message.@*
 ## @var{note} - the note value for message (Only valid for noteon/off and polykeypressure).@*
 ## @var{velocity} - the velocity value for message (Only valid for noteon/off).@*
+## @var{keypressure} - the keypressure value for message (Only valid for polykeypressure).@*
+## @var{localcontrol} - the localcontrol value for message (Only valid for localcontrol messages).@*
+## @var{monochannels} - channels specified for a mono on message.@*
+## @var{program} - channels specified for a program change message.@*
 ##
 ## @subsubheading Examples
 ## Create a note on/off pair with a duration of 1.5 seconds
@@ -193,7 +199,7 @@ classdef midimsg
         case "programchange"
           # channel,prog, timestamp
           if nargin < 3
-            error ('programchange expects at least channel,note,velocity')
+            error ('programchange expects at least channel,program')
           endif
           chan = this.check_channel(varargin{1})-1;
           prog = varargin{2};
@@ -246,6 +252,20 @@ classdef midimsg
             timestamp = varargin{3};
           endif
           this.data{end+1} = uint8([bitor(0xd0, chan), pres]);
+          this.timestamp{end+1} = timestamp;
+
+        case "localcontrol"
+          # channel, localcontrol, timestamp
+          if nargin < 3
+            error ('channelpressure expects at least channel,keypressure')
+          endif
+          chan = this.check_channel(varargin{1})-1;
+          local = varargin{2};
+          timestamp = 0;
+          if nargin > 3
+            timestamp = varargin{3};
+          endif
+          this.data{end+1} = uint8([bitor(0xb0, chan), 122 local]);
           this.timestamp{end+1} = timestamp;
 
         case "pitchbend"
@@ -638,7 +658,94 @@ classdef midimsg
               endif
               val = double(val);
             endif
-
+          case "keypressure"
+            if length(p.data) > 0
+              data = p.data{1};
+              cmd = bitand(data(1), 0xF0);
+              if cmd == 0xA0
+                val = data(3);
+              else
+                error ("keypressure property only valid for polykeypressure");
+              endif
+              if length(p.data) > 1
+                for i = 2:length(p.data)
+                  data = p.data{i};
+                  cmd = bitand(data(1), 0xF0);
+                  if cmd == 0xA0
+                    val = [val data(3)];
+                  else
+                    error ("keypressure property only valid for polykeypressure");
+                  endif
+                endfor
+              endif
+              val = double(val);
+            endif
+          case "localcontrol"
+            if length(p.data) > 0
+              data = p.data{1};
+              cmd = bitand(data(1), 0xF0);
+              if cmd == 0xB0 && data(2) == 122
+                val = data(3);
+              else
+                error ("localcontrol property only valid for localcontrol messages");
+              endif
+              if length(p.data) > 1
+                for i = 2:length(p.data)
+                  data = p.data{i};
+                  cmd = bitand(data(1), 0xF0);
+                  if cmd == 0xB0 && data(2) == 122
+                    val = [val data(3)];
+                  else
+                    error ("localcontrol property only valid for localcontrol messages");
+                  endif
+                endfor
+              endif
+              val = double(val);
+            endif
+          case "monochannels"
+            if length(p.data) > 0
+              data = p.data{1};
+              cmd = bitand(data(1), 0xF0);
+              if cmd == 0xB0 && data(2) == 126
+                val = data(3);
+              else
+                error ("monochannels property only valid for monoon messages");
+              endif
+              if length(p.data) > 1
+                for i = 2:length(p.data)
+                  data = p.data{i};
+                  cmd = bitand(data(1), 0xF0);
+                  if cmd == 0xB0 && data(2) == 126
+                    val = [val data(3)];
+                  else
+                    error ("monochannels property only valid for monoon messages");
+                  endif
+                endfor
+              endif
+              val = double(val);
+            endif
+          case "program"
+            if length(p.data) > 0
+              data = p.data{1};
+              cmd = bitand(data(1), 0xF0);
+              if cmd == 0xC0
+                val = data(2);
+              else
+                error ("program property only valid for programchange messages");
+              endif
+              if length(p.data) > 1
+                for i = 2:length(p.data)
+                  data = p.data{i};
+                  cmd = bitand(data(1), 0xF0);
+                  if cmd == 0xC0
+                    val = [val data(2)];
+                  else
+                    error ("program property only valid for programchange messages");
+                  endif
+                endfor
+              endif
+              val = double(val);
+            endif
           otherwise
             error("unimplemented midimsg.subsref property '%s'", s(1).subs);
           endswitch
@@ -905,7 +1012,10 @@ endclassdef
 %! assert(isa(a, "midimsg"));
 %! assert(length(a) == 1);
 %! assert(a.type, "ProgramChange");
+%! assert(a.program, 60);
+%! assert(a.channel, 1);
 %! assert(a.nummsgbytes, 2);
+%! assert(a.msgbytes, uint8([0xC0 60]));
 %! assert(!isempty(a));
 
 %!test
@@ -923,6 +1033,7 @@ endclassdef
 %! assert(a.type, "PolyKeyPressure");
 %! assert(a.nummsgbytes, 3);
 %! assert(a.note, 60);
+%! assert(a.keypressure, 65);
 %! assert(!isempty(a));
 
 %!test
@@ -943,6 +1054,21 @@ endclassdef
 %! assert(!isempty(a));
 
 %!test
+%! a = midimsg("localcontrol", 1, 1);
+%! assert(isa(a, "midimsg"));
+%! assert(length(a) == 1);
+%! assert(a.type, "LocalControl");
+%! assert(a.nummsgbytes, 3);
+%! assert(a.localcontrol, 1);
+%! assert(!isempty(a));
+%! assert(a.msgbytes, uint8([0xB0 122 0x01]));
+%!
+%! a = midimsg("localcontrol", 2, 0);
+%! assert(a.msgbytes, uint8([0xB1 122 0x00]));
+%! assert(a.localcontrol, 0);
+%! assert(a.channel, 2);
+
+%!test
 %! a = midimsg("polyon", 1);
 %! assert(isa(a, "midimsg"));
 %! assert(length(a) == 1);
@@ -955,6 +1081,7 @@ endclassdef
 %! assert(isa(a, "midimsg"));
 %! assert(length(a) == 1);
 %! assert(a.type, "MonoOn");
+%! assert(a.monochannels, 0);
 %! assert(a.nummsgbytes, 3);
 %! assert(!isempty(a));
 
