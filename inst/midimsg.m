@@ -763,7 +763,8 @@ classdef midimsg
 
       # TODO: store timestamp as matrix not a cell
       # then could just use sort, and no swaps ?
-      [~, s_idx] = sortrows(this.timestamp');
+      [~, s_idx] = sort(cell2mat(this.timestamp'));
+
       s_idx = s_idx';
 
       for i = 1:numel(s_idx)
