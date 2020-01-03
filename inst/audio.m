@@ -19,13 +19,13 @@
 ##
 ## The following MIDI functions are available:
 ##
-## @subsubheading Device query:
+## @subsubheading MIDI Device query:
 ## @table @asis
 ## @item mididevinfo
 ## list any MIDI devices detected in the system
 ## @end table
 ##
-## @subsubheading Device creation and manipulation:
+## @subsubheading MIDI Device creation and manipulation:
 ## @table @asis
 ## @item mididevice
 ## Create a midi device
@@ -37,10 +37,23 @@
 ## Send a MIDI message to a device
 ## @end table
 ##
+## @subsubheading MIDI Controller Interface Functions:
+## @table @asis
+## @item midiid
+## Identify a midi controller
+## @item midicontrols
+## Create a MIDI controller object
+## @item midirecieve
+## Recieve data from a MIDI controller object
+## @item midisend
+## Send data to a MIDI controller.
+## @end table
+##
 ## @subsubheading Writing and reading basic MIDI files:
 ## @table @asis
 ## @item midifileinfo
-## read information about a MIDI file, including number of tracks, comments etc.
+## read information about a MIDI file, including number of tracks, 
+## comments etc.
 ## @item midifileread
 ## read a MIDI file into a midimsg array
 ## @item midifilewrite
