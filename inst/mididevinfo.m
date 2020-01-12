@@ -101,7 +101,7 @@ function out = mididevinfo ()
     printf ("ID Direction Interface  Name\n");
 
     for i=1:length(data)
-      printf ("%2d %12s %10s %s\n", data(i).ID, data(i).Direction, data(i).Interface, data(i).Name);
+      printf ("%2d %-9s %-10s %s\n", data(i).ID, data(i).Direction, data(i).Interface, data(i).Name);
     endfor
   endif
 
