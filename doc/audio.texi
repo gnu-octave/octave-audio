@@ -191,9 +191,9 @@ devs = mididevinfo
 dev = mididevice("input", devs.input@{1@}.ID, "output", devs.output@{1@}.ID)
 
 % receive data and echo it through the output port
-while True
+while true
   msg = midireceive(dev, 1);
-  if !empty(msg)
+  if !isempty(msg)
     midisend(msg);
   endif
 endwhile

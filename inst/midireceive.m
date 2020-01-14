@@ -32,9 +32,9 @@
 ## @example
 ## @code {
 ## dev = mididevice(0);
-## while True
+## while true
 ##    mx = midireceive(dev);
-##    if !empty(mx)
+##    if !isempty(mx)
 ##      % display message
 ##      mx
 ##    endif
