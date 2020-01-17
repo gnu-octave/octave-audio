@@ -15,10 +15,10 @@
 ## <https://www.gnu.org/licenses/>.
 
 ## -*- texinfo -*- 
-## @deftypefn {} {[@var{ctrlid} @var{dev}] =} midiid ()
+## @deftypefn {} {[@var{ctrlid}, @var{dev}] =} midiid ()
 ## Scan for control messages from midi devices to get the id of the device
 ## 
-## Function will display a prompt fir user to move the midi control and return when
+## Function will display a prompt for the user to move the midi control and return when
 ## a control messages is detected or ctrl-C is pressed.
 ##
 ## @subsubheading Inputs
@@ -26,7 +26,7 @@
 ##
 ## @subsubheading Outputs
 ## @var{ctrlid} - control id made from the controller channel * 1000 + controller number.@*
-## @var{dev} = name of the midi device the controller was detected.
+## @var{dev} = name of the midi device the controller was detected on.
 ##
 ## @subsubheading Examples
 ## Monitor midi devices for first moving controller

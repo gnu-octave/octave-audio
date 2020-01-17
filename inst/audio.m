@@ -43,8 +43,8 @@
 ## Identify a midi controller
 ## @item midicontrols
 ## Create a MIDI controller object
-## @item midirecieve
-## Recieve data from a MIDI controller object
+## @item midireceive
+## Receive data from a MIDI controller object
 ## @item midisend
 ## Send data to a MIDI controller.
 ## @end table

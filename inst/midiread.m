@@ -15,14 +15,14 @@
 ## <https://www.gnu.org/licenses/>.
 
 ## -*- texinfo -*- 
-## @deftypefn {} {} midiread (@var{midicontrolsObj})
+## @deftypefn {} {@var{val} =} midiread (@var{midicontrolsObj})
 ## Read current values of midi controls
 ## 
 ## @subsubheading Inputs
 ## @var{midicontrolObj} - control object created using midicontrols@*
 ##
 ## @subsubheading Outputs
-## @var{ret} single value or array of current values from the midi device.
+## @var{val} single value or array of current values from the midi device.
 ##
 ## @subsubheading Examples
 ## Read current value of midicontrols with a ctrlid 2001 on the default midi device.

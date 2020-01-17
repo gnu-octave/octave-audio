@@ -19,7 +19,7 @@
 ## @deftypefnx {} {@var{obj} =} midicontrols (@var{ctrlid})
 ## @deftypefnx {} {@var{obj} =} midicontrols (@var{ctrlid}, @var{initialvalues})
 ## @deftypefnx {} {@var{obj} =} midicontrols (__, @var{propertyname}, @var{propertyvalue})
-## create a midi controls object
+## Create a midi controls object
 ##
 ## @subsubheading Inputs
 ## @var{ctrlid} - single control id or array of control ids to monitor, or [] to use any controller.@*
