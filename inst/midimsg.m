@@ -155,11 +155,11 @@ classdef midimsg
           endif
           # TODO: change channel to be 1 indexed
           chan = this.check_channel(varargin{1})-1;
-          note = varargin{2};
-          vel = varargin{3};
+          note = this.check_value127("note", varargin{2});
+          vel = this.check_value127("velocity", varargin{3});
           timestamp = 0;
           if nargin > 4
-            timestamp = varargin{4};
+            timestamp = this.check_timestamp(varargin{4});
           endif
           this.data{end+1} = uint8 ([bitor(0x90, chan), note, vel]);
           this.timestamp{end+1} = timestamp;
@@ -169,11 +169,11 @@ classdef midimsg
             error ('noteoff expects at least channel,note,velocity')
           endif
           chan = this.check_channel(varargin{1})-1;
-          note = varargin{2};
-          vel = varargin{3};
+          note = this.check_value127("note", varargin{2});
+          vel = this.check_value127("velocity", varargin{3});
           timestamp = 0;
           if nargin > 4
-            timestamp = varargin{4};
+            timestamp = this.check_timestamp(varargin{4});
           endif
           this.data{end+1} = uint8 ([bitor(0x80, chan), note, vel]);
           this.timestamp{end+1} = timestamp;
@@ -183,12 +183,15 @@ classdef midimsg
             error ('note expects at least channel,note,velocity,duration')
           endif
           chan = this.check_channel(varargin{1})-1;
-          note = varargin{2};
-          vel = varargin{3};
+          note = this.check_value127("note", varargin{2});
+          vel = this.check_value127("velocity", varargin{3});
           dur = varargin{4};
+	  if !isscalar(dur) || !isnumeric(dur) || dur < 0
+            error ('note expects at least duration to be a number >= 0')
+          endif
           timestamp = 0;
           if nargin > 5
-            timestamp = varargin{5};
+            timestamp = this.check_timestamp(varargin{5});
           endif
           this.data{end+1} = uint8 ([bitor(0x90, chan), note, vel]);
           this.timestamp{end+1} = timestamp;
@@ -202,10 +205,10 @@ classdef midimsg
             error ('programchange expects at least channel,program')
           endif
           chan = this.check_channel(varargin{1})-1;
-          prog = varargin{2};
+          prog = this.check_value127("program", varargin{2});
           timestamp = 0;
           if nargin > 3
-            timestamp = varargin{3};
+            timestamp = this.check_timestamp(varargin{3});
           endif
           this.data{end+1} = uint8([bitor(0xc0, chan), prog]);
           this.timestamp{end+1} = timestamp;
@@ -216,13 +219,13 @@ classdef midimsg
             error ('controlchange expects at least channel,ccnum,ccval')
           endif
           chan = this.check_channel(varargin{1})-1;
-          ccnum = varargin{2};
-          ccval = varargin{3};
+          ccnum = this.check_value127("ccnum", varargin{2});
+          ccval = this.check_value127("bbval", varargin{3});
           timestamp = 0;
           if nargin > 4
-            timestamp = varargin{4};
+            timestamp = this.check_timestamp(varargin{4});
           endif
-          this.data{end+1} = uint8([bitor(0xb0, chan), ccnum ccval]);
+          this.data{end+1} = uint8([bitor(0xb0, chan), ccnum, ccval]);
           this.timestamp{end+1} = timestamp;
 
         case "polykeypressure"
@@ -231,11 +234,11 @@ classdef midimsg
             error ('polykeypressure expects at least channel,note,keypressure')
           endif
           chan = this.check_channel(varargin{1})-1;
-          note = varargin{2};
-          pres = varargin{3};
+          note = this.check_value127("note", varargin{2});
+          pres = this.check_value127("pressure", varargin{3});
           timestamp = 0;
           if nargin > 4
-            timestamp = varargin{4};
+            timestamp = this.check_timestamp(varargin{4});
           endif
           this.data{end+1} = uint8([bitor(0xa0, chan), note pres]);
           this.timestamp{end+1} = timestamp;
@@ -246,10 +249,10 @@ classdef midimsg
             error ('channelpressure expects at least channel,keypressure')
           endif
           chan = this.check_channel(varargin{1})-1;
-          pres = varargin{2};
+          pres = this.check_value127("pressure", varargin{2});
           timestamp = 0;
           if nargin > 3
-            timestamp = varargin{3};
+            timestamp = this.check_timestamp(varargin{3});
           endif
           this.data{end+1} = uint8([bitor(0xd0, chan), pres]);
           this.timestamp{end+1} = timestamp;
@@ -257,15 +260,15 @@ classdef midimsg
         case "localcontrol"
           # channel, localcontrol, timestamp
           if nargin < 3
-            error ('channelpressure expects at least channel,keypressure')
+            error ('localcontrol expects at least channel,localcontrol')
           endif
           chan = this.check_channel(varargin{1})-1;
-          local = varargin{2};
+          local = this.check_value1("localcontrol", varargin{2});
           timestamp = 0;
           if nargin > 3
-            timestamp = varargin{3};
+            timestamp = this.check_timestamp(varargin{3});
           endif
-          this.data{end+1} = uint8([bitor(0xb0, chan), 122 local]);
+          this.data{end+1} = uint8([bitor(0xb0, chan), 122, local]);
           this.timestamp{end+1} = timestamp;
 
         case "pitchbend"
@@ -279,7 +282,7 @@ classdef midimsg
           pitchhi = bitand(bitshift(pitch, -7), 0x7f);
           timestamp = 0;
           if nargin > 3
-            timestamp = varargin{3};
+            timestamp = this.check_timestamp(varargin{3});
           endif
           this.data{end+1} = uint8([bitor(0xe0, chan), pitchlo pitchhi]);
           this.timestamp{end+1} = timestamp;
@@ -292,7 +295,7 @@ classdef midimsg
           chan = this.check_channel(varargin{1})-1;
           timestamp = 0;
           if nargin > 2
-            timestamp = varargin{2};
+            timestamp = this.check_timestamp(varargin{2});
           endif
           this.data{end+1} = uint8([bitor(0xb0, chan), 127]);
           this.timestamp{end+1} = timestamp;
@@ -303,10 +306,10 @@ classdef midimsg
             error ('monoon expects at least channel and monochannels')
           endif
           chan = this.check_channel(varargin{1})-1;
-          mono = varargin{2};
+          mono = this.check_value16("monochannels", varargin{2});
           timestamp = 0;
           if nargin > 3
-            timestamp = varargin{3};
+            timestamp = this.check_timestamp(varargin{3});
           endif
           this.data{end+1} = uint8([bitor(0xb0, chan), 126, mono]);
           this.timestamp{end+1} = timestamp;
@@ -319,7 +322,7 @@ classdef midimsg
           chan = this.check_channel(varargin{1})-1;
           timestamp = 0;
           if nargin > 2
-            timestamp = varargin{2};
+            timestamp = this.check_timestamp(varargin{2});
           endif
           this.data{end+1} = uint8([bitor(0xb0, chan), 125]);
           this.timestamp{end+1} = timestamp;
@@ -332,7 +335,7 @@ classdef midimsg
           chan = this.check_channel(varargin{1})-1;
           timestamp = 0;
           if nargin > 2
-            timestamp = varargin{2};
+            timestamp = this.check_timestamp(varargin{2});
           endif
           this.data{end+1} = uint8([bitor(0xb0, chan), 124]);
           this.timestamp{end+1} = timestamp;
@@ -345,7 +348,7 @@ classdef midimsg
           chan = this.check_channel(varargin{1})-1;
           timestamp = 0;
           if nargin > 2
-            timestamp = varargin{2};
+            timestamp = this.check_timestamp(varargin{2});
           endif
           this.data{end+1} = uint8([bitor(0xb0, chan), 120]);
           this.timestamp{end+1} = timestamp;
@@ -358,7 +361,7 @@ classdef midimsg
           chan = this.check_channel(varargin{1})-1;
           timestamp = 0;
           if nargin > 2
-            timestamp = varargin{2};
+            timestamp = this.check_timestamp(varargin{2});
           endif
           this.data{end+1} = uint8([bitor(0xb0, chan), 123]);
           this.timestamp{end+1} = timestamp;
@@ -371,7 +374,7 @@ classdef midimsg
           chan = this.check_channel(varargin{1})-1;
           timestamp = 0;
           if nargin > 2
-            timestamp = varargin{2};
+            timestamp = this.check_timestamp(varargin{2});
           endif
           this.data{end+1} = uint8([bitor(0xb0, chan), 121]);
           this.timestamp{end+1} = timestamp;
@@ -381,9 +384,9 @@ classdef midimsg
             error ('songselect expects at least song number')
           endif
           timestamp = 0;
-          song = varargin{1};
+          song = this.check_value127("songnumber", varargin{1});
           if nargin > 2
-            timestamp = varargin{2};
+            timestamp = this.check_timestamp(varargin{2});
           endif
           this.data{end+1} = uint8([0xF3 song]);
           this.timestamp{end+1} = timestamp;
@@ -397,7 +400,7 @@ classdef midimsg
           songlo = bitand(songpos, 0x7F);
           songhi = bitand(bitshift(songpos, -7), 0x7f);
           if nargin > 2
-            timestamp = varargin{2};
+            timestamp = this.check_timestamp(varargin{2});
           endif
           this.data{end+1} = uint8([0xF2 songlo songhi]);
           this.timestamp{end+1} = timestamp;
@@ -412,7 +415,7 @@ classdef midimsg
           data = bitshift(seq, 3) + val;
           timestamp = 0;
           if nargin > 3
-            timestamp = varargin{3};
+            timestamp = this.check_timestamp(varargin{3});
           endif
           this.data{end+1} = uint8([0xF1 data]);
           this.timestamp{end+1} = timestamp;
@@ -420,7 +423,7 @@ classdef midimsg
         case "start"
           timestamp = 0;
           if nargin > 1
-            timestamp = varargin{1};
+            timestamp = this.check_timestamp(varargin{1});
           endif
           this.data{end+1} = uint8([0xFA]);
           this.timestamp{end+1} = timestamp;
@@ -428,7 +431,7 @@ classdef midimsg
         case "stop"
           timestamp = 0;
           if nargin > 1
-            timestamp = varargin{1};
+            timestamp = this.check_timestamp(varargin{1});
           endif
           this.data{end+1} = uint8([0xFC]);
           this.timestamp{end+1} = timestamp;
@@ -436,7 +439,7 @@ classdef midimsg
         case "continue"
           timestamp = 0;
           if nargin > 1
-            timestamp = varargin{1};
+            timestamp = this.check_timestamp(varargin{1});
           endif
           this.data{end+1} = uint8([0xFB]);
           this.timestamp{end+1} = timestamp;
@@ -444,7 +447,7 @@ classdef midimsg
         case "systemreset"
           timestamp = 0;
           if nargin > 1
-            timestamp = varargin{1};
+            timestamp = this.check_timestamp(varargin{1});
           endif
           this.data{end+1} = uint8([0xFF]);
           this.timestamp{end+1} = timestamp;
@@ -452,7 +455,7 @@ classdef midimsg
         case "activesensing"
           timestamp = 0;
           if nargin > 1
-            timestamp = varargin{1};
+            timestamp = this.check_timestamp(varargin{1});
           endif
           this.data{end+1} = uint8([0xFE]);
           this.timestamp{end+1} = timestamp;
@@ -460,7 +463,7 @@ classdef midimsg
         case "timingclock"
           timestamp = 0;
           if nargin > 1
-            timestamp = varargin{1};
+            timestamp = this.check_timestamp(varargin{1});
           endif
           this.data{end+1} = uint8([0xF8]);
           this.timestamp{end+1} = timestamp;
@@ -468,7 +471,7 @@ classdef midimsg
         case "tunerequest"
           timestamp = 0;
           if nargin > 1
-            timestamp = varargin{1};
+            timestamp = this.check_timestamp(varargin{1});
           endif
           this.data{end+1} = uint8([0xF6]);
           this.timestamp{end+1} = timestamp;
@@ -481,7 +484,7 @@ classdef midimsg
  
           timestamp = 0;
           if nargin > 2
-            timestamp = varargin{2};
+            timestamp = this.check_timestamp(varargin{2});
           endif
           this.data{end+1} = uint8(varargin{1});
           this.timestamp{end+1} = timestamp;
@@ -489,7 +492,7 @@ classdef midimsg
         case "eox"
           timestamp = 0;
           if nargin > 1
-            timestamp = varargin{1};
+            timestamp = this.check_timestamp(varargin{1});
           endif
           this.data{end+1} = uint8([0xF7]);
           this.timestamp{end+1} = timestamp;
@@ -506,11 +509,11 @@ classdef midimsg
               timestamp = 0;
             else
               data = [];
-              timestamp = varargin{1};
+              timestamp = this.check_timestamp(varargin{1});
             endif
           elseif nargin == 3
             data = uint8(varargin{1});
-            timestamp = varargin{2};
+            timestamp = this.check_timestamp(varargin{2});
           else
             error ("systemexclusive expects optional data and timestamp only");
           endif
@@ -847,11 +850,39 @@ classdef midimsg
   endmethods
 
   methods (Access = private)
+    function t = check_timestamp(this, ts)
+      if !isscalar (ts) || !isnumeric(ts) || ts < 0
+        error ("expected timestamp to be a number >= 0");
+      endif
+      t = ts;
+    endfunction
+
     function c = check_channel(this, chan)
-      if !isscalar (chan) || chan < 1 || chan > 16
+      if !isscalar (chan) || !isnumeric(chan) || chan < 1 || chan > 16
         error ("expected channel to be a number between 1..16");
       endif
       c = chan;
+    endfunction
+
+    function v = check_value127(this, name, value)
+      if !isscalar (value) || !isnumeric(value) || value < 0 || value > 127
+        error ("expected %s to be a number between 0..127", name);
+      endif
+      v = value;
+    endfunction
+
+    function v = check_value1(this, name, value)
+      if !isscalar (value) || !(islogical(value) || isnumeric(value)) || value < 0 || value > 1
+        error ("expected %s to be a number between 0..1", name);
+      endif
+      v = value;
+    endfunction
+
+    function v = check_value16(this, name, value)
+      if !isscalar (value) || !isnumeric(value) || value < 0 || value > 16
+        error ("expected %s to be a number between 0..16", name);
+      endif
+      v = value;
     endfunction
 
     function v = type_str (this, data)
@@ -968,7 +999,14 @@ endclassdef
 %! assert(length(a) == 0);
 %! assert(isempty(a));
 
-%! fail midimsg("note", 0, 60, 127, 2)
+%!fail midimsg("note", 0, 60, 127, 2)
+%!fail midimsg("note", 17, 60, 127, 2)
+%!fail midimsg("note", 1, 128, 127, 2)
+%!fail midimsg("note", 1, -1, 127, 2)
+%!fail midimsg("note", 1, 60, 128, 2)
+%!fail midimsg("note", 1, 60, -1, 2)
+%!fail midimsg("note", 1, 60, 127, -1)
+%!fail midimsg("note", 1, 60, 127, 2, -1)
 
 %!test
 %! a = midimsg("note", 1, 60, 127, 2);
