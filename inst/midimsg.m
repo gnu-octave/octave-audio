@@ -561,16 +561,31 @@ classdef midimsg
 
       switch (s(1).type)
         case "."
+          if length(p.timestamp) > 1
+            error ("Can not set %s on mutiple messages yet", s(1).subs);
+          endif
           switch tolower(s(1).subs)
             case "timestamp"
-              if length(p.timestamp) == 1
-                p.timestamp{1} = p.check_timestamp(rhs);
-              else
-                error ("Can not set timestamp on mutiple messages yet");
+              p.timestamp{1} = p.check_timestamp(rhs);
+
+            case "channel"
+              chan = p.check_channel(rhs);
+              data = p.data{1};
+              data(1) = bitor(bitand(data(1), 0xF0), (chan-1));
+	      p.data{1} = data;
+
+            case "note"
+              data = p.data{1};
+              cmd = bitand(data(1), 0xF0);
+              if !(cmd == 0x80 || cmd == 0x90 || cmd == 0xA0)
+                error ("note property only valid for noteon/off and polykeypressure");
               endif
+              data(2) = p.check_value127("note", rhs);
+	      p.data{1} = data;
             otherwise
               error("unimplemented midimsg.subsasgn property '%s'", s(1).subs);
 	  endswitch
+
         case "()"
           idx = s(1).subs;
           if (numel (idx) != 1)
@@ -1400,16 +1415,46 @@ endclassdef
 %! assert(a.timestamp, 0);
 %!
 %! a.timestamp = 10;
+%! a.channel = 2;
+%! a.note = 61;
 %! assert(a.timestamp, 10);
+%! assert(a.channel, 2);
+%! assert(a.note, 61);
+%!
+%! fail ("a.channel = 0;");
+%! fail ("a.note = -1;");
 %
 %! a = midimsg("note", 1, 60, 127, 2);
 %! assert(length(a) == 2);
 %! assert(a(1).timestamp, 0);
 %! assert(a(2).timestamp, 2);
+%! assert(a(1).note, 60);
+%! assert(a(2).note, 60);
+%! assert(a(1).channel, 1);
+%! assert(a(2).channel, 1);
 %!
 %! a(1).timestamp = 10;
 %! a(2).timestamp = 20;
 %! fail ("a(3).timestamp = 1;");
+%! a(1).channel = 11;
+%! a(2).channel = 12;
+%! a(1).note = 71;
 %!
 %! assert(a(1).timestamp, 10);
 %! assert(a(2).timestamp, 20);
+%! assert(a(1).channel, 11);
+%! assert(a(2).channel, 12);
+%! assert(a(1).note, 71);
+%!
+%! fail ("a(1) = 1;");
+%! a(1) = midimsg("noteon", 1, 80, 100, 50);
+%! assert(length(a) == 2);
+%! assert(a(1).timestamp, 50);
+%! assert(a(1).channel, 1);
+%! assert(a(1).note, 80);
+%! assert(a(1).velocity, 100);
+%!
+%! # 2nd index still same as was
+%! assert(a(2).timestamp, 20);
+%! assert(a(2).channel, 12);
+%! assert(a(2).note, 60);
