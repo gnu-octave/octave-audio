@@ -523,7 +523,7 @@ classdef midimsg
 
           # want to build a full SOX data EOX
           if !isempty(data)
-            this.data{end+1} = data;;
+            this.data{end+1} = data;
             this.timestamp{end+1} = timestamp;
 
             this.data{end+1} = uint8([0xF7]);
@@ -552,6 +552,48 @@ classdef midimsg
 
     function e = length (this)
       e = length(this.data);
+    endfunction
+
+    function p = subsasgn (p, s, rhs)
+      if isempty(s)
+        error ("midimsg.subsref missing index");
+      endif
+
+      switch (s(1).type)
+        case "."
+          switch tolower(s(1).subs)
+            case "timestamp"
+              if length(p.timestamp) == 1
+                p.timestamp{1} = p.check_timestamp(rhs);
+              else
+                error ("Can not set timestamp on mutiple messages yet");
+              endif
+            otherwise
+              error("unimplemented midimsg.subsasgn property '%s'", s(1).subs);
+	  endswitch
+        case "()"
+          idx = s(1).subs;
+          if (numel (idx) != 1)
+            error ("@midimsg/subsasgn: needs exactly one index");
+          endif
+          if numel (s) == 1		
+            # assign a value to here - so verify is a midimsg
+            if !isa(rhs, "midimsg")
+              error ("midimsg.subsasgn rhs of indexed value must be a midimsg");
+            endif
+            val = rhs;
+          else
+            # extract out midimsg value and do assign on it
+            val = midimsg.createMessage(p.data{idx{1}}, p.timestamp{idx{1}});
+            val = subsasgn (val, s(2:end), rhs);
+          endif
+	  # store the modded data back in our object
+          p.data{idx{1}} = val.data{1};
+          p.timestamp{idx{1}} = val.timestamp{1};
+ 
+        otherwise
+          error("unimplemented midimsg.subsasgn type");
+      endswitch
     endfunction
 
     function val = subsref (p, s)
@@ -1345,3 +1387,29 @@ endclassdef
 %! assert(c(2).channel, 2);
 %! assert(c(2).note, 60);
 %! assert(c(2).velocity, 10);
+
+%!test
+%! # basic assign operations
+%!
+%! a = midimsg("noteon", 1, 60, 127, 0);
+%! assert(length(a) == 1);
+%! assert(a.type, "NoteOn");
+%! assert(a.channel, 1);
+%! assert(a.note, 60);
+%! assert(a.velocity, 127);
+%! assert(a.timestamp, 0);
+%!
+%! a.timestamp = 10;
+%! assert(a.timestamp, 10);
+%
+%! a = midimsg("note", 1, 60, 127, 2);
+%! assert(length(a) == 2);
+%! assert(a(1).timestamp, 0);
+%! assert(a(2).timestamp, 2);
+%!
+%! a(1).timestamp = 10;
+%! a(2).timestamp = 20;
+%! fail ("a(3).timestamp = 1;");
+%!
+%! assert(a(1).timestamp, 10);
+%! assert(a(2).timestamp, 20);
