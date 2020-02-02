@@ -66,7 +66,7 @@
 ## @var{ccnum} - control change control number.@*
 ## @var{ccval} - control change control value.@*
 ## @var{keypressure} - key pressure value when creating a key pressure message.@*
-## @var{chanpressure} - channel pressure value when creating a chanpressure message.@*
+## @var{chanpressure} - channel pressure value when creating a channelpressure message.@*
 ## @var{pitchchange} - pitch change value when creating a pitch change message.@*
 ## @var{localcontrol} - boolean value when creating a localcontrol message.@*
 ## @var{monochannels} - channels specified for a mono on message.@*
@@ -90,6 +90,7 @@
 ## @var{note} - the note value for message (Only valid for noteon/off and polykeypressure).@*
 ## @var{velocity} - the velocity value for message (Only valid for noteon/off).@*
 ## @var{keypressure} - the keypressure value for message (Only valid for polykeypressure).@*
+## @var{channelpressure} - the chanpressure value for message (Only valid for channelpressure).@*
 ## @var{localcontrol} - the localcontrol value for message (Only valid for localcontrol messages).@*
 ## @var{monochannels} - channels specified for a mono on message.@*
 ## @var{program} - program number specified for a program change message.@*
@@ -274,7 +275,7 @@ classdef midimsg
         case "pitchbend"
           # channel, pitchchange, timestamp
           if nargin < 3
-            error ('channelpressure expects at least channel,pitch')
+            error ('pitchbend expects at least channel,pitch')
           endif
           chan = this.check_channel(varargin{1})-1;
           pitch = uint16(varargin{2} + 0x2000);
@@ -592,6 +593,24 @@ classdef midimsg
               data(3) = p.check_value127("velocity", rhs);
 	      p.data{1} = data;
 
+            case "channelpressure"
+              data = p.data{1};
+              cmd = bitand(data(1), 0xF0);
+              if !(cmd == 0xD0)
+                error ("channel property only valid for channelpressure messages");
+              endif
+              data(2) = p.check_value127("channelpressure", rhs);
+	      p.data{1} = data;
+
+            case "keypressure"
+              data = p.data{1};
+              cmd = bitand(data(1), 0xF0);
+              if !(cmd == 0xA0)
+                error ("keypressure property only valid for polykeypressure messages");
+              endif
+              data(3) = p.check_value127("keypressure", rhs);
+	      p.data{1} = data;
+
             otherwise
               error("unimplemented midimsg.subsasgn property '%s'", s(1).subs);
 	  endswitch
@@ -750,6 +769,30 @@ classdef midimsg
               endif
               val = double(val);
             endif
+
+          case "channelpressure"
+            if length(p.data) > 0
+              data = p.data{1};
+              cmd = bitand(data(1), 0xF0);
+              if cmd == 0xD0
+                val = data(2);
+              else
+                error ("channelpressure property only valid for channelpressure");
+              endif
+              if length(p.data) > 1
+                for i = 2:length(p.data)
+                  data = p.data{i};
+                  cmd = bitand(data(1), 0xF0);
+                  if cmd == 0xD0
+                    val = [val data(2)];
+                  else
+                    error ("keypressure property only valid for channelpressure");
+                  endif
+                endfor
+              endif
+              val = double(val);
+            endif
+ 
           case "localcontrol"
             if length(p.data) > 0
               data = p.data{1};
@@ -1141,6 +1184,9 @@ endclassdef
 %! assert(a.note, 60);
 %! assert(a.keypressure, 65);
 %! assert(!isempty(a));
+%!
+%! a.keypressure = 40;
+%! assert(a.keypressure, 40);
 
 %!test
 %! a = midimsg("pitchbend", 1, 0);
@@ -1158,6 +1204,10 @@ endclassdef
 %! assert(a.type, "ChannelPressure");
 %! assert(a.nummsgbytes, 2);
 %! assert(!isempty(a));
+%! assert(a.channelpressure, 60);
+%!
+%! a.channelpressure = 40;
+%! assert(a.channelpressure, 40);
 
 %!test
 %! a = midimsg("localcontrol", 1, 1);
@@ -1471,3 +1521,4 @@ endclassdef
 %! assert(a(2).timestamp, 20);
 %! assert(a(2).channel, 12);
 %! assert(a(2).note, 60);
+
