@@ -92,7 +92,7 @@
 ## @var{keypressure} - the keypressure value for message (Only valid for polykeypressure).@*
 ## @var{localcontrol} - the localcontrol value for message (Only valid for localcontrol messages).@*
 ## @var{monochannels} - channels specified for a mono on message.@*
-## @var{program} - channels specified for a program change message.@*
+## @var{program} - program number specified for a program change message.@*
 ##
 ## @subsubheading Examples
 ## Create a note on/off pair with a duration of 1.5 seconds
@@ -582,6 +582,16 @@ classdef midimsg
               endif
               data(2) = p.check_value127("note", rhs);
 	      p.data{1} = data;
+
+            case "velocity"
+              data = p.data{1};
+              cmd = bitand(data(1), 0xF0);
+              if !(cmd == 0x80 || cmd == 0x90)
+                error ("velocity property only valid for noteon/off");
+              endif
+              data(3) = p.check_value127("velocity", rhs);
+	      p.data{1} = data;
+
             otherwise
               error("unimplemented midimsg.subsasgn property '%s'", s(1).subs);
 	  endswitch
@@ -1417,12 +1427,15 @@ endclassdef
 %! a.timestamp = 10;
 %! a.channel = 2;
 %! a.note = 61;
+%! a.velocity = 100;
 %! assert(a.timestamp, 10);
 %! assert(a.channel, 2);
 %! assert(a.note, 61);
+%! assert(a.velocity, 100);
 %!
 %! fail ("a.channel = 0;");
 %! fail ("a.note = -1;");
+%! fail ("a.velocity = -1;");
 %
 %! a = midimsg("note", 1, 60, 127, 2);
 %! assert(length(a) == 2);
