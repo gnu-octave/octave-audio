@@ -166,7 +166,7 @@ doc/$(package).pdf: doc/$(package).texi doc/functions.texi
 	cd doc && $(RM) -f $(package).aux  $(package).cp  $(package).cps  $(package).fn  $(package).fns  $(package).log  $(package).toc
 
 doc/functions.texi:
-	cd doc && ./mkfuncdocs.py --src-dir=../inst/ ../INDEX > functions.texi
+	cd doc && ./mkfuncdocs.py --src-dir=../inst/ ../INDEX | $(SED) 's/@seealso/@xseealso/g' > functions.texi
 
 
 run_in_place = $(OCTAVE) --eval ' pkg ("local_list", "$(package_list)"); ' \
