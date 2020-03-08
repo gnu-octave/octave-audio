@@ -1,4 +1,4 @@
-## Copyright (C) 2019 John Donoghue <john.donoghue@ieee.org>
+## Copyright (C) 2019-2020 John Donoghue <john.donoghue@ieee.org>
 ## 
 ## This program is free software: you can redistribute it and/or modify it
 ## under the terms of the GNU General Public License as published by
@@ -887,69 +887,71 @@ classdef midimsg
 
     endfunction
 
-    function short_disp (this)
-      printf("MIDI Msg\n");
-    endfunction
-
-    function display (this)
-      printf("MIDI message:\n");
-      # 2 options here
-      # single array of data
-      # or a cell contain multiple arrays
+    function out = disp (this)
+      if nargout == 0
+        disp(" MIDI message:");
+      else
+        out = "";
+      endif
       for i=1:length(this.data)
-         data =  this.data{i};
-         cmd = data(1);
-         types = this.type_str(data); 
+        data =  this.data{i};
+        cmd = data(1);
+        types = this.type_str(data); 
 
-         if bitand(cmd, 0xF0) != 0xF0 && bitand(cmd, 0x80) != 0
-           chan = bitand(cmd, 0x0F) + 1;
-           printf (" %-10s Channel: %2d", types, chan);
-         else
-           printf (" %-10s", types);
-         endif
+        if bitand(cmd, 0xF0) != 0xF0 && bitand(cmd, 0x80) != 0
+          chan = bitand(cmd, 0x0F) + 1;
+          msgtext = sprintf ("%-10s Channel: %2d", types, chan);
+        else
+          msgtext = sprintf ("%-10s", types);
+        endif
 
-         if strcmp(types, "NoteOn") || strcmp(types, "NoteOff")
-           printf (" Note: %3d Velocity: %3d", data(2), data(3));
-         endif
-         if strcmp(types, "ProgramChange")
-           printf (" Program: %3d", data(2));
-         endif
-         if strcmp(types, "ControlChange")
-           printf (" CCNumber: %3d CCValue: %3d", data(2), data(3));
-         endif
-         if strcmp(types, "PitchBend")
-           v = bitshift(int16(data(3)), 7) + int16(data(2)) - 0x2000;
-           printf (" PitchChange: %d", v);
-         endif
-         if strcmp(types, "ChannelPressure")
-           printf (" ChannelPressure: %3d", data(2));
-         endif
-         if strcmp(types, "PolyKeyPressure")
-           printf (" Note: %3d KeyPressure: %3d", data(2), data(3));
-         endif
-         if strcmp(types, "LocalControl")
-           printf (" LocalControl: %3d", data(3));
-         endif
-         if strcmp(types, "MonoOn")
-           printf (" MonoChannels: %3d", data(3));
-         endif
-         if strcmp(types, "SongSelect")
-           printf (" Song: %3d", data(2));
-         endif
-         if strcmp(types, "SongPositionPointer")
-           v = bitshift(int16(data(3)), 7) + int16(data(2));
-           printf (" SongPosition: %d", v);
-         endif
-         if strcmp(types, "MIDITimeCodeQuarterFrame")
-           seq = bitshift(data(2), 3);
-           val = bitand(data(2), 7);
-           printf (" TimeCodeSequence: %d TimeCodeValue: %d", seq, val);
-         endif
+        if strcmp(types, "NoteOn") || strcmp(types, "NoteOff")
+          msgtext = [msgtext sprintf(" Note: %3d Velocity: %3d", data(2), data(3))];
+        endif
+        if strcmp(types, "ProgramChange")
+          msgtext = [msgtext sprintf(" Program: %3d", data(2))];
+        endif
+        if strcmp(types, "ControlChange")
+          msgtext = [msgtext sprintf(" CCNumber: %3d CCValue: %3d", data(2), data(3))];
+        endif
+        if strcmp(types, "PitchBend")
+          v = bitshift(int16(data(3)), 7) + int16(data(2)) - 0x2000;
+          msgtext = [msgtext sprintf(" PitchChange: %d", v)];
+        endif
+        if strcmp(types, "ChannelPressure")
+          msgtext = [msgtext sprintf(" ChannelPressure: %3d", data(2))];
+        endif
+        if strcmp(types, "PolyKeyPressure")
+          msgtext = [msgtext sprintf(" Note: %3d KeyPressure: %3d", data(2), data(3))];
+        endif
+        if strcmp(types, "LocalControl")
+          msgtext = [msgtext sprintf(" LocalControl: %3d", data(3))];
+        endif
+        if strcmp(types, "MonoOn")
+          msgtext = [msgtext sprintf(" MonoChannels: %3d", data(3))];
+        endif
+        if strcmp(types, "SongSelect")
+          msgtext = [msgtext sprintf(" Song: %3d", data(2))];
+        endif
+        if strcmp(types, "SongPositionPointer")
+          v = bitshift(int16(data(3)), 7) + int16(data(2));
+          msgtext = [msgtext sprintf(" SongPosition: %d", v)];
+        endif
+        if strcmp(types, "MIDITimeCodeQuarterFrame")
+          seq = bitshift(data(2), 3);
+          val = bitand(data(2), 7);
+          msgtext = [msgtext sprintf(" TimeCodeSequence: %d TimeCodeValue: %d", seq, val)];
+        endif
 
-         printf (" Timestamp: %f", this.timestamp{i});
-         printf (" [");
-         printf (" 0x%02X", data);
-         printf(" ]\n");
+        msgtext = [msgtext sprintf(" Timestamp: %f", this.timestamp{i})];
+        msgtext = [msgtext sprintf(" [")];
+        msgtext = [msgtext sprintf(" 0x%02X", data)];
+        msgtext = [msgtext sprintf(" ]")];
+	if nargout == 0
+          disp(["   "  msgtext]);
+        else
+          out = [out msgtext "\n"];
+        endif
       endfor
     endfunction
     

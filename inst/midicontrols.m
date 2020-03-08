@@ -1,4 +1,4 @@
-## Copyright (C) 2019 John Donoghue <john.donoghue@ieee.org>
+## Copyright (C) 2019-2020 John Donoghue <john.donoghue@ieee.org>
 ## 
 ## This program is free software: you can redistribute it and/or modify it
 ## under the terms of the GNU General Public License as published by
@@ -217,16 +217,25 @@ classdef midicontrols < handle
       val = double(val);
     endfunction
 
-    function display (this)
-      printf ("%s = \n", inputname (1));
-      printf ("  midicontrols object: listening for events on %s\n",  this.device.Input);
-      if ( isempty(this.controls))
-        printf ("    any control"); % any control on {devname}
+    function out = disp (this)
+      if nargout == 0
+        disp(sprintf ("  midicontrols object: listening for events on %s",  this.device.Input));
       else
-	printf ("    controls ");
-	printf ("%d ", this.controls)
+        out = sprintf ("midicontrols object: listening for events on %s\n",  this.device.Input);
+      endif
+      if ( isempty(this.controls))
+        if nargout == 0
+          disp ("    any control"); % any control on {devname}
+        else
+          out = [out "  any control\n"];
+        endif
+      else
+        if nargout == 0
+	  disp (["    controls " sprintf("%d ", this.controls)]);
+        else
+          out = [out "  controls " sprintf("%d ", this.controls) "\n"];
+        endif
       endif       
-      printf ("\n ");
     endfunction
   endmethods
 endclassdef
