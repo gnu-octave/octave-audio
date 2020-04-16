@@ -1,6 +1,14 @@
 Summary of important user-visible changes for releases of the audio package
 
 ===============================================================================
+audio-2.0.1   Release Date: TDB
+===============================================================================
+
+ ** added additional midimsg property set/get
+
+ ** added midimsgtype enumeration class
+
+===============================================================================
 audio-2.0.0   Release Date: 2020-01-03
 ===============================================================================
 

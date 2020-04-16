@@ -15,3 +15,5 @@ MIDI File I/O
   midifileread
   midifilewrite
   ismidifile
+Enumerations
+  midimsgtype
