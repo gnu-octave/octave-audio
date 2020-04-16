@@ -96,6 +96,7 @@
 ## @var{program} - program number specified for a program change message.@*
 ## @var{ccnumber} - control change number specified for a control change message.@*
 ## @var{ccvalue} - control change value specified for a control change message.@*
+## @var{song} - song number for a song selection message.@*
 ##
 ## @subsubheading Examples
 ## Create a note on/off pair with a duration of 1.5 seconds
@@ -634,6 +635,15 @@ classdef midimsg
               data(3) = p.check_value127("ccvalue", rhs);
 	      p.data{1} = data;
 
+            case "song"
+              data = p.data{1};
+              cmd = data(1);
+              if cmd != 0xF3
+                error ("song property only valid for song select messages");
+              endif
+              data(2) = p.check_value127("song", rhs);
+	      p.data{1} = data;
+
             otherwise
               error("unimplemented midimsg.subsasgn property '%s'", s(1).subs);
 	  endswitch
@@ -921,6 +931,29 @@ classdef midimsg
                     val = [val data(3)];
                   else
                     error ("ccvalue property only valid for controlchange messages");
+                  endif
+                endfor
+              endif
+              val = double(val);
+            endif
+
+           case "song"
+            if length(p.data) > 0
+              data = p.data{1};
+              cmd = data(1);
+              if cmd == 0xF3
+                val = data(2);
+              else
+                error ("song property only valid for songselect messages");
+              endif
+              if length(p.data) > 1
+                for i = 2:length(p.data)
+                  data = p.data{i};
+                  cmd = data(1);
+                  if cmd == 0xF3
+                    val = [val data(2)];
+                  else
+                    error ("song property only valid for songselect messages");
                   endif
                 endfor
               endif
@@ -1450,6 +1483,10 @@ endclassdef
 %! assert(a.nummsgbytes, 2);
 %! assert(!isempty(a));
 %! assert(a.msgbytes, uint8([0xF3 1]));
+%! assert(a.song, 1);
+%! a.song = 2;
+%! assert(a.song, 2);
+%! assert(a.msgbytes, uint8([0xF3 2]));
 
 %!test
 %! a = midimsg("songpositionpointer", 0);
