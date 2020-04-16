@@ -56,7 +56,7 @@
 ## For each message type, the timestamp value is optional.
 ##
 ## @subsubheading Inputs
-## @var{type} - string message type.@*
+## @var{type} - string message type or a midimsgtype.@*
 ## @var{timestamp} - optional seconds time stamp for the event@*
 ## @var{channel} - the channel to use for the message (1..16)@*
 ## @var{note} - the value of the note to play/stop@*
@@ -117,7 +117,7 @@
 ## }
 ## @end example
 ##
-## @seealso{midifileread, midisend, midireceive}
+## @seealso{midifileread, midisend, midireceive, midimsgtype}
 ## @end deftypefn
 
 classdef midimsg
@@ -136,10 +136,13 @@ classdef midimsg
       this.data = {};
       this.timestamp = {};
 
-      if nargin < 1 || (! ischar (typev) && !isscalar (typev))
+      if nargin < 1 || (! ischar (typev) && !isscalar (typev) && ! (class(typev) == "midimsgtype"))
         error ("Expected midi type or size");
       endif
-      if isscalar (typev)
+
+      if strcmp (class(typev), "midimsgtype")
+        typev = char(typev);
+      elseif isscalar (typev)
         if typev == 0
           return; 
         else
@@ -1148,6 +1151,12 @@ endclassdef
 %! a = midimsg("noteon", 2, 60, 20);
 %! assert(a.channel, 2);
 %! assert(a.msgbytes, uint8([0x91 0x3C 0x14]));
+
+%!test
+%! % using midimsgtype enum
+%! a = midimsg(midimsgtype.NoteOn, 1, 60, 20);
+%! assert(isa(a, "midimsg"));
+%! assert(a.type, "NoteOn");
 
 %!test
 %! a = midimsg("noteoff", 1, 60, 20);
