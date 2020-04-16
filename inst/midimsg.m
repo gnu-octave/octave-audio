@@ -94,6 +94,8 @@
 ## @var{localcontrol} - the localcontrol value for message (Only valid for localcontrol messages).@*
 ## @var{monochannels} - channels specified for a mono on message.@*
 ## @var{program} - program number specified for a program change message.@*
+## @var{ccnumber} - control change number specified for a control change message.@*
+## @var{ccvalue} - control change value specified for a control change message.@*
 ##
 ## @subsubheading Examples
 ## Create a note on/off pair with a duration of 1.5 seconds
@@ -223,8 +225,8 @@ classdef midimsg
             error ('controlchange expects at least channel,ccnum,ccval')
           endif
           chan = this.check_channel(varargin{1})-1;
-          ccnum = this.check_value127("ccnum", varargin{2});
-          ccval = this.check_value127("bbval", varargin{3});
+          ccnum = this.check_value119("ccnum", varargin{2});
+          ccval = this.check_value127("ccval", varargin{3});
           timestamp = 0;
           if nargin > 4
             timestamp = this.check_timestamp(varargin{4});
@@ -614,6 +616,24 @@ classdef midimsg
               data(3) = p.check_value127("keypressure", rhs);
 	      p.data{1} = data;
 
+            case "ccnumber"
+              data = p.data{1};
+              cmd = bitand(data(1), 0xF0);
+              if cmd != 0xB0 || data(2) > 119
+                error ("ccnumber property only valid for controlchange messages");
+              endif
+              data(2) = p.check_value119("ccnumber", rhs);
+	      p.data{1} = data;
+
+            case "ccvalue"
+              data = p.data{1};
+              cmd = bitand(data(1), 0xF0);
+              if cmd != 0xB0 || data(2) > 119
+                error ("ccnumber property only valid for controlchange messages");
+              endif
+              data(3) = p.check_value127("ccvalue", rhs);
+	      p.data{1} = data;
+
             otherwise
               error("unimplemented midimsg.subsasgn property '%s'", s(1).subs);
 	  endswitch
@@ -862,6 +882,51 @@ classdef midimsg
               endif
               val = double(val);
             endif
+          case "ccnumber"
+            if length(p.data) > 0
+              data = p.data{1};
+              cmd = bitand(data(1), 0xF0);
+              if cmd == 0xB0 && data(2) <= 119
+                val = data(2);
+              else
+                error ("ccnumber property only valid for controlchange messages");
+              endif
+              if length(p.data) > 1
+                for i = 2:length(p.data)
+                  data = p.data{i};
+                  cmd = bitand(data(1), 0xF0);
+                  if cmd == 0xB0 && data(2) <= 119
+                    val = [val data(2)];
+                  else
+                    error ("ccnumber property only valid for controlchange messages");
+                  endif
+                endfor
+              endif
+              val = double(val);
+            endif
+          case "ccvalue"
+            if length(p.data) > 0
+              data = p.data{1};
+              cmd = bitand(data(1), 0xF0);
+              if cmd == 0xB0 && data(2) <= 119
+                val = data(3);
+              else
+                error ("ccvalue property only valid for controlchange messages");
+              endif
+              if length(p.data) > 1
+                for i = 2:length(p.data)
+                  data = p.data{i};
+                  cmd = bitand(data(1), 0xF0);
+                  if cmd == 0xB0 && data(2) <= 119
+                    val = [val data(3)];
+                  else
+                    error ("ccvalue property only valid for controlchange messages");
+                  endif
+                endfor
+              endif
+              val = double(val);
+            endif
+ 
           otherwise
             error("unimplemented midimsg.subsref property '%s'", s(1).subs);
           endswitch
@@ -996,6 +1061,13 @@ classdef midimsg
     function v = check_value16(this, name, value)
       if !isscalar (value) || !isnumeric(value) || value < 0 || value > 16
         error ("expected %s to be a number between 0..16", name);
+      endif
+      v = value;
+    endfunction
+
+    function v = check_value119(this, name, value)
+      if !isscalar (value) || !isnumeric(value) || value < 0 || value > 119
+        error ("expected %s to be a number between 0..119", name);
       endif
       v = value;
     endfunction
@@ -1185,6 +1257,12 @@ endclassdef
 %! assert(a.type, "ControlChange");
 %! assert(a.nummsgbytes, 3);
 %! assert(!isempty(a));
+%! assert(a.ccnumber, 60)
+%! assert(a.ccvalue, 65)
+%! a.ccnumber = 0;
+%! a.ccvalue = 4;
+%! assert(a.ccnumber, 0)
+%! assert(a.ccvalue, 4)
 
 %!test
 %! a = midimsg("polykeypressure", 1, 60, 65);
