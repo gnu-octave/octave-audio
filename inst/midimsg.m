@@ -731,15 +731,16 @@ classdef midimsg
           case "type"
             if length(this.data) > 0
               data = this.data{1};
-              val = this.type_str(this.data{1}); 
+              val = this.type_enum(this.data{1}); 
               if length(this.data) > 1
-                val = {val}; 
+                # we cant override cellstr yes, so just use strings for multiples
+                val = {char(val)}; 
                 for i = 2:length(this.data)
                   val{end+1} = this.type_str(this.data{i});
                 endfor
               endif
             else
-              val = "<none>"
+              val = midimsgtype.Undefined;
             endif
           case "channel"
             if length(this.data) > 0
@@ -1154,7 +1155,7 @@ classdef midimsg
       v = value;
     endfunction
 
-    function v = type_str (this, data)
+    function v = type_enum (this, data)
       cmd = 0;
       b1 = 0;
       if length(data) > 0
@@ -1167,77 +1168,85 @@ classdef midimsg
       cmdgrp = bitand(cmd, 0xF0);
       switch (cmdgrp)
        case 0x80
-         v = "NoteOff";             
+         v = midimsgtype.NoteOff;             
        case 0x90
-         v = "NoteOn";
+         v = midimsgtype.NoteOn;
        case 0xA0
-         v = "PolyKeyPressure";
+         v = midimsgtype.PolyKeyPressure;
        case 0xB0
          # depends on next byte for actual msg
          if b1 == 120
-           v = "AllSoundOff";
+           v = midimsgtype.AllSoundOff;
          elseif b1 == 121
-           v = "ResetAllControllers";
+           v = midimsgtype.ResetAllControllers;
          elseif b1 == 122
-           v = "LocalControl"; # off or on
+           v = midimsgtype.LocalControl;
          elseif b1 == 123
-           v = "AllNotesOff";
+           v = midimsgtype.AllNotesOff;
          elseif b1 == 124
-           v = "OmniOff";
+           v = midimsgtype.OmniOff;
          elseif b1 == 125
-           v = "OmniOn";
+           v = midimsgtype.OmniOn;
          elseif b1 == 126
-           v = "MonoOn";
+           v = midimsgtype.MonoOn;
          elseif b1 == 127
-           v = "PolyOn";
+           v = midimsgtype.PolyOn;
          else
-           v = "ControlChange";
+           v = midimsgtype.ControlChange;
          endif
        case 0xC0
-         v = "ProgramChange";             
+         v = midimsgtype.ProgramChange;             
        case 0xD0
-         v = "ChannelPressure";             
+         v = midimsgtype.ChannelPressure;             
        case 0xE0
-         v = "PitchBend";             
+         v = midimsgtype.PitchBend;             
        case 0xF0
          if cmd == 0xF0
-           v = "SystemExclusive";
+           v = midimsgtype.SystemExclusive;
          elseif cmd == 0xF1
-           v = "MIDITimeCodeQuarterFrame";
+           v = midimsgtype.MIDITimeCodeQuarterFrame;
          elseif cmd == 0xF2
-           v = "SongPositionPointer";
+           v = midimsgtype.SongPositionPointer;
          elseif cmd == 0xF3
-           v = "SongSelect";
+           v = midimsgtype.SongSelect;
          elseif cmd == 0xF4
-           v = "Reserved";
+           v = midimsgtype.Reserved;
          elseif cmd == 0xF5
-           v = "Reserved";
+           v = midimsgtype.Reserved;
          elseif cmd == 0xF6
-           v = "TuneRequest";
+           v = midimsgtype.TuneRequest;
          elseif cmd == 0xF7
-           v = "EOX";
+           v = midimsgtype.EOX;
          elseif cmd == 0xF8
-           v = "TimingClock";
+           v = midimsgtype.TimingClock;
          elseif cmd == 0xF9
-           v = "Reserved";
+           v = midimsgtype.Reserved;
          elseif cmd == 0xFA
-           v = "Start";
+           v = midimsgtype.Start;
          elseif cmd == 0xFB
-           v = "Continue";
+           v = midimsgtype.Continue;
          elseif cmd == 0xFC
-           v = "Stop";
+           v = midimsgtype.Stop;
          elseif cmd == 0xFD
-           v = "Reserved";
+           v = midimsgtype.Reserved;
          elseif cmd == 0xFE
-           v = "ActiveSensing";
+           v = midimsgtype.ActiveSensing;
          elseif cmd == 0xFF
-           v = "SystemReset";
+           v = midimsgtype.SystemReset;
          endif
          # depend  on other bytes ?
        otherwise
-         v = "Data";             
+         if length(data) < 1
+           v = midimsgtype.Undefined;
+	 else
+           v = midimsgtype.Data;
+	 endif
       endswitch
       
+    endfunction
+
+    function v = type_str (this, data)
+      v = char(this.type_enum(data));
     endfunction
 
   endmethods
@@ -1298,7 +1307,7 @@ endclassdef
 %! a = midimsg("noteon", 1, 60, 20);
 %! assert(isa(a, "midimsg"));
 %! assert(length(a) == 1);
-%! assert(a.type, "NoteOn");
+%! assert(a.type == "NoteOn");
 %! assert(a.channel, 1);
 %! assert(a.msgbytes, uint8([0x90 0x3C 0x14]));
 %! assert(!isempty(a));
@@ -1310,13 +1319,13 @@ endclassdef
 %! % using midimsgtype enum
 %! a = midimsg(midimsgtype.NoteOn, 1, 60, 20);
 %! assert(isa(a, "midimsg"));
-%! assert(a.type, "NoteOn");
+%! assert(a.type == "NoteOn");
 
 %!test
 %! a = midimsg("noteoff", 1, 60, 20);
 %! assert(isa(a, "midimsg"));
 %! assert(length(a) == 1);
-%! assert(a.type, "NoteOff");
+%! assert(a.type == "NoteOff");
 %! assert(a.nummsgbytes, 3);
 %! assert(!isempty(a));
 %! assert(a.msgbytes, uint8([0x80 0x3C 0x14]));
@@ -1325,7 +1334,7 @@ endclassdef
 %! a = midimsg("programchange", 1, 60);
 %! assert(isa(a, "midimsg"));
 %! assert(length(a) == 1);
-%! assert(a.type, "ProgramChange");
+%! assert(a.type == "ProgramChange");
 %! assert(a.program, 60);
 %! assert(a.channel, 1);
 %! assert(a.nummsgbytes, 2);
@@ -1336,7 +1345,7 @@ endclassdef
 %! a = midimsg("controlchange", 1, 60, 65);
 %! assert(isa(a, "midimsg"));
 %! assert(length(a) == 1);
-%! assert(a.type, "ControlChange");
+%! assert(a.type == "ControlChange");
 %! assert(a.nummsgbytes, 3);
 %! assert(!isempty(a));
 %! assert(a.ccnumber, 60)
@@ -1350,7 +1359,7 @@ endclassdef
 %! a = midimsg("polykeypressure", 1, 60, 65);
 %! assert(isa(a, "midimsg"));
 %! assert(length(a) == 1);
-%! assert(a.type, "PolyKeyPressure");
+%! assert(a.type == "PolyKeyPressure");
 %! assert(a.nummsgbytes, 3);
 %! assert(a.note, 60);
 %! assert(a.keypressure, 65);
@@ -1363,7 +1372,7 @@ endclassdef
 %! a = midimsg("pitchbend", 1, 0);
 %! assert(isa(a, "midimsg"));
 %! assert(length(a) == 1);
-%! assert(a.type, "PitchBend");
+%! assert(a.type == "PitchBend");
 %! assert(a.nummsgbytes, 3);
 %! assert(!isempty(a));
 %! assert(a.msgbytes, uint8([0xE0 0x00 0x40]));
@@ -1372,7 +1381,7 @@ endclassdef
 %! a = midimsg("channelpressure", 1, 60);
 %! assert(isa(a, "midimsg"));
 %! assert(length(a) == 1);
-%! assert(a.type, "ChannelPressure");
+%! assert(a.type == "ChannelPressure");
 %! assert(a.nummsgbytes, 2);
 %! assert(!isempty(a));
 %! assert(a.channelpressure, 60);
@@ -1384,7 +1393,7 @@ endclassdef
 %! a = midimsg("localcontrol", 1, 1);
 %! assert(isa(a, "midimsg"));
 %! assert(length(a) == 1);
-%! assert(a.type, "LocalControl");
+%! assert(a.type == "LocalControl");
 %! assert(a.nummsgbytes, 3);
 %! assert(a.localcontrol, 1);
 %! assert(!isempty(a));
@@ -1399,7 +1408,7 @@ endclassdef
 %! a = midimsg("polyon", 1);
 %! assert(isa(a, "midimsg"));
 %! assert(length(a) == 1);
-%! assert(a.type, "PolyOn");
+%! assert(a.type == "PolyOn");
 %! assert(a.nummsgbytes, 2);
 %! assert(!isempty(a));
 
@@ -1407,7 +1416,7 @@ endclassdef
 %! a = midimsg("monoon", 1, 0);
 %! assert(isa(a, "midimsg"));
 %! assert(length(a) == 1);
-%! assert(a.type, "MonoOn");
+%! assert(a.type == "MonoOn");
 %! assert(a.monochannels, 0);
 %! assert(a.nummsgbytes, 3);
 %! assert(!isempty(a));
@@ -1416,7 +1425,7 @@ endclassdef
 %! a = midimsg("omnion", 1);
 %! assert(isa(a, "midimsg"));
 %! assert(length(a) == 1);
-%! assert(a.type, "OmniOn");
+%! assert(a.type == "OmniOn");
 %! assert(a.nummsgbytes, 2);
 %! assert(!isempty(a));
 
@@ -1424,7 +1433,7 @@ endclassdef
 %! a = midimsg("omnioff", 1);
 %! assert(isa(a, "midimsg"));
 %! assert(length(a) == 1);
-%! assert(a.type, "OmniOff");
+%! assert(a.type == "OmniOff");
 %! assert(a.nummsgbytes, 2);
 %! assert(!isempty(a));
 
@@ -1432,7 +1441,7 @@ endclassdef
 %! a = midimsg("allsoundoff", 1);
 %! assert(isa(a, "midimsg"));
 %! assert(length(a) == 1);
-%! assert(a.type, "AllSoundOff");
+%! assert(a.type == "AllSoundOff");
 %! assert(a.nummsgbytes, 2);
 %! assert(!isempty(a));
 
@@ -1440,7 +1449,7 @@ endclassdef
 %! a = midimsg("allnotesoff", 1);
 %! assert(isa(a, "midimsg"));
 %! assert(length(a) == 1);
-%! assert(a.type, "AllNotesOff");
+%! assert(a.type == "AllNotesOff");
 %! assert(a.nummsgbytes, 2);
 %! assert(!isempty(a));
 
@@ -1448,7 +1457,7 @@ endclassdef
 %! a = midimsg("resetallcontrollers", 1);
 %! assert(isa(a, "midimsg"));
 %! assert(length(a) == 1);
-%! assert(a.type, "ResetAllControllers");
+%! assert(a.type == "ResetAllControllers");
 %! assert(a.nummsgbytes, 2);
 %! assert(!isempty(a));
 
@@ -1456,7 +1465,7 @@ endclassdef
 %! a = midimsg("systemreset");
 %! assert(isa(a, "midimsg"));
 %! assert(length(a) == 1);
-%! assert(a.type, "SystemReset");
+%! assert(a.type == "SystemReset");
 %! assert(a.nummsgbytes, 1);
 %! assert(!isempty(a));
 %! assert(a.msgbytes, uint8([0xFF]));
@@ -1465,7 +1474,7 @@ endclassdef
 %! a = midimsg("start");
 %! assert(isa(a, "midimsg"));
 %! assert(length(a) == 1);
-%! assert(a.type, "Start");
+%! assert(a.type == "Start");
 %! assert(a.nummsgbytes, 1);
 %! assert(!isempty(a));
 %! assert(a.msgbytes, uint8([0xFA]));
@@ -1474,7 +1483,7 @@ endclassdef
 %! a = midimsg("stop");
 %! assert(isa(a, "midimsg"));
 %! assert(length(a) == 1);
-%! assert(a.type, "Stop");
+%! assert(a.type == "Stop");
 %! assert(a.nummsgbytes, 1);
 %! assert(!isempty(a));
 %! assert(a.msgbytes, uint8([0xFC]));
@@ -1483,7 +1492,7 @@ endclassdef
 %! a = midimsg("continue");
 %! assert(isa(a, "midimsg"));
 %! assert(length(a) == 1);
-%! assert(a.type, "Continue");
+%! assert(a.type == "Continue");
 %! assert(a.nummsgbytes, 1);
 %! assert(!isempty(a));
 %! assert(a.msgbytes, uint8([0xFB]));
@@ -1492,7 +1501,7 @@ endclassdef
 %! a = midimsg("activesensing");
 %! assert(isa(a, "midimsg"));
 %! assert(length(a) == 1);
-%! assert(a.type, "ActiveSensing");
+%! assert(a.type == "ActiveSensing");
 %! assert(a.nummsgbytes, 1);
 %! assert(!isempty(a));
 %! assert(a.msgbytes, uint8([0xFE]));
@@ -1501,7 +1510,7 @@ endclassdef
 %! a = midimsg("timingclock");
 %! assert(isa(a, "midimsg"));
 %! assert(length(a) == 1);
-%! assert(a.type, "TimingClock");
+%! assert(a.type == "TimingClock");
 %! assert(a.nummsgbytes, 1);
 %! assert(!isempty(a));
 %! assert(a.msgbytes, uint8([0xF8]));
@@ -1510,7 +1519,7 @@ endclassdef
 %! a = midimsg("eox");
 %! assert(isa(a, "midimsg"));
 %! assert(length(a) == 1);
-%! assert(a.type, "EOX");
+%! assert(a.type == "EOX");
 %! assert(a.nummsgbytes, 1);
 %! assert(!isempty(a));
 %! assert(a.msgbytes, uint8([0xF7]));
@@ -1519,7 +1528,7 @@ endclassdef
 %! a = midimsg("data", [1 2 3]);
 %! assert(isa(a, "midimsg"));
 %! assert(length(a) == 1);
-%! assert(a.type, "Data");
+%! assert(a.type == "Data");
 %! assert(a.nummsgbytes, 3);
 %! assert(!isempty(a));
 %! assert(a.msgbytes, uint8([1 2 3]));
@@ -1528,7 +1537,7 @@ endclassdef
 %! a = midimsg("songselect", 1);
 %! assert(isa(a, "midimsg"));
 %! assert(length(a) == 1);
-%! assert(a.type, "SongSelect");
+%! assert(a.type == "SongSelect");
 %! assert(a.nummsgbytes, 2);
 %! assert(!isempty(a));
 %! assert(a.msgbytes, uint8([0xF3 1]));
@@ -1541,7 +1550,7 @@ endclassdef
 %! a = midimsg("songpositionpointer", 0);
 %! assert(isa(a, "midimsg"));
 %! assert(length(a) == 1);
-%! assert(a.type, "SongPositionPointer");
+%! assert(a.type == "SongPositionPointer");
 %! assert(a.nummsgbytes, 3);
 %! assert(!isempty(a));
 %! assert(a.msgbytes, uint8([0xF2 0 0]));
@@ -1553,7 +1562,7 @@ endclassdef
 %! a = midimsg("tunerequest");
 %! assert(isa(a, "midimsg"));
 %! assert(length(a) == 1);
-%! assert(a.type, "TuneRequest");
+%! assert(a.type == "TuneRequest");
 %! assert(a.nummsgbytes, 1);
 %! assert(!isempty(a));
 %! assert(a.msgbytes, uint8([0xF6]));
@@ -1562,7 +1571,7 @@ endclassdef
 %! a = midimsg("miditimecodequarterframe", 1, 1);
 %! assert(isa(a, "midimsg"));
 %! assert(length(a) == 1);
-%! assert(a.type, "MIDITimeCodeQuarterFrame");
+%! assert(a.type == "MIDITimeCodeQuarterFrame");
 %! assert(a.nummsgbytes, 2);
 %! assert(!isempty(a));
 %! assert(a.msgbytes, uint8([0xF1 9]));
@@ -1571,7 +1580,7 @@ endclassdef
 %! a = midimsg("systemexclusive");
 %! assert(isa(a, "midimsg"));
 %! assert(length(a) == 1);
-%! assert(a.type, "SystemExclusive");
+%! assert(a.type == "SystemExclusive");
 %! assert(a.nummsgbytes, 1);
 %! assert(!isempty(a));
 %! assert(a.msgbytes, uint8([0xF0]));
@@ -1579,7 +1588,7 @@ endclassdef
 %! a = midimsg("systemexclusive", 1.0);
 %! assert(isa(a, "midimsg"));
 %! assert(length(a) == 1);
-%! assert(a.type, "SystemExclusive");
+%! assert(a.type == "SystemExclusive");
 %! assert(a.nummsgbytes, 1);
 %! assert(!isempty(a));
 %! assert(a.msgbytes, uint8([0xF0]));
@@ -1615,13 +1624,13 @@ endclassdef
 %! a = midimsg("noteon", 1, 60, 20);
 %! assert(isa(a, "midimsg"));
 %! assert(length(a) == 1);
-%! assert(a.type, "NoteOn");
+%! assert(a.type == "NoteOn");
 %! assert(a.note, 60);
 %! assert(a.velocity, 20);
 %! b = midimsg("noteoff", 2, 60, 10, 5.0);
 %! assert(isa(b, "midimsg"));
 %! assert(length(b) == 1);
-%! assert(b.type, "NoteOff");
+%! assert(b.type == "NoteOff");
 %! assert(b.note, 60);
 %! assert(b.velocity, 10);
 %! c = [a b];
@@ -1631,11 +1640,11 @@ endclassdef
 %! assert(c.channel, [1 2]);
 %! assert(c.note, [60 60]);
 %! assert(c.velocity, [20 10]);
-%! assert(c(1).type, "NoteOn");
+%! assert(c(1).type == "NoteOn");
 %! assert(c(1).channel, 1);
 %! assert(c(1).note, 60);
 %! assert(c(1).velocity, 20);
-%! assert(c(2).type, "NoteOff");
+%! assert(c(2).type == "NoteOff");
 %! assert(c(2).timestamp, 5.0);
 %! assert(c(2).channel, 2);
 %! assert(c(2).note, 60);
@@ -1646,7 +1655,7 @@ endclassdef
 %!
 %! a = midimsg("noteon", 1, 60, 127, 0);
 %! assert(length(a) == 1);
-%! assert(a.type, "NoteOn");
+%! assert(a.type == "NoteOn");
 %! assert(a.channel, 1);
 %! assert(a.note, 60);
 %! assert(a.velocity, 127);

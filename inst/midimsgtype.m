@@ -25,7 +25,7 @@
 ## @item EOX         @tab ActiveSensing   @tab SongSelect
 ## @item MonoOn      @tab ChannelPressure @tab ControllChange
 ## @item TimingClock @tab SystemReset     @tab AlLSoundOff
-## @item OmniOn      @tab PitchBendChange @tab ProgramChange
+## @item OmniOn      @tab PitchBend       @tab ProgramChange
 ## @item Start       @tab TuneRequest     @tab ResetAllControllers
 ## @item OmniOff     @tab Undefined       @tab SystemExclusive
 ## @item Continue    @tab MIDITimeCodeQuarterFrame @tab LocalControl
@@ -71,9 +71,9 @@ classdef midimsgtype
     endfunction
 
     # ismember
-	    
+
     function tf = eq(this, val)
-      if isobject(val) && strcmp(class(val), "midimsgtype")
+      if isa(val, "midimsgtype")
         val = val.value;
       endif
 
@@ -82,6 +82,42 @@ classdef midimsgtype
       else
         tf = strcmpi(this.value, val);
       endif
+    endfunction
+
+    function tf = ne(this, val)
+      tf = ! eq(this, val);
+    endfunction
+
+    function tf = strcmp(this, val)
+      if isa(val, "midimsgtype")
+        val = val.value;
+      endif
+
+      tf = strcmp(this.value, val);
+    endfunction
+
+    function tf = strcmpi(this, val)
+      if isa(val, "midimsgtype")
+        val = val.value;
+      endif
+
+      tf = strcmpi(this.value, val);
+    endfunction
+
+    function tf = strncmp(this, val)
+      if isa(val, "midimsgtype")
+        val = val.value;
+      endif
+
+      tf = strncmp(this.value, val);
+    endfunction
+
+    function tf = strncmpi(this, val)
+      if isa(val, "midimsgtype")
+        val = val.value;
+      endif
+
+      tf = strncmpi(this.value, val);
     endfunction
 
     function s = char(this)
@@ -211,14 +247,19 @@ classdef midimsgtype
       persistent v = midimsgtype("ChannelPressure");
       c = v;
     endfunction
-    function c = PitchBendChange()
-      persistent v = midimsgtype("PitchBendChange");
+    function c = PitchBend()
+      persistent v = midimsgtype("PitchBend");
       c = v;
     endfunction
     function c = Undefined()
       persistent v = midimsgtype("Undefined");
       c = v;
     endfunction
+    function c = Reserved()
+      persistent v = midimsgtype("Reserved");
+      c = v;
+    endfunction
+ 
   endmethods
 endclassdef
 
@@ -237,4 +278,8 @@ endclassdef
 
 %!test
 %! t = midimsgtype.NoteOn;
-%! assert (t == "NoteOn")
+%! assert (t == "NoteOn");
+%! assert (t == midimsgtype.NoteOn);
+%! assert (t != midimsgtype.NoteOff);
+%! assert (strcmp(midimsgtype.NoteOn, "NoteOn"));
+%! assert (strcmp(midimsgtype.NoteOn, midimsgtype.NoteOn));
