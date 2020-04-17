@@ -59,9 +59,17 @@ classdef midimsgtype
   endproperties
 
   # dont allow external creation of objects
-  methods (Access = private, Hidden = true)
+  methods (Access = public, Hidden = true)
     function this = midimsgtype(value)
-      this.value = value;
+      if nargin < 1
+        value = "Undefined";
+      endif
+      enums = this.enum_names();
+      idx = find( cellfun(@(x) strcmpi(x, value), enums), 1);
+      if isempty (idx)
+        error ("Unknown enum string value");
+      endif
+      this.value = enums{idx};
     endfunction
   endmethods
 
@@ -139,6 +147,33 @@ classdef midimsgtype
 
   # methods we will use to fake as readonly enum values
   methods (Static = true)
+    function outlst = enum_names ()
+      persistent lst = {};
+      if isempty(lst)
+        #classinfo = metaclass(this)
+	classinfo = meta.class.fromName('midimsgtype');
+        for i = 1:length(classinfo.MethodList)
+          x = classinfo.MethodList{i};
+	  # assuming captital letter static funcs are the enum values
+          if x.Static && !x.Hidden && x.Name(1) <= 'Z'
+            lst{end+1} = x.Name;
+          endif
+        endfor
+      endif
+      outlst = lst;
+    endfunction
+
+    function outlst = enum_values ()
+      persistent lst = {};
+      if isempty(lst)
+        names = midimsgtype.enum_names();
+        for i = 1:length(names)
+	  lst{end+1} = eval(sprintf("midimsgtype.%s;", names{i}));
+	endfor
+      endif
+      outlst = lst;
+    endfunction
+
     function c = NoteOn()
       persistent v = midimsgtype("NoteOn");
       c = v;
