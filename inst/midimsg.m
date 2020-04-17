@@ -67,7 +67,7 @@
 ## @var{ccval} - control change control value.@*
 ## @var{keypressure} - key pressure value when creating a key pressure message.@*
 ## @var{chanpressure} - channel pressure value when creating a channelpressure message.@*
-## @var{pitchchange} - pitch change value when creating a pitch change message.@*
+## @var{pitchchange} - pitch change value when creating a pitch bend message.@*
 ## @var{localcontrol} - boolean value when creating a localcontrol message.@*
 ## @var{monochannels} - channels specified for a mono on message.@*
 ## @var{bytes} - array of data in range of 0 to 127 specified as part of a data message or
@@ -98,6 +98,7 @@
 ## @var{ccvalue} - control change value specified for a control change message.@*
 ## @var{song} - song number for a song selection message.@*
 ## @var{songposition} - song position value for a song position message.@*
+## @var{pitchchange} - pitch change value for a pitch bend message.@*
 ##
 ## @subsubheading Examples
 ## Create a note on/off pair with a duration of 1.5 seconds
@@ -282,10 +283,12 @@ classdef midimsg
         case "pitchbend"
           # channel, pitchchange, timestamp
           if nargin < 3
-            error ('pitchbend expects at least channel,pitch')
+            error ('pitchbend expects at least channel,pitchchange')
           endif
           chan = this.check_channel(varargin{1})-1;
-          pitch = uint16(varargin{2} + 0x2000);
+          # pitch is 0 .. 16383 where 8120 is no change
+          # pitch = uint16(varargin{2} + 0x2000);
+          pitch = uint16(this.check_value16383("pitchchange", varargin{2}));
           pitchlo = bitand(pitch, 0x7F);
           pitchhi = bitand(bitshift(pitch, -7), 0x7f);
           timestamp = 0;
@@ -580,7 +583,7 @@ classdef midimsg
               chan = this.check_channel(rhs);
               data = this.data{1};
               data(1) = bitor(bitand(data(1), 0xF0), (chan-1));
-	      this.data{1} = data;
+              this.data{1} = data;
 
             case "note"
               data = this.data{1};
@@ -589,7 +592,7 @@ classdef midimsg
                 error ("note property only valid for noteon/off and polykeypressure");
               endif
               data(2) = this.check_value127("note", rhs);
-	      this.data{1} = data;
+              this.data{1} = data;
 
             case "velocity"
               data = this.data{1};
@@ -598,7 +601,7 @@ classdef midimsg
                 error ("velocity property only valid for noteon/off");
               endif
               data(3) = this.check_value127("velocity", rhs);
-	      this.data{1} = data;
+              this.data{1} = data;
 
             case "channelpressure"
               data = this.data{1};
@@ -607,7 +610,7 @@ classdef midimsg
                 error ("channel property only valid for channelpressure messages");
               endif
               data(2) = this.check_value127("channelpressure", rhs);
-	      this.data{1} = data;
+              this.data{1} = data;
 
             case "keypressure"
               data = this.data{1};
@@ -616,7 +619,7 @@ classdef midimsg
                 error ("keypressure property only valid for polykeypressure messages");
               endif
               data(3) = this.check_value127("keypressure", rhs);
-	      this.data{1} = data;
+              this.data{1} = data;
 
             case "ccnumber"
               data = this.data{1};
@@ -625,7 +628,7 @@ classdef midimsg
                 error ("ccnumber property only valid for controlchange messages");
               endif
               data(2) = this.check_value119("ccnumber", rhs);
-	      this.data{1} = data;
+              this.data{1} = data;
 
             case "ccvalue"
               data = this.data{1};
@@ -634,7 +637,7 @@ classdef midimsg
                 error ("ccnumber property only valid for controlchange messages");
               endif
               data(3) = this.check_value127("ccvalue", rhs);
-	      this.data{1} = data;
+              this.data{1} = data;
 
             case "song"
               data = this.data{1};
@@ -643,7 +646,7 @@ classdef midimsg
                 error ("song property only valid for song select messages");
               endif
               data(2) = this.check_value127("song", rhs);
-	      this.data{1} = data;
+              this.data{1} = data;
 
             case "songposition"
               data = this.data{1};
@@ -658,8 +661,24 @@ classdef midimsg
 
               data(2) = songlo;
               data(3) = songhi;
- 
-	      this.data{1} = data;
+
+              this.data{1} = data;
+
+            case "pitchchange"
+              data = this.data{1};
+              cmd = bitand(data(1), 0xF0);
+              if cmd != 0xE0
+                error ("pitchchange property only valid for pitchbend messages");
+              endif
+
+              pitchchange = uint16(this.check_value16383("pitchchange", rhs));
+              pitchlo = bitand(pitchchange, 0x7F);
+              pitchhi = bitand(bitshift(pitchchange, -7), 0x7f);
+
+              data(2) = pitchlo;
+              data(3) = pitchhi;
+
+              this.data{1} = data;
 
             otherwise
               error("unimplemented midimsg.subsasgn property '%s'", s(1).subs);
@@ -1003,6 +1022,31 @@ classdef midimsg
               val = double(val);
             endif
 
+          case "pitchchange"
+          
+            if length(this.data) > 0
+              data = this.data{1};
+              cmd = bitand(data(1), 0xF0);
+              if cmd == 0xE0
+                val = bitshift(int16(data(3)), 7) + int16(data(2));
+              else
+                error ("pitchchange property only valid for pitchbend messages");
+              endif
+              if length(this.data) > 1
+                for i = 2:length(this.data)
+                  data = this.data{i};
+                  cmd = bitand(data(1), 0xF0);
+                  if cmd == 0xF2
+                    v = bitshift(int16(data(3)), 7) + int16(data(2));
+                    val = [val v];
+                  else
+                    error ("picthchange property only valid for pitchbend messages");
+                  endif
+                endfor
+              endif
+              val = double(val);
+            endif
+
           otherwise
             error("unimplemented midimsg.subsref property '%s'", s(1).subs);
           endswitch
@@ -1059,7 +1103,7 @@ classdef midimsg
           msgtext = [msgtext sprintf(" CCNumber: %3d CCValue: %3d", data(2), data(3))];
         endif
         if strcmp(types, "PitchBend")
-          v = bitshift(int16(data(3)), 7) + int16(data(2)) - 0x2000;
+          v = bitshift(int16(data(3)), 7) + int16(data(2));
           msgtext = [msgtext sprintf(" PitchChange: %d", v)];
         endif
         if strcmp(types, "ChannelPressure")
@@ -1369,13 +1413,17 @@ endclassdef
 %! assert(a.keypressure, 40);
 
 %!test
-%! a = midimsg("pitchbend", 1, 0);
+%! a = midimsg("pitchbend", 1, 8192);
 %! assert(isa(a, "midimsg"));
 %! assert(length(a) == 1);
 %! assert(a.type == "PitchBend");
 %! assert(a.nummsgbytes, 3);
 %! assert(!isempty(a));
 %! assert(a.msgbytes, uint8([0xE0 0x00 0x40]));
+%! assert(a.pitchchange, 8192);
+%! assert(a.channel, 1);
+%! a.pitchchange = 8200;
+%! assert(a.pitchchange, 8200);
 
 %!test
 %! a = midimsg("channelpressure", 1, 60);
