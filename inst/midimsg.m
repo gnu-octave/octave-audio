@@ -97,6 +97,7 @@
 ## @var{ccnumber} - control change number specified for a control change message.@*
 ## @var{ccvalue} - control change value specified for a control change message.@*
 ## @var{song} - song number for a song selection message.@*
+## @var{songposition} - song position value for a song position message.@*
 ##
 ## @subsubheading Examples
 ## Create a note on/off pair with a duration of 1.5 seconds
@@ -403,7 +404,7 @@ classdef midimsg
             error ('song expects at least song position')
           endif
           timestamp = 0;
-          songpos = uint16(varargin{1});
+          songpos = uint16(this.check_value16383("songposiition", varargin{1}));
           songlo = bitand(songpos, 0x7F);
           songhi = bitand(bitshift(songpos, -7), 0x7f);
           if nargin > 2
@@ -642,6 +643,22 @@ classdef midimsg
                 error ("song property only valid for song select messages");
               endif
               data(2) = p.check_value127("song", rhs);
+	      p.data{1} = data;
+
+            case "songposition"
+              data = p.data{1};
+              cmd = data(1);
+              if cmd != 0xF2
+                error ("songposition property only valid for songpositionpointer messages");
+              endif
+
+              songpos = uint16(p.check_value16383("songposition", rhs));
+              songlo = bitand(songpos, 0x7F);
+              songhi = bitand(bitshift(songpos, -7), 0x7f);
+
+              data(2) = songlo;
+              data(3) = songhi;
+ 
 	      p.data{1} = data;
 
             otherwise
@@ -937,7 +954,7 @@ classdef midimsg
               val = double(val);
             endif
 
-           case "song"
+          case "song"
             if length(p.data) > 0
               data = p.data{1};
               cmd = data(1);
@@ -959,7 +976,32 @@ classdef midimsg
               endif
               val = double(val);
             endif
- 
+
+          case "songposition"
+          
+            if length(p.data) > 0
+              data = p.data{1};
+              cmd = data(1);
+              if cmd == 0xF2
+                val = bitshift(int16(data(3)), 7) + int16(data(2));
+              else
+                error ("songpostion property only valid for songpositionpointer messages");
+              endif
+              if length(p.data) > 1
+                for i = 2:length(p.data)
+                  data = p.data{i};
+                  cmd = data(1);
+                  if cmd == 0xF2
+                    v = bitshift(int16(data(3)), 7) + int16(data(2));
+                    val = [val v];
+                  else
+                    error ("songposition property only valid for songpositionpointer messages");
+                  endif
+                endfor
+              endif
+              val = double(val);
+            endif
+
           otherwise
             error("unimplemented midimsg.subsref property '%s'", s(1).subs);
           endswitch
@@ -1101,6 +1143,13 @@ classdef midimsg
     function v = check_value119(this, name, value)
       if !isscalar (value) || !isnumeric(value) || value < 0 || value > 119
         error ("expected %s to be a number between 0..119", name);
+      endif
+      v = value;
+    endfunction
+
+    function v = check_value16383(this, name, value)
+      if !isscalar (value) || !isnumeric(value) || value < 0 || value > 16383
+        error ("expected %s to be a number between 0..16386", name);
       endif
       v = value;
     endfunction
@@ -1496,6 +1545,9 @@ endclassdef
 %! assert(a.nummsgbytes, 3);
 %! assert(!isempty(a));
 %! assert(a.msgbytes, uint8([0xF2 0 0]));
+%! assert(a.songposition, 0);
+%! a.songposition = 1000;
+%! assert(a.songposition, 1000);
 
 %!test
 %! a = midimsg("tunerequest");
