@@ -85,7 +85,7 @@
 ## compound message.@*
 ## @var{msgbytes} - the raw message bytes that make up the MIDI message.@*
 ## @var{nummsgbytes} - the number of message bytes that make up the MIDI message.@*
-## @var{type} - string that represents the message type.@*
+## @var{type} - string or midimsgtype that represents the message type.@*
 ## @var{channel} - the channel number for message.@*
 ## @var{note} - the note value for message (Only valid for noteon/off and polykeypressure).@*
 ## @var{velocity} - the velocity value for message (Only valid for noteon/off).@*
