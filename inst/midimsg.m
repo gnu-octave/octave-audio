@@ -99,6 +99,8 @@
 ## @var{song} - song number for a song selection message.@*
 ## @var{songposition} - song position value for a song position message.@*
 ## @var{pitchchange} - pitch change value for a pitch bend message.@*
+## @var{timecodesequence} - timecode sequence number for a miditimecodequarterframe message.@*
+## @var{timecodevalue} - timecode value number for a miditimecodequarterframe message.@*
 ##
 ## @subsubheading Examples
 ## Create a note on/off pair with a duration of 1.5 seconds
@@ -417,12 +419,14 @@ classdef midimsg
           this.timestamp{end+1} = timestamp;
 
         case "miditimecodequarterframe"
-          # channel,  monochan, timestamp
+          # timeseq, timeval, timestamp
           if nargin < 3
-            error ('miditimecodequarterframe expects at least seq and value')
+            error ('miditimecodequarterframe expects at least timeseq and value')
           endif
-          seq = bitand(uint8(varargin{1}), 3);
-          val = bitand(uint8(varargin{2}), 7);
+          seq = this.check_value7("timeseq", varargin{1});
+          val = this.check_value15("timeval", varargin{2});
+          seq = bitand(uint8(seq), 3);
+          val = bitand(uint8(val), 7);
           data = bitshift(seq, 3) + val;
           timestamp = 0;
           if nargin > 3
@@ -677,6 +681,39 @@ classdef midimsg
 
               data(2) = pitchlo;
               data(3) = pitchhi;
+
+              this.data{1} = data;
+
+            case "timecodesequence"
+              data = this.data{1};
+              cmd = data(1);
+              if cmd != 0xF1
+                error ("timecodesequence property only valid for miditimecodequaterframe messages");
+              endif
+	  
+              seq = bitshift(data(2), -3);
+              val = bitand(data(2), 7);
+
+              seq = this.check_value7("timecodesequence", rhs);
+
+              data(2) = bitshift(seq, 3) + val;
+
+              this.data{1} = data;
+
+            case "timecodevalue"
+              data = this.data{1};
+              cmd = data(1);
+              if cmd != 0xF1
+                error ("value property only valid for miditimecodequaterframe messages");
+              endif
+	  
+              seq = bitshift(data(2), -3);
+              val = bitand(data(2), 7);
+
+              val = this.check_value15("timecodevalue", rhs);
+              val = bitand(uint8(val), 7);
+
+              data(2) = bitshift(seq, 3) + val;
 
               this.data{1} = data;
 
@@ -1047,6 +1084,56 @@ classdef midimsg
               val = double(val);
             endif
 
+          case "timecodesequence"
+          
+            if length(this.data) > 0
+              data = this.data{1};
+              cmd = data(1);
+              if cmd == 0xF1
+                val = bitshift(data(2), -3);
+              else
+                error ("timecodesequence property only valid for miditimecodequarterframe messages");
+              endif
+              if length(this.data) > 1
+                for i = 2:length(this.data)
+                  data = this.data{i};
+                  cmd = data(1);
+                  if cmd == 0xF1
+                    v = bitshift(data(2), -3);
+                    val = [val v];
+                  else
+                    error ("timecodesequence property only valid for miditimecodequaterframe messages");
+                  endif
+                endfor
+              endif
+              val = double(val);
+            endif
+
+          case "timecodevalue"
+
+            if length(this.data) > 0
+              data = this.data{1};
+              cmd = data(1);
+              if cmd == 0xF1
+                val = bitand(data(2), 7);
+              else
+                error ("timecodevalue property only valid for miditimecodequarterframe messages");
+              endif
+              if length(this.data) > 1
+                for i = 2:length(this.data)
+                  data = this.data{i};
+                  cmd = data(1);
+                  if cmd == 0xF1
+                    v = bitand(data(2), 7);
+                    val = [val v];
+                  else
+                    error ("timecodevalue property only valid for miditimecodequaterframe messages");
+                  endif
+                endfor
+              endif
+              val = double(val);
+            endif
+
           otherwise
             error("unimplemented midimsg.subsref property '%s'", s(1).subs);
           endswitch
@@ -1126,7 +1213,7 @@ classdef midimsg
           msgtext = [msgtext sprintf(" SongPosition: %d", v)];
         endif
         if strcmp(types, "MIDITimeCodeQuarterFrame")
-          seq = bitshift(data(2), 3);
+          seq = bitshift(data(2), -3);
           val = bitand(data(2), 7);
           msgtext = [msgtext sprintf(" TimeCodeSequence: %d TimeCodeValue: %d", seq, val)];
         endif
@@ -1174,6 +1261,20 @@ classdef midimsg
     function v = check_value1(this, name, value)
       if !isscalar (value) || !(islogical(value) || isnumeric(value)) || value < 0 || value > 1
         error ("expected %s to be a number between 0..1", name);
+      endif
+      v = value;
+    endfunction
+
+    function v = check_value7(this, name, value)
+      if !isscalar (value) || !isnumeric(value) || value < 0 || value > 7
+        error ("expected %s to be a number between 0..7", name);
+      endif
+      v = value;
+    endfunction
+
+    function v = check_value15(this, name, value)
+      if !isscalar (value) || !isnumeric(value) || value < 0 || value > 7
+        error ("expected %s to be a number between 0..15", name);
       endif
       v = value;
     endfunction
@@ -1623,6 +1724,14 @@ endclassdef
 %! assert(a.nummsgbytes, 2);
 %! assert(!isempty(a));
 %! assert(a.msgbytes, uint8([0xF1 9]));
+%! assert(a.timecodesequence, 1);
+%! assert(a.timecodevalue, 1);
+%! a.timecodesequence = 5;
+%! assert(a.timecodesequence, 5);
+%! assert(a.timecodevalue, 1);
+%! a.timecodevalue = 2;
+%! assert(a.timecodesequence, 5);
+%! assert(a.timecodevalue, 2);
 
 %!test
 %! a = midimsg("systemexclusive");
