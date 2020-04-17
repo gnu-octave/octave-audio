@@ -562,104 +562,104 @@ classdef midimsg
       e = length(this.data);
     endfunction
 
-    function p = subsasgn (p, s, rhs)
+    function this = subsasgn (this, s, rhs)
       if isempty(s)
         error ("midimsg.subsref missing index");
       endif
 
       switch (s(1).type)
         case "."
-          if length(p.timestamp) > 1
+          if length(this.timestamp) > 1
             error ("Can not set %s on mutiple messages yet", s(1).subs);
           endif
           switch tolower(s(1).subs)
             case "timestamp"
-              p.timestamp{1} = p.check_timestamp(rhs);
+              this.timestamp{1} = this.check_timestamp(rhs);
 
             case "channel"
-              chan = p.check_channel(rhs);
-              data = p.data{1};
+              chan = this.check_channel(rhs);
+              data = this.data{1};
               data(1) = bitor(bitand(data(1), 0xF0), (chan-1));
-	      p.data{1} = data;
+	      this.data{1} = data;
 
             case "note"
-              data = p.data{1};
+              data = this.data{1};
               cmd = bitand(data(1), 0xF0);
               if !(cmd == 0x80 || cmd == 0x90 || cmd == 0xA0)
                 error ("note property only valid for noteon/off and polykeypressure");
               endif
-              data(2) = p.check_value127("note", rhs);
-	      p.data{1} = data;
+              data(2) = this.check_value127("note", rhs);
+	      this.data{1} = data;
 
             case "velocity"
-              data = p.data{1};
+              data = this.data{1};
               cmd = bitand(data(1), 0xF0);
               if !(cmd == 0x80 || cmd == 0x90)
                 error ("velocity property only valid for noteon/off");
               endif
-              data(3) = p.check_value127("velocity", rhs);
-	      p.data{1} = data;
+              data(3) = this.check_value127("velocity", rhs);
+	      this.data{1} = data;
 
             case "channelpressure"
-              data = p.data{1};
+              data = this.data{1};
               cmd = bitand(data(1), 0xF0);
               if !(cmd == 0xD0)
                 error ("channel property only valid for channelpressure messages");
               endif
-              data(2) = p.check_value127("channelpressure", rhs);
-	      p.data{1} = data;
+              data(2) = this.check_value127("channelpressure", rhs);
+	      this.data{1} = data;
 
             case "keypressure"
-              data = p.data{1};
+              data = this.data{1};
               cmd = bitand(data(1), 0xF0);
               if !(cmd == 0xA0)
                 error ("keypressure property only valid for polykeypressure messages");
               endif
-              data(3) = p.check_value127("keypressure", rhs);
-	      p.data{1} = data;
+              data(3) = this.check_value127("keypressure", rhs);
+	      this.data{1} = data;
 
             case "ccnumber"
-              data = p.data{1};
+              data = this.data{1};
               cmd = bitand(data(1), 0xF0);
               if cmd != 0xB0 || data(2) > 119
                 error ("ccnumber property only valid for controlchange messages");
               endif
-              data(2) = p.check_value119("ccnumber", rhs);
-	      p.data{1} = data;
+              data(2) = this.check_value119("ccnumber", rhs);
+	      this.data{1} = data;
 
             case "ccvalue"
-              data = p.data{1};
+              data = this.data{1};
               cmd = bitand(data(1), 0xF0);
               if cmd != 0xB0 || data(2) > 119
                 error ("ccnumber property only valid for controlchange messages");
               endif
-              data(3) = p.check_value127("ccvalue", rhs);
-	      p.data{1} = data;
+              data(3) = this.check_value127("ccvalue", rhs);
+	      this.data{1} = data;
 
             case "song"
-              data = p.data{1};
+              data = this.data{1};
               cmd = data(1);
               if cmd != 0xF3
                 error ("song property only valid for song select messages");
               endif
-              data(2) = p.check_value127("song", rhs);
-	      p.data{1} = data;
+              data(2) = this.check_value127("song", rhs);
+	      this.data{1} = data;
 
             case "songposition"
-              data = p.data{1};
+              data = this.data{1};
               cmd = data(1);
               if cmd != 0xF2
                 error ("songposition property only valid for songpositionpointer messages");
               endif
 
-              songpos = uint16(p.check_value16383("songposition", rhs));
+              songpos = uint16(this.check_value16383("songposition", rhs));
               songlo = bitand(songpos, 0x7F);
               songhi = bitand(bitshift(songpos, -7), 0x7f);
 
               data(2) = songlo;
               data(3) = songhi;
  
-	      p.data{1} = data;
+	      this.data{1} = data;
 
             otherwise
               error("unimplemented midimsg.subsasgn property '%s'", s(1).subs);
@@ -678,19 +678,19 @@ classdef midimsg
             val = rhs;
           else
             # extract out midimsg value and do assign on it
-            val = midimsg.createMessage(p.data{idx{1}}, p.timestamp{idx{1}});
+            val = midimsg.createMessage(this.data{idx{1}}, this.timestamp{idx{1}});
             val = subsasgn (val, s(2:end), rhs);
           endif
 	  # store the modded data back in our object
-          p.data{idx{1}} = val.data{1};
-          p.timestamp{idx{1}} = val.timestamp{1};
+          this.data{idx{1}} = val.data{1};
+          this.timestamp{idx{1}} = val.timestamp{1};
  
         otherwise
           error("unimplemented midimsg.subsasgn type");
       endswitch
     endfunction
 
-    function val = subsref (p, s)
+    function val = subsref (this, s)
       if isempty(s)
         error ("midimsg.subsref missing index");
       endif
@@ -701,70 +701,70 @@ classdef midimsg
           if (numel (idx) != 1)
             error ("@midimsg/subsref: need exactly one index");
           endif
-          val = midimsg.createMessage(p.data{idx{1}}, p.timestamp{idx{1}});
+          val = midimsg.createMessage(this.data{idx{1}}, this.timestamp{idx{1}});
         case "."
           switch tolower(s(1).subs)
           case "timestamp"
-            if length(p.timestamp) == 1
-              val = p.timestamp{1};
+            if length(this.timestamp) == 1
+              val = this.timestamp{1};
             else
-              val = p.timestamp;
+              val = this.timestamp;
             endif
           case "msgbytes"
-            if length(p.data) == 1
-              val = p.data{1};
+            if length(this.data) == 1
+              val = this.data{1};
             else
-              val = p.data;
+              val = this.data;
             endif
           case "nummsgbytes"
-            if length(p.data) > 0
-              val = length(p.data{1});
+            if length(this.data) > 0
+              val = length(this.data{1});
 
-              if length(p.data) > 1
-                for i = 2:length(p.data)
-                  val = [val length(p.data{i})];
+              if length(this.data) > 1
+                for i = 2:length(this.data)
+                  val = [val length(this.data{i})];
                 endfor
               endif
             else
               val = 0;
             endif
           case "type"
-            if length(p.data) > 0
-              data = p.data{1};
-              val = p.type_str(p.data{1}); 
-              if length(p.data) > 1
+            if length(this.data) > 0
+              data = this.data{1};
+              val = this.type_str(this.data{1}); 
+              if length(this.data) > 1
                 val = {val}; 
-                for i = 2:length(p.data)
-                  val{end+1} = p.type_str(p.data{i});
+                for i = 2:length(this.data)
+                  val{end+1} = this.type_str(this.data{i});
                 endfor
               endif
             else
               val = "<none>"
             endif
           case "channel"
-            if length(p.data) > 0
-              data = p.data{1};
+            if length(this.data) > 0
+              data = this.data{1};
               val = bitand(data(1), 0x0F) + 1;
-              if length(p.data) > 1
-                for i = 2:length(p.data)
-                  data = p.data{i};
+              if length(this.data) > 1
+                for i = 2:length(this.data)
+                  data = this.data{i};
                   val = [val (bitand(data(1), 0x0F)+1)];
                 endfor
               endif
               val = double(val);
             endif
           case "note"
-            if length(p.data) > 0
-              data = p.data{1};
+            if length(this.data) > 0
+              data = this.data{1};
               cmd = bitand(data(1), 0xF0);
               if cmd == 0x80 || cmd == 0x90 || cmd == 0xA0
                 val = data(2);
               else
                 error ("note property only valid for noteon/off and polykeypressure");
               endif
-              if length(p.data) > 1
-                for i = 2:length(p.data)
-                  data = p.data{i};
+              if length(this.data) > 1
+                for i = 2:length(this.data)
+                  data = this.data{i};
                   cmd = bitand(data(1), 0xF0);
                   if cmd == 0x80 || cmd == 0x90 || cmd == 0xA0
                     val = [val data(2)];
@@ -776,17 +776,17 @@ classdef midimsg
               val = double(val);
             endif
           case "velocity"
-            if length(p.data) > 0
-              data = p.data{1};
+            if length(this.data) > 0
+              data = this.data{1};
               cmd = bitand(data(1), 0xF0);
               if cmd == 0x80 || cmd == 0x90
                 val = data(3);
               else
                 error ("velocity property only valid for noteon/off");
               endif
-              if length(p.data) > 1
-                for i = 2:length(p.data)
-                  data = p.data{i};
+              if length(this.data) > 1
+                for i = 2:length(this.data)
+                  data = this.data{i};
                   cmd = bitand(data(1), 0xF0);
                   if cmd == 0x80 || cmd == 0x90
                     val = [val data(3)];
@@ -798,17 +798,17 @@ classdef midimsg
               val = double(val);
             endif
           case "keypressure"
-            if length(p.data) > 0
-              data = p.data{1};
+            if length(this.data) > 0
+              data = this.data{1};
               cmd = bitand(data(1), 0xF0);
               if cmd == 0xA0
                 val = data(3);
               else
                 error ("keypressure property only valid for polykeypressure");
               endif
-              if length(p.data) > 1
-                for i = 2:length(p.data)
-                  data = p.data{i};
+              if length(this.data) > 1
+                for i = 2:length(this.data)
+                  data = this.data{i};
                   cmd = bitand(data(1), 0xF0);
                   if cmd == 0xA0
                     val = [val data(3)];
@@ -821,17 +821,17 @@ classdef midimsg
             endif
 
           case "channelpressure"
-            if length(p.data) > 0
-              data = p.data{1};
+            if length(this.data) > 0
+              data = this.data{1};
               cmd = bitand(data(1), 0xF0);
               if cmd == 0xD0
                 val = data(2);
               else
                 error ("channelpressure property only valid for channelpressure");
               endif
-              if length(p.data) > 1
-                for i = 2:length(p.data)
-                  data = p.data{i};
+              if length(this.data) > 1
+                for i = 2:length(this.data)
+                  data = this.data{i};
                   cmd = bitand(data(1), 0xF0);
                   if cmd == 0xD0
                     val = [val data(2)];
@@ -844,17 +844,17 @@ classdef midimsg
             endif
  
           case "localcontrol"
-            if length(p.data) > 0
-              data = p.data{1};
+            if length(this.data) > 0
+              data = this.data{1};
               cmd = bitand(data(1), 0xF0);
               if cmd == 0xB0 && data(2) == 122
                 val = data(3);
               else
                 error ("localcontrol property only valid for localcontrol messages");
               endif
-              if length(p.data) > 1
-                for i = 2:length(p.data)
-                  data = p.data{i};
+              if length(this.data) > 1
+                for i = 2:length(this.data)
+                  data = this.data{i};
                   cmd = bitand(data(1), 0xF0);
                   if cmd == 0xB0 && data(2) == 122
                     val = [val data(3)];
@@ -866,17 +866,17 @@ classdef midimsg
               val = double(val);
             endif
           case "monochannels"
-            if length(p.data) > 0
-              data = p.data{1};
+            if length(this.data) > 0
+              data = this.data{1};
               cmd = bitand(data(1), 0xF0);
               if cmd == 0xB0 && data(2) == 126
                 val = data(3);
               else
                 error ("monochannels property only valid for monoon messages");
               endif
-              if length(p.data) > 1
-                for i = 2:length(p.data)
-                  data = p.data{i};
+              if length(this.data) > 1
+                for i = 2:length(this.data)
+                  data = this.data{i};
                   cmd = bitand(data(1), 0xF0);
                   if cmd == 0xB0 && data(2) == 126
                     val = [val data(3)];
@@ -888,17 +888,17 @@ classdef midimsg
               val = double(val);
             endif
           case "program"
-            if length(p.data) > 0
-              data = p.data{1};
+            if length(this.data) > 0
+              data = this.data{1};
               cmd = bitand(data(1), 0xF0);
               if cmd == 0xC0
                 val = data(2);
               else
                 error ("program property only valid for programchange messages");
               endif
-              if length(p.data) > 1
-                for i = 2:length(p.data)
-                  data = p.data{i};
+              if length(this.data) > 1
+                for i = 2:length(this.data)
+                  data = this.data{i};
                   cmd = bitand(data(1), 0xF0);
                   if cmd == 0xC0
                     val = [val data(2)];
@@ -910,17 +910,17 @@ classdef midimsg
               val = double(val);
             endif
           case "ccnumber"
-            if length(p.data) > 0
-              data = p.data{1};
+            if length(this.data) > 0
+              data = this.data{1};
               cmd = bitand(data(1), 0xF0);
               if cmd == 0xB0 && data(2) <= 119
                 val = data(2);
               else
                 error ("ccnumber property only valid for controlchange messages");
               endif
-              if length(p.data) > 1
-                for i = 2:length(p.data)
-                  data = p.data{i};
+              if length(this.data) > 1
+                for i = 2:length(this.data)
+                  data = this.data{i};
                   cmd = bitand(data(1), 0xF0);
                   if cmd == 0xB0 && data(2) <= 119
                     val = [val data(2)];
@@ -932,17 +932,17 @@ classdef midimsg
               val = double(val);
             endif
           case "ccvalue"
-            if length(p.data) > 0
-              data = p.data{1};
+            if length(this.data) > 0
+              data = this.data{1};
               cmd = bitand(data(1), 0xF0);
               if cmd == 0xB0 && data(2) <= 119
                 val = data(3);
               else
                 error ("ccvalue property only valid for controlchange messages");
               endif
-              if length(p.data) > 1
-                for i = 2:length(p.data)
-                  data = p.data{i};
+              if length(this.data) > 1
+                for i = 2:length(this.data)
+                  data = this.data{i};
                   cmd = bitand(data(1), 0xF0);
                   if cmd == 0xB0 && data(2) <= 119
                     val = [val data(3)];
@@ -955,17 +955,17 @@ classdef midimsg
             endif
 
           case "song"
-            if length(p.data) > 0
-              data = p.data{1};
+            if length(this.data) > 0
+              data = this.data{1};
               cmd = data(1);
               if cmd == 0xF3
                 val = data(2);
               else
                 error ("song property only valid for songselect messages");
               endif
-              if length(p.data) > 1
-                for i = 2:length(p.data)
-                  data = p.data{i};
+              if length(this.data) > 1
+                for i = 2:length(this.data)
+                  data = this.data{i};
                   cmd = data(1);
                   if cmd == 0xF3
                     val = [val data(2)];
@@ -979,17 +979,17 @@ classdef midimsg
 
           case "songposition"
           
-            if length(p.data) > 0
-              data = p.data{1};
+            if length(this.data) > 0
+              data = this.data{1};
               cmd = data(1);
               if cmd == 0xF2
                 val = bitshift(int16(data(3)), 7) + int16(data(2));
               else
                 error ("songpostion property only valid for songpositionpointer messages");
               endif
-              if length(p.data) > 1
-                for i = 2:length(p.data)
-                  data = p.data{i};
+              if length(this.data) > 1
+                for i = 2:length(this.data)
+                  data = this.data{i};
                   cmd = data(1);
                   if cmd == 0xF2
                     v = bitshift(int16(data(3)), 7) + int16(data(2));
