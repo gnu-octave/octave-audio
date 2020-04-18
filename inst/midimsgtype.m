@@ -78,7 +78,17 @@ classdef midimsgtype
       tf = true;
     endfunction
 
-    # ismember
+    function results = ismember(this, cmpvals)
+      if nargin < 2 || !iscell(cmpvals)
+        error ("expected cell array to check against");
+      endif
+      results = 0;
+      for idx = 1:length(cmpvals)
+        if this == cmpvals{idx}
+	  results = 1;
+	endif
+      endfor
+    endfunction
 
     function tf = eq(this, val)
       if isa(val, "midimsgtype")
@@ -318,3 +328,9 @@ endclassdef
 %! assert (t != midimsgtype.NoteOff);
 %! assert (strcmp(midimsgtype.NoteOn, "NoteOn"));
 %! assert (strcmp(midimsgtype.NoteOn, midimsgtype.NoteOn));
+
+%!test
+%! t = midimsgtype.NoteOn;
+%! assert(ismember(t, {midimsgtype.NoteOn}), 1);
+%! assert(ismember(t, {midimsgtype.NoteOff}), 0);
+%! assert(ismember(t, {midimsgtype.NoteOn, midimsgtype.NoteOff}), 1);
