@@ -23,8 +23,8 @@
 ## @item Data        @tab Stop            @tab SongPositionPointer 
 ## @item PolyOn      @tab PolyKeyPressure @tab NoteOff
 ## @item EOX         @tab ActiveSensing   @tab SongSelect
-## @item MonoOn      @tab ChannelPressure @tab ControllChange
-## @item TimingClock @tab SystemReset     @tab AlLSoundOff
+## @item MonoOn      @tab ChannelPressure @tab ControlChange
+## @item TimingClock @tab SystemReset     @tab AllSoundOff
 ## @item OmniOn      @tab PitchBend       @tab ProgramChange
 ## @item Start       @tab TuneRequest     @tab ResetAllControllers
 ## @item OmniOff     @tab Undefined       @tab SystemExclusive
