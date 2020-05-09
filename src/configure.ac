@@ -18,7 +18,7 @@
 ### <http://www.gnu.org/licenses/>.
 
 AC_PREREQ([2.67])
-AC_INIT([octave midi package], [2.0.0])
+AC_INIT([octave midi package], [2.0.1])
 AC_CONFIG_HEADERS([config.h])
 
 # Avoid warnings for redefining AH-generated preprocessor symbols of
