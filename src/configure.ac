@@ -45,6 +45,24 @@ else
   AC_MSG_ERROR([RTMIDI required to install $PACKAGE_NAME])
 fi
 
+# Check for RtMidi::getApiName
+AC_MSG_CHECKING([RtMidi::getApiName])
+have_get_api_name=no
+AC_COMPILE_IFELSE([AC_LANG_PROGRAM([[
+   #include <RtMidi.h>
+   #include <string>
+  ]], [
+    std::string n = RtMidi::getApiName(RtMidi::LINUX_ALSA);
+  ])],
+ [AC_MSG_RESULT([yes])
+  have_api_name=yes],
+ [AC_MSG_RESULT([no])]
+)
+
+if test $have_get_api_name = yes; then
+  AC_DEFINE([HAVE_RTMIDI_GETAPINAME], [1], [have the RtMidi::getApiName function])
+fi
+
 # Checks for octave depreciated symbols
 ## Simple symbol alternatives of different Octave versions.
 save_altsyms_CXX="$CXX"

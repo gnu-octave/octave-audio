@@ -17,6 +17,7 @@
 #include <octave/oct.h>
 #include <octave/defun-dld.h>
 #include <octave/ov.h>
+#include <octave/oct-map.h>
 
 #include <iostream>
 #include <iomanip>

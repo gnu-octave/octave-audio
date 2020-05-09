@@ -16,11 +16,6 @@
 #ifndef MIDI_H
 #define MIDI_H
 
-#if defined (HAVE_CONFIG_H)
-#  include "config.h"
-#endif
-
-#include <RtMidi.h>
 #include <vector>
 
 class midi_device;

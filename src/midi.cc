@@ -13,20 +13,35 @@
 // You should have received a copy of the GNU General Public License along with
 // this program; if not, see <http://www.gnu.org/licenses/>.
 
-#include "midi.h"
 #include <octave/oct.h>
+
+#include <RtMidi.h>
+#include "midi.h"
+
+#if defined (HAVE_CONFIG_H)
+#  include "config.h"
+#endif
+
 
 static std::string api_name(RtMidi::Api api)
 {
+  std::string name;
+#ifdef HAVE_RTMIDI_GETAPINAME
+  name = RtMidi::getApiName(api);
+#else
   switch(api)
     {
-      case RtMidi::Api::MACOSX_CORE: return "MacOS Core";
-      case RtMidi::Api::LINUX_ALSA: return "Alsa";
-      case RtMidi::Api::UNIX_JACK: return "Jack";
-      case RtMidi::Api::WINDOWS_MM: return "MMSystem";
+      case RtMidi::MACOSX_CORE: name = "MacOS Core"; break;
+      case RtMidi::LINUX_ALSA: name = "Alsa"; break;
+      case RtMidi::UNIX_JACK: name = "Jack"; break;
+      case RtMidi::WINDOWS_MM: name = "MMSystem"; break;
       default: break;
     }
-  return "Unknown";
+#endif
+
+  if (name.length() == 0)
+      name = "Unknown";
+  return name;
 }
 
 class midi_device

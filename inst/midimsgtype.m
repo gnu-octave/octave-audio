@@ -55,7 +55,7 @@ classdef midimsgtype
   #endenumeration
 
   properties  (Access = private)
-    value = ""
+    value = "";
   endproperties
 
   # dont allow external creation of objects
