@@ -31,6 +31,8 @@
 ## The header block information
 ## @item track
 ## An array of tracks read from the file
+## @item other
+## An array of non-track midi blocks read from the file
 ## @end table
 ## @seealso{midifileread}
 ## @end deftypefn
@@ -45,8 +47,10 @@ function mi = midifileinfo(filename)
   mi.filename = filename;
   mi.header = {};
   mi.track = {};
+  mi.other = {};
 
   fd = fopen(filename, "rb");
+  blockidx = 0;
 
   unwind_protect
     # read file
@@ -73,11 +77,11 @@ function mi = midifileinfo(filename)
 
 	  mi.header = hdr;
 
-        endif
-        if strcmp (blockhdr.blocktype, "MTrk")
+        elseif strcmp (blockhdr.blocktype, "MTrk")
           cmd = 0;
 	  track = {};
 	  track.number = length (mi.track) + 1;
+	  track.blockindex = blockidx;
 	  track.blocksize = blockhdr.blocksize;
 	  track.blockstart = ftell(fd); 
 
@@ -137,7 +141,16 @@ function mi = midifileinfo(filename)
           endwhile
 
 	  mi.track{end+1} = track;
+	else
+	  track = {};
+	  track.blockindex = blockidx;
+	  track.blocksize = blockhdr.blocksize;
+	  track.blockstart = ftell(fd); 
+	  track.blocktype = blockhdr.blocktype
+	  mi.other{end+1} = track;
         endif
+
+	blockidx = blockidx + 1;
 
         fseek (fd, nextpos, 'bof');
       endif
@@ -159,4 +172,6 @@ endfunction
 %! assert(info.header.ticks_per_qtr, 480);
 %! assert(info.header.ticks, 224);
 %! assert(info.header.frames, 1);
+%! assert(length(info.track), 2);
+%! assert(length(info.other), 0);
 
