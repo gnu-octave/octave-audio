@@ -545,6 +545,22 @@ classdef midimsg
             this.timestamp{end+1} = timestamp;
           endif
 
+        case "metaevent"
+          if nargin < 3
+            error ('metaevent expects at least metatype and data')
+          endif
+          timestamp = 0;
+          if nargin > 3
+            timestamp = this.check_timestamp(varargin{3});
+          endif
+	  # TODO: could be a integer or char type for metatype
+          event  = this.check_value127("metatype", varargin{1});
+          data  = varargin{2};  # TODO: check validity of the data <= 127
+	  #p_makevariable = str2func("private/makevariable")
+	  datasize = __midimsg_makevariable__(length(data));
+          this.data{end+1} = uint8([0xFF event datasize data]);
+          this.timestamp{end+1} = timestamp;
+
         otherwise
           error ("Unknown midi type '%s", typev);
       endswitch
@@ -1134,6 +1150,31 @@ classdef midimsg
               val = double(val);
             endif
 
+          case "metatype"
+
+            if length(this.data) > 0
+              data = this.data{1};
+              cmd = data(1);
+              if cmd == 0xFF && length(data) > 1
+                val = data(2);
+              else
+                error ("metatype property only valid for metaevent messages");
+              endif
+              if length(this.data) > 1
+                for i = 2:length(this.data)
+                  data = this.data{i};
+                  cmd = data(1);
+                  if cmd == 0xFF &&  length(data) > 1
+                    v = bitand(data(2), 7);
+                    val = [val v];
+                  else
+                    error ("metatype property only valid for metaevent messages");
+                  endif
+                endfor
+              endif
+              val = double(val);
+            endif
+
           otherwise
             error("unimplemented midimsg.subsref property '%s'", s(1).subs);
           endswitch
@@ -1216,6 +1257,10 @@ classdef midimsg
           seq = bitshift(data(2), -3);
           val = bitand(data(2), 7);
           msgtext = [msgtext sprintf(" TimeCodeSequence: %d TimeCodeValue: %d", seq, val)];
+        endif
+        if strcmp(types, "MetaEvent")
+          metatype = data(2);
+          msgtext = [msgtext sprintf(" MetaType: %d", metatype)];
         endif
 
         msgtext = [msgtext sprintf(" Timestamp: %f", this.timestamp{i})];
@@ -1378,6 +1423,9 @@ classdef midimsg
            v = midimsgtype.ActiveSensing;
          elseif cmd == 0xFF
            v = midimsgtype.SystemReset;
+           if length(data) > 1
+             v = midimsgtype.MetaEvent;
+           endif
          endif
          # depend  on other bytes ?
        otherwise
@@ -1411,6 +1459,11 @@ classdef midimsg
   endmethods
 
 endclassdef
+
+# classes cant call private functions at the mometnt (Octave 5.2)
+function d = __midimsg_makevariable__(x)
+  d = makevariable(x);
+endfunction
 
 %!fail midimsg('badtype')
 
@@ -1806,6 +1859,14 @@ endclassdef
 %! assert(c(2).channel, 2);
 %! assert(c(2).note, 60);
 %! assert(c(2).velocity, 10);
+
+%!test
+%! a = midimsg("metaevent", 1, "hello");
+%! assert(isa(a, "midimsg"));
+%! assert(length(a) == 1);
+%! assert(a.type == "MetaEvent");
+%! assert(a.metatype, 1);
+%! assert(a.msgbytes, uint8([0xFF 0x01 0x05 0x68 0x65 0x6C 0x6C 0x6F]))
 
 %!test
 %! # basic assign operations

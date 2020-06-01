@@ -6,6 +6,8 @@ audio-2.0.1+   Release Date: TBD
 
  ** added 'other' field to midifileinfo structure
 
+ ** added metaevent type to midimsg
+
 
 ===============================================================================
 audio-2.0.1   Release Date: 2020-05-08

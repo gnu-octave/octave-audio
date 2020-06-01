@@ -29,7 +29,7 @@
 ## @item Start       @tab TuneRequest     @tab ResetAllControllers
 ## @item OmniOff     @tab Undefined       @tab SystemExclusive
 ## @item Continue    @tab MIDITimeCodeQuarterFrame @tab LocalControl
-## @item AllNotesOff @tab                 @tab
+## @item AllNotesOff @tab MetaEvent       @tab
 ## @end multitable
 ##
 ##
@@ -294,6 +294,10 @@ classdef midimsgtype
     endfunction
     function c = PitchBend()
       persistent v = midimsgtype("PitchBend");
+      c = v;
+    endfunction
+    function c = MetaEvent()
+      persistent v = midimsgtype("MetaEvent");
       c = v;
     endfunction
     function c = Undefined()
