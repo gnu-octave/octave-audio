@@ -8,6 +8,8 @@ audio-2.0.1+   Release Date: TBD
 
  ** added metaevent type to midimsg
 
+ ** additional FXX type message file reading
+
 
 ===============================================================================
 audio-2.0.1   Release Date: 2020-05-08

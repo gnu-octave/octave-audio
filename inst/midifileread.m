@@ -93,14 +93,14 @@ function msg = midifileread(filename)
 	    endif
 
             switch subcmd
-	      # TODO: convert to midi messages
-	      case 0xff
-		# example
+              # TODO: convert to midi messages
+              case 0xff
+                # example
                 # ff00 1003 7741 7961 6920 0000020 206e 2061 614d 676e 7265
                 ctype  = fread (fd, 1, "uint8");
                 ct = getvariable (fd);
-	        data = fread (fd, [1 ct], "uint8");
-		if debug
+                data = fread (fd, [1 ct], "uint8");
+                if debug
                   if ctype == 0
                     [ "seq: " char(data) ]
                   elseif ctype == 1
@@ -137,29 +137,36 @@ function msg = midifileread(filename)
                 if ctype == 0x51
                   tempo = polyval(double(data), 256);
                 endif
-	      case {0xf1}
+              case {0xf1, 0xf3}
                 sz = 1;
-	        data = fread(fd, [1 sz], "uint8");
-		msg = [msg midimsg.createMessage(uint8([cmd data]), abstime)];
-	      case {0xf0, 0xf7}
-                ct = getvariable (fd);
-	        data = fread (fd, [1 ct], "uint8");
-		msg = [msg midimsg.createMessage(uint8([cmd data]), abstime)];
-	      case { 0x80,  0x90, 0xA0, 0xB0, 0xE0}
+                data = fread(fd, [1 sz], "uint8");
+                msg = [msg midimsg.createMessage(uint8([cmd data]), abstime)];
+              case {0xf2}
                 sz = 2;
-	        data = fread (fd, [1 sz], "uint8");
-		msg = [msg midimsg.createMessage(uint8([cmd data]), abstime)];
-	      case { 0xC0, 0xD0}
+                data = fread(fd, [1 sz], "uint8");
+                msg = [msg midimsg.createMessage(uint8([cmd data]), abstime)];
+              case {0xf6, 0xf7, 0xf8, 0xfa, 0xfb, 0xfc, 0xfe}
+                msg = [msg midimsg.createMessage(uint8([cmd]), abstime)];
+              case {0xf0}
+                ct = getvariable (fd);
+                data = fread (fd, [1 ct], "uint8");
+                msg = [msg midimsg.createMessage(uint8([cmd data]), abstime)];
+              case { 0x80,  0x90, 0xA0, 0xB0, 0xE0}
+                sz = 2;
+                data = fread (fd, [1 sz], "uint8");
+                msg = [msg midimsg.createMessage(uint8([cmd data]), abstime)];
+              case { 0xC0, 0xD0}
                 sz = 1;
-	        data = fread(fd, [1 sz], "uint8");
-		msg = [msg midimsg.createMessage(uint8([cmd data]), abstime)];
-	      otherwise
-	        # now what
+                data = fread(fd, [1 sz], "uint8");
+                msg = [msg midimsg.createMessage(uint8([cmd data]), abstime)];
+              otherwise
+                # now what
                 err = dec2hex (fread(fd,5, "uint8"));
-	        error ("unknown command now %2X", cmd)
-	    endswitch
+                error ("unknown command now %2X", cmd)
+            endswitch
           endwhile
         endif
+
         fseek (fd, nextpos, 'bof');
 
       endif
