@@ -15,29 +15,66 @@
 ## <https://www.gnu.org/licenses/>.
 
 ## -*- texinfo -*- 
-## @deftypefn {} {@var{msg} =} midifileread (@var{filename})
+## @deftypefn {} {@var{msg} =} midifileread (@var{filename}, [propertyname, propertyvalue @dots{}])
 ## Read MIDI file into a midimsg
 ##
 ## @subsubheading Inputs
 ## @var{filename} - filename of file to open.@*
+## @var {propertyname}, @var{properyvalue} - optional propertyname/value pairs.@*
+##
+## Known property values are:
+## @table @asis
+## @item includemetaevents
+## A True/False value to include MetaEvents in the out message list.
+## @end table
 ##
 ## @subsubheading Outputs
 ## @var{msg} - a midimsg struct containing the messages read from the file@*
 ## @seealso{midifileinfo, midimsg}
 ## @end deftypefn
 
-function msg = midifileread(filename)
+function msg = midifileread(filename, varargin)
 
   if nargin < 1
     error ("Expected filename");
   endif
 
   debug = 0;
-
+  includemetaevents = 0;
   abstime = 0;
   format = 0;
   tempo = 6e7/120;
   msg = midimsg(0);
+
+
+  if mod (nargin + 1, 2) != 0
+    error ("midifileread: expected property name, value pairs");
+  endif
+  if !iscellstr (varargin (1:2:nargin-1))
+    error ("midicontrols: expected property names to be strings");
+  endif
+
+  for i = 1:2:nargin-1
+    propname = tolower (varargin{i});
+    propvalue = varargin{i+1};
+
+    if strcmp (propname, "debug")
+      if !isnumeric (propvalue) || !isscalar(propvalue)
+         error ("debug should be boolean")
+      else
+        debug = propvalue;
+      endif
+    elseif strcmp (propname, "includemetaevents")
+      if !isnumeric (propvalue) || !isscalar(propvalue)
+         error ("includemetaevents should be boolean")
+      else
+        includemetaevents = propvalue;
+      endif
+ 
+    else
+      error ("unknown property '%s'", propname)
+    endif
+  endfor
 
   # TODO: handle time stamp AND fact that different formats offset time stamp differently between tracks
 
@@ -137,6 +174,9 @@ function msg = midifileread(filename)
                 if ctype == 0x51
                   tempo = polyval(double(data), 256);
                 endif
+                if includemetaevents
+                  msg = [msg midimsg.createMessage(uint8([cmd ctype data]), abstime)];
+                endif
               case {0xf1, 0xf3}
                 sz = 1;
                 data = fread(fd, [1 sz], "uint8");
@@ -193,3 +233,6 @@ endfunction
 %! assert(msg(length(msg)).type == "NoteOn");
 %! assert(msg(length(msg)).timestamp, 7.9739583, 5e-7);
 
+%!fail midifileread(testname, "1name");
+
+%!fail midifileread();
