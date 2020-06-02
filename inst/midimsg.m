@@ -555,7 +555,7 @@ classdef midimsg
           endif
 	  # TODO: could be a integer or char type for metatype
           event  = this.check_value127("metatype", varargin{1});
-          data  = varargin{2};  # TODO: check validity of the data <= 127
+          data  = uint8(varargin{2});  # TODO: check validity of the data <= 127
 	  #p_makevariable = str2func("private/makevariable")
 	  datasize = __midimsg_makevariable__(length(data));
           this.data{end+1} = uint8([0xFF event datasize data]);
@@ -1165,7 +1165,7 @@ classdef midimsg
                   data = this.data{i};
                   cmd = data(1);
                   if cmd == 0xFF &&  length(data) > 1
-                    v = bitand(data(2), 7);
+                    val = data(2);
                     val = [val v];
                   else
                     error ("metatype property only valid for metaevent messages");
@@ -1173,6 +1173,48 @@ classdef midimsg
                 endfor
               endif
               val = double(val);
+            endif
+
+          case "metadata"
+
+            if length(this.data) > 0
+              data = this.data{1};
+              cmd = data(1);
+	      len = length(data);
+              if cmd == 0xFF && len > 1
+                if len < 128
+                  val = data(4:len);
+                elseif len < 128*128
+                  val = data(5:len);
+                elseif len < 128*128*128
+                  val = data(6:len);
+                else
+                  val = data(7:len);
+                endif
+              else
+                error ("metadata property only valid for metaevent messages");
+              endif
+              if length(this.data) > 1
+                for i = 2:length(this.data)
+                  data = this.data{i};
+                  cmd = data(1);
+                  len = length(data);
+                  if cmd == 0xFF && len > 1
+                    if len < 128
+                      v = data(4:len);
+                    elseif len < 128*128
+                      v = data(5:len);
+                    elseif len < 128*128*128
+                      v = data(6:len);
+                    else
+                      v = data(7:len);
+                    endif
+                    val = [val v];
+                  else
+                    error ("metadata property only valid for metaevent messages");
+                  endif
+                endfor
+              endif
             endif
 
           otherwise
@@ -1866,6 +1908,7 @@ endfunction
 %! assert(length(a) == 1);
 %! assert(a.type == "MetaEvent");
 %! assert(a.metatype, 1);
+%! assert(a.metadata, uint8([0x68 0x65 0x6C 0x6C 0x6F]));
 %! assert(a.msgbytes, uint8([0xFF 0x01 0x05 0x68 0x65 0x6C 0x6C 0x6F]))
 
 %!test
