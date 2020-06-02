@@ -59,13 +59,13 @@ function msg = midifileread(filename, varargin)
     propvalue = varargin{i+1};
 
     if strcmp (propname, "debug")
-      if !isnumeric (propvalue) || !isscalar(propvalue)
+      if !(isnumeric (propvalue) || islogical(propvalue)) || !isscalar(propvalue)
          error ("debug should be boolean")
       else
         debug = propvalue;
       endif
     elseif strcmp (propname, "includemetaevents")
-      if !isnumeric (propvalue) || !isscalar(propvalue)
+      if !(isnumeric (propvalue) || islogical(propvalue))|| !isscalar(propvalue)
          error ("includemetaevents should be boolean")
       else
         includemetaevents = propvalue;
