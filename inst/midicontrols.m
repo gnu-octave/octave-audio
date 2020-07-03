@@ -14,51 +14,51 @@
 ## along with this program.  If not, see
 ## <https://www.gnu.org/licenses/>.
 
-## -*- texinfo -*- 
-## @deftypefn {} {@var{obj} =} midicontrols ()
-## @deftypefnx {} {@var{obj} =} midicontrols (@var{ctrlid})
-## @deftypefnx {} {@var{obj} =} midicontrols (@var{ctrlid}, @var{initialvalues})
-## @deftypefnx {} {@var{obj} =} midicontrols (__, @var{propertyname}, @var{propertyvalue})
-## Create a midi controls object
-##
-## @subsubheading Inputs
-## @var{ctrlid} - single control id or array of control ids to monitor, or [] to use any controller.@*
-## @var{initialvalues} - initial values to use for controls. It should be the same size as @var{ctrlid}@*
-## @var{propertyname}, @var{propertyvalue} - properties to set on the controller. If a device is not specified
-## the value from getpref("midi", "DefaultDevice", 0) will be used.@*
-##
-##
-## Known properties are:
-## @table @asis
-## @item mididevice
-## name of the mididevice to monitor.
-## @item outputmode
-## the scaling mode for values: 'rawmidi' will return values between 0 .. 127, 'normalized' will use
-## values between 0 .. 1.
-## @end table
-##
-## @subsubheading Outputs
-## @var{obj} - returns a midicontrols object
-##
-## @subsubheading Examples
-## Create a midicontrols object monitoring control id 2001 on the default midi device 
-## @example
-## @code {
-## ctrl = midicontrols(2001)
-## }
-## @end example
-##
-## Create a midicontrols object monitoring control id 2001 on a a non default device
-## @example
-## @code {
-## ctrl = midicontrols(2001, 'mididevice', 1)
-## }
-## @end example
-##
-## @seealso{midiread, midisync}
-## @end deftypefn
-
 classdef midicontrols < handle
+  ## -*- texinfo -*- 
+  ## @deftypefn {} {@var{obj} =} midicontrols ()
+  ## @deftypefnx {} {@var{obj} =} midicontrols (@var{ctrlid})
+  ## @deftypefnx {} {@var{obj} =} midicontrols (@var{ctrlid}, @var{initialvalues})
+  ## @deftypefnx {} {@var{obj} =} midicontrols (__, @var{propertyname}, @var{propertyvalue})
+  ## Create a midi controls object
+  ##
+  ## @subsubheading Inputs
+  ## @var{ctrlid} - single control id or array of control ids to monitor, or [] to use any controller.@*
+  ## @var{initialvalues} - initial values to use for controls. It should be the same size as @var{ctrlid}@*
+  ## @var{propertyname}, @var{propertyvalue} - properties to set on the controller. If a device is not specified
+  ## the value from getpref("midi", "DefaultDevice", 0) will be used.@*
+  ##
+  ##
+  ## Known properties are:
+  ## @table @asis
+  ## @item mididevice
+  ## name of the mididevice to monitor.
+  ## @item outputmode
+  ## the scaling mode for values: 'rawmidi' will return values between 0 .. 127,
+  ## 'normalized' will use values between 0 .. 1.
+  ## @end table
+  ##
+  ## @subsubheading Outputs
+  ## @var{obj} - returns a midicontrols object
+  ##
+  ## @subsubheading Examples
+  ## Create a midicontrols object monitoring control id 2001 on the default midi device 
+  ## @example
+  ## @code {
+  ## ctrl = midicontrols(2001)
+  ## }
+  ## @end example
+  ##
+  ## Create a midicontrols object monitoring control id 2001 on a a non default device
+  ## @example
+  ## @code {
+  ## ctrl = midicontrols(2001, 'mididevice', 1)
+  ## }
+  ## @end example
+  ##
+  ## @seealso{midiread, midisync}
+  ## @end deftypefn
+
   properties (Access = private)
    controls = [];
    initialvalue = 0;

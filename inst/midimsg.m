@@ -14,120 +14,120 @@
 ## along with this program.  If not, see
 ## <https://www.gnu.org/licenses/>.
 
-## -*- texinfo -*- 
-## @deftypefn {} {@var{msg} =} midimsg (0)
-## @deftypefnx {} {@var{msg} =} midimsg (@var{type} ....)
-## @deftypefnx {} {@var{msg} =} midimsg ("note", @var{channel}, @var{note}, @var{velocity}, @var{duration}, @var{timestamp})
-## @deftypefnx {} {@var{msg} =} midimsg ("noteon", @var{channel}, @var{note}, @var{velocity}, @var{timestamp})
-## @deftypefnx {} {@var{msg} =} midimsg ("noteoff", @var{channel}, @var{note}, @var{velocity}, @var{timestamp})
-## @deftypefnx {} {@var{msg} =} midimsg ("programchange", @var{channel}, @var{prog}, @var{timestamp})
-## @deftypefnx {} {@var{msg} =} midimsg ("controlchange", @var{channel}, @var{ccnum}, @var{ccval}, @var{timestamp})
-## @deftypefnx {} {@var{msg} =} midimsg ("polykeypressure", @var{channel}, @var{note}, @var{keypressure}, @var{timestamp})
-## @deftypefnx {} {@var{msg} =} midimsg ("channelpressure", @var{channel}, @var{chanpressure}, @var{timestamp})
-## @deftypefnx {} {@var{msg} =} midimsg ("localcontrol", @var{channel}, @var{localcontrol}, @var{timestamp})
-## @deftypefnx {} {@var{msg} =} midimsg ("pitchbend", @var{channel}, @var{pitchchange}, @var{timestamp})
-## @deftypefnx {} {@var{msg} =} midimsg ("polyon", @var{channel}, @var{timestamp})
-## @deftypefnx {} {@var{msg} =} midimsg ("monoon", @var{channel}, @var{monochannels}, @var{timestamp})
-## @deftypefnx {} {@var{msg} =} midimsg ("omnion", @var{channel}, @var{timestamp})
-## @deftypefnx {} {@var{msg} =} midimsg ("omnioff", @var{channel}, @var{timestamp})
-## @deftypefnx {} {@var{msg} =} midimsg ("allsoundoff", @var{channel}, @var{timestamp})
-## @deftypefnx {} {@var{msg} =} midimsg ("allnotesoff", @var{channel}, @var{timestamp})
-## @deftypefnx {} {@var{msg} =} midimsg ("resetallcontrollers", @var{channel}, @var{timestamp})
-## @deftypefnx {} {@var{msg} =} midimsg ("start", @var{timestamp})
-## @deftypefnx {} {@var{msg} =} midimsg ("stop", @var{timestamp})
-## @deftypefnx {} {@var{msg} =} midimsg ("continue", @var{timestamp})
-## @deftypefnx {} {@var{msg} =} midimsg ("systemreset", @var{timestamp})
-## @deftypefnx {} {@var{msg} =} midimsg ("activesensing", @var{timestamp})
-## @deftypefnx {} {@var{msg} =} midimsg ("timingclock", @var{timestamp})
-## @deftypefnx {} {@var{msg} =} midimsg ("systemexclusive", @var{timestamp})
-## @deftypefnx {} {@var{msg} =} midimsg ("systemexclusive", @var{bytes}, @var{timestamp})
-## @deftypefnx {} {@var{msg} =} midimsg ("eox", @var{timestamp})
-## @deftypefnx {} {@var{msg} =} midimsg ("data", @var{bytes}, @var{timestamp})
-## @deftypefnx {} {@var{msg} =} midimsg ("songselect", @var{song}, @var{timestamp})
-## @deftypefnx {} {@var{msg} =} midimsg ("songpositionpointer", @var{songposition}, @var{timestamp})
-## @deftypefnx {} {@var{msg} =} midimsg ("tunerequest", @var{timestamp})
-## @deftypefnx {} {@var{msg} =} midimsg ("miditimecodequarterframe", @var{timeseq}, @var{timevalue}, @var{timestamp})
-## Create a midimsg object
-##
-## If the input parameter is 0, create an empty midi message object
-## Otherwise the first variable is the type of message to create, followed by the additional
-## parameters for the message.
-##
-## For each message type, the timestamp value is optional.
-##
-## @subsubheading Inputs
-## @var{type} - string message type or a midimsgtype.@*
-## @var{timestamp} - optional seconds time stamp for the event@*
-## @var{channel} - the channel to use for the message (1..16)@*
-## @var{note} - the value of the note to play/stop@*
-## @var{velocity} - the velocity value for a note on/off, with 0 stopping a note from sounding.@*
-## @var{duration} - seconds between starting and stopping a note when created a 'note' message.@*
-## @var{prog} - program number when doing a program change message.@*
-## @var{ccnum} - control change control number.@*
-## @var{ccval} - control change control value.@*
-## @var{keypressure} - key pressure value when creating a key pressure message.@*
-## @var{chanpressure} - channel pressure value when creating a channelpressure message.@*
-## @var{pitchchange} - pitch change value when creating a pitch bend message.@*
-## @var{localcontrol} - boolean value when creating a localcontrol message.@*
-## @var{monochannels} - channels specified for a mono on message.@*
-## @var{bytes} - array of data in range of 0 to 127 specified as part of a data message or
-## system exclusive message.@*
-## @var{song} - song selection number for a song selection message.@*
-## @var{songposition} - song position value for a song position message.@*
-## @var{timeseq} - timecode sequence number for a miditimecodequarterframe message.@*
-## @var{timevalue} - timecode value number for a miditimecodequarterframe message.@*
-##
-## @subsubheading Outputs
-## @var{msg} - a midimsg object containing the midi data of the message
-##
-## @subsubheading Properties
-## @var{timestamp} - timestamp of the message, or an array or timestamps if the the message is a
-## compound message.@*
-## @var{msgbytes} - the raw message bytes that make up the MIDI message.@*
-## @var{nummsgbytes} - the number of message bytes that make up the MIDI message.@*
-## @var{type} - string or midimsgtype that represents the message type.@*
-## @var{channel} - the channel number for message.@*
-## @var{note} - the note value for message (Only valid for noteon/off and polykeypressure).@*
-## @var{velocity} - the velocity value for message (Only valid for noteon/off).@*
-## @var{keypressure} - the keypressure value for message (Only valid for polykeypressure).@*
-## @var{channelpressure} - the chanpressure value for message (Only valid for channelpressure).@*
-## @var{localcontrol} - the localcontrol value for message (Only valid for localcontrol messages).@*
-## @var{monochannels} - channels specified for a mono on message.@*
-## @var{program} - program number specified for a program change message.@*
-## @var{ccnumber} - control change number specified for a control change message.@*
-## @var{ccvalue} - control change value specified for a control change message.@*
-## @var{song} - song number for a song selection message.@*
-## @var{songposition} - song position value for a song position message.@*
-## @var{pitchchange} - pitch change value for a pitch bend message.@*
-## @var{timecodesequence} - timecode sequence number for a miditimecodequarterframe message.@*
-## @var{timecodevalue} - timecode value number for a miditimecodequarterframe message.@*
-##
-## @subsubheading Examples
-## Create a note on/off pair with a duration of 1.5 seconds
-## @example
-## @code {
-## msg = midimsg('note', 1, 60, 100, 1.5)
-## }
-## @end example
-##
-## Create a separate note on/off pair with a time between them of 1.5 seconds
-## @example
-## @code {
-## msg = [midimsg('noteon', 1, 60, 100, 0), midimsg('noteoff', 1, 60, 0, 1.5)]
-## }
-## @end example
-##
-## Create a system reset message
-## @example
-## @code {
-## msg = midimsg('systemreset')
-## }
-## @end example
-##
-## @seealso{midifileread, midisend, midireceive, midimsgtype}
-## @end deftypefn
-
 classdef midimsg
+  ## -*- texinfo -*- 
+  ## @deftypefn {} {@var{msg} =} midimsg (0)
+  ## @deftypefnx {} {@var{msg} =} midimsg (@var{type} ....)
+  ## @deftypefnx {} {@var{msg} =} midimsg ("note", @var{channel}, @var{note}, @var{velocity}, @var{duration}, @var{timestamp})
+  ## @deftypefnx {} {@var{msg} =} midimsg ("noteon", @var{channel}, @var{note}, @var{velocity}, @var{timestamp})
+  ## @deftypefnx {} {@var{msg} =} midimsg ("noteoff", @var{channel}, @var{note}, @var{velocity}, @var{timestamp})
+  ## @deftypefnx {} {@var{msg} =} midimsg ("programchange", @var{channel}, @var{prog}, @var{timestamp})
+  ## @deftypefnx {} {@var{msg} =} midimsg ("controlchange", @var{channel}, @var{ccnum}, @var{ccval}, @var{timestamp})
+  ## @deftypefnx {} {@var{msg} =} midimsg ("polykeypressure", @var{channel}, @var{note}, @var{keypressure}, @var{timestamp})
+  ## @deftypefnx {} {@var{msg} =} midimsg ("channelpressure", @var{channel}, @var{chanpressure}, @var{timestamp})
+  ## @deftypefnx {} {@var{msg} =} midimsg ("localcontrol", @var{channel}, @var{localcontrol}, @var{timestamp})
+  ## @deftypefnx {} {@var{msg} =} midimsg ("pitchbend", @var{channel}, @var{pitchchange}, @var{timestamp})
+  ## @deftypefnx {} {@var{msg} =} midimsg ("polyon", @var{channel}, @var{timestamp})
+  ## @deftypefnx {} {@var{msg} =} midimsg ("monoon", @var{channel}, @var{monochannels}, @var{timestamp})
+  ## @deftypefnx {} {@var{msg} =} midimsg ("omnion", @var{channel}, @var{timestamp})
+  ## @deftypefnx {} {@var{msg} =} midimsg ("omnioff", @var{channel}, @var{timestamp})
+  ## @deftypefnx {} {@var{msg} =} midimsg ("allsoundoff", @var{channel}, @var{timestamp})
+  ## @deftypefnx {} {@var{msg} =} midimsg ("allnotesoff", @var{channel}, @var{timestamp})
+  ## @deftypefnx {} {@var{msg} =} midimsg ("resetallcontrollers", @var{channel}, @var{timestamp})
+  ## @deftypefnx {} {@var{msg} =} midimsg ("start", @var{timestamp})
+  ## @deftypefnx {} {@var{msg} =} midimsg ("stop", @var{timestamp})
+  ## @deftypefnx {} {@var{msg} =} midimsg ("continue", @var{timestamp})
+  ## @deftypefnx {} {@var{msg} =} midimsg ("systemreset", @var{timestamp})
+  ## @deftypefnx {} {@var{msg} =} midimsg ("activesensing", @var{timestamp})
+  ## @deftypefnx {} {@var{msg} =} midimsg ("timingclock", @var{timestamp})
+  ## @deftypefnx {} {@var{msg} =} midimsg ("systemexclusive", @var{timestamp})
+  ## @deftypefnx {} {@var{msg} =} midimsg ("systemexclusive", @var{bytes}, @var{timestamp})
+  ## @deftypefnx {} {@var{msg} =} midimsg ("eox", @var{timestamp})
+  ## @deftypefnx {} {@var{msg} =} midimsg ("data", @var{bytes}, @var{timestamp})
+  ## @deftypefnx {} {@var{msg} =} midimsg ("songselect", @var{song}, @var{timestamp})
+  ## @deftypefnx {} {@var{msg} =} midimsg ("songpositionpointer", @var{songposition}, @var{timestamp})
+  ## @deftypefnx {} {@var{msg} =} midimsg ("tunerequest", @var{timestamp})
+  ## @deftypefnx {} {@var{msg} =} midimsg ("miditimecodequarterframe", @var{timeseq}, @var{timevalue}, @var{timestamp})
+  ## Create a midimsg object
+  ##
+  ## If the input parameter is 0, create an empty midi message object
+  ## Otherwise the first variable is the type of message to create, followed by the additional
+  ## parameters for the message.
+  ##
+  ## For each message type, the timestamp value is optional.
+  ##
+  ## @subsubheading Inputs
+  ## @var{type} - string message type or a midimsgtype.@*
+  ## @var{timestamp} - optional seconds time stamp for the event@*
+  ## @var{channel} - the channel to use for the message (1..16)@*
+  ## @var{note} - the value of the note to play/stop@*
+  ## @var{velocity} - the velocity value for a note on/off, with 0 stopping a note from sounding.@*
+  ## @var{duration} - seconds between starting and stopping a note when created a 'note' message.@*
+  ## @var{prog} - program number when doing a program change message.@*
+  ## @var{ccnum} - control change control number.@*
+  ## @var{ccval} - control change control value.@*
+  ## @var{keypressure} - key pressure value when creating a key pressure message.@*
+  ## @var{chanpressure} - channel pressure value when creating a channelpressure message.@*
+  ## @var{pitchchange} - pitch change value when creating a pitch bend message.@*
+  ## @var{localcontrol} - boolean value when creating a localcontrol message.@*
+  ## @var{monochannels} - channels specified for a mono on message.@*
+  ## @var{bytes} - array of data in range of 0 to 127 specified as part of a data message or
+  ## system exclusive message.@*
+  ## @var{song} - song selection number for a song selection message.@*
+  ## @var{songposition} - song position value for a song position message.@*
+  ## @var{timeseq} - timecode sequence number for a miditimecodequarterframe message.@*
+  ## @var{timevalue} - timecode value number for a miditimecodequarterframe message.@*
+  ##
+  ## @subsubheading Outputs
+  ## @var{msg} - a midimsg object containing the midi data of the message
+  ##
+  ## @subsubheading Properties
+  ## @var{timestamp} - timestamp of the message, or an array or timestamps if the the message is a
+  ## compound message.@*
+  ## @var{msgbytes} - the raw message bytes that make up the MIDI message.@*
+  ## @var{nummsgbytes} - the number of message bytes that make up the MIDI message.@*
+  ## @var{type} - string or midimsgtype that represents the message type.@*
+  ## @var{channel} - the channel number for message.@*
+  ## @var{note} - the note value for message (Only valid for noteon/off and polykeypressure).@*
+  ## @var{velocity} - the velocity value for message (Only valid for noteon/off).@*
+  ## @var{keypressure} - the keypressure value for message (Only valid for polykeypressure).@*
+  ## @var{channelpressure} - the chanpressure value for message (Only valid for channelpressure).@*
+  ## @var{localcontrol} - the localcontrol value for message (Only valid for localcontrol messages).@*
+  ## @var{monochannels} - channels specified for a mono on message.@*
+  ## @var{program} - program number specified for a program change message.@*
+  ## @var{ccnumber} - control change number specified for a control change message.@*
+  ## @var{ccvalue} - control change value specified for a control change message.@*
+  ## @var{song} - song number for a song selection message.@*
+  ## @var{songposition} - song position value for a song position message.@*
+  ## @var{pitchchange} - pitch change value for a pitch bend message.@*
+  ## @var{timecodesequence} - timecode sequence number for a miditimecodequarterframe message.@*
+  ## @var{timecodevalue} - timecode value number for a miditimecodequarterframe message.@*
+  ##
+  ## @subsubheading Examples
+  ## Create a note on/off pair with a duration of 1.5 seconds
+  ## @example
+  ## @code {
+  ## msg = midimsg('note', 1, 60, 100, 1.5)
+  ## }
+  ## @end example
+  ##
+  ## Create a separate note on/off pair with a time between them of 1.5 seconds
+  ## @example
+  ## @code {
+  ## msg = [midimsg('noteon', 1, 60, 100, 0), midimsg('noteoff', 1, 60, 0, 1.5)]
+  ## }
+  ## @end example
+  ##
+  ## Create a system reset message
+  ## @example
+  ## @code {
+  ## msg = midimsg('systemreset')
+  ## }
+  ## @end example
+  ##
+  ## @seealso{midifileread, midisend, midireceive, midimsgtype}
+  ## @end deftypefn
+
   properties (SetAccess = private, GetAccess = public)
    data = {};
    timestamp = {};

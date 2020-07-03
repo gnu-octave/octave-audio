@@ -14,41 +14,41 @@
 ## along with this program.  If not, see
 ## <https://www.gnu.org/licenses/>.
 
-## -*- texinfo -*- 
-## @deftypefn {} {} midimsgtype
-## A midimsg type enumeration for values of the midimsg type.
-##
-## Enumeration values are:
-## @multitable @columnfractions .2 .4 .3
-## @item Data        @tab Stop            @tab SongPositionPointer 
-## @item PolyOn      @tab PolyKeyPressure @tab NoteOff
-## @item EOX         @tab ActiveSensing   @tab SongSelect
-## @item MonoOn      @tab ChannelPressure @tab ControlChange
-## @item TimingClock @tab SystemReset     @tab AllSoundOff
-## @item OmniOn      @tab PitchBend       @tab ProgramChange
-## @item Start       @tab TuneRequest     @tab ResetAllControllers
-## @item OmniOff     @tab Undefined       @tab SystemExclusive
-## @item Continue    @tab MIDITimeCodeQuarterFrame @tab LocalControl
-## @item AllNotesOff @tab MetaEvent       @tab
-## @end multitable
-##
-##
-## The enumeration value can be used instead of a string in midimsg creation.
-##
-## @subsubheading Examples
-## Use both a string and a midimsgtype for the type parameter of a midimsg.
-## @example
-## @code {
-## # both statements are equivalent
-## msg = midimsg('NoteOn', 1, 60, 100);
-## msg = midimsg(midimsgtype.NoteOn, 1, 60, 100);
-## }
-## @end example
-##
-## @seealso{midimsg}
-## @end deftypefn
-
 classdef midimsgtype
+  ## -*- texinfo -*- 
+  ## @deftypefn {} {} midimsgtype
+  ## A midimsg type enumeration for values of the midimsg type.
+  ##
+  ## Enumeration values are:
+  ## @multitable @columnfractions .2 .4 .3
+  ## @item Data        @tab Stop            @tab SongPositionPointer 
+  ## @item PolyOn      @tab PolyKeyPressure @tab NoteOff
+  ## @item EOX         @tab ActiveSensing   @tab SongSelect
+  ## @item MonoOn      @tab ChannelPressure @tab ControlChange
+  ## @item TimingClock @tab SystemReset     @tab AllSoundOff
+  ## @item OmniOn      @tab PitchBend       @tab ProgramChange
+  ## @item Start       @tab TuneRequest     @tab ResetAllControllers
+  ## @item OmniOff     @tab Undefined       @tab SystemExclusive
+  ## @item Continue    @tab MIDITimeCodeQuarterFrame @tab LocalControl
+  ## @item AllNotesOff @tab MetaEvent       @tab
+  ## @end multitable
+  ##
+  ##
+  ## The enumeration value can be used instead of a string in midimsg creation.
+  ##
+  ## @subsubheading Examples
+  ## Use both a string and a midimsgtype for the type parameter of a midimsg.
+  ## @example
+  ## @code {
+  ## # both statements are equivalent
+  ## msg = midimsg('NoteOn', 1, 60, 100);
+  ## msg = midimsg(midimsgtype.NoteOn, 1, 60, 100);
+  ## }
+  ## @end example
+  ##
+  ## @seealso{midimsg}
+  ## @end deftypefn
+
   # enumeration doesnt work yet in octave
   #enumeration
   #  Stop ("Stop")
