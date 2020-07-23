@@ -10,6 +10,8 @@ audio-2.0.1+   Release Date: TBD
 
  ** additional FXX type message file reading
 
+ ** added format specifier to midifileread
+
 
 ===============================================================================
 audio-2.0.1   Release Date: 2020-05-08

@@ -571,9 +571,9 @@ classdef midimsg
       if !isa(a, 'midimsg') || !isa(b, 'midimsg')
         error ("Cannot concatenate non midimsg elements");
       endif
-      for i=1:length (b.data)
-        a.data{end+1} = b.data{i};
-        a.timestamp{end+1} = b.timestamp{i};
+      for idx=1:length (b.data)
+        a.data{end+1} = b.data{idx};
+        a.timestamp{end+1} = b.timestamp{idx};
       endfor
     endfunction
 
@@ -793,8 +793,8 @@ classdef midimsg
               val = length(this.data{1});
 
               if length(this.data) > 1
-                for i = 2:length(this.data)
-                  val = [val length(this.data{i})];
+                for idx = 2:length(this.data)
+                  val = [val length(this.data{idx})];
                 endfor
               endif
             else
@@ -807,8 +807,8 @@ classdef midimsg
               if length(this.data) > 1
                 # we cant override cellstr yes, so just use strings for multiples
                 val = {char(val)}; 
-                for i = 2:length(this.data)
-                  val{end+1} = this.type_str(this.data{i});
+                for idx = 2:length(this.data)
+                  val{end+1} = this.type_str(this.data{idx});
                 endfor
               endif
             else
@@ -819,8 +819,8 @@ classdef midimsg
               data = this.data{1};
               val = bitand(data(1), 0x0F) + 1;
               if length(this.data) > 1
-                for i = 2:length(this.data)
-                  data = this.data{i};
+                for idx = 2:length(this.data)
+                  data = this.data{idx};
                   val = [val (bitand(data(1), 0x0F)+1)];
                 endfor
               endif
@@ -836,8 +836,8 @@ classdef midimsg
                 error ("note property only valid for noteon/off and polykeypressure");
               endif
               if length(this.data) > 1
-                for i = 2:length(this.data)
-                  data = this.data{i};
+                for idx = 2:length(this.data)
+                  data = this.data{idx};
                   cmd = bitand(data(1), 0xF0);
                   if cmd == 0x80 || cmd == 0x90 || cmd == 0xA0
                     val = [val data(2)];
@@ -858,8 +858,8 @@ classdef midimsg
                 error ("velocity property only valid for noteon/off");
               endif
               if length(this.data) > 1
-                for i = 2:length(this.data)
-                  data = this.data{i};
+                for idx = 2:length(this.data)
+                  data = this.data{idx};
                   cmd = bitand(data(1), 0xF0);
                   if cmd == 0x80 || cmd == 0x90
                     val = [val data(3)];
@@ -880,8 +880,8 @@ classdef midimsg
                 error ("keypressure property only valid for polykeypressure");
               endif
               if length(this.data) > 1
-                for i = 2:length(this.data)
-                  data = this.data{i};
+                for idx = 2:length(this.data)
+                  data = this.data{idx};
                   cmd = bitand(data(1), 0xF0);
                   if cmd == 0xA0
                     val = [val data(3)];
@@ -903,8 +903,8 @@ classdef midimsg
                 error ("channelpressure property only valid for channelpressure");
               endif
               if length(this.data) > 1
-                for i = 2:length(this.data)
-                  data = this.data{i};
+                for idx = 2:length(this.data)
+                  data = this.data{idx};
                   cmd = bitand(data(1), 0xF0);
                   if cmd == 0xD0
                     val = [val data(2)];
@@ -926,8 +926,8 @@ classdef midimsg
                 error ("localcontrol property only valid for localcontrol messages");
               endif
               if length(this.data) > 1
-                for i = 2:length(this.data)
-                  data = this.data{i};
+                for idx = 2:length(this.data)
+                  data = this.data{idx};
                   cmd = bitand(data(1), 0xF0);
                   if cmd == 0xB0 && data(2) == 122
                     val = [val data(3)];
@@ -948,8 +948,8 @@ classdef midimsg
                 error ("monochannels property only valid for monoon messages");
               endif
               if length(this.data) > 1
-                for i = 2:length(this.data)
-                  data = this.data{i};
+                for idx = 2:length(this.data)
+                  data = this.data{idx};
                   cmd = bitand(data(1), 0xF0);
                   if cmd == 0xB0 && data(2) == 126
                     val = [val data(3)];
@@ -970,8 +970,8 @@ classdef midimsg
                 error ("program property only valid for programchange messages");
               endif
               if length(this.data) > 1
-                for i = 2:length(this.data)
-                  data = this.data{i};
+                for idx = 2:length(this.data)
+                  data = this.data{idx};
                   cmd = bitand(data(1), 0xF0);
                   if cmd == 0xC0
                     val = [val data(2)];
@@ -992,8 +992,8 @@ classdef midimsg
                 error ("ccnumber property only valid for controlchange messages");
               endif
               if length(this.data) > 1
-                for i = 2:length(this.data)
-                  data = this.data{i};
+                for idx = 2:length(this.data)
+                  data = this.data{idx};
                   cmd = bitand(data(1), 0xF0);
                   if cmd == 0xB0 && data(2) <= 119
                     val = [val data(2)];
@@ -1014,8 +1014,8 @@ classdef midimsg
                 error ("ccvalue property only valid for controlchange messages");
               endif
               if length(this.data) > 1
-                for i = 2:length(this.data)
-                  data = this.data{i};
+                for idx = 2:length(this.data)
+                  data = this.data{idx};
                   cmd = bitand(data(1), 0xF0);
                   if cmd == 0xB0 && data(2) <= 119
                     val = [val data(3)];
@@ -1037,8 +1037,8 @@ classdef midimsg
                 error ("song property only valid for songselect messages");
               endif
               if length(this.data) > 1
-                for i = 2:length(this.data)
-                  data = this.data{i};
+                for idx = 2:length(this.data)
+                  data = this.data{idx};
                   cmd = data(1);
                   if cmd == 0xF3
                     val = [val data(2)];
@@ -1061,8 +1061,8 @@ classdef midimsg
                 error ("songpostion property only valid for songpositionpointer messages");
               endif
               if length(this.data) > 1
-                for i = 2:length(this.data)
-                  data = this.data{i};
+                for idx = 2:length(this.data)
+                  data = this.data{idx};
                   cmd = data(1);
                   if cmd == 0xF2
                     v = bitshift(int16(data(3)), 7) + int16(data(2));
@@ -1086,8 +1086,8 @@ classdef midimsg
                 error ("pitchchange property only valid for pitchbend messages");
               endif
               if length(this.data) > 1
-                for i = 2:length(this.data)
-                  data = this.data{i};
+                for idx = 2:length(this.data)
+                  data = this.data{idx};
                   cmd = bitand(data(1), 0xF0);
                   if cmd == 0xF2
                     v = bitshift(int16(data(3)), 7) + int16(data(2));
@@ -1111,8 +1111,8 @@ classdef midimsg
                 error ("timecodesequence property only valid for miditimecodequarterframe messages");
               endif
               if length(this.data) > 1
-                for i = 2:length(this.data)
-                  data = this.data{i};
+                for idx = 2:length(this.data)
+                  data = this.data{idx};
                   cmd = data(1);
                   if cmd == 0xF1
                     v = bitshift(data(2), -3);
@@ -1136,8 +1136,8 @@ classdef midimsg
                 error ("timecodevalue property only valid for miditimecodequarterframe messages");
               endif
               if length(this.data) > 1
-                for i = 2:length(this.data)
-                  data = this.data{i};
+                for idx = 2:length(this.data)
+                  data = this.data{idx};
                   cmd = data(1);
                   if cmd == 0xF1
                     v = bitand(data(2), 7);
@@ -1161,8 +1161,8 @@ classdef midimsg
                 error ("metatype property only valid for metaevent messages");
               endif
               if length(this.data) > 1
-                for i = 2:length(this.data)
-                  data = this.data{i};
+                for idx = 2:length(this.data)
+                  data = this.data{idx};
                   cmd = data(1);
                   if cmd == 0xFF &&  length(data) > 1
                     val = data(2);
@@ -1195,8 +1195,8 @@ classdef midimsg
                 error ("metadata property only valid for metaevent messages");
               endif
               if length(this.data) > 1
-                for i = 2:length(this.data)
-                  data = this.data{i};
+                for idx = 2:length(this.data)
+                  data = this.data{idx};
                   cmd = data(1);
                   len = length(data);
                   if cmd == 0xFF && len > 1
@@ -1238,9 +1238,9 @@ classdef midimsg
 
       s_idx = s_idx';
 
-      for i = 1:numel(s_idx)
-        msg.timestamp{end+1} = this.timestamp{s_idx(i)};
-        msg.data{end+1} = this.data{s_idx(i)};
+      for idx = 1:numel(s_idx)
+        msg.timestamp{end+1} = this.timestamp{s_idx(idx)};
+        msg.data{end+1} = this.data{s_idx(idx)};
       endfor
 
     endfunction
@@ -1251,8 +1251,8 @@ classdef midimsg
       else
         out = "";
       endif
-      for i=1:length(this.data)
-        data =  this.data{i};
+      for idx=1:length(this.data)
+        data =  this.data{idx};
         cmd = data(1);
         types = this.type_str(data); 
 
@@ -1305,7 +1305,7 @@ classdef midimsg
           msgtext = [msgtext sprintf(" MetaType: %d", metatype)];
         endif
 
-        msgtext = [msgtext sprintf(" Timestamp: %f", this.timestamp{i})];
+        msgtext = [msgtext sprintf(" Timestamp: %f", this.timestamp{idx})];
         msgtext = [msgtext sprintf(" [")];
         msgtext = [msgtext sprintf(" 0x%02X", data)];
         msgtext = [msgtext sprintf(" ]")];
