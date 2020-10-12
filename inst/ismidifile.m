@@ -54,7 +54,7 @@ function ismidi = ismidifile(filename)
       fclose (fd);
     end_unwind_protect
   catch
-    # no mothin
+    # do nothing
   end_try_catch
 
 endfunction
