@@ -12,6 +12,8 @@ audio-2.0.1+   Release Date: TBD
 
  ** added format specifier to midifileread
 
+ ** bugfix  ref count on midi_object unique_clone
+
 
 ===============================================================================
 audio-2.0.1   Release Date: 2020-05-08

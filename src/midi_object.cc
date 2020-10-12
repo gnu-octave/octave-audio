@@ -1,4 +1,4 @@
-// Copyright (C) 2019 John Donoghue <john.donoghue@ieee.org>
+// Copyright (C) 2019-2020 John Donoghue <john.donoghue@ieee.org>
 //
 // This program is free software; you can redistribute it and/or modify it under
 // the terms of the GNU General Public License as published by the Free Software
@@ -88,6 +88,7 @@ octave_midi::clone (void) const
 octave_base_value *
 octave_midi::unique_clone (void)
 {
+  count++;
   return this;
 }
 
