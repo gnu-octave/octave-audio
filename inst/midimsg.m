@@ -553,11 +553,10 @@ classdef midimsg
           if nargin > 3
             timestamp = this.check_timestamp(varargin{3});
           endif
-	  # TODO: could be a integer or char type for metatype
+          # TODO: could be a integer or char type for metatype
           event  = this.check_value127("metatype", varargin{1});
           data  = uint8(varargin{2});  # TODO: check validity of the data <= 127
-	  #p_makevariable = str2func("private/makevariable")
-	  datasize = __midimsg_makevariable__(length(data));
+          datasize = midimsg.makevariable(length(data));
           this.data{end+1} = uint8([0xFF event datasize data]);
           this.timestamp{end+1} = timestamp;
 
@@ -1500,12 +1499,35 @@ classdef midimsg
     endfunction
   endmethods
 
-endclassdef
+  methods (Static = true)
+    # octave 5 wont allow us to call private funcs from the class
+    # so a copy of private/makevariable is here
+    function data = makevariable (value)
+      t = uint64(value);
+      if t < 128
+        v = uint8(t);
+        data = [v];
+      else
+        tmp = dec2bin(t);
+        while mod(length(tmp), 7) != 0
+          tmp = [ "0" tmp ];
+        endwhile
+        data = [];
+        for i=1:7:length(tmp)
+          v = tmp(i:i+6);
+          v = uint8(bin2dec(v));
+          if i < length(tmp) -7
+            v = 128 + v;
+          endif
 
-# classes cant call private functions at the mometnt (Octave 5.2)
-function d = __midimsg_makevariable__(x)
-  d = makevariable(x);
-endfunction
+          data = [data v];
+        endfor
+      endif
+    endfunction
+
+  endmethods
+
+endclassdef
 
 %!fail midimsg('badtype')
 

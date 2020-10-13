@@ -175,7 +175,7 @@ function msg = midifileread(filename, varargin)
                   tempo = polyval(double(data), 256);
                 endif
                 if includemetaevents
-                  msg = [msg midimsg.createMessage(uint8([cmd ctype makevariable(ct) data]), abstime)];
+                  msg = [msg midimsg.createMessage(uint8([cmd ctype midimsg.makevariable(ct) data]), abstime)];
                 endif
               case {0xf1, 0xf3}
                 sz = 1;
