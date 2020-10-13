@@ -233,6 +233,14 @@ endfunction
 %! assert(msg(length(msg)).type == "NoteOn");
 %! assert(msg(length(msg)).timestamp, 7.9739583, 5e-7);
 
+%!test
+%! msg = midifileread(testname, 'includemetaevents', true);
+%! assert(length(msg), 77);
+%! assert(msg(1).type == "MetaEvent");
+%! assert(msg(1).timestamp, 0);
+%! assert(msg(length(msg)).type == "MetaEvent");
+%! assert(msg(length(msg)).timestamp, 7.975, 5e-7);
+
 %!fail midifileread(testname, "1name");
 
 %!fail midifileread();
