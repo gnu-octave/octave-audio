@@ -1,7 +1,7 @@
 Summary of important user-visible changes for releases of the audio package
 
 ===============================================================================
-audio-2.0.1+   Release Date: TBD
+audio-2.0.2   Release Date: 2020-10-13
 ===============================================================================
 
  ** added 'other' field to midifileinfo structure
@@ -14,6 +14,7 @@ audio-2.0.1+   Release Date: TBD
 
  ** bugfix  ref count on midi_object unique_clone
 
+ ** minor documentation updates
 
 ===============================================================================
 audio-2.0.1   Release Date: 2020-05-08
