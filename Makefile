@@ -239,9 +239,8 @@ run: $(install_stamp)
 ##  https://octave.sourceforge.io/doctest/index.html
 doctest: $(install_stamp)
 	$(run_in_place) --eval 'pkg load doctest;'                                                          \
-	  --eval "targets = '$(shell (ls inst; ls src | $(GREP) .oct) | $(CUT) -f2 -d@ | $(CUT) -f1 -d.)';" \
-	  --eval "targets = strsplit (targets, ' ');  doctest (targets);"
-
+	  --eval "targets = pkg('list', '$(package)'){1}.dir;" \
+	  --eval "doctest (targets);"
 
 ## Test package.
 octave_test_commands = \

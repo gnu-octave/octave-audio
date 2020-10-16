@@ -28,6 +28,18 @@
 #include "midi_object.h"
 #include "midi.h"
 
+// PKG_ADD: autoload ("__midi__", "__midi__.oct");
+DEFUN_DLD (__midi__, args, nargout,
+"-*- texinfo -*-\n\
+@deftypefn {Package} {@var{dev} = }  __midi__()\n \
+private stub for octave midi\n \
+\n \
+@seealso{audio}\n \
+@end deftypefn")
+{
+  return octave_value ();
+}
+
 // PKG_ADD: autoload ("__mididevice__", "__midi__.oct");
 DEFUN_DLD (__mididevice__, args, nargout,
 "-*- texinfo -*-\n\
