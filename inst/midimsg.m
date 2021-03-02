@@ -566,13 +566,21 @@ classdef midimsg
        
     endfunction
 
-    function a = horzcat (a, b)
-      if !isa(a, 'midimsg') || !isa(b, 'midimsg')
+    function a = horzcat (a, varargin)
+      
+      if !isa(a, 'midimsg')
         error ("Cannot concatenate non midimsg elements");
       endif
-      for idx=1:length (b.data)
-        a.data{end+1} = b.data{idx};
-        a.timestamp{end+1} = b.timestamp{idx};
+
+      for i = 1:nargin-1
+        b = varargin{i};
+        if !isa(b, 'midimsg')
+          error ("Cannot concatenate non midimsg elements");
+        endif
+        for idx=1:length (b.data)
+          a.data{end+1} = b.data{idx};
+          a.timestamp{end+1} = b.timestamp{idx};
+        endfor
       endfor
     endfunction
 
