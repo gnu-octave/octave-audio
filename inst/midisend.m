@@ -90,7 +90,11 @@ function midisend (dev, varargin)
      pause(delta);
 
      data = msg_data{i};
-     __midisend__(dev, ts, data);
+
+     # if we have metaevents, dont send them length would be FF type encodedsize data
+     if length(data) < 3 || data(1) != 0xff
+       __midisend__(dev, ts, data);
+     endif
 
      timestamp = timestamp + delta;
   endfor
