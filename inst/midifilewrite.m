@@ -134,6 +134,7 @@ function midifilewrite(varargin)
       writeheader (fd, hdr);
 
       lasttime = 0;
+      la = [];
       for idx=1:length(msg)
         a = msg(idx);
         if a.timestamp >= lasttime
@@ -143,9 +144,19 @@ function midifilewrite(varargin)
         endif
         lasttime = lasttime + ts;
         ts = (ts*1e6)/(tempo/ticks_per_qtr);
-        setvariable (fd, ts);
-        fwrite (fd, a.msgbytes);
 
+        if !isempty(la) && la.msgbytes(1) == 0xF0
+          # sysex msg previously started
+          sz = length(a.msgbytes) + 1;
+          setvariable (fd, sz);
+          fwrite (fd, a.msgbytes);
+          fwrite (fd, uint8([0xF7]));
+        elseif !isempty(a) && a.msgbytes(1) != 0xF7
+          setvariable (fd, ts);
+          fwrite (fd, a.msgbytes);
+        endif
+	la = a;
+ 
         # TODO: if come across any tempo message, set tempo to it
       endfor
 
@@ -173,6 +184,7 @@ function midifilewrite(varargin)
 
         lasttime = 0;
         m = msg{t};
+	la = [];
         for idx=1:length(m)
           a = m(idx);
           if a.timestamp >= lasttime
@@ -182,8 +194,17 @@ function midifilewrite(varargin)
           endif
           lasttime = lasttime + ts;
           ts = (ts*1e6)/(tempo/ticks_per_qtr);
-          setvariable (fd, ts);
-          fwrite (fd, a.msgbytes);
+          if !isempty(la) && la.msgbytes(1) == 0xF0
+            # sysex msg previously started
+            sz = length(a.msgbytes) + 1;
+            setvariable (fd, sz);
+            fwrite (fd, a.msgbytes);
+            fwrite (fd, uint8([0xF7]));
+          elseif !isempty(a) && a.msgbytes(1) != 0xF7
+            setvariable (fd, ts);
+            fwrite (fd, a.msgbytes);
+          endif
+	  la = a;
         endfor
 
         # write eot and fix the header

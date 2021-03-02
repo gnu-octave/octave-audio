@@ -189,8 +189,11 @@ function msg = midifileread(filename, varargin)
                 msg = [msg midimsg.createMessage(uint8([cmd]), abstime)];
               case {0xf0}
                 ct = getvariable (fd);
-                data = fread (fd, [1 ct], "uint8");
-                msg = [msg midimsg.createMessage(uint8([cmd data]), abstime)];
+                data = fread (fd, [1 (ct-1)], "uint8");
+                eox = fread (fd, [1 1], "uint8");
+                msg = [msg midimsg.createMessage(uint8([cmd]), abstime) ...
+			   midimsg.createMessage(uint8([data]), abstime) ...
+			   midimsg.createMessage(uint8([eox]), abstime)];
               case { 0x80,  0x90, 0xA0, 0xB0, 0xE0}
                 sz = 2;
                 data = fread (fd, [1 sz], "uint8");
