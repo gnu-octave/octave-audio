@@ -1,4 +1,4 @@
-## Copyright (C) 2019-2020 John Donoghue <john.donoghue@ieee.org>
+## Copyright (C) 2019-2021 John Donoghue <john.donoghue@ieee.org>
 ## 
 ## This program is free software: you can redistribute it and/or modify it
 ## under the terms of the GNU General Public License as published by
@@ -75,29 +75,29 @@ classdef midicontrols < handle
 
       if nargin > 0
         controls = varargin{1};
-	if !isnumeric(controls)
+        if !isnumeric(controls)
           error ("Expected numeric controls ids");
         endif
         if isscalar(controls)
-	  this.controls = [controls];
+          this.controls = [controls];
         else
-	  this.controls = controls;
+          this.controls = controls;
         endif
       endif
 
       if nargin > 1
         if ischar (varargin{2})
-	  propstart = 2;
-	  initvals = [0];
-	else
-	  propstart = 3;
+          propstart = 2;
+          initvals = [0];
+        else
+          propstart = 3;
           initvals = varargin{2};
 
           if !isnumeric (initvals)
             error ("Expected numeric initial values");
           endif
           if isscalar (initvals)
-   	    initvals = [initvals];
+            initvals = [initvals];
           endif
         endif
 
@@ -112,24 +112,24 @@ classdef midicontrols < handle
           propname = tolower (varargin{i});
           propvalue = varargin{i+1};
 
-	  if strcmp (propname, "outputmode")
+          if strcmp (propname, "outputmode")
             if !ischar (propvalue)
               error ("output mode should be 'normalized' or 'rawmidi'")
-	    elseif strcmpi (propvalue, "normalized")
+            elseif strcmpi (propvalue, "normalized")
               this.outscale = 1;
-	    elseif strcmpi (propvalue, "rawmidi")
+            elseif strcmpi (propvalue, "rawmidi")
               this.outscale = 127;
-	    else
+            else
               error ("output mode should be 'normalized' or 'rawmidi'")
-	    endif
-	  elseif strcmp (propname, "mididevice")
+            endif
+          elseif strcmp (propname, "mididevice")
             devicename = propvalue;
           else
             error ("unknown property '%s'", propname)
-	  endif
+          endif
         endfor
 
-	this.initialvalue = initvals/this.outscale;
+        this.initialvalue = initvals/this.outscale;
       endif
 
       if length (this.controls) > 0
@@ -154,25 +154,25 @@ classdef midicontrols < handle
       else
         if isscalar(values)
           values = [values];
-	endif
-	values = values/this.outscale;
+        endif
+        values = values/this.outscale;
       endif
 
       if isempty(this.controls)
         warning ('Can not send control values when no specific controller ids were provided.')
-	val = this.get_value(1, values);
-	this.currentvalue(1) = val;
+        val = this.get_value(1, values);
+        this.currentvalue(1) = val;
       else
         for i =1:length(this.controls)
-	  ctrl = this.controls(i);
+          ctrl = this.controls(i);
           ch = int32(ctrl/1000);
-	  id = mod(ctrl, 1000);
+          id = mod(ctrl, 1000);
 
-	  val = this.get_value(i, values);
-	  this.currentvalue(i) = val;
+          val = this.get_value(i, values);
+          this.currentvalue(i) = val;
 
-	  midisend(this.device, midimsg("controlchange", ch, id, val*this.midiscale));
-	endfor
+          midisend(this.device, midimsg("controlchange", ch, id, val*this.midiscale));
+        endfor
       endif
 
     endfunction
@@ -182,18 +182,18 @@ classdef midicontrols < handle
       while !isempty(mx)
         for j = 1:length(mx)
           m = mx(j);
-	  if strcmp(m.type, "ControlChange")
+          if strcmp(m.type, "ControlChange")
             if isempty(this.controls)
               idx = 1;
             else
-	      ctrlid = m.channel*1000 + double(m.msgbytes(2));
-	      idx = find(this.controls==ctrlid, 1);
+              ctrlid = m.channel*1000 + double(m.msgbytes(2));
+              idx = find(this.controls==ctrlid, 1);
             endif
-	    if !isempty(idx)
+            if !isempty(idx)
               val = double(m.msgbytes(3))/this.midiscale;
-	      this.currentvalue(idx) = val;
-	    endif
-	  endif
+              this.currentvalue(idx) = val;
+            endif
+          endif
         endfor
         mx = midireceive(this.device);
       endwhile
@@ -231,7 +231,7 @@ classdef midicontrols < handle
         endif
       else
         if nargout == 0
-	  disp (["    controls " sprintf("%d ", this.controls)]);
+          disp (["    controls " sprintf("%d ", this.controls)]);
         else
           out = [out "  controls " sprintf("%d ", this.controls) "\n"];
         endif

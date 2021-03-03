@@ -1,4 +1,4 @@
-## Copyright (C) 2019 John Donoghue <john.donoghue@ieee.org>
+## Copyright (C) 2019-2021 John Donoghue <john.donoghue@ieee.org>
 ## 
 ## This program is free software: you can redistribute it and/or modify it
 ## under the terms of the GNU General Public License as published by
@@ -71,10 +71,10 @@ function [ctrlid, devname] = midiid ()
         mx = midireceive(devices{i}.device);
         for j = 1:length(mx)
           m = mx(j);
-	  if strcmp(m.type, "ControlChange")
-	    ctrlid = m.channel*1000 + double(m.msgbytes(2));
-	    devname = devices{i}.Name;
-	  endif
+          if strcmp(m.type, "ControlChange")
+            ctrlid = m.channel*1000 + double(m.msgbytes(2));
+            devname = devices{i}.Name;
+          endif
         endfor
       endfor
       pause (0.1)

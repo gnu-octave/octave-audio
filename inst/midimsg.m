@@ -1,4 +1,4 @@
-## Copyright (C) 2019-2020 John Donoghue <john.donoghue@ieee.org>
+## Copyright (C) 2019-2021 John Donoghue <john.donoghue@ieee.org>
 ## 
 ## This program is free software: you can redistribute it and/or modify it
 ## under the terms of the GNU General Public License as published by
@@ -197,7 +197,7 @@ classdef midimsg
           note = this.check_value127("note", varargin{2});
           vel = this.check_value127("velocity", varargin{3});
           dur = varargin{4};
-	  if !isscalar(dur) || !isnumeric(dur) || dur < 0
+          if !isscalar(dur) || !isnumeric(dur) || dur < 0
             error ('note expects at least duration to be a number >= 0')
           endif
           timestamp = 0;
@@ -713,7 +713,7 @@ classdef midimsg
               if cmd != 0xF1
                 error ("timecodesequence property only valid for miditimecodequaterframe messages");
               endif
-	  
+  
               seq = bitshift(data(2), -3);
               val = bitand(data(2), 7);
 
@@ -729,7 +729,7 @@ classdef midimsg
               if cmd != 0xF1
                 error ("value property only valid for miditimecodequaterframe messages");
               endif
-	  
+  
               seq = bitshift(data(2), -3);
               val = bitand(data(2), 7);
 
@@ -742,14 +742,14 @@ classdef midimsg
 
             otherwise
               error("unimplemented midimsg.subsasgn property '%s'", s(1).subs);
-	  endswitch
+          endswitch
 
         case "()"
           idx = s(1).subs;
           if (numel (idx) != 1)
             error ("@midimsg/subsasgn: needs exactly one index");
           endif
-          if numel (s) == 1		
+          if numel (s) == 1
             # assign a value to here - so verify is a midimsg
             if !isa(rhs, "midimsg")
               error ("midimsg.subsasgn rhs of indexed value must be a midimsg");
@@ -760,7 +760,7 @@ classdef midimsg
             val = midimsg.createMessage(this.data{idx{1}}, this.timestamp{idx{1}});
             val = subsasgn (val, s(2:end), rhs);
           endif
-	  # store the modded data back in our object
+          # store the modded data back in our object
           this.data{idx{1}} = val.data{1};
           this.timestamp{idx{1}} = val.timestamp{1};
  
@@ -1187,7 +1187,7 @@ classdef midimsg
             if length(this.data) > 0
               data = this.data{1};
               cmd = data(1);
-	      len = length(data);
+              len = length(data);
               if cmd == 0xFF && len > 1
                 if len < 128
                   val = data(4:len);
@@ -1316,7 +1316,7 @@ classdef midimsg
         msgtext = [msgtext sprintf(" [")];
         msgtext = [msgtext sprintf(" 0x%02X", data)];
         msgtext = [msgtext sprintf(" ]")];
-	if nargout == 0
+        if nargout == 0
           disp(["   "  msgtext]);
         else
           out = [out msgtext "\n"];
@@ -1480,9 +1480,9 @@ classdef midimsg
        otherwise
          if length(data) < 1
            v = midimsgtype.Undefined;
-	 else
+         else
            v = midimsgtype.Data;
-	 endif
+         endif
       endswitch
       
     endfunction

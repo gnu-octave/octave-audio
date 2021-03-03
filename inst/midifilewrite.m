@@ -1,4 +1,4 @@
-## Copyright (C) 2019 John Donoghue <john.donoghue@ieee.org>
+## Copyright (C) 2019-2021 John Donoghue <john.donoghue@ieee.org>
 ## 
 ## This program is free software: you can redistribute it and/or modify it
 ## under the terms of the GNU General Public License as published by
@@ -155,7 +155,7 @@ function midifilewrite(varargin)
           setvariable (fd, ts);
           fwrite (fd, a.msgbytes);
         endif
-	la = a;
+        la = a;
  
         # TODO: if come across any tempo message, set tempo to it
       endfor
@@ -184,7 +184,7 @@ function midifilewrite(varargin)
 
         lasttime = 0;
         m = msg{t};
-	la = [];
+        la = [];
         for idx=1:length(m)
           a = m(idx);
           if a.timestamp >= lasttime
@@ -204,7 +204,7 @@ function midifilewrite(varargin)
             setvariable (fd, ts);
             fwrite (fd, a.msgbytes);
           endif
-	  la = a;
+          la = a;
         endfor
 
         # write eot and fix the header

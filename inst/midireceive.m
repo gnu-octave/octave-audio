@@ -53,7 +53,7 @@ function msg = midireceive (dev, maxmsg)
   if nargin < 2
     maxmsg = 0;
   endif
-	
+
   msg = midimsg (0);
 
   [ts, data] = __midirecv__(dev);

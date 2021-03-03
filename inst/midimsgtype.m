@@ -1,4 +1,4 @@
-## Copyright (C) 2020 John Donoghue <john.donoghue@ieee.org>
+## Copyright (C) 2020-2021 John Donoghue <john.donoghue@ieee.org>
 ## 
 ## This program is free software: you can redistribute it and/or modify it
 ## under the terms of the GNU General Public License as published by
@@ -85,8 +85,8 @@ classdef midimsgtype
       results = 0;
       for idx = 1:length(cmpvals)
         if this == cmpvals{idx}
-	  results = 1;
-	endif
+          results = 1;
+        endif
       endfor
     endfunction
 
@@ -161,10 +161,10 @@ classdef midimsgtype
       persistent lst = {};
       if isempty(lst)
         #classinfo = metaclass(this)
-	classinfo = meta.class.fromName('midimsgtype');
+        classinfo = meta.class.fromName('midimsgtype');
         for i = 1:length(classinfo.MethodList)
           x = classinfo.MethodList{i};
-	  # assuming captital letter static funcs are the enum values
+          # assuming captital letter static funcs are the enum values
           if x.Static && !x.Hidden && x.Name(1) <= 'Z'
             lst{end+1} = x.Name;
           endif
@@ -178,8 +178,8 @@ classdef midimsgtype
       if isempty(lst)
         names = midimsgtype.enum_names();
         for i = 1:length(names)
-	  lst{end+1} = eval(sprintf("midimsgtype.%s;", names{i}));
-	endfor
+          lst{end+1} = eval(sprintf("midimsgtype.%s;", names{i}));
+        endfor
       endif
       outlst = lst;
     endfunction

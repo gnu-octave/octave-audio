@@ -1,4 +1,4 @@
-## Copyright (C) 2019 John Donoghue <john.donoghue@ieee.org>
+## Copyright (C) 2019-2021 John Donoghue <john.donoghue@ieee.org>
 ## 
 ## This program is free software: you can redistribute it and/or modify it
 ## under the terms of the GNU General Public License as published by
@@ -90,9 +90,9 @@ function out = mididevinfo ()
       val.Interface = data(i).Interface;
       val.ID = data(i).ID;
       if strcmp (data(i).Direction, "input")
-	out.input{end+1} = val;
+        out.input{end+1} = val;
       else
-	out.output{end+1} = val;
+        out.output{end+1} = val;
       endif
     endfor
   # no output - just display the devices

@@ -1,4 +1,4 @@
-## Copyright (C) 2019 John Donoghue <john.donoghue@ieee.org>
+## Copyright (C) 2019-2021 John Donoghue <john.donoghue@ieee.org>
 ## 
 ## This program is free software: you can redistribute it and/or modify it
 ## under the terms of the GNU General Public License as published by
@@ -93,21 +93,22 @@ function msg = midifileread(filename, varargin)
           frames = fread (fd, 1, "uint8");
           ticks = fread (fd, 1, "uint8");
 
-	  if frames > 127
-	    tick_resolution = double(256-frames) * ticks;
-	  else
-	    ticks_per_qtr = polyval(double([frames ticks]), 256);
-	  endif
+          if frames > 127
+            tick_resolution = double(256-frames) * ticks;
+          else
+            ticks_per_qtr = polyval(double([frames ticks]), 256);
+          endif
         endif
         if strcmp (blockhdr.blocktype, "MTrk")
           if format == 1
             abstime = 0;
-	  endif
-          cmd = 0;
-	  while ftell (fd) < nextpos
-	    t = getvariable(fd);
+          endif
 
-	    if frames > 127
+          cmd = 0;
+          while ftell (fd) < nextpos
+            t = getvariable(fd);
+
+            if frames > 127
               t = t / tick_resolution;
             else
               t = t * (tempo/ticks_per_qtr)/1e6;
@@ -116,18 +117,18 @@ function msg = midifileread(filename, varargin)
             abstime = abstime + t;
 
             tcmd  = fread (fd,1, "uint8");
-	    if tcmd >= 0x80
-	      cmd = tcmd;
-	    else
-	      # repeat same command, so with is a data byte
-	      fseek (fd,-1,'cof');
-	    endif
-
-	    if cmd >= 0xf0
-	      subcmd = cmd;
+            if tcmd >= 0x80
+              cmd = tcmd;
             else
-	      subcmd = bitand (cmd, 0xF0);
-	    endif
+              # repeat same command, so with is a data byte
+              fseek (fd,-1,'cof');
+            endif
+
+            if cmd >= 0xf0
+              subcmd = cmd;
+            else
+              subcmd = bitand (cmd, 0xF0);
+            endif
 
             switch subcmd
               # TODO: convert to midi messages
@@ -192,8 +193,8 @@ function msg = midifileread(filename, varargin)
                 data = fread (fd, [1 (ct-1)], "uint8");
                 eox = fread (fd, [1 1], "uint8");
                 msg = [msg midimsg.createMessage(uint8([cmd]), abstime) ...
-			   midimsg.createMessage(uint8([data]), abstime) ...
-			   midimsg.createMessage(uint8([eox]), abstime)];
+                       midimsg.createMessage(uint8([data]), abstime) ...
+                       midimsg.createMessage(uint8([eox]), abstime)];
               case { 0x80,  0x90, 0xA0, 0xB0, 0xE0}
                 sz = 2;
                 data = fread (fd, [1 sz], "uint8");

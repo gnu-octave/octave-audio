@@ -1,4 +1,4 @@
-## Copyright (C) 2019 John Donoghue <john.donoghue@ieee.org>
+## Copyright (C) 2019-2021 John Donoghue <john.donoghue@ieee.org>
 ## 
 ## This program is free software: you can redistribute it and/or modify it
 ## under the terms of the GNU General Public License as published by
@@ -66,41 +66,41 @@ function mi = midifileinfo(filename)
           frames = fread (fd, 1, "uint8");
           ticks = fread (fd, 1, "uint8");
 
-	  if frames > 127
-	    hdr.tick_resolution = double(256-frames) * ticks;
-	  else
-	    hdr.ticks_per_qtr = polyval(double([frames ticks]), 256);
-	  endif
+          if frames > 127
+            hdr.tick_resolution = double(256-frames) * ticks;
+          else
+            hdr.ticks_per_qtr = polyval(double([frames ticks]), 256);
+          endif
 
-	  hdr.ticks = ticks;
-	  hdr.frames = frames;
+          hdr.ticks = ticks;
+          hdr.frames = frames;
 
-	  mi.header = hdr;
+          mi.header = hdr;
 
         elseif strcmp (blockhdr.blocktype, "MTrk")
           cmd = 0;
-	  track = {};
-	  track.number = length (mi.track) + 1;
-	  track.blockindex = blockidx;
-	  track.blocksize = blockhdr.blocksize;
-	  track.blockstart = ftell(fd); 
+          track = {};
+          track.number = length (mi.track) + 1;
+          track.blockindex = blockidx;
+          track.blocksize = blockhdr.blocksize;
+          track.blockstart = ftell(fd); 
 
-	  while ftell (fd) < nextpos
-	    t = getvariable(fd);
+          while ftell (fd) < nextpos
+            t = getvariable(fd);
 
             tcmd  = fread (fd,1, "uint8");
-	    if tcmd >= 0x80
-	      cmd = tcmd;
-	    else
-	      # repeat same command, so with is a data byte
-	      fseek (fd,-1,'cof');
-	    endif
-
-	    if cmd >= 0xf0
-	      subcmd = cmd;
+            if tcmd >= 0x80
+              cmd = tcmd;
             else
-	      subcmd = bitand (cmd, 0xF0);
-	    endif
+              # repeat same command, so with is a data byte
+              fseek (fd,-1,'cof');
+            endif
+
+            if cmd >= 0xf0
+              subcmd = cmd;
+            else
+              subcmd = bitand (cmd, 0xF0);
+            endif
 
             switch subcmd
               case 0xff
@@ -149,7 +149,7 @@ function mi = midifileinfo(filename)
           endwhile
 
           mi.track{end+1} = track;
-	else
+        else
           track = {};
           track.blockindex = blockidx;
           track.blocksize = blockhdr.blocksize;
@@ -158,7 +158,7 @@ function mi = midifileinfo(filename)
           mi.other{end+1} = track;
         endif
 
-	blockidx = blockidx + 1;
+        blockidx = blockidx + 1;
 
         fseek (fd, nextpos, 'bof');
       endif
