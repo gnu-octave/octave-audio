@@ -133,10 +133,14 @@ function midifilewrite(varargin)
       hdr.blocktype = "MTrk";
       writeheader (fd, hdr);
 
-      lasttime = 0;
+      lasttime = [];
       la = [];
       for idx=1:length(msg)
         a = msg(idx);
+        # on first time, set lasttime
+        if isempty(lasttime)
+          lasttime = a.timestamp;
+        endif
         if a.timestamp >= lasttime
           ts = (a.timestamp - lasttime);
         else
@@ -182,11 +186,17 @@ function midifilewrite(varargin)
         hdr.blocktype = "MTrk";
         writeheader (fd, hdr);
 
-        lasttime = 0;
+        lasttime = [];
         m = msg{t};
         la = [];
         for idx=1:length(m)
           a = m(idx);
+
+          # on first time, set lasttime
+          if isempty(lasttime)
+            lasttime = a.timestamp;
+          endif
+
           if a.timestamp >= lasttime
             ts = (a.timestamp - lasttime);
           else
