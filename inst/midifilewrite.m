@@ -158,10 +158,15 @@ function midifilewrite(varargin)
         elseif !isempty(a) && a.msgbytes(1) != 0xF7
           setvariable (fd, ts);
           fwrite (fd, a.msgbytes);
+
+          # tempo meta event
+          if a.msgbytes(1) == 0xFF && a.msgbytes(2) == 0x51
+            # FF 51 3 TT TT TT
+            tempo = polyval(double(a.msgbytes(4:end)), 256);
+          endif
         endif
         la = a;
  
-        # TODO: if come across any tempo message, set tempo to it
       endfor
 
       # write eot and fix the header
