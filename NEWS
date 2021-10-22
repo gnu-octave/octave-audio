@@ -1,8 +1,9 @@
 Summary of important user-visible changes for releases of the audio package
 
 ===============================================================================
-audio-2.0.3   Release Date: TBD
+audio-2.0.3   Release Date: 2021-10-22
 ===============================================================================
+
   ** midifilewrite: updates for time processing
 
   ** midifileread: updates reading sysex messages
