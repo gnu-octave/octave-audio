@@ -291,8 +291,8 @@ classdef midimsg
           # pitch is 0 .. 16383 where 8120 is no change
           # pitch = uint16(varargin{2} + 0x2000);
           pitch = uint16(this.check_value16383("pitchchange", varargin{2}));
-          pitchlo = bitand(pitch, 0x7F);
-          pitchhi = bitand(bitshift(pitch, -7), 0x7f);
+          pitchlo = bitand(pitch, uint16(0x7F));
+          pitchhi = bitand(bitshift(pitch, -7), uint16(0x7f));
           timestamp = 0;
           if nargin > 3
             timestamp = this.check_timestamp(varargin{3});
@@ -410,8 +410,8 @@ classdef midimsg
           endif
           timestamp = 0;
           songpos = uint16(this.check_value16383("songposiition", varargin{1}));
-          songlo = bitand(songpos, 0x7F);
-          songhi = bitand(bitshift(songpos, -7), 0x7f);
+          songlo = bitand(songpos, uint16(0x7F));
+          songhi = bitand(bitshift(songpos, -7), uint16(0x7f));
           if nargin > 2
             timestamp = this.check_timestamp(varargin{2});
           endif
@@ -683,8 +683,8 @@ classdef midimsg
               endif
 
               songpos = uint16(this.check_value16383("songposition", rhs));
-              songlo = bitand(songpos, 0x7F);
-              songhi = bitand(bitshift(songpos, -7), 0x7f);
+              songlo = bitand(songpos, uint16(0x7F));
+              songhi = bitand(bitshift(songpos, -7), uint16(0x7f));
 
               data(2) = songlo;
               data(3) = songhi;
@@ -699,8 +699,8 @@ classdef midimsg
               endif
 
               pitchchange = uint16(this.check_value16383("pitchchange", rhs));
-              pitchlo = bitand(pitchchange, 0x7F);
-              pitchhi = bitand(bitshift(pitchchange, -7), 0x7f);
+              pitchlo = bitand(pitchchange, uint16(0x7F));
+              pitchhi = bitand(bitshift(pitchchange, -7), uint16(0x7f));
 
               data(2) = pitchlo;
               data(3) = pitchhi;

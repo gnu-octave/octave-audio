@@ -23,7 +23,7 @@ function t = getvariable (fd)
   t = uint64(0);
   while !feof(fd)
     b = fread(fd, 1, "uint8");
-    t = bitshift(t, 7) + bitand(b, 0x7f);
+    t = bitshift(t, 7) + bitand(b, uint64(0x7f));
     if b < 128
       break;
     endif
