@@ -19,6 +19,10 @@
 // Octave Includes
 #include <octave/oct.h>
 
+#ifdef HAVE_CONFIG_H
+#  include "config.h"
+#endif
+
 #include <string>
 #include <iostream>
 #include <errno.h>
@@ -27,7 +31,7 @@
 
 void init_types(void);
 
-class octave_midi : public octave_base_value
+class octave_midi : public OCTAVE_BASE_CLASS
 {
 public:
   octave_midi();

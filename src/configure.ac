@@ -111,6 +111,15 @@ OF_OCTAVE_LIST_ALT_SYMS([
   [OV_ISCELL],
   [],
   []
+],
+
+[dnl
+  [octave_base_value],
+  [octave_base_dld_value],
+  [[octave_base_dld_value tmp();]],
+  [OCTAVE_BASE_CLASS],
+  [],
+  []
 ]
 
 ],[oct-alt-includes.h])
