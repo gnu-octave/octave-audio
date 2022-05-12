@@ -192,18 +192,14 @@ stat_midi (midi_device *dev)
       try 
         {
           std::vector<unsigned char> message;
-          double stamp; 
 
           if (dev->tmessage.size())
             {
-              stamp = dev->tstamp;
               message = dev->tmessage;
-
-              dev->tmessage = std::vector<unsigned char>();
             }
           else
             {
-              stamp = dev->in->getMessage (&message);
+              double stamp = dev->in->getMessage (&message);
               dev->tstamp = stamp;
               dev->tmessage = message;
             }
