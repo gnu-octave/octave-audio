@@ -5,6 +5,7 @@ MIDI Device Interface
   midimsg
   midireceive
   midisend
+  @octave_midi/hasdata
 MIDI Controller Interface
   midiid
   midicontrols

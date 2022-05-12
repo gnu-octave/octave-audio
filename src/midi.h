@@ -72,5 +72,7 @@ bool send_midi(midi_device * dev, const unsigned char *data, size_t sz);
 
 int recv_midi(midi_device * dev, double *ts, unsigned char *data, size_t sz);
 
+int stat_midi(midi_device * dev);
+
 #endif
 

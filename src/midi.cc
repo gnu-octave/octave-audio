@@ -53,10 +53,15 @@ public:
   midi_device_info in_info;
   midi_device_info out_info;
 
+  std::vector<unsigned char> tmessage;
+  double tstamp;
+
   midi_device ()
   {
     in = 0;
     out = 0;
+
+    tstamp = 0;
 
     out = new RtMidiOut();
     in = new RtMidiIn();
@@ -142,26 +147,76 @@ int
 recv_midi (midi_device *dev, double *ts, unsigned char *data, size_t sz)
 {
   if (dev && dev->in)
-  {
-    try 
-      {
-        std::vector<unsigned char> message;
-        double stamp = dev->in->getMessage (&message);
-        if (message.size() > 0)
-          {
-            for (size_t i=0;i<message.size() && i<sz; i++)
-              data[i] = message[i];
+    {
+      try 
+        {
+          std::vector<unsigned char> message;
+          double stamp; 
 
-            *ts = stamp;
-            return (int)message.size();
+          if (dev->tmessage.size())
+            {
+              stamp = dev->tstamp;
+              message = dev->tmessage;
+
+              // clear it
+              dev->tmessage = std::vector<unsigned char>();
           }
-      }
-    catch(const RtMidiError &err)
-      {
-        error ("Error reading midi: '%s'", err.getMessage ().c_str ());
-        return -1;
-      }
-  }
+          else
+            {
+              stamp = dev->in->getMessage (&message);
+            }
+
+          if (message.size() > 0)
+            {
+              for (size_t i=0;i<message.size() && i<sz; i++)
+                data[i] = message[i];
+
+              *ts = stamp;
+              return (int)message.size();
+            }
+        }
+      catch(const RtMidiError &err)
+        {
+          error ("Error reading midi: '%s'", err.getMessage ().c_str ());
+          return -1;
+        }
+    }
+  return 0;
+}
+
+int
+stat_midi (midi_device *dev)
+{
+  if (dev && dev->in)
+    {
+      try 
+        {
+          std::vector<unsigned char> message;
+          double stamp; 
+
+          if (dev->tmessage.size())
+            {
+              stamp = dev->tstamp;
+              message = dev->tmessage;
+
+              dev->tmessage = std::vector<unsigned char>();
+            }
+          else
+            {
+              stamp = dev->in->getMessage (&message);
+              dev->tstamp = stamp;
+              dev->tmessage = message;
+            }
+ 
+          if (message.size() > 0)
+              return 1;
+        }
+      catch(const RtMidiError &err)
+        {
+          error ("Error reading midi: '%s'", err.getMessage ().c_str ());
+          return -1;
+        }
+    }
   return 0;
 }
 

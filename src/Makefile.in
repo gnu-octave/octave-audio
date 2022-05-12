@@ -3,7 +3,7 @@ CXXFLAGS  := @CXXFLAGS@ @DEFS@
 LIBS      := @LIBS@
 LDFLAGS   := @LDFLAGS@
 
-SRC := mididevinfo.cc mididevice.cc midi.cc midi_object.cc midisend.cc midirecv.cc pkglock.cc
+SRC := mididevinfo.cc mididevice.cc midi.cc midi_object.cc midisend.cc midirecv.cc midistat.cc pkglock.cc
 
 OBJ := $(SRC:.cc=.o)
 

@@ -40,6 +40,8 @@ public:
   bool create(const std::string &inname, const std::string &outname);
   bool send(const unsigned char *data, int sz);
   int recv(double *ts, unsigned char *data, int sz);
+  int stat();
+
   void close();
   /**
    * Various properties of the octave_base_value datatype.

@@ -67,6 +67,12 @@ octave_midi::recv (double *ts, unsigned char * data, int sz)
   return recv_midi (dev, ts, data, sz);
 }
 
+int
+octave_midi::stat ()
+{
+  return stat_midi (dev);
+}
+
 void
 octave_midi::close ()
 {
