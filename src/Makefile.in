@@ -25,4 +25,6 @@ clean:
 
 distclean: clean
 	rm -rf autom4te.cache
-	rm -f Makefile config.status config.log config.h configure
+	rm -r oct-alt-includes.h
+	rm -f config.status config.log config.h
+	rm -f Makefile
