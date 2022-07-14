@@ -150,7 +150,7 @@ classdef midicontrols < handle
 
     function delete (this)
       try
-        this.callback("")
+        this.callback("");
       catch
         # do nothing
       end_try_catch
@@ -264,3 +264,7 @@ classdef midicontrols < handle
     endfunction
   endmethods
 endclassdef
+
+%!test
+%! a = midicontrols();
+%! assert(isa(a, "midicontrols"));

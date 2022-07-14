@@ -68,7 +68,7 @@
 ## @end deftypefn
 function ret = midicallback (ctrlobj, varargin)
   if nargin < 1 || !isa (ctrlobj, "midicontrols")
-    error ("Expected midi controls object");
+    error ("Expected midicontrols object");
   endif
 
   if nargin > 1
@@ -93,3 +93,17 @@ function ret = midicallback (ctrlobj, varargin)
   endif
 endfunction
 
+%!function testcallback(ctrl)
+%! # do nothing
+%!endfunction
+
+%!test
+%! a = midicontrols();
+%! assert(isa(a, "midicontrols"));
+%! assert(midicallback(a), []);
+%! assert(midicallback(a, @testcallback), []);
+%! assert(midicallback(a), func2str(@testcallback));
+%! midicallback(a, []);
+%! assert(midicallback(a), []);
+
+%!error <Expected midicontrols object> midicallback(0);
