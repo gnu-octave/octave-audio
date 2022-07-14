@@ -45,7 +45,7 @@
 ## @seealso{mididevice, midisend}
 ## @end deftypefn
 
-function msg = midireceive (dev, maxmsg)
+function msg = midireceive (dev, maxmsg=0)
   if nargin < 1 || !isobject(dev) || !strcmp(typeinfo(dev), "octave_midi")
     error ("Expected midi device");
   endif
@@ -55,7 +55,6 @@ function msg = midireceive (dev, maxmsg)
   endif
 
   msg = midimsg (0);
-
   [ts, data] = __midirecv__(dev);
   while !isempty(data)
     msg = [ msg midimsg.createMessage(data, ts) ];

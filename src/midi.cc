@@ -50,12 +50,12 @@ class msg_info
 {
 public:
   std::vector<unsigned char> data;
-  double deltatime;
+  double timestamp;
 
   msg_info(const std::vector<unsigned char> &d, double dt = 0.0)
   {
     data = d;
-    deltatime = dt;
+    timestamp = dt;
   }
 };
 
@@ -87,8 +87,7 @@ public:
   midi_device_info in_info;
   midi_device_info out_info;
 
-  //std::vector<unsigned char> tmessage;
-  //double tstamp;
+  double tstamp;
   std::deque<msg_info> messages;
 
   MidiCallback callback;
@@ -101,7 +100,7 @@ public:
     callback = 0;
     userdata = 0;
 
-    //tstamp = 0;
+    tstamp = 0;
 
     out = new RtMidiOut();
     in = new RtMidiIn();
@@ -114,11 +113,13 @@ public:
     callback = 0;
   }
 
-  void push_message(const msg_info &inf)
+  void push_message(const std::vector< unsigned char > &message, double deltatime)
   {
     Locker lock(mutex);
 
-    messages.push_back(inf);
+    tstamp = tstamp + deltatime;
+
+    messages.push_back(msg_info(message, tstamp));
 
     if(callback)
       callback(userdata);
@@ -133,8 +134,10 @@ mycallback( double deltatime, std::vector< unsigned char > *message, void *userD
 {
   midi_device *mididev = (midi_device *)userData;
 
-  if(mididev && message)
-    mididev->push_message(msg_info(*message, deltatime));
+  if (mididev &&message)
+    {
+      mididev->push_message(*message, deltatime);
+    }
 }
 
 
@@ -223,7 +226,6 @@ send_midi (midi_device *dev, const unsigned char *data, size_t sz)
 int
 recv_midi (midi_device *dev, double *ts, unsigned char *data, size_t sz)
 {
-
   Locker lock(mutex);
 
   if (dev && dev->in)
@@ -239,7 +241,7 @@ recv_midi (midi_device *dev, double *ts, unsigned char *data, size_t sz)
           for (size_t i=0;i<message.size() && i<sz; i++)
              data[i] = message[i];
 
-          *ts = msg.deltatime;
+          *ts = msg.timestamp;
           return (int)message.size();
         }
     }
