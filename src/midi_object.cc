@@ -20,9 +20,28 @@
 #  include "config.h"
 #endif
 
+#include <octave/quit.h>
+
 #include "midi_object.h"
 
 DEFINE_OV_TYPEID_FUNCTIONS_AND_DATA (octave_midi, "octave_midi", "octave_midi");
+
+void octave_midi::octave_midi_callback (void *userData)
+{
+  octave_midi * dev = (octave_midi *)userData;
+  if(dev && dev->callback.length() >0)
+  {
+    try
+      {
+          octave_value_list ret = OCTAVE__FEVAL (dev->callback, ovl (dev->callbackdata), 0);
+      }
+    catch (const octave::execution_exception &e)
+      {
+        warning("midicallback: %s", e.message().c_str());
+      }
+  }
+}
+
 
 octave_midi::octave_midi ()
  : fieldnames(4)
@@ -31,6 +50,9 @@ octave_midi::octave_midi ()
   fieldnames[1] = "Output";
   fieldnames[2] = "InputID";
   fieldnames[3] = "OutputID";
+
+  callback = "";
+  callbackdata = "";
 
   dev = 0;
 }
@@ -66,6 +88,16 @@ octave_midi::recv (double *ts, unsigned char * data, int sz)
 {
   return recv_midi (dev, ts, data, sz);
 }
+
+int
+octave_midi::set_callback(const std::string &cb, octave_value cbdata)
+{
+  callback = cb;
+  callbackdata = cbdata;
+  set_midi_callback(dev, octave_midi_callback, this);
+  return 1;
+}
+
 
 int
 octave_midi::stat ()

@@ -148,6 +148,14 @@ classdef midicontrols < handle
       this.device = mididevice (devicename);
     endfunction
 
+    function delete (this)
+      try
+        this.callback("")
+      catch
+        # do nothing
+      end_try_catch
+    endfunction
+
     function send (this, values)
       if nargin < 2
         values = this.initialvalue;
@@ -202,6 +210,23 @@ classdef midicontrols < handle
       for i = 1:length(this.currentvalue)
         val(i) = this.get_value(i, this.currentvalue)*this.outscale;
       endfor
+    endfunction
+
+    function val = callback(this, cb=[])
+      # set/unset callback
+      if nargin < 2
+        val = __midicallback__(this.device);
+      else
+        if isempty(cb)
+          val = __midicallback__(this.device, cb, []);
+        else
+          val = __midicallback__(this.device, cb, this);
+        endif
+      endif
+
+      if ischar(val) && isempty(val)
+        val = [];
+      endif
     endfunction
 
     function val = get_value(this, ch, values)

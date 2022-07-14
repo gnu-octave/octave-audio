@@ -42,6 +42,11 @@ public:
   int recv(double *ts, unsigned char *data, int sz);
   int stat();
 
+  std::string get_callback() const { return callback; };
+  int set_callback(const std::string &cb, octave_value cbdata);
+
+  static void octave_midi_callback(void *d);
+
   void close();
   /**
    * Various properties of the octave_base_value datatype.
@@ -83,6 +88,8 @@ private:
 
   midi_device * dev;
   string_vector fieldnames;
+  std::string callback;
+  octave_value callbackdata;
 
   DECLARE_OV_TYPEID_FUNCTIONS_AND_DATA
 };

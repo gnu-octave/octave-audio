@@ -74,5 +74,10 @@ int recv_midi(midi_device * dev, double *ts, unsigned char *data, size_t sz);
 
 int stat_midi(midi_device * dev);
 
+
+typedef void(* MidiCallback )(void *userData);
+
+int set_midi_callback(midi_device * dev, MidiCallback cb, void *userdata);
+
 #endif
 
