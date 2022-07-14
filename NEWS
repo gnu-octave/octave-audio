@@ -6,11 +6,12 @@ audio-2.0.4+   Release Date: TBD
 
   ** minor updates for octave dld classes
 
-  ** added @octave_midi/hasdata
+  ** NEW FUNCTIONS:
+    - @octave_midi/hasdata
+    - midicallback
+    - midiflush
 
-  ** added midicallback
-
-  ** midirecv always returns abs timestamp from device beig opened
+  ** midirecv always returns abs timestamp from midimsg results
 
 ===============================================================================
 audio-2.0.4   Release Date: 2021-12-05

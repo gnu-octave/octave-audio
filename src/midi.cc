@@ -256,6 +256,14 @@ stat_midi (midi_device *dev)
   return dev->messages.size();
 }
 
+int
+flush_midi (midi_device *dev)
+{
+  Locker lock(mutex);
+  dev->messages.erase(dev->messages.begin(), dev->messages.end());
+  return 1;
+}
+
 bool
 get_midi_devices (midi_device_list &devs)
 {

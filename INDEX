@@ -2,6 +2,7 @@ audio >> Audio and MIDI Toolbox
 MIDI Device Interface
   mididevice
   mididevinfo
+  midiflush
   midimsg
   midireceive
   midisend

@@ -4,7 +4,7 @@ LIBS      := @LIBS@
 LDFLAGS   := @LDFLAGS@
 
 SRC := mididevinfo.cc mididevice.cc midi.cc midi_object.cc midisend.cc midirecv.cc \
-       midistat.cc midicallback.cc pkglock.cc
+       midistat.cc midiflush.cc midicallback.cc pkglock.cc
 
 OBJ := $(SRC:.cc=.o)
 

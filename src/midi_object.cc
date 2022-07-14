@@ -98,6 +98,11 @@ octave_midi::set_callback(const std::string &cb, octave_value cbdata)
   return 1;
 }
 
+int
+octave_midi::flush ()
+{
+  return flush_midi (dev);
+}
 
 int
 octave_midi::stat ()

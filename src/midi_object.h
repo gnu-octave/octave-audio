@@ -41,6 +41,7 @@ public:
   bool send(const unsigned char *data, int sz);
   int recv(double *ts, unsigned char *data, int sz);
   int stat();
+  int flush();
 
   std::string get_callback() const { return callback; };
   int set_callback(const std::string &cb, octave_value cbdata);
