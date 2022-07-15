@@ -2,7 +2,7 @@
 ## Copyright 2015-2016 Oliver Heimlich
 ## Copyright 2017 Julien Bect <jbect@users.sf.net>
 ## Copyright 2017 Olaf Till <i7tiol@t-online.de>
-## Copyright 2019 John Donoghue <john.donoghue@ieee.org>
+## Copyright 2019-2022 John Donoghue <john.donoghue@ieee.org>
 ##
 ## Copying and distribution of this file, with or without modification,
 ## are permitted in any medium without royalty provided the copyright
@@ -18,6 +18,23 @@ GREP ?= grep
 CUT ?= cut
 TR ?= tr
 TEXI2PDF  ?= texi2pdf -q
+MAKEINFO  ?= makeinfo
+
+# work out a possible help generator
+ifeq ($(strip $(QHELPGENERATOR)),)
+  ifneq ($(shell qhelpgenerator-qt5 -v 2>/dev/null),)
+    QHELPGENERATOR = qhelpgenerator-qt5
+  else ifneq ($(shell qcollectiongenerator-qt5 -v 2>/dev/null),)
+    QHELPGENERATOR = qcollectiongenerator-qt5
+  #else ifneq ($(shell qhelpgenerator -qt5 -v 2>/dev/null),)
+  # v4 doesnt work
+  #  QHELPGENERATOR = qhelpgenerator -qt5
+  else ifneq ($(shell qcollectiongenerator -qt5 -v 2>/dev/null),)
+    QHELPGENERATOR = qcollectiongenerator -qt5
+  else
+    QHELPGENERATOR = true
+  endif
+endif
 
 ## Note the use of ':=' (immediate set) and not just '=' (lazy set).
 ## http://stackoverflow.com/a/448939/1609556
@@ -149,13 +166,17 @@ endif
 	$(MAKE) -C "$@" docs
 #	cd "$@" && $(MAKE) tests
 	# remove dev stuff
-	cd "$@" && $(RM) -rf "devel" && $(RM) -f doc/mkfuncdocs.py
+	cd "$@" && $(RM) -rf "devel" && $(RM) -f doc/mkfuncdocs.py doc/mkqhcp.py
 	${FIX_PERMISSIONS} "$@"
 
 .PHONY: docs
-docs: doc/$(package).pdf
+docs: doc/$(package).pdf doc/$(package).info doc/$(package).qhc doc/$(package).html
 
+.PHONY: clean-docs
 clean-docs:
+	$(RM) -f doc/$(package).html
+	$(RM) -f doc/$(package).qhc
+	$(RM) -f doc/$(package).qch
 	$(RM) -f doc/$(package).info
 	$(RM) -f doc/$(package).pdf
 	$(RM) -f doc/functions.texi
@@ -164,6 +185,17 @@ doc/$(package).pdf: doc/$(package).texi doc/functions.texi
 	cd doc && SOURCE_DATE_EPOCH=$(HG_TIMESTAMP) $(TEXI2PDF) $(package).texi
 	# remove temp files
 	cd doc && $(RM) -f $(package).aux  $(package).cp  $(package).cps  $(package).fn  $(package).fns  $(package).log  $(package).toc
+
+doc/$(package).html: doc/$(package).texi doc/functions.texi
+	cd doc && SOURCE_DATE_EPOCH=$(HG_TIMESTAMP) $(MAKEINFO) --html --css-ref=$(package).css  --no-split $(package).texi
+
+doc/$(package).qhc: doc/$(package).html
+	# try also create qch file if can
+	cd doc && ./mkqhcp.py $(package) && $(QHELPGENERATOR) $(package).qhcp -o $(package).qhc
+	cd doc && $(RM) -f $(package).qhcp $(package).qhp
+
+doc/$(package).info: doc/$(package).texi doc/functions.texi
+	cd doc && $(MAKEINFO) $(package).texi
 
 doc/functions.texi:
 	cd doc && ./mkfuncdocs.py --src-dir=../inst/ ../INDEX | $(SED) 's/@seealso/@xseealso/g' > functions.texi
