@@ -16,7 +16,7 @@
 
 ## -*- texinfo -*- 
 ## @deftypefn {} {} midiflush (@var{dev})
-## FLush the receive buffers on a mididevice
+## Flush the receive buffers on a midi device
 ##
 ## @subsubheading Inputs
 ## @var{dev} - midi device opened using mididevice@*

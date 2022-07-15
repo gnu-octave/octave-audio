@@ -21,18 +21,18 @@
 ## Get, set or clear the midicontrol object callback.
 ## 
 ## @subsubheading Inputs
-## @var{midicontrolObj} - control object created using midicontrols@*
+## @var{midicontrolObj} - control object created using midicontrols.
 ##
 ## @var{functionHandle} - function handle to set for call back. If it is [],
 ## the callback function will be cleared.
 ##
-## NOTE: currently anonymous functions will not work.
+## @strong{NOTE}: currently anonymous functions will not work.
 ##
-## NOTE: callbacks should be cleared before losing any reference to the midicontrols 
+## @strong{NOTE}: callbacks should be cleared before losing all references to the midicontrols 
 ## object.
 ##
 ## @subsubheading Outputs
-## @var{oldhandle} The previously set midicallback function handle.
+## @var{oldhandle} The previously set midicallback function handle when setting a new callback.
 ##
 ## @var{currhandle} The current set midicallback function handle.
 ##
@@ -46,7 +46,6 @@
 ## }
 ## @end example
 ##
-## @subsubheading Examples
 ## Clear the callback on a midicontrols object
 ## @example
 ## @code {
@@ -55,7 +54,6 @@
 ## }
 ## @end example
 ##
-## @subsubheading Examples
 ## Get the current callback on a midicontrols object
 ## @example
 ## @code {
