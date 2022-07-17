@@ -48,4 +48,4 @@ Read the Octave [Octave audio package wiki](https://wiki.octave.org/Audio_packag
 Known limitations and bugs
 ==========================
 
-Currenty package provides only the midi functions
+Currently the package provides only midi functions
