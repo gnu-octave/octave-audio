@@ -30,10 +30,8 @@
 ## @subsubheading Examples
 ## Send sync command to a midicontrols with a ctrlid 2001 to set a value of 1
 ## @example
-## @code {
 ## ctrl = midicontrols(2001)
 ## midisync(ctrl, 1);
-## }
 ## @end example
 ##
 ## @seealso{midicontrols}

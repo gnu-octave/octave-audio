@@ -20,7 +20,7 @@
 ##
 ## @subsubheading Inputs
 ## @var{filename} - filename of file to open.@*
-## @var {propertyname}, @var{properyvalue} - optional propertyname/value pairs.@*
+## @var{propertyname}, @var{properyvalue} - optional propertyname/value pairs.@*
 ##
 ## Known property values are:
 ## @table @asis

@@ -39,27 +39,21 @@
 ## @subsubheading Examples
 ## Set a callback on a midicontrols object
 ## @example
-## @code {
 ## ctrl = midicontrols(2001)
 ## function dispCallback(ctrl),disp(midiread(ctrl)),endfunction;
 ## midicallback(ctrl, @@dispCallback);
-## }
 ## @end example
 ##
 ## Clear the callback on a midicontrols object
 ## @example
-## @code {
 ## ctrl = midicontrols(2001)
 ## midicallback(ctrl, []);
-## }
 ## @end example
 ##
 ## Get the current callback on a midicontrols object
 ## @example
-## @code {
 ## ctrl = midicontrols(2001)
 ## cb = midicallback(ctrl);
-## }
 ## @end example
 ##
 ## @seealso{midicontrols, midisync, midiread}

@@ -30,9 +30,7 @@
 ## @subsubheading Examples
 ## Send a note on/off command to a opened midi device @var{dev}
 ## @example
-## @code {
 ## midisend(dev, midimsg("note", 1, 60, 100, 2.0));
-## }
 ## @end example
 ## 
 ## @seealso{midimsg, mididevice, midireceive}

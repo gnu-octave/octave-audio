@@ -31,9 +31,7 @@
 ## @subsubheading Examples
 ## Monitor midi devices for first moving controller
 ## @example
-## @code {
 ## [ctrlid, devname] = midiid()
-## }
 ## @end example
 ##
 ## @seealso{mididevinfo, midicontrols}

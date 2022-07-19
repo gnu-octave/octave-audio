@@ -30,7 +30,6 @@
 ## @subsubheading Examples
 ## Open device 0, and poll and display read messages
 ## @example
-## @code {
 ## dev = mididevice(0);
 ## while true
 ##    mx = midireceive(dev);
@@ -39,7 +38,6 @@
 ##      mx
 ##    endif
 ## endwhile
-## }
 ## @end example
 ##
 ## @seealso{mididevice, midisend}

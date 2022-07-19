@@ -31,7 +31,6 @@
 ## @subsubheading Examples
 ## Display the known devices of the system.
 ## @example
-## @code {
 ## @command{>} mididevinfo
 ##
 ## MIDI devices available
@@ -42,12 +41,10 @@
 ##  3 input     Alsa       Midi Through:Midi Through Port-0 14:0
 ##  4 input     Alsa       Ensoniq AudioPCI:ES1371 16:0
 ##  5 input     Alsa       SparkFun Pro Micro:SparkFun Pro Micro MIDI 1 20:0 
-## }
 ## @end example
 ##
 ## Assign variable @var{mididevices} with the values from the known devices
 ## @example
-## @code {
 ## @command{>} mididevices = mididevinfo
 ##
 ## mididevices =
@@ -68,7 +65,6 @@
 ##          Interface = Alsa
 ##          ID =  1
 ##    @}
-## }
 ## @end example
 ##
 ## @seealso{mididevice}

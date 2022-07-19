@@ -27,9 +27,7 @@
 ## @subsubheading Examples
 ## Flush a midi device
 ## @example
-## @code {
 ## midiflush(dev);
-## }
 ## @end example
 ## 
 ## @seealso{mididevice, midireceive}

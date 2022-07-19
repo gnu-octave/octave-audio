@@ -106,23 +106,17 @@ classdef midimsg
   ## @subsubheading Examples
   ## Create a note on/off pair with a duration of 1.5 seconds
   ## @example
-  ## @code {
   ## msg = midimsg('note', 1, 60, 100, 1.5)
-  ## }
   ## @end example
   ##
   ## Create a separate note on/off pair with a time between them of 1.5 seconds
   ## @example
-  ## @code {
   ## msg = [midimsg('noteon', 1, 60, 100, 0), midimsg('noteoff', 1, 60, 0, 1.5)]
-  ## }
   ## @end example
   ##
   ## Create a system reset message
   ## @example
-  ## @code {
   ## msg = midimsg('systemreset')
-  ## }
   ## @end example
   ##
   ## @seealso{midifileread, midisend, midireceive, midimsgtype}
