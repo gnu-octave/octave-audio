@@ -63,6 +63,8 @@ if test $have_get_api_name = yes; then
   AC_DEFINE([HAVE_RTMIDI_GETAPINAME], [1], [have the RtMidi::getApiName function])
 fi
 
+AX_PTHREAD([],[AC_MSG_ERROR([thread library is needed to install $PACKAGE_NAME])])
+
 # Checks for octave depreciated symbols
 ## Simple symbol alternatives of different Octave versions.
 save_altsyms_CXX="$CXX"

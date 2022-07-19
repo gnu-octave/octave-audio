@@ -1,6 +1,6 @@
 MKOCTFILE := @MKOCTFILE@
-CXXFLAGS  := @CXXFLAGS@ @DEFS@
-LIBS      := @LIBS@
+CXXFLAGS  := @CXXFLAGS@ @PTHREAD_CFLAGS@ @DEFS@
+LIBS      := @LIBS@ @PTHREAD_LIBS@
 LDFLAGS   := @LDFLAGS@
 
 SRC := mididevinfo.cc mididevice.cc midi.cc midi_object.cc midisend.cc midirecv.cc \
