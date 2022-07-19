@@ -35,9 +35,13 @@ void octave_midi::octave_midi_callback (void *userData)
       {
           octave_value_list ret = OCTAVE__FEVAL (dev->callback, ovl (dev->callbackdata), 0);
       }
-    catch (const octave::execution_exception &e)
+    catch (const OCTAVE_EXECUTION_EXCEPTION &e)
       {
-        warning("midicallback: %s", e.message().c_str());
+#ifdef HAS_OCTAVE_EXCEPTION_MESSAGE
+        warning("midicallback: %s", e.OCTAVE_EXCEPTION_MESSAGE().c_str());
+#else
+        warning("midicallback: execution exception occured");
+#endif
       }
   }
 }

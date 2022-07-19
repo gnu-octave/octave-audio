@@ -114,6 +114,15 @@ OF_OCTAVE_LIST_ALT_SYMS([
 ],
 
 [dnl
+  [octave_execution_exception],
+  [octave::execution_exception],
+  [[octave::execution_exception err;]],
+  [OCTAVE_EXECUTION_EXCEPTION],
+  [#include <octave/quit.h>],
+  [#include <octave/quit.h>]
+],
+
+[dnl
   [octave_base_value],
   [octave_base_dld_value],
   [[octave_base_dld_value tmp();]],
@@ -123,6 +132,34 @@ OF_OCTAVE_LIST_ALT_SYMS([
 ]
 
 ],[oct-alt-includes.h])
+
+# check if method of getting execution exception message
+AC_MSG_CHECKING([for execution_exception message field])
+octave_execution_field=none
+AC_COMPILE_IFELSE([AC_LANG_PROGRAM([[
+   #include <octave/oct.h>
+   #include <octave/quit.h>
+  ]], [
+    OCTAVE_EXECUTION_EXCEPTION err; err.message();
+  ])],
+ [octave_execution_field=message],
+ [
+   AC_COMPILE_IFELSE([AC_LANG_PROGRAM([[
+     #include <octave/oct.h>
+     #include <octave/quit.h>
+    ]], [
+      OCTAVE_EXECUTION_EXCEPTION err; err.info();
+    ])],
+    [octave_execution_field=info],
+    [])
+ ]
+)
+AC_MSG_RESULT([$octave_execution_field])
+AC_DEFINE_UNQUOTED([OCTAVE_EXCEPTION_MESSAGE],$octave_execution_field,[execution_exception message field])
+
+if test $octave_execution_field != none; then
+AC_DEFINE([HAS_OCTAVE_EXCEPTION_MESSAGE],[1],[has some kid of execution_exception message field])
+fi
 
 CXX=$save_altsyms_CXX
 CXXFLAGS=$save_altsyms_CXXFLAGS
