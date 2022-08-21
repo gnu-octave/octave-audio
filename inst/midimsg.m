@@ -1494,10 +1494,21 @@ classdef midimsg
       endif
       if nargin < 2
         ts = 0;
+      elif !isnumeric(ts)
+        error ("Expected Timestamp as a number")
       endif
       msg = midimsg(0);
       msg.data{end+1} = data;
       msg.timestamp{end+1} = ts;
+    endfunction
+
+    function msg = fromStruct (msgstruct)
+      # expects 'RawBytes' and 'Timestamp' in a struct
+      if !isstruct (msgstruct) || !isfield (msgstruct, "RawBytes") || !isfield (msgstruct, "Timestamp")
+        error ("Expected struct with RawBytes and Timestamp field");
+      endif
+
+      msg = midimsg.createMessage(uint8(msgstruct.RawBytes), msgstruct.Timestamp);
     endfunction
   endmethods
 
@@ -1994,3 +2005,11 @@ endclassdef
 %! assert(a(2).channel, 12);
 %! assert(a(2).note, 60);
 
+%!test
+%! as = struct("RawBytes", [0x90 0x3C 0x14], "Timestamp", 10);
+%! a = midimsg.fromStruct(as);
+%! assert(length(a) == 1);
+%! assert(a.type == "NoteOn");
+%! assert(a.channel, 1);
+%! assert(a.timestamp, 10);
+%! assert(a.msgbytes, uint8([0x90 0x3C 0x14]));
