@@ -774,14 +774,19 @@ classdef midimsg
           if (numel (idx) != 1)
             error ("@midimsg/subsref: need exactly one index");
           endif
-          val = midimsg.createMessage(this.data{idx{1}}, this.timestamp{idx{1}});
+          off=[idx{1}];
+          val = midimsg(0);
+          for ix=off
+            a = midimsg.createMessage(this.data{ix}, this.timestamp{ix});
+            val = [val a];
+          endfor
         case "."
           switch tolower(s(1).subs)
           case "timestamp"
             if length(this.timestamp) == 1
               val = this.timestamp{1};
             else
-              val = this.timestamp;
+              val = cell2mat(this.timestamp);
             endif
           case "msgbytes"
             if length(this.data) == 1
@@ -1572,10 +1577,7 @@ endclassdef
 %! assert(length(t) == 2);
 %! assert(strcmp(t{1}, "NoteOn"))
 %! assert(strcmp(t{2}, "NoteOn"))
-%! t = a.timestamp;
-%! assert(length(t) == 2);
-%! assert(t{1}, 0.0)
-%! assert(t{2}, 1.2)
+%! assert(a.timestamp, [0.0 1.2]);
 %! assert(a.channel, [2 2]);
 
 %!test
@@ -2013,3 +2015,18 @@ endclassdef
 %! assert(a.channel, 1);
 %! assert(a.timestamp, 10);
 %! assert(a.msgbytes, uint8([0x90 0x3C 0x14]));
+
+%!test
+%! a1 = midimsg("noteon", 1, 80, 100, 5);
+%! a2 = midimsg("noteon", 1, 81, 100, 1);
+%! a3 = midimsg("noteon", 1, 82, 100, 10);
+%! msgs = [a1 a2 a3];
+%! ts = msgs.Timestamp;
+%! [~, idx] = sort(ts);
+%! smsgs = msgs(idx);
+%! assert(smsgs(1).Timestamp, 1)
+%! assert(smsgs(2).Timestamp, 5)
+%! assert(smsgs(3).Timestamp, 10)
+%! assert(smsgs(1).Note, 81)
+%! assert(smsgs(2).Note, 80)
+%! assert(smsgs(3).Note, 82)
