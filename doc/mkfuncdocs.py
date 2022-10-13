@@ -16,7 +16,7 @@
 ## along with this program.  If not, see
 ## <https://www.gnu.org/licenses/>.
 
-## mkfuncdocs v1.0.2
+## mkfuncdocs v1.0.4
 ## mkfuncdocs.py will attempt to extract the help texts from functions in src
 ## dirs, extracting only those that are in the specifed INDEX file and output them
 ## to stdout in texi format
@@ -39,6 +39,9 @@
 ##   --funcprefix=xxxxx : remove xxxxx from the function name when searching for matching
 ##                     source file.
 ##   --allowscan     : if can not find function, attemp to scan .cc,cpp,cxx files for match
+##
+##   --standalone    : generate a texinfo file expected to be used with being included in
+##                     another document file.
 
 import sys
 import os
@@ -56,12 +59,22 @@ class Group:
   functions = []
 
   def __init__ (self, name=""):
-    self.name = name
+    if name:
+        self.name = name
     self.functions = []
 
 class Index:
   name = ""
   groups = []
+
+def texify_line(line):
+  # convert any special chars in a line to texinfo format
+  # currently just used for group formatting ?
+  line = line.replace("@", "@@")
+  line = line.replace("{", "@{")
+  line = line.replace("}", "@}")
+  line = line.replace(",", "@comma{}")
+  return line
 
 def find_defun_line_in_file(filename, fnname):
   linecnt = 0
@@ -182,6 +195,11 @@ def find_func_file(fname, paths, prefix, scanfiles=False):
       name = f + "/" + fname + ".m"
       if os.path.isfile(name):
         return name, 0
+      # class constructor ?
+      name = f + "/@" + fname + "/" + fname + ".m"
+      if os.path.isfile(name):
+        return name, 0
+      name = f + "/" + fname + ".cc"
       name = f + "/" + fname + ".cc"
       if os.path.isfile(name):
         return name, 0
@@ -216,6 +234,24 @@ def find_func_file(fname, paths, prefix, scanfiles=False):
   
   return None, -1
 
+def display_standalone_header():
+  # make a file that doesnt need to be included in a texinfo file to
+  # be valid
+  print("@c mkfuncdocs output for a standalone function list")
+  print("@include macros.texi")
+  print("@ifnottex")
+  print("@node Top")
+  print("@top Function Documentation")
+  print("Function documentation extracted from texinfo source in octave source files.")
+  print("@contents")
+  print("@end ifnottex")
+  print("@node Function Reference")
+  print("@chapter Function Reference")
+  print("@cindex Function Reference")
+
+def display_standalone_footer():
+  print("@bye")
+
 def display_func(name, ref, help):
   print ("@c -----------------------------------------")
   print ("@subsection {}".format(name))
@@ -224,7 +260,14 @@ def display_func(name, ref, help):
     print ("{}".format(l))
 
 def process (args):
-  options = { "verbose": False, "srcdir": [], "funcprefix": "", "ignore": [], "allowscan": False }
+  options = { 
+    "verbose": False,
+    "srcdir": [],
+    "funcprefix": "",
+    "ignore": [],
+    "standalone": False,
+    "allowscan": False
+  }
   indexfile = ""
 
   for a in args:
@@ -239,6 +282,8 @@ def process (args):
 
     if key == "--verbose":
       options["verbose"] = True;
+    if key == "--standalone":
+      options["standalone"] = True;
     elif key == "--allowscan":
       options["allowscan"] = True;
     elif key == "--src-dir":
@@ -261,17 +306,20 @@ def process (args):
     options["srcdir"].append("inst")
 
   #print "options=", options
+  if options['standalone']:
+      display_standalone_header()
 
   idx = read_index(indexfile,  options["ignore"])
   for g in idx.groups:
     #print ("************ {}".format(g.name))
+    g_name = texify_line(g.name)
     print ("@c ---------------------------------------------------")
-    print ("@node {}".format(g.name))
-    print ("@section {}".format(g.name))
-    print ("@cindex {}".format(g.name))
+    print ("@node {}".format(g_name))
+    print ("@section {}".format(g_name))
+    print ("@cindex {}".format(g_name))
 
     for f in sorted(g.functions):
-      print ("@c {} {}".format(g.name, f))
+      print ("@c {} {}".format(g_name, f))
       h = ""
       filename = ""
       path = ""
@@ -314,7 +362,10 @@ def process (args):
       if h:
         display_func (name, ref, h)
 
-    
+  if options['standalone']:
+      display_standalone_footer()
+
+
 def show_usage():
   print (sys.argv[0], "[options] indexfile")
 
