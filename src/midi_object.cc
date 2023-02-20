@@ -135,7 +135,7 @@ octave_midi::clone (void) const
 octave_base_value *
 octave_midi::unique_clone (void)
 {
-  count++;
+  OV_COUNT++;
   return this;
 }
 

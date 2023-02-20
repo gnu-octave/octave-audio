@@ -127,7 +127,7 @@ OF_OCTAVE_LIST_ALT_SYMS([
 [dnl
   [octave_base_value],
   [octave_base_dld_value],
-  [[octave_base_dld_value tmp();]],
+  [[octave_base_dld_value tmp;]],
   [OCTAVE_BASE_CLASS],
   [],
   []
@@ -162,6 +162,30 @@ AC_DEFINE_UNQUOTED([OCTAVE_EXCEPTION_MESSAGE],$octave_execution_field,[execution
 if test $octave_execution_field != none; then
 AC_DEFINE([HAS_OCTAVE_EXCEPTION_MESSAGE],[1],[has some kid of execution_exception message field])
 fi
+
+AC_MSG_CHECKING([for octave_base_value count field])
+octave_count_field=count
+AC_COMPILE_IFELSE([AC_LANG_PROGRAM([[
+   #include <octave/oct.h>
+   #ifdef HAVE_CONFIG_H
+   #  include "config.h"
+   #endif
+   class test_base_class : public octave_base_value
+   {
+   public:
+     test_base_class() {}
+     ~test_base_class() {}
+     void test() { m_count ++; }
+     bool is_object (void) const { return true; }
+   };
+  ]], [
+    test_base_class t;  t.is_object();
+  ])],
+ [octave_count_field=m_count],
+ [octave_count_field=count]
+)
+AC_MSG_RESULT([$octave_count_field])
+AC_DEFINE_UNQUOTED([OV_COUNT],$octave_count_field,[octave_base_value ref count field])
 
 CXX=$save_altsyms_CXX
 CXXFLAGS=$save_altsyms_CXXFLAGS
