@@ -68,22 +68,22 @@ MKOCTFILE ?= mkoctfile
 ## Command used to set permissions before creating tarballs
 FIX_PERMISSIONS ?= chmod -R a+rX,u+w,go-w,ug-s
 
-HG           := hg
-HG_CMD        = $(HG) --config alias.$(1)=$(1) --config defaults.$(1)= $(1)
-HG_ID        := $(shell $(call HG_CMD,identify) --id | sed -e 's/+//' )
-HG_TIMESTAMP := $(firstword $(shell $(call HG_CMD,log) --rev $(HG_ID) --template '{date|hgdate}'))
-
-
 ## Detect which VCS is used
 vcs := $(if $(wildcard .hg),hg,$(if $(wildcard .git),git,unknown))
 ifeq ($(vcs),hg)
 release_dir_dep := .hg/dirstate
+HG           := hg
+HG_CMD        = $(HG) --config alias.$(1)=$(1) --config defaults.$(1)= $(1)
+HG_ID        := $(shell $(call HG_CMD,identify) --id | sed -e 's/+//' )
+REPO_TIMESTAMP := $(firstword $(shell $(call HG_CMD,log) --rev $(HG_ID) --template '{date|hgdate}'))
 endif
 ifeq ($(vcs),git)
 release_dir_dep := .git/index
+GIT          := git
+REPO_TIMESTAMP := $(firstword $(shell $(GIT) log -n1 --date=unix --format="%ad"))
 endif
 
-TAR_REPRODUCIBLE_OPTIONS := --sort=name --mtime="@$(HG_TIMESTAMP)" --owner=0 --group=0 --numeric-owner
+TAR_REPRODUCIBLE_OPTIONS := --sort=name --mtime="@$(REPO_TIMESTAMP)" --owner=0 --group=0 --numeric-owner
 TAR_OPTIONS  := --format=ustar $(TAR_REPRODUCIBLE_OPTIONS)
 
 ## .PHONY indicates targets that are not filenames
@@ -182,12 +182,12 @@ clean-docs:
 	$(RM) -f doc/functions.texi
 
 doc/$(package).pdf: doc/$(package).texi doc/functions.texi
-	cd doc && SOURCE_DATE_EPOCH=$(HG_TIMESTAMP) $(TEXI2PDF) $(package).texi
+	cd doc && SOURCE_DATE_EPOCH=$(REPO_TIMESTAMP) $(TEXI2PDF) $(package).texi
 	# remove temp files
 	cd doc && $(RM) -f $(package).aux  $(package).cp  $(package).cps  $(package).fn  $(package).fns  $(package).log  $(package).toc
 
 doc/$(package).html: doc/$(package).texi doc/functions.texi
-	cd doc && SOURCE_DATE_EPOCH=$(HG_TIMESTAMP) $(MAKEINFO) --html --css-ref=$(package).css  --no-split $(package).texi
+	cd doc && SOURCE_DATE_EPOCH=$(REPO_TIMESTAMP) $(MAKEINFO) --html --css-ref=$(package).css  --no-split $(package).texi
 
 doc/$(package).qhc: doc/$(package).html
 	# try also create qch file if can
