@@ -21,7 +21,7 @@
 title: Octave Audio Toolkit
 email: "John Donoghue <john.donoghue@ieee.org>"
 author: "John Donoghue <john.donoghue@ieee.org>"
-logo: "/assets/octave-sqlite.png"
+logo: "/assets/octave-audio.png"
 description: >- # this means to ignore newlines until "baseurl:"
   SQLite Toolkit for GNU Octave
 baseurl: "" # the subpath of your site, e.g. /blog
