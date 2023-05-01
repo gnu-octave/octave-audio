@@ -1,0 +1,90 @@
+---
+layout: "default"
+permalink: "/news/"
+title: "Audio Toolkit - News"
+pkg_name: "audio"
+version: "2.0.5"
+description: "Audio and MIDI Toolbox for GNU Octave"
+navigation:
+- id: "overview"
+  name: "Overview"
+  url: "/index"
+- id: "Functions"
+  name: "Function Reference"
+  url: "/functions"
+- id: "news"
+  name: "News"
+- id: "manual"
+  name: "Manual"
+  url: "/manual"
+---
+<pre>
+Summary of important user-visible changes for releases of the audio package
+
+===============================================================================
+audio-2.0.5   Release Date: 2022-07-20
+===============================================================================
+
+  ** minor updates for octave dld classes
+
+  ** NEW FUNCTIONS:
+    - @octave_midi/hasdata
+    - midicallback
+    - midiflush
+
+  ** midirecv always returns abs timestamp from midimsg results
+
+  ** added qt5 documentation
+
+===============================================================================
+audio-2.0.4   Release Date: 2021-12-05
+===============================================================================
+
+  ** minor updates for octave 7 compatibility
+
+===============================================================================
+audio-2.0.3   Release Date: 2021-10-22
+===============================================================================
+
+  ** midifilewrite: updates for time processing
+
+  ** midifileread: updates reading sysex messages
+
+  ** midimsg: allow horzcat to add multiple messages
+
+  ** midisend: dont send metadata to mididevice
+
+===============================================================================
+audio-2.0.2   Release Date: 2020-10-13
+===============================================================================
+
+ ** added 'other' field to midifileinfo structure
+
+ ** added metaevent type to midimsg
+
+ ** additional FXX type message file reading
+
+ ** added format specifier to midifileread
+
+ ** bugfix  ref count on midi_object unique_clone
+
+ ** minor documentation updates
+
+===============================================================================
+audio-2.0.1   Release Date: 2020-05-08
+===============================================================================
+
+ ** added additional midimsg property set/get
+
+ ** added midimsgtype enumeration class
+
+ ** minor documentation updates
+
+===============================================================================
+audio-2.0.0   Release Date: 2020-01-03
+===============================================================================
+
+ ** Added midi functions
+
+ ** remove obsolete / old audio functions
+</pre>
