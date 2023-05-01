@@ -39,9 +39,9 @@ Usage:
 Documentation
 ==============
 
-See the function list for octave-audio on [octave forge](https://octave.sourceforge.io/audio/overview.html) for function documentation.
+See the function list for octave-audio on [octave github](https://gnu-octave.github.io/octave-audio/functions/) for function documentation.
 
-See the online manual for octave-audio on [octave forge](https://octave.sourceforge.io/audio/package_doc/) for complete documentation.
+See the online manual for octave-audio on [octave github](https://gnu-octave.github.io/octave-audio/manual/) for complete documentation.
 
 Read the Octave [Octave audio package wiki](https://wiki.octave.org/Audio_package) for install tips and examples.
 

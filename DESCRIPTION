@@ -10,4 +10,5 @@ Depends: octave (>= 4.0.0)
 SystemRequirements: rtmidi
 Autoload: no
 License: GPLv3+
-Url: http://octave.sourceforge.net
+Url: https://gnu-octave.github.io/octave-audio/
+Repository: https://github.com/gnu-octave/octave-audio/

@@ -53,7 +53,7 @@ Octave that you have.  The precise conditions can be found in the
 Octave Audio package and that also appears in @ref{Copying}.
 
 To download a copy of the @acronym{GNU} Octave Audio package, please visit
-@url{http://octave.sourceforge.net/audio/}.
+@url{https://gnu-octave.github.io/octave-audio/index}.
 
 @end titlepage
 @c %*** End of TITLEPAGE
