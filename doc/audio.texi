@@ -11,10 +11,10 @@
 @afourpaper
 @paragraphindent 0
 @finalout
-@set VERSION 2.0.5
 @c @afourwide
 @c %*** End of the HEADER
 
+@include version.texi
 @include macros.texi
 
 @c %*** Start of TITLEPAGE
@@ -24,7 +24,7 @@
 @author John Donoghue
 @page
 @vskip 0pt plus 1filll
-Copyright @copyright{} 2019-2022 John Donoghue
+Copyright @copyright{} 2019-2023 John Donoghue
 
 Permission is granted to make and distribute verbatim copies of
 this manual provided the copyright notice and this permission notice
