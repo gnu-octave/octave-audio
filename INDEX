@@ -20,3 +20,5 @@ MIDI File I/O
   ismidifile
 Enumerations
   midimsgtype
+Waveform Generation
+  audioOscillator
