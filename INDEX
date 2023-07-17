@@ -22,3 +22,6 @@ Enumerations
   midimsgtype
 Waveform Generation
   audioOscillator
+Measurements
+  erb2hz
+  hz2erb
