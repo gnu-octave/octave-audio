@@ -48,4 +48,3 @@ Read the Octave [Octave audio package wiki](https://wiki.octave.org/Audio_packag
 Known limitations and bugs
 ==========================
 
-Currently the package provides only midi functions
