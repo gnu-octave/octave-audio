@@ -23,5 +23,7 @@ Enumerations
 Waveform Generation
   audioOscillator
 Measurements
+  bark2hz
   erb2hz
+  hz2bark
   hz2erb
