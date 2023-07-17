@@ -25,5 +25,7 @@ Waveform Generation
 Measurements
   bark2hz
   erb2hz
+  mel2hz
   hz2bark
   hz2erb
+  hz2mel
