@@ -15,8 +15,9 @@
 ## <https://www.gnu.org/licenses/>.
 
 ## -*- texinfo -*- 
-## The Audio package provides basic MIDI functionality for GNU octave.
+## The Audio package provides basic MIDI and audio functionality for GNU octave.
 ##
+## @subheading MIDI
 ## The following MIDI functions are available:
 ##
 ## @subsubheading MIDI Device query:
@@ -76,6 +77,15 @@
 ## @example
 ## msg = midireceive(dev)
 ## @end example
+##
+## @subheading Audio
+## The following Audio functions are available:
+## @table @asis
+## @item hz2mel, hz2bark, hz2erp, mel2hz, bark2hz, erp2hz
+## Convert between hz and other frequenct scales
+## @item audioOscillator
+## Create a audio waveform generator
+## @end table
 
 function audio()
   help audio;
