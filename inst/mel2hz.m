@@ -15,7 +15,7 @@
 ## <https://www.gnu.org/licenses/>.
 
 ## -*- texinfo -*- 
-## @deftypefn {} {@var{hz} =} erb2hz (@var{mel})
+## @deftypefn {} {@var{hz} =} mel2hz (@var{mel})
 ## Convert equivalent mel frequency to Hz.
 ##
 ## @subsubheading Inputs
@@ -31,7 +31,7 @@
 ## @seealso {hz2mel}
 ## @end deftypefn
 
-function hz = erb2mel (mel)
+function hz = mel2hz (mel)
   persistent A;
 
   if nargin < 1
