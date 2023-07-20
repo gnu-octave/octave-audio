@@ -2,7 +2,7 @@
 layout: "default"
 permalink: "/functions/11_mididevinfo/"
 pkg_name: "audio"
-pkg_version: "2.0.5"
+pkg_version: "2.0.6"
 pkg_description: "Audio and MIDI Toolbox for GNU Octave"
 title: "Audio Toolkit - mididevinfo"
 category: "MIDI Device Interface"
@@ -14,6 +14,24 @@ navigation:
 - id: "Functions"
   name: "Function Reference"
   url: "/functions"
+- id: "21_MIDIDeviceInterface"
+  name: "&nbsp;&nbsp;MIDI Device Interface"
+  url: "/functions/#21_MIDIDeviceInterface"
+- id: "25_MIDIControllerInterface"
+  name: "&nbsp;&nbsp;MIDI Controller Interface"
+  url: "/functions/#25_MIDIControllerInterface"
+- id: "13_MIDIFileIO"
+  name: "&nbsp;&nbsp;MIDI File I/O"
+  url: "/functions/#13_MIDIFileIO"
+- id: "12_Enumerations"
+  name: "&nbsp;&nbsp;Enumerations"
+  url: "/functions/#12_Enumerations"
+- id: "19_WaveformGeneration"
+  name: "&nbsp;&nbsp;Waveform Generation"
+  url: "/functions/#19_WaveformGeneration"
+- id: "12_Measurements"
+  name: "&nbsp;&nbsp;Measurements"
+  url: "/functions/#12_Measurements"
 - id: "news"
   name: "News"
   url: "/news"
@@ -21,24 +39,24 @@ navigation:
   name: "Manual"
   url: "/manual"
 ---
-<dl class="def">
-<dt id="index-mididevinfo"><span class="category">: </span><span><em><var>devlist</var> =</em> <strong>mididevinfo</strong> <em>()</em><a href='#index-mididevinfo' class='copiable-anchor'></a></span></dt>
-<dt id="index-mididevinfo-1"><span class="category">: </span><span><em></em> <strong>mididevinfo</strong> <em>()</em><a href='#index-mididevinfo-1' class='copiable-anchor'></a></span></dt>
+<dl class="first-deftypefn">
+<dt class="deftypefn" id="index-mididevinfo"><span class="category-def">: </span><span><code class="def-type"><var class="var">devlist</var> =</code> <strong class="def-name">mididevinfo</strong> <code class="def-code-arguments">()</code><a class="copiable-link" href='#index-mididevinfo'></a></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn" id="index-mididevinfo-1"><span class="category-def">: </span><span><strong class="def-name">mididevinfo</strong> <code class="def-code-arguments">()</code><a class="copiable-link" href='#index-mididevinfo-1'></a></span></dt>
 <dd><p>Retrieve the midi devices detected within the system.
 </p>
-<p>The list will be stored with variable <var>devlist</var> as either a input or output device.
+<p>The list will be stored with variable <var class="var">devlist</var> as either a input or output device.
  If no output variable is provided, the devices will be displayed.
 </p>
-<span id="Inputs"></span><h4 class="subsubheading">Inputs</h4>
+<h4 class="subsubheading" id="Inputs">Inputs</h4>
 <p>None
 </p>
-<span id="Outputs"></span><h4 class="subsubheading">Outputs</h4>
-<p><var>devlist</var> - a structure containing the midi device information
+<h4 class="subsubheading" id="Outputs">Outputs</h4>
+<p><var class="var">devlist</var> - a structure containing the midi device information
 </p>
-<span id="Examples"></span><h4 class="subsubheading">Examples</h4>
+<h4 class="subsubheading" id="Examples">Examples</h4>
 <p>Display the known devices of the system.
  </p><div class="example">
-<pre class="example"> <code>&gt;</code> mididevinfo
+<pre class="example-preformatted"> <code class="command">&gt;</code> mididevinfo
 
  MIDI devices available
  ID Direction Interface  Name
@@ -50,9 +68,9 @@ navigation:
   5 input     Alsa       SparkFun Pro Micro:SparkFun Pro Micro MIDI 1 20:0 
  </pre></div>
 
-<p>Assign variable <var>mididevices</var> with the values from the known devices
+<p>Assign variable <var class="var">mididevices</var> with the values from the known devices
  </p><div class="example">
-<pre class="example"> <code>&gt;</code> mididevices = mididevinfo
+<pre class="example-preformatted"> <code class="command">&gt;</code> mididevices = mididevinfo
 
  mididevices =
   scalar structure containing the fields:
@@ -75,5 +93,5 @@ navigation:
  </pre></div>
 
 
-<p><strong>See also:</strong> mididevice.
+<p><strong class="strong">See also:</strong> mididevice.
  </p></dd></dl>

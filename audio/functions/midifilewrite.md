@@ -2,7 +2,7 @@
 layout: "default"
 permalink: "/functions/13_midifilewrite/"
 pkg_name: "audio"
-pkg_version: "2.0.5"
+pkg_version: "2.0.6"
 pkg_description: "Audio and MIDI Toolbox for GNU Octave"
 title: "Audio Toolkit - midifilewrite"
 category: "MIDI File I/O"
@@ -14,6 +14,24 @@ navigation:
 - id: "Functions"
   name: "Function Reference"
   url: "/functions"
+- id: "21_MIDIDeviceInterface"
+  name: "&nbsp;&nbsp;MIDI Device Interface"
+  url: "/functions/#21_MIDIDeviceInterface"
+- id: "25_MIDIControllerInterface"
+  name: "&nbsp;&nbsp;MIDI Controller Interface"
+  url: "/functions/#25_MIDIControllerInterface"
+- id: "13_MIDIFileIO"
+  name: "&nbsp;&nbsp;MIDI File I/O"
+  url: "/functions/#13_MIDIFileIO"
+- id: "12_Enumerations"
+  name: "&nbsp;&nbsp;Enumerations"
+  url: "/functions/#12_Enumerations"
+- id: "19_WaveformGeneration"
+  name: "&nbsp;&nbsp;Waveform Generation"
+  url: "/functions/#19_WaveformGeneration"
+- id: "12_Measurements"
+  name: "&nbsp;&nbsp;Measurements"
+  url: "/functions/#12_Measurements"
 - id: "news"
   name: "News"
   url: "/news"
@@ -21,19 +39,19 @@ navigation:
   name: "Manual"
   url: "/manual"
 ---
-<dl class="def">
-<dt id="index-midifilewrite"><span class="category">: </span><span><em></em> <strong>midifilewrite</strong> <em>(<var>filename</var>, <var>msgs</var>)</em><a href='#index-midifilewrite' class='copiable-anchor'></a></span></dt>
-<dt id="index-midifilewrite-1"><span class="category">: </span><span><em></em> <strong>midifilewrite</strong> <em>(<var>filename</var>, <var>msgs</var>, <var>optionname</var>, <var>optionvalue</var>)</em><a href='#index-midifilewrite-1' class='copiable-anchor'></a></span></dt>
+<dl class="first-deftypefn">
+<dt class="deftypefn" id="index-midifilewrite"><span class="category-def">: </span><span><strong class="def-name">midifilewrite</strong> <code class="def-code-arguments">(<var class="var">filename</var>, <var class="var">msgs</var>)</code><a class="copiable-link" href='#index-midifilewrite'></a></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn" id="index-midifilewrite-1"><span class="category-def">: </span><span><strong class="def-name">midifilewrite</strong> <code class="def-code-arguments">(<var class="var">filename</var>, <var class="var">msgs</var>, <var class="var">optionname</var>, <var class="var">optionvalue</var>)</code><a class="copiable-link" href='#index-midifilewrite-1'></a></span></dt>
 <dd><p>Write a midifile
 </p>
-<span id="Inputs"></span><h4 class="subsubheading">Inputs</h4>
-<p><var>filename</var> - filename of file to open.<br>
- <var>msg</var> - a midimsg struct or a cell array of midimsg containing data to write to file<br>
- <var>optionname</var>, <var>optionvalue</var> - option value/name pairs<br>
+<h4 class="subsubheading" id="Inputs">Inputs</h4>
+<p><var class="var">filename</var> - filename of file to open.<br>
+ <var class="var">msg</var> - a midimsg struct or a cell array of midimsg containing data to write to file<br>
+ <var class="var">optionname</var>, <var class="var">optionvalue</var> - option value/name pairs<br>
 </p>
 <p>Known options are:
- </p><dl compact="compact">
-<dt><span>format</span></dt>
+ </p><dl class="table">
+<dt>format</dt>
 <dd><p>MIDI file format number. (0 (default), 1, 2)
  </p></dd>
 </dl>
@@ -43,8 +61,8 @@ navigation:
 </p>
 <p>Were format is not 0, the cell array is treated as tracks of misimsg.
 </p>
-<span id="Outputs"></span><h4 class="subsubheading">Outputs</h4>
+<h4 class="subsubheading" id="Outputs">Outputs</h4>
 <p>None
  </p>
-<p><strong>See also:</strong> midifileread, midimsg.
+<p><strong class="strong">See also:</strong> midifileread, midimsg.
  </p></dd></dl>

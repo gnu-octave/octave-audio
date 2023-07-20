@@ -1,12 +1,12 @@
 ---
 layout: "default"
-permalink: "/functions/9_midiflush/"
+permalink: "/functions/7_hz2bark/"
 pkg_name: "audio"
 pkg_version: "2.0.6"
 pkg_description: "Audio and MIDI Toolbox for GNU Octave"
-title: "Audio Toolkit - midiflush"
-category: "MIDI Device Interface"
-func_name: "midiflush"
+title: "Audio Toolkit - hz2bark"
+category: "Measurements"
+func_name: "hz2bark"
 navigation:
 - id: "overview"
   name: "Overview"
@@ -40,21 +40,23 @@ navigation:
   url: "/manual"
 ---
 <dl class="first-deftypefn">
-<dt class="deftypefn" id="index-midiflush"><span class="category-def">: </span><span><strong class="def-name">midiflush</strong> <code class="def-code-arguments">(<var class="var">dev</var>)</code><a class="copiable-link" href='#index-midiflush'></a></span></dt>
-<dd><p>Flush the receive buffers on a midi device
+<dt class="deftypefn" id="index-hz2bark"><span class="category-def">: </span><span><code class="def-type"><var class="var">bark</var> =</code> <strong class="def-name">hz2bark</strong> <code class="def-code-arguments">(<var class="var">hz</var>)</code><a class="copiable-link" href='#index-hz2bark'></a></span></dt>
+<dd><p>Convert hz to equivalent bark frequency
 </p>
 <h4 class="subsubheading" id="Inputs">Inputs</h4>
-<p><var class="var">dev</var> - midi device opened using mididevice<br>
+<p><var class="var">hz</var> - input frequency in Hz.
 </p>
 <h4 class="subsubheading" id="Outputs">Outputs</h4>
-<p>None
+<p><var class="var">bark</var> - Output frequency as a bark value
 </p>
 <h4 class="subsubheading" id="Examples">Examples</h4>
-<p>Flush a midi device
+<p>Convert 4000 Hz to erb
  </p><div class="example">
-<pre class="example-preformatted"> midiflush(dev);
+<pre class="example-preformatted"> <code class="code">erb = hz2erb(4000)</code>
  </pre></div>
- 
 
-<p><strong class="strong">See also:</strong> mididevice, midireceive.
- </p></dd></dl>
+<h4 class="subsubheading" id="References">References</h4>
+<p>Traunmüller, Hartmut. <cite class="cite">Analytical Expressions for the Tonotopic Sensory Scale.
+ Journal of the Acoustical Society of America. Vol. 88, Issue 1, 1990</cite>
+</p>
+</dd></dl>

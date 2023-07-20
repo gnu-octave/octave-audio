@@ -1,12 +1,12 @@
 ---
 layout: "default"
-permalink: "/functions/9_midiflush/"
+permalink: "/functions/6_hz2mel/"
 pkg_name: "audio"
 pkg_version: "2.0.6"
 pkg_description: "Audio and MIDI Toolbox for GNU Octave"
-title: "Audio Toolkit - midiflush"
-category: "MIDI Device Interface"
-func_name: "midiflush"
+title: "Audio Toolkit - hz2mel"
+category: "Measurements"
+func_name: "hz2mel"
 navigation:
 - id: "overview"
   name: "Overview"
@@ -40,21 +40,28 @@ navigation:
   url: "/manual"
 ---
 <dl class="first-deftypefn">
-<dt class="deftypefn" id="index-midiflush"><span class="category-def">: </span><span><strong class="def-name">midiflush</strong> <code class="def-code-arguments">(<var class="var">dev</var>)</code><a class="copiable-link" href='#index-midiflush'></a></span></dt>
-<dd><p>Flush the receive buffers on a midi device
+<dt class="deftypefn" id="index-hz2mel"><span class="category-def">: </span><span><code class="def-type"><var class="var">mel</var> =</code> <strong class="def-name">hz2mel</strong> <code class="def-code-arguments">(<var class="var">hz</var>)</code><a class="copiable-link" href='#index-hz2mel'></a></span></dt>
+<dd><p>Convert hz to equivalent mel frequency.
 </p>
 <h4 class="subsubheading" id="Inputs">Inputs</h4>
-<p><var class="var">dev</var> - midi device opened using mididevice<br>
+<p><var class="var">hz</var> - input frequency in Hz.
 </p>
 <h4 class="subsubheading" id="Outputs">Outputs</h4>
-<p>None
+<p><var class="var">mel</var> - Output frequency as a mel value
 </p>
 <h4 class="subsubheading" id="Examples">Examples</h4>
-<p>Flush a midi device
+<p>Convert 4000 Hz to mel
  </p><div class="example">
-<pre class="example-preformatted"> midiflush(dev);
+<pre class="example-preformatted"> <code class="code">mel = hz2mel(4000)</code>
  </pre></div>
- 
 
-<p><strong class="strong">See also:</strong> mididevice, midireceive.
- </p></dd></dl>
+<p>Convert a range of Hz to mel
+ </p><div class="example">
+<pre class="example-preformatted"> <code class="code">mel = hz2erb(4000:100:5000)</code>
+ </pre></div>
+
+<h4 class="subsubheading" id="References">References</h4>
+<p>O&rsquo;Shaghnessy, Douglas. <cite class="cite">Speech Communication: Human and Machine. Reading, MA:
+ Addison-Wesley Publishing Company, 1987</cite>
+</p>
+</dd></dl>

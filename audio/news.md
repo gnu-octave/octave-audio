@@ -3,7 +3,7 @@ layout: "default"
 permalink: "/news/"
 title: "Audio Toolkit - News"
 pkg_name: "audio"
-version: "2.0.5"
+version: "2.0.6"
 description: "Audio and MIDI Toolbox for GNU Octave"
 navigation:
 - id: "overview"
@@ -20,6 +20,20 @@ navigation:
 ---
 <pre>
 Summary of important user-visible changes for releases of the audio package
+
+===============================================================================
+audio-2.0.6   Release Date: 2023-07-20
+===============================================================================
+
+  ** minor updates for octave dld classes
+
+  ** NEW FUNCTIONS:
+    - erb2hz and hz2erb
+    - bark2hz and hz2bark
+    - mel2hz and hz2mel
+    - audioOscillator
+
+  ** minor updates to documentation
 
 ===============================================================================
 audio-2.0.5   Release Date: 2022-07-20

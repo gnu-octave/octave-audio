@@ -1,12 +1,12 @@
 ---
 layout: "default"
-permalink: "/functions/9_midiflush/"
+permalink: "/functions/6_erb2hz/"
 pkg_name: "audio"
 pkg_version: "2.0.6"
 pkg_description: "Audio and MIDI Toolbox for GNU Octave"
-title: "Audio Toolkit - midiflush"
-category: "MIDI Device Interface"
-func_name: "midiflush"
+title: "Audio Toolkit - erb2hz"
+category: "Measurements"
+func_name: "erb2hz"
 navigation:
 - id: "overview"
   name: "Overview"
@@ -40,21 +40,17 @@ navigation:
   url: "/manual"
 ---
 <dl class="first-deftypefn">
-<dt class="deftypefn" id="index-midiflush"><span class="category-def">: </span><span><strong class="def-name">midiflush</strong> <code class="def-code-arguments">(<var class="var">dev</var>)</code><a class="copiable-link" href='#index-midiflush'></a></span></dt>
-<dd><p>Flush the receive buffers on a midi device
+<dt class="deftypefn" id="index-erb2hz"><span class="category-def">: </span><span><code class="def-type"><var class="var">hz</var> =</code> <strong class="def-name">erb2hz</strong> <code class="def-code-arguments">(<var class="var">erb</var>)</code><a class="copiable-link" href='#index-erb2hz'></a></span></dt>
+<dd><p>Convert equivalent rectangular bandwidth (ERB) to Hz.
 </p>
 <h4 class="subsubheading" id="Inputs">Inputs</h4>
-<p><var class="var">dev</var> - midi device opened using mididevice<br>
+<p><var class="var">erb</var> - input frequency in erb.
 </p>
 <h4 class="subsubheading" id="Outputs">Outputs</h4>
-<p>None
+<p><var class="var">hz</var> - Output frequency in Hz.
 </p>
-<h4 class="subsubheading" id="Examples">Examples</h4>
-<p>Flush a midi device
- </p><div class="example">
-<pre class="example-preformatted"> midiflush(dev);
- </pre></div>
- 
-
-<p><strong class="strong">See also:</strong> mididevice, midireceive.
- </p></dd></dl>
+<h4 class="subsubheading" id="References">References</h4>
+<p>Glasberg and Moore. <cite class="cite">Derivation of Auditory Filter Shapes from Notched-Noise Data.
+ Hearing Research. Vol. 47, 1990</cite>
+</p>
+</dd></dl>

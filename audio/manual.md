@@ -3,7 +3,7 @@ layout: "default"
 permalink: "/manual/"
 title: "Audio Toolkit - Manual"
 pkg_name: "audio"
-version: "2.0.5"
+version: "2.0.6"
 description: "Audio and MIDI Toolbox for GNU Octave"
 navigation:
 - id: "overview"
@@ -27,31 +27,35 @@ navigation:
   name: "&nbsp;&nbsp; Function Reference"
   url: "/manual/#Function-Reference-1"
 ---
-<h1 class="settitle" align="center">Octave Audio - Audio Toolkit for GNU octave</h1>
-<div class="top" id="Top">
-<div class="header">
+<div class="top-level-extent" id="Top">
+<div class="nav-panel">
 <p>
 Next: <a href="#Installing-and-loading" accesskey="n" rel="next">Installing and loading</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="#Index" title="Index" rel="index">Index</a>]</p>
 </div>
-<span id="Introduction"></span><h1 class="top">Introduction</h1>
+<h1 class="top" id="Introduction">Introduction</h1>
 <p>The Audio toolkit is a set of functions for manipulating MIDI devices and files for GNU Octave
 </p>
-<div class="Contents_element" id="SEC_Contents">
+<div class="element-contents" id="SEC_Contents">
 <h2 class="contents-heading">Table of Contents</h2>
 <div class="contents">
-<ul class="no-bullet">
+<ul class="toc-numbered-mark">
   <li><a id="toc-Installing-and-loading-1" href="#Installing-and-loading">1 Installing and loading</a>
-  <ul class="no-bullet">
+  <ul class="toc-numbered-mark">
     <li><a id="toc-Windows-install" href="#Windows-install">1.1 Windows install</a></li>
     <li><a id="toc-Online-Direct-install" href="#Online-Direct-install">1.2 Online Direct install</a></li>
     <li><a id="toc-Off_002dline-install" href="#Off_002dline-install">1.3 Off-line install</a></li>
     <li><a id="toc-Loading" href="#Loading">1.4 Loading</a></li>
   </ul></li>
-  <li><a id="toc-Basic-Usage-Overview-1" href="#Basic-Usage-Overview">2 Basic Usage Overview</a></li>
+  <li><a id="toc-Basic-Usage-Overview-1" href="#Basic-Usage-Overview">2 Basic Usage Overview</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Conversion-Functionality" href="#Conversion-Functionality">2.1 Conversion Functionality</a></li>
+    <li><a id="toc-Waveform-Generation-1" href="#Waveform-Generation-1">2.2 Waveform Generation</a></li>
+    <li><a id="toc-MIDI-Functionality" href="#MIDI-Functionality">2.3 MIDI Functionality</a></li>
+  </ul></li>
   <li><a id="toc-Function-Reference-1" href="#Function-Reference">3 Function Reference</a>
-  <ul class="no-bullet">
+  <ul class="toc-numbered-mark">
     <li><a id="toc-MIDI-Device-Interface-1" href="#MIDI-Device-Interface">3.1 MIDI Device Interface</a>
-    <ul class="no-bullet">
+    <ul class="toc-numbered-mark">
       <li><a id="toc-_0040octave_005fmidi_002fhasdata" href="#g_t_0040octave_005fmidi_002fhasdata">3.1.1 @octave_midi/hasdata</a></li>
       <li><a id="toc-mididevice" href="#mididevice">3.1.2 mididevice</a></li>
       <li><a id="toc-mididevinfo" href="#mididevinfo">3.1.3 mididevinfo</a></li>
@@ -61,7 +65,7 @@ Next: <a href="#Installing-and-loading" accesskey="n" rel="next">Installing and 
       <li><a id="toc-midisend" href="#midisend">3.1.7 midisend</a></li>
     </ul></li>
     <li><a id="toc-MIDI-Controller-Interface-1" href="#MIDI-Controller-Interface">3.2 MIDI Controller Interface</a>
-    <ul class="no-bullet">
+    <ul class="toc-numbered-mark">
       <li><a id="toc-midicallback" href="#midicallback">3.2.1 midicallback</a></li>
       <li><a id="toc-midicontrols" href="#midicontrols">3.2.2 midicontrols</a></li>
       <li><a id="toc-midiid" href="#midiid">3.2.3 midiid</a></li>
@@ -69,15 +73,28 @@ Next: <a href="#Installing-and-loading" accesskey="n" rel="next">Installing and 
       <li><a id="toc-midisync" href="#midisync">3.2.5 midisync</a></li>
     </ul></li>
     <li><a id="toc-MIDI-File-I_002fO-1" href="#MIDI-File-I_002fO">3.3 MIDI File I/O</a>
-    <ul class="no-bullet">
+    <ul class="toc-numbered-mark">
       <li><a id="toc-ismidifile" href="#ismidifile">3.3.1 ismidifile</a></li>
       <li><a id="toc-midifileinfo" href="#midifileinfo">3.3.2 midifileinfo</a></li>
       <li><a id="toc-midifileread" href="#midifileread">3.3.3 midifileread</a></li>
       <li><a id="toc-midifilewrite" href="#midifilewrite">3.3.4 midifilewrite</a></li>
     </ul></li>
     <li><a id="toc-Enumerations-1" href="#Enumerations">3.4 Enumerations</a>
-    <ul class="no-bullet">
+    <ul class="toc-numbered-mark">
       <li><a id="toc-midimsgtype" href="#midimsgtype">3.4.1 midimsgtype</a></li>
+    </ul></li>
+    <li><a id="toc-Waveform-Generation-2" href="#Waveform-Generation">3.5 Waveform Generation</a>
+    <ul class="toc-numbered-mark">
+      <li><a id="toc-audioOscillator" href="#audioOscillator">3.5.1 audioOscillator</a></li>
+    </ul></li>
+    <li><a id="toc-Measurements-1" href="#Measurements">3.6 Measurements</a>
+    <ul class="toc-numbered-mark">
+      <li><a id="toc-bark2hz" href="#bark2hz">3.6.1 bark2hz</a></li>
+      <li><a id="toc-erb2hz" href="#erb2hz">3.6.2 erb2hz</a></li>
+      <li><a id="toc-hz2bark" href="#hz2bark">3.6.3 hz2bark</a></li>
+      <li><a id="toc-hz2erb" href="#hz2erb">3.6.4 hz2erb</a></li>
+      <li><a id="toc-hz2mel" href="#hz2mel">3.6.5 hz2mel</a></li>
+      <li><a id="toc-mel2hz" href="#mel2hz">3.6.6 mel2hz</a></li>
     </ul></li>
   </ul></li>
   <li><a id="toc-GNU-General-Public-License" href="#Copying">Appendix A GNU General Public License</a></li>
@@ -86,101 +103,148 @@ Next: <a href="#Installing-and-loading" accesskey="n" rel="next">Installing and 
 </div>
 </div>
 <hr>
-<div class="chapter" id="Installing-and-loading">
-<div class="header">
+<div class="chapter-level-extent" id="Installing-and-loading">
+<div class="nav-panel">
 <p>
 Next: <a href="#Basic-Usage-Overview" accesskey="n" rel="next">Basic Usage Overview</a>, Previous: <a href="#Top" accesskey="p" rel="prev">Introduction</a>, Up: <a href="#Top" accesskey="u" rel="up">Introduction</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="#Index" title="Index" rel="index">Index</a>]</p>
 </div>
-<span id="Installing-and-loading-1"></span><h2 class="chapter">1 Installing and loading</h2>
-<span id="index-Installing-and-loading"></span>
+<h2 class="chapter" id="Installing-and-loading-1">1 Installing and loading</h2>
+<a class="index-entry-id" id="index-Installing-and-loading"></a>
 <p>The Audio toolkit must be installed and then loaded to be used.
 </p>
-<p>It can be installed in <acronym>GNU</acronym> Octave directly from octave-forge,
+<p>It can be installed in <abbr class="acronym">GNU</abbr> Octave directly from octave-forge,
 or can be installed in an off-line mode via a downloaded tarball.
 </p>
-<p>The toolkit has a dependency on the RTMIDI library (<a href="https://github.com/thestk/rtmidi">https://github.com/thestk/rtmidi</a>), so it must be installed in order
+<p>The toolkit has a dependency on the RTMIDI library (<a class="url" href="https://github.com/thestk/rtmidi">https://github.com/thestk/rtmidi</a>), so it must be installed in order
 to successfully install the toolkit.
 </p>
-<p>For Fedora: <code>yum install rtmidi-devel</code> 
+<p>For Fedora: <code class="code">yum install rtmidi-devel</code> 
 </p>
-<p>For Ubuntu: <code>apt install librtmidi-dev</code> 
+<p>For Ubuntu: <code class="code">apt install librtmidi-dev</code> 
 </p>
-<p>The toolkit must be then be loaded once per each <acronym>GNU</acronym> Octave session in order to use its functionality.
+<p>The toolkit must be then be loaded once per each <abbr class="acronym">GNU</abbr> Octave session in order to use its functionality.
 </p>
-<ul class="section-toc">
+<ul class="mini-toc">
 <li><a href="#Windows-install" accesskey="1">Windows install</a></li>
 <li><a href="#Online-Direct-install" accesskey="2">Online Direct install</a></li>
 <li><a href="#Off_002dline-install" accesskey="3">Off-line install</a></li>
 <li><a href="#Loading" accesskey="4">Loading</a></li>
 </ul>
-<div class="section" id="Windows-install">
+<div class="section-level-extent" id="Windows-install">
 <h3 class="section">1.1 Windows install</h3>
-<span id="index-Windows-install"></span>
+<a class="index-entry-id" id="index-Windows-install"></a>
 <p>If running in Windows, the package may already be installed, to check run:
 </p>
 <div class="example">
-<pre class="example">pkg list audio
+<pre class="example-preformatted">pkg list audio
 </pre></div>
 <p>Otherwise it can be installed by installing the requirements and then using the online or offline install method.
 </p>
 </div>
-<div class="section" id="Online-Direct-install">
+<div class="section-level-extent" id="Online-Direct-install">
 <h3 class="section">1.2 Online Direct install</h3>
-<span id="index-Online-install"></span>
+<a class="index-entry-id" id="index-Online-install"></a>
 <p>With an internet connection available, the Audio package can be installed from
-octave-forge using the following command within <acronym>GNU</acronym> Octave:
+octave-forge using the following command within <abbr class="acronym">GNU</abbr> Octave:
 </p>
 <div class="example">
-<pre class="example">pkg install -forge audio
+<pre class="example-preformatted">pkg install -forge audio
 </pre></div>
 <p>The latest released version of the toolkit will be downloaded and installed.
 </p>
 </div>
-<div class="section" id="Off_002dline-install">
+<div class="section-level-extent" id="Off_002dline-install">
 <h3 class="section">1.3 Off-line install</h3>
-<span id="index-Off_002dline-install"></span>
+<a class="index-entry-id" id="index-Off_002dline-install"></a>
 <p>With the Audio toolkit package already downloaded, and in the current directory when running
-<acronym>GNU</acronym> Octave, the package can be installed using the following command within <acronym>GNU</acronym> Octave:
+<abbr class="acronym">GNU</abbr> Octave, the package can be installed using the following command within <abbr class="acronym">GNU</abbr> Octave:
 </p>
 <div class="example">
-<pre class="example">pkg install audio-2.0.5.tar.gz
+<pre class="example-preformatted">pkg install audio-2.0.6.tar.gz
 </pre></div>
 </div>
-<div class="section" id="Loading">
+<div class="section-level-extent" id="Loading">
 <h3 class="section">1.4 Loading</h3>
-<span id="index-Loading"></span>
+<a class="index-entry-id" id="index-Loading"></a>
 <p>Regardless of the method of installing the Audio toolkit, in order to use its functions,
 the toolkit must be loaded using the pkg load command:
 </p>
 <div class="example">
-<pre class="example">pkg load audio
+<pre class="example-preformatted">pkg load audio
 </pre></div>
-<p>The toolkit must be loaded on each <acronym>GNU</acronym> Octave session.
+<p>The toolkit must be loaded on each <abbr class="acronym">GNU</abbr> Octave session.
 </p>
 <hr>
 </div>
 </div>
-<div class="chapter" id="Basic-Usage-Overview">
-<div class="header">
+<div class="chapter-level-extent" id="Basic-Usage-Overview">
+<div class="nav-panel">
 <p>
 Next: <a href="#Function-Reference" accesskey="n" rel="next">Function Reference</a>, Previous: <a href="#Installing-and-loading" accesskey="p" rel="prev">Installing and loading</a>, Up: <a href="#Top" accesskey="u" rel="up">Introduction</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="#Index" title="Index" rel="index">Index</a>]</p>
 </div>
-<span id="Basic-Usage-Overview-1"></span><h2 class="chapter">2 Basic Usage Overview</h2>
-<span id="index-Basic-Usage-Overview"></span>
-<p>The Audio package must be loaded each time a <acronym>GNU</acronym> Octave session is started:
+<h2 class="chapter" id="Basic-Usage-Overview-1">2 Basic Usage Overview</h2>
+<a class="index-entry-id" id="index-Basic-Usage-Overview"></a>
+<p>The Audio package must be loaded each time a <abbr class="acronym">GNU</abbr> Octave session is started:
 </p><div class="example">
-<pre class="example">pkg load audio
+<pre class="example-preformatted">pkg load audio
 </pre></div>
+<p>An overview of the package can be displayed by running <code class="code">help audio</code>
+</p>
+<p>Help for each function can be displayed by  <code class="code">help thefunctionname</code>
+</p>
+<p>ie: 
+</p><div class="example">
+<pre class="example-preformatted">help mididevice
+</pre></div>
+<ul class="mini-toc">
+<li><a href="#Conversion-Functionality" accesskey="1">Conversion Functionality</a></li>
+<li><a href="#Waveform-Generation-1" accesskey="2">Waveform Generation</a></li>
+<li><a href="#MIDI-Functionality" accesskey="3">MIDI Functionality</a></li>
+</ul>
+<div class="section-level-extent" id="Conversion-Functionality">
+<h3 class="section">2.1 Conversion Functionality</h3>
+<a class="index-entry-id" id="index-Conversion-Functionality"></a>
+<p>The following functions are available to convert to and from Hz frequency:
+</p><dl class="table">
+<dt>hz2erb, erb2hz</dt>
+<dd><p>Conversion between hz and equivalent rectangular bandwidths (ERP) frequency scales
+</p></dd>
+<dt>hz2mel, mel2hz</dt>
+<dd><p>Conversion between hz and equivalent mel frequency scales
+</p></dd>
+<dt>hz2bark, bark2hz</dt>
+<dd><p>Conversion between hz and equivalent bark frequency scales
+</p></dd>
+</dl>
+</div>
+<div class="section-level-extent" id="Waveform-Generation-1">
+<h3 class="section">2.2 Waveform Generation</h3>
+<a class="index-entry-id" id="index-Waveform-Generation"></a>
+<p>The <code class="code">audioOscillator</code> function provides a method of creating a waveform generator for sine,
+square and sawtooth waveforms.
+</p>
+<div class="example">
+<pre class="example-preformatted">% create a sawtooth audio generator
+osc = audioOscillator(&quot;sawtooth&quot;);
+% get a frame of data
+data = osc();
+% plot the data
+plot(data);
+</pre></div>
+</div>
+<div class="section-level-extent" id="MIDI-Functionality">
+<h3 class="section">2.3 MIDI Functionality</h3>
+<a class="index-entry-id" id="index-MIDI-Functionality"></a>
 <p>The Audio toolkit provides 3 main types of MIDI functionality:
 </p>
-<dl compact="compact">
-<dt><span>Device functions</span></dt>
+<dl class="table">
+<dt>Device functions</dt>
 <dd><p>These are functions that directly allow opening, sending and receiving MIDI messages.
 </p></dd>
-<dt><span>Controller functions</span></dt>
+<dt>Controller functions</dt>
 <dd><p>Functions that provide a layer on top of the device functions for using MIDI controls.
 </p></dd>
-<dt><span>File functions</span></dt>
+<dt>File functions</dt>
 <dd><p>Basic functions that allow read and write of MIDI files.
 </p></dd>
 </dl>
@@ -190,7 +254,7 @@ of a known MIDI device as provided by the mididevinfo function.
 <p>MIDI devices can then be read using the midisend and midireceive functions that use midimsg type to encapsulate the MIDI data.
 </p>
 <div class="example">
-<pre class="example">% list the midi devices
+<pre class="example-preformatted">% list the midi devices
 devs = mididevinfo
 % open a midi device, specifying the first input and output MIDI device
 dev = mididevice(&quot;input&quot;, devs.input{1}.ID, &quot;output&quot;, devs.output{1}.ID)
@@ -202,40 +266,35 @@ while true
   endif
 endwhile
 </pre></div>
-<p>An overview of the package can be displayed by running <code>help audio</code>
-</p>
-<p>Help for each function can be displayed by  <code>help thefunctionname</code>
-</p>
-<p>ie: 
-</p><div class="example">
-<pre class="example">help mididevice
-</pre></div>
 <hr>
 </div>
-<div class="chapter" id="Function-Reference">
-<div class="header">
+</div>
+<div class="chapter-level-extent" id="Function-Reference">
+<div class="nav-panel">
 <p>
 Next: <a href="#Copying" accesskey="n" rel="next">GNU General Public License</a>, Previous: <a href="#Basic-Usage-Overview" accesskey="p" rel="prev">Basic Usage Overview</a>, Up: <a href="#Top" accesskey="u" rel="up">Introduction</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="#Index" title="Index" rel="index">Index</a>]</p>
 </div>
-<span id="Function-Reference-1"></span><h2 class="chapter">3 Function Reference</h2>
-<span id="index-Function-Reference"></span>
+<h2 class="chapter" id="Function-Reference-1">3 Function Reference</h2>
+<a class="index-entry-id" id="index-Function-Reference"></a>
 <p>The functions currently available in the Audio toolkit are described below:
 </p>
-<ul class="section-toc">
+<ul class="mini-toc">
 <li><a href="#MIDI-Device-Interface" accesskey="1">MIDI Device Interface</a></li>
 <li><a href="#MIDI-Controller-Interface" accesskey="2">MIDI Controller Interface</a></li>
 <li><a href="#MIDI-File-I_002fO" accesskey="3">MIDI File I/O</a></li>
 <li><a href="#Enumerations" accesskey="4">Enumerations</a></li>
+<li><a href="#Waveform-Generation" accesskey="5">Waveform Generation</a></li>
+<li><a href="#Measurements" accesskey="6">Measurements</a></li>
 </ul>
 <hr>
-<div class="section" id="MIDI-Device-Interface">
-<div class="header">
+<div class="section-level-extent" id="MIDI-Device-Interface">
+<div class="nav-panel">
 <p>
 Next: <a href="#MIDI-Controller-Interface" accesskey="n" rel="next">MIDI Controller Interface</a>, Up: <a href="#Function-Reference" accesskey="u" rel="up">Function Reference</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="#Index" title="Index" rel="index">Index</a>]</p>
 </div>
-<span id="MIDI-Device-Interface-1"></span><h3 class="section">3.1 MIDI Device Interface</h3>
-<span id="index-MIDI-Device-Interface"></span>
-<ul class="section-toc">
+<h3 class="section" id="MIDI-Device-Interface-1">3.1 MIDI Device Interface</h3>
+<a class="index-entry-id" id="index-MIDI-Device-Interface"></a>
+<ul class="mini-toc">
 <li><a href="#g_t_0040octave_005fmidi_002fhasdata" accesskey="1">@octave_midi/hasdata</a></li>
 <li><a href="#mididevice" accesskey="2">mididevice</a></li>
 <li><a href="#mididevinfo" accesskey="3">mididevinfo</a></li>
@@ -244,89 +303,89 @@ Next: <a href="#MIDI-Controller-Interface" accesskey="n" rel="next">MIDI Control
 <li><a href="#midireceive" accesskey="6">midireceive</a></li>
 <li><a href="#midisend" accesskey="7">midisend</a></li>
 </ul>
-<div class="subsection" id="g_t_0040octave_005fmidi_002fhasdata">
+<div class="subsection-level-extent" id="g_t_0040octave_005fmidi_002fhasdata">
 <h4 class="subsection">3.1.1 @octave_midi/hasdata</h4>
-<span id="index-hasdata"></span>
-<dl class="def">
-<dt id="index-hasdata-1"><span class="category">: </span><span><em><var>tf</var> =</em> <strong>hasdata</strong> <em>(<var>dev</var>)</em><a href='#index-hasdata-1' class='copiable-anchor'></a></span></dt>
+<a class="index-entry-id" id="index-hasdata"></a>
+<dl class="first-deftypefn">
+<dt class="deftypefn" id="index-hasdata-1"><span class="category-def">: </span><span><code class="def-type"><var class="var">tf</var> =</code> <strong class="def-name">hasdata</strong> <code class="def-code-arguments">(<var class="var">dev</var>)</code><a class="copiable-link" href='#index-hasdata-1'></a></span></dt>
 <dd><p>Return whether there is data available to read
 </p>
-<span id="Inputs"></span><h4 class="subsubheading">Inputs</h4>
-<p><var>dev</var> - a octave midi device opened using mididevice.<br>
+<h4 class="subsubheading" id="Inputs">Inputs</h4>
+<p><var class="var">dev</var> - a octave midi device opened using mididevice.<br>
 </p>
-<span id="Outputs"></span><h4 class="subsubheading">Outputs</h4>
-<p><var>tf</var> - true if device has data available to read<br>
+<h4 class="subsubheading" id="Outputs">Outputs</h4>
+<p><var class="var">tf</var> - true if device has data available to read<br>
 </p>
-<p><strong>See also:</strong> mididevice.
- </p></dd></dl>
+<p><strong class="strong">See also:</strong> mididevice.
+</p></dd></dl>
 </div>
-<div class="subsection" id="mididevice">
+<div class="subsection-level-extent" id="mididevice">
 <h4 class="subsection">3.1.2 mididevice</h4>
-<span id="index-mididevice"></span>
-<dl class="def">
-<dt id="index-mididevice-1"><span class="category">: </span><span><em><var>dev</var> =</em> <strong>mididevice</strong> <em>(<var>mididev</var>)</em><a href='#index-mididevice-1' class='copiable-anchor'></a></span></dt>
-<dt id="index-mididevice-2"><span class="category">: </span><span><em><var>dev</var> =</em> <strong>mididevice</strong> <em>(<var>mididir</var>, <var>mididev</var>)</em><a href='#index-mididevice-2' class='copiable-anchor'></a></span></dt>
-<dt id="index-mididevice-3"><span class="category">: </span><span><em><var>dev</var> =</em> <strong>mididevice</strong> <em>(&quot;input&quot;, <var>midiindev</var>, &quot;output&quot;, <var>midioutdev</var>)</em><a href='#index-mididevice-3' class='copiable-anchor'></a></span></dt>
+<a class="index-entry-id" id="index-mididevice"></a>
+<dl class="first-deftypefn">
+<dt class="deftypefn" id="index-mididevice-1"><span class="category-def">: </span><span><code class="def-type"><var class="var">dev</var> =</code> <strong class="def-name">mididevice</strong> <code class="def-code-arguments">(<var class="var">mididev</var>)</code><a class="copiable-link" href='#index-mididevice-1'></a></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn" id="index-mididevice-2"><span class="category-def">: </span><span><code class="def-type"><var class="var">dev</var> =</code> <strong class="def-name">mididevice</strong> <code class="def-code-arguments">(<var class="var">mididir</var>, <var class="var">mididev</var>)</code><a class="copiable-link" href='#index-mididevice-2'></a></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn" id="index-mididevice-3"><span class="category-def">: </span><span><code class="def-type"><var class="var">dev</var> =</code> <strong class="def-name">mididevice</strong> <code class="def-code-arguments">(&quot;input&quot;, <var class="var">midiindev</var>, &quot;output&quot;, <var class="var">midioutdev</var>)</code><a class="copiable-link" href='#index-mididevice-3'></a></span></dt>
 <dd><p>Create a midi device using the input parameters.
 </p>
 <p>When a single device name or id is provided, attempt to create the midi device using the same name for both input and output.
 </p>
 <p>Otherwise, use the name or device id for the given input or output direction.
 </p>
-<span id="Inputs-1"></span><h4 class="subsubheading">Inputs</h4>
-<p><var>mididev</var> - name or id of device to load.<br>
- <var>mididir</var> - midi direction of &quot;input&quot; or &quot;output&quot;<br>
- <var>midiindev</var> - midi input name or id<br>
- <var>midioutdev</var> - midi output name or id
+<h4 class="subsubheading" id="Inputs-1">Inputs</h4>
+<p><var class="var">mididev</var> - name or id of device to load.<br>
+<var class="var">mididir</var> - midi direction of &quot;input&quot; or &quot;output&quot;<br>
+<var class="var">midiindev</var> - midi input name or id<br>
+<var class="var">midioutdev</var> - midi output name or id
 </p>
-<span id="Outputs-1"></span><h4 class="subsubheading">Outputs</h4>
-<p><var>dev</var> - octave_midi class for opened device
+<h4 class="subsubheading" id="Outputs-1">Outputs</h4>
+<p><var class="var">dev</var> - octave_midi class for opened device
 </p>
-<span id="Properties"></span><h4 class="subsubheading">Properties</h4>
-<p><var>Input</var> - Input device name (read only).<br>
- <var>Output</var> - Output device name (read only).<br>
- <var>InputID</var> - Input device id (read only).<br>
- <var>OutputID</var> - Output device id (read only).<br>
+<h4 class="subsubheading" id="Properties">Properties</h4>
+<p><var class="var">Input</var> - Input device name (read only).<br>
+<var class="var">Output</var> - Output device name (read only).<br>
+<var class="var">InputID</var> - Input device id (read only).<br>
+<var class="var">OutputID</var> - Output device id (read only).<br>
 </p>
-<span id="Examples"></span><h4 class="subsubheading">Examples</h4>
+<h4 class="subsubheading" id="Examples">Examples</h4>
 <p>Open midi device with ID of 0.
- </p><div class="example">
-<pre class="example"> <code>&gt;</code> dev = mididevice(0);
+</p><div class="example">
+<pre class="example-preformatted"><code class="command">&gt;</code> dev = mididevice(0);
   mididevice connected to
     input: &quot;SparkFun Pro Micro:SparkFun Pro Micro MIDI 1 20:0&quot; (1)
     output: &quot;SparkFun Pro Micro:SparkFun Pro Micro MIDI 1 20:0&quot; (0)
- </pre></div>
+</pre></div>
 <p>Open a named midi device:
- </p><div class="example">
-<pre class="example"> <code>&gt;</code> dev = mididevice(&quot;SparkFun Pro Micro:SparkFun Pro Micro MIDI 1 20:0&quot;);
+</p><div class="example">
+<pre class="example-preformatted"><code class="command">&gt;</code> dev = mididevice(&quot;SparkFun Pro Micro:SparkFun Pro Micro MIDI 1 20:0&quot;);
   mididevice connected to
     input: &quot;SparkFun Pro Micro:SparkFun Pro Micro MIDI 1 20:0&quot; (1)
     output: &quot;SparkFun Pro Micro:SparkFun Pro Micro MIDI 1 20:0&quot; (0)
- </pre></div>
-<p><strong>See also:</strong> mididevinfo.
- </p></dd></dl>
+</pre></div>
+<p><strong class="strong">See also:</strong> mididevinfo.
+</p></dd></dl>
 </div>
-<div class="subsection" id="mididevinfo">
+<div class="subsection-level-extent" id="mididevinfo">
 <h4 class="subsection">3.1.3 mididevinfo</h4>
-<span id="index-mididevinfo"></span>
-<dl class="def">
-<dt id="index-mididevinfo-1"><span class="category">: </span><span><em><var>devlist</var> =</em> <strong>mididevinfo</strong> <em>()</em><a href='#index-mididevinfo-1' class='copiable-anchor'></a></span></dt>
-<dt id="index-mididevinfo-2"><span class="category">: </span><span><em></em> <strong>mididevinfo</strong> <em>()</em><a href='#index-mididevinfo-2' class='copiable-anchor'></a></span></dt>
+<a class="index-entry-id" id="index-mididevinfo"></a>
+<dl class="first-deftypefn">
+<dt class="deftypefn" id="index-mididevinfo-1"><span class="category-def">: </span><span><code class="def-type"><var class="var">devlist</var> =</code> <strong class="def-name">mididevinfo</strong> <code class="def-code-arguments">()</code><a class="copiable-link" href='#index-mididevinfo-1'></a></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn" id="index-mididevinfo-2"><span class="category-def">: </span><span><strong class="def-name">mididevinfo</strong> <code class="def-code-arguments">()</code><a class="copiable-link" href='#index-mididevinfo-2'></a></span></dt>
 <dd><p>Retrieve the midi devices detected within the system.
 </p>
-<p>The list will be stored with variable <var>devlist</var> as either a input or output device.
+<p>The list will be stored with variable <var class="var">devlist</var> as either a input or output device.
  If no output variable is provided, the devices will be displayed.
 </p>
-<span id="Inputs-2"></span><h4 class="subsubheading">Inputs</h4>
+<h4 class="subsubheading" id="Inputs-2">Inputs</h4>
 <p>None
 </p>
-<span id="Outputs-2"></span><h4 class="subsubheading">Outputs</h4>
-<p><var>devlist</var> - a structure containing the midi device information
+<h4 class="subsubheading" id="Outputs-2">Outputs</h4>
+<p><var class="var">devlist</var> - a structure containing the midi device information
 </p>
-<span id="Examples-1"></span><h4 class="subsubheading">Examples</h4>
+<h4 class="subsubheading" id="Examples-1">Examples</h4>
 <p>Display the known devices of the system.
- </p><div class="example">
-<pre class="example"> <code>&gt;</code> mididevinfo
+</p><div class="example">
+<pre class="example-preformatted"><code class="command">&gt;</code> mididevinfo
  MIDI devices available
  ID Direction Interface  Name
   0 output    Alsa       Midi Through:Midi Through Port-0 14:0
@@ -335,10 +394,10 @@ Next: <a href="#MIDI-Controller-Interface" accesskey="n" rel="next">MIDI Control
   3 input     Alsa       Midi Through:Midi Through Port-0 14:0
   4 input     Alsa       Ensoniq AudioPCI:ES1371 16:0
   5 input     Alsa       SparkFun Pro Micro:SparkFun Pro Micro MIDI 1 20:0
- </pre></div>
-<p>Assign variable <var>mididevices</var> with the values from the known devices
- </p><div class="example">
-<pre class="example"> <code>&gt;</code> mididevices = mididevinfo
+</pre></div>
+<p>Assign variable <var class="var">mididevices</var> with the values from the known devices
+</p><div class="example">
+<pre class="example-preformatted"><code class="command">&gt;</code> mididevices = mididevinfo
  mididevices =
   scalar structure containing the fields:
     input =
@@ -357,67 +416,67 @@ Next: <a href="#MIDI-Controller-Interface" accesskey="n" rel="next">MIDI Control
           Interface = Alsa
           ID =  1
     }
- </pre></div>
-<p><strong>See also:</strong> mididevice.
- </p></dd></dl>
+</pre></div>
+<p><strong class="strong">See also:</strong> mididevice.
+</p></dd></dl>
 </div>
-<div class="subsection" id="midiflush">
+<div class="subsection-level-extent" id="midiflush">
 <h4 class="subsection">3.1.4 midiflush</h4>
-<span id="index-midiflush"></span>
-<dl class="def">
-<dt id="index-midiflush-1"><span class="category">: </span><span><em></em> <strong>midiflush</strong> <em>(<var>dev</var>)</em><a href='#index-midiflush-1' class='copiable-anchor'></a></span></dt>
+<a class="index-entry-id" id="index-midiflush"></a>
+<dl class="first-deftypefn">
+<dt class="deftypefn" id="index-midiflush-1"><span class="category-def">: </span><span><strong class="def-name">midiflush</strong> <code class="def-code-arguments">(<var class="var">dev</var>)</code><a class="copiable-link" href='#index-midiflush-1'></a></span></dt>
 <dd><p>Flush the receive buffers on a midi device
 </p>
-<span id="Inputs-3"></span><h4 class="subsubheading">Inputs</h4>
-<p><var>dev</var> - midi device opened using mididevice<br>
+<h4 class="subsubheading" id="Inputs-3">Inputs</h4>
+<p><var class="var">dev</var> - midi device opened using mididevice<br>
 </p>
-<span id="Outputs-3"></span><h4 class="subsubheading">Outputs</h4>
+<h4 class="subsubheading" id="Outputs-3">Outputs</h4>
 <p>None
 </p>
-<span id="Examples-2"></span><h4 class="subsubheading">Examples</h4>
+<h4 class="subsubheading" id="Examples-2">Examples</h4>
 <p>Flush a midi device
- </p><div class="example">
-<pre class="example"> midiflush(dev);
- </pre></div>
-<p><strong>See also:</strong> mididevice, midireceive.
- </p></dd></dl>
+</p><div class="example">
+<pre class="example-preformatted"> midiflush(dev);
+</pre></div>
+<p><strong class="strong">See also:</strong> mididevice, midireceive.
+</p></dd></dl>
 </div>
-<div class="subsection" id="midimsg">
+<div class="subsection-level-extent" id="midimsg">
 <h4 class="subsection">3.1.5 midimsg</h4>
-<span id="index-midimsg"></span>
-<dl class="def">
-<dt id="index-midimsg-1"><span class="category">: </span><span><em><var>msg</var> =</em> <strong>midimsg</strong> <em>(0)</em><a href='#index-midimsg-1' class='copiable-anchor'></a></span></dt>
-<dt id="index-midimsg-2"><span class="category">: </span><span><em><var>msg</var> =</em> <strong>midimsg</strong> <em>(<var>type</var> ....)</em><a href='#index-midimsg-2' class='copiable-anchor'></a></span></dt>
-<dt id="index-midimsg-3"><span class="category">: </span><span><em><var>msg</var> =</em> <strong>midimsg</strong> <em>(&quot;note&quot;, <var>channel</var>, <var>note</var>, <var>velocity</var>, <var>duration</var>, <var>timestamp</var>)</em><a href='#index-midimsg-3' class='copiable-anchor'></a></span></dt>
-<dt id="index-midimsg-4"><span class="category">: </span><span><em><var>msg</var> =</em> <strong>midimsg</strong> <em>(&quot;noteon&quot;, <var>channel</var>, <var>note</var>, <var>velocity</var>, <var>timestamp</var>)</em><a href='#index-midimsg-4' class='copiable-anchor'></a></span></dt>
-<dt id="index-midimsg-5"><span class="category">: </span><span><em><var>msg</var> =</em> <strong>midimsg</strong> <em>(&quot;noteoff&quot;, <var>channel</var>, <var>note</var>, <var>velocity</var>, <var>timestamp</var>)</em><a href='#index-midimsg-5' class='copiable-anchor'></a></span></dt>
-<dt id="index-midimsg-6"><span class="category">: </span><span><em><var>msg</var> =</em> <strong>midimsg</strong> <em>(&quot;programchange&quot;, <var>channel</var>, <var>prog</var>, <var>timestamp</var>)</em><a href='#index-midimsg-6' class='copiable-anchor'></a></span></dt>
-<dt id="index-midimsg-7"><span class="category">: </span><span><em><var>msg</var> =</em> <strong>midimsg</strong> <em>(&quot;controlchange&quot;, <var>channel</var>, <var>ccnum</var>, <var>ccval</var>, <var>timestamp</var>)</em><a href='#index-midimsg-7' class='copiable-anchor'></a></span></dt>
-<dt id="index-midimsg-8"><span class="category">: </span><span><em><var>msg</var> =</em> <strong>midimsg</strong> <em>(&quot;polykeypressure&quot;, <var>channel</var>, <var>note</var>, <var>keypressure</var>, <var>timestamp</var>)</em><a href='#index-midimsg-8' class='copiable-anchor'></a></span></dt>
-<dt id="index-midimsg-9"><span class="category">: </span><span><em><var>msg</var> =</em> <strong>midimsg</strong> <em>(&quot;channelpressure&quot;, <var>channel</var>, <var>chanpressure</var>, <var>timestamp</var>)</em><a href='#index-midimsg-9' class='copiable-anchor'></a></span></dt>
-<dt id="index-midimsg-10"><span class="category">: </span><span><em><var>msg</var> =</em> <strong>midimsg</strong> <em>(&quot;localcontrol&quot;, <var>channel</var>, <var>localcontrol</var>, <var>timestamp</var>)</em><a href='#index-midimsg-10' class='copiable-anchor'></a></span></dt>
-<dt id="index-midimsg-11"><span class="category">: </span><span><em><var>msg</var> =</em> <strong>midimsg</strong> <em>(&quot;pitchbend&quot;, <var>channel</var>, <var>pitchchange</var>, <var>timestamp</var>)</em><a href='#index-midimsg-11' class='copiable-anchor'></a></span></dt>
-<dt id="index-midimsg-12"><span class="category">: </span><span><em><var>msg</var> =</em> <strong>midimsg</strong> <em>(&quot;polyon&quot;, <var>channel</var>, <var>timestamp</var>)</em><a href='#index-midimsg-12' class='copiable-anchor'></a></span></dt>
-<dt id="index-midimsg-13"><span class="category">: </span><span><em><var>msg</var> =</em> <strong>midimsg</strong> <em>(&quot;monoon&quot;, <var>channel</var>, <var>monochannels</var>, <var>timestamp</var>)</em><a href='#index-midimsg-13' class='copiable-anchor'></a></span></dt>
-<dt id="index-midimsg-14"><span class="category">: </span><span><em><var>msg</var> =</em> <strong>midimsg</strong> <em>(&quot;omnion&quot;, <var>channel</var>, <var>timestamp</var>)</em><a href='#index-midimsg-14' class='copiable-anchor'></a></span></dt>
-<dt id="index-midimsg-15"><span class="category">: </span><span><em><var>msg</var> =</em> <strong>midimsg</strong> <em>(&quot;omnioff&quot;, <var>channel</var>, <var>timestamp</var>)</em><a href='#index-midimsg-15' class='copiable-anchor'></a></span></dt>
-<dt id="index-midimsg-16"><span class="category">: </span><span><em><var>msg</var> =</em> <strong>midimsg</strong> <em>(&quot;allsoundoff&quot;, <var>channel</var>, <var>timestamp</var>)</em><a href='#index-midimsg-16' class='copiable-anchor'></a></span></dt>
-<dt id="index-midimsg-17"><span class="category">: </span><span><em><var>msg</var> =</em> <strong>midimsg</strong> <em>(&quot;allnotesoff&quot;, <var>channel</var>, <var>timestamp</var>)</em><a href='#index-midimsg-17' class='copiable-anchor'></a></span></dt>
-<dt id="index-midimsg-18"><span class="category">: </span><span><em><var>msg</var> =</em> <strong>midimsg</strong> <em>(&quot;resetallcontrollers&quot;, <var>channel</var>, <var>timestamp</var>)</em><a href='#index-midimsg-18' class='copiable-anchor'></a></span></dt>
-<dt id="index-midimsg-19"><span class="category">: </span><span><em><var>msg</var> =</em> <strong>midimsg</strong> <em>(&quot;start&quot;, <var>timestamp</var>)</em><a href='#index-midimsg-19' class='copiable-anchor'></a></span></dt>
-<dt id="index-midimsg-20"><span class="category">: </span><span><em><var>msg</var> =</em> <strong>midimsg</strong> <em>(&quot;stop&quot;, <var>timestamp</var>)</em><a href='#index-midimsg-20' class='copiable-anchor'></a></span></dt>
-<dt id="index-midimsg-21"><span class="category">: </span><span><em><var>msg</var> =</em> <strong>midimsg</strong> <em>(&quot;continue&quot;, <var>timestamp</var>)</em><a href='#index-midimsg-21' class='copiable-anchor'></a></span></dt>
-<dt id="index-midimsg-22"><span class="category">: </span><span><em><var>msg</var> =</em> <strong>midimsg</strong> <em>(&quot;systemreset&quot;, <var>timestamp</var>)</em><a href='#index-midimsg-22' class='copiable-anchor'></a></span></dt>
-<dt id="index-midimsg-23"><span class="category">: </span><span><em><var>msg</var> =</em> <strong>midimsg</strong> <em>(&quot;activesensing&quot;, <var>timestamp</var>)</em><a href='#index-midimsg-23' class='copiable-anchor'></a></span></dt>
-<dt id="index-midimsg-24"><span class="category">: </span><span><em><var>msg</var> =</em> <strong>midimsg</strong> <em>(&quot;timingclock&quot;, <var>timestamp</var>)</em><a href='#index-midimsg-24' class='copiable-anchor'></a></span></dt>
-<dt id="index-midimsg-25"><span class="category">: </span><span><em><var>msg</var> =</em> <strong>midimsg</strong> <em>(&quot;systemexclusive&quot;, <var>timestamp</var>)</em><a href='#index-midimsg-25' class='copiable-anchor'></a></span></dt>
-<dt id="index-midimsg-26"><span class="category">: </span><span><em><var>msg</var> =</em> <strong>midimsg</strong> <em>(&quot;systemexclusive&quot;, <var>bytes</var>, <var>timestamp</var>)</em><a href='#index-midimsg-26' class='copiable-anchor'></a></span></dt>
-<dt id="index-midimsg-27"><span class="category">: </span><span><em><var>msg</var> =</em> <strong>midimsg</strong> <em>(&quot;eox&quot;, <var>timestamp</var>)</em><a href='#index-midimsg-27' class='copiable-anchor'></a></span></dt>
-<dt id="index-midimsg-28"><span class="category">: </span><span><em><var>msg</var> =</em> <strong>midimsg</strong> <em>(&quot;data&quot;, <var>bytes</var>, <var>timestamp</var>)</em><a href='#index-midimsg-28' class='copiable-anchor'></a></span></dt>
-<dt id="index-midimsg-29"><span class="category">: </span><span><em><var>msg</var> =</em> <strong>midimsg</strong> <em>(&quot;songselect&quot;, <var>song</var>, <var>timestamp</var>)</em><a href='#index-midimsg-29' class='copiable-anchor'></a></span></dt>
-<dt id="index-midimsg-30"><span class="category">: </span><span><em><var>msg</var> =</em> <strong>midimsg</strong> <em>(&quot;songpositionpointer&quot;, <var>songposition</var>, <var>timestamp</var>)</em><a href='#index-midimsg-30' class='copiable-anchor'></a></span></dt>
-<dt id="index-midimsg-31"><span class="category">: </span><span><em><var>msg</var> =</em> <strong>midimsg</strong> <em>(&quot;tunerequest&quot;, <var>timestamp</var>)</em><a href='#index-midimsg-31' class='copiable-anchor'></a></span></dt>
-<dt id="index-midimsg-32"><span class="category">: </span><span><em><var>msg</var> =</em> <strong>midimsg</strong> <em>(&quot;miditimecodequarterframe&quot;, <var>timeseq</var>, <var>timevalue</var>, <var>timestamp</var>)</em><a href='#index-midimsg-32' class='copiable-anchor'></a></span></dt>
+<a class="index-entry-id" id="index-midimsg"></a>
+<dl class="first-deftypefn">
+<dt class="deftypefn" id="index-midimsg-1"><span class="category-def">: </span><span><code class="def-type"><var class="var">msg</var> =</code> <strong class="def-name">midimsg</strong> <code class="def-code-arguments">(0)</code><a class="copiable-link" href='#index-midimsg-1'></a></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn" id="index-midimsg-2"><span class="category-def">: </span><span><code class="def-type"><var class="var">msg</var> =</code> <strong class="def-name">midimsg</strong> <code class="def-code-arguments">(<var class="var">type</var> ....)</code><a class="copiable-link" href='#index-midimsg-2'></a></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn" id="index-midimsg-3"><span class="category-def">: </span><span><code class="def-type"><var class="var">msg</var> =</code> <strong class="def-name">midimsg</strong> <code class="def-code-arguments">(&quot;note&quot;, <var class="var">channel</var>, <var class="var">note</var>, <var class="var">velocity</var>, <var class="var">duration</var>, <var class="var">timestamp</var>)</code><a class="copiable-link" href='#index-midimsg-3'></a></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn" id="index-midimsg-4"><span class="category-def">: </span><span><code class="def-type"><var class="var">msg</var> =</code> <strong class="def-name">midimsg</strong> <code class="def-code-arguments">(&quot;noteon&quot;, <var class="var">channel</var>, <var class="var">note</var>, <var class="var">velocity</var>, <var class="var">timestamp</var>)</code><a class="copiable-link" href='#index-midimsg-4'></a></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn" id="index-midimsg-5"><span class="category-def">: </span><span><code class="def-type"><var class="var">msg</var> =</code> <strong class="def-name">midimsg</strong> <code class="def-code-arguments">(&quot;noteoff&quot;, <var class="var">channel</var>, <var class="var">note</var>, <var class="var">velocity</var>, <var class="var">timestamp</var>)</code><a class="copiable-link" href='#index-midimsg-5'></a></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn" id="index-midimsg-6"><span class="category-def">: </span><span><code class="def-type"><var class="var">msg</var> =</code> <strong class="def-name">midimsg</strong> <code class="def-code-arguments">(&quot;programchange&quot;, <var class="var">channel</var>, <var class="var">prog</var>, <var class="var">timestamp</var>)</code><a class="copiable-link" href='#index-midimsg-6'></a></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn" id="index-midimsg-7"><span class="category-def">: </span><span><code class="def-type"><var class="var">msg</var> =</code> <strong class="def-name">midimsg</strong> <code class="def-code-arguments">(&quot;controlchange&quot;, <var class="var">channel</var>, <var class="var">ccnum</var>, <var class="var">ccval</var>, <var class="var">timestamp</var>)</code><a class="copiable-link" href='#index-midimsg-7'></a></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn" id="index-midimsg-8"><span class="category-def">: </span><span><code class="def-type"><var class="var">msg</var> =</code> <strong class="def-name">midimsg</strong> <code class="def-code-arguments">(&quot;polykeypressure&quot;, <var class="var">channel</var>, <var class="var">note</var>, <var class="var">keypressure</var>, <var class="var">timestamp</var>)</code><a class="copiable-link" href='#index-midimsg-8'></a></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn" id="index-midimsg-9"><span class="category-def">: </span><span><code class="def-type"><var class="var">msg</var> =</code> <strong class="def-name">midimsg</strong> <code class="def-code-arguments">(&quot;channelpressure&quot;, <var class="var">channel</var>, <var class="var">chanpressure</var>, <var class="var">timestamp</var>)</code><a class="copiable-link" href='#index-midimsg-9'></a></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn" id="index-midimsg-10"><span class="category-def">: </span><span><code class="def-type"><var class="var">msg</var> =</code> <strong class="def-name">midimsg</strong> <code class="def-code-arguments">(&quot;localcontrol&quot;, <var class="var">channel</var>, <var class="var">localcontrol</var>, <var class="var">timestamp</var>)</code><a class="copiable-link" href='#index-midimsg-10'></a></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn" id="index-midimsg-11"><span class="category-def">: </span><span><code class="def-type"><var class="var">msg</var> =</code> <strong class="def-name">midimsg</strong> <code class="def-code-arguments">(&quot;pitchbend&quot;, <var class="var">channel</var>, <var class="var">pitchchange</var>, <var class="var">timestamp</var>)</code><a class="copiable-link" href='#index-midimsg-11'></a></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn" id="index-midimsg-12"><span class="category-def">: </span><span><code class="def-type"><var class="var">msg</var> =</code> <strong class="def-name">midimsg</strong> <code class="def-code-arguments">(&quot;polyon&quot;, <var class="var">channel</var>, <var class="var">timestamp</var>)</code><a class="copiable-link" href='#index-midimsg-12'></a></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn" id="index-midimsg-13"><span class="category-def">: </span><span><code class="def-type"><var class="var">msg</var> =</code> <strong class="def-name">midimsg</strong> <code class="def-code-arguments">(&quot;monoon&quot;, <var class="var">channel</var>, <var class="var">monochannels</var>, <var class="var">timestamp</var>)</code><a class="copiable-link" href='#index-midimsg-13'></a></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn" id="index-midimsg-14"><span class="category-def">: </span><span><code class="def-type"><var class="var">msg</var> =</code> <strong class="def-name">midimsg</strong> <code class="def-code-arguments">(&quot;omnion&quot;, <var class="var">channel</var>, <var class="var">timestamp</var>)</code><a class="copiable-link" href='#index-midimsg-14'></a></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn" id="index-midimsg-15"><span class="category-def">: </span><span><code class="def-type"><var class="var">msg</var> =</code> <strong class="def-name">midimsg</strong> <code class="def-code-arguments">(&quot;omnioff&quot;, <var class="var">channel</var>, <var class="var">timestamp</var>)</code><a class="copiable-link" href='#index-midimsg-15'></a></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn" id="index-midimsg-16"><span class="category-def">: </span><span><code class="def-type"><var class="var">msg</var> =</code> <strong class="def-name">midimsg</strong> <code class="def-code-arguments">(&quot;allsoundoff&quot;, <var class="var">channel</var>, <var class="var">timestamp</var>)</code><a class="copiable-link" href='#index-midimsg-16'></a></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn" id="index-midimsg-17"><span class="category-def">: </span><span><code class="def-type"><var class="var">msg</var> =</code> <strong class="def-name">midimsg</strong> <code class="def-code-arguments">(&quot;allnotesoff&quot;, <var class="var">channel</var>, <var class="var">timestamp</var>)</code><a class="copiable-link" href='#index-midimsg-17'></a></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn" id="index-midimsg-18"><span class="category-def">: </span><span><code class="def-type"><var class="var">msg</var> =</code> <strong class="def-name">midimsg</strong> <code class="def-code-arguments">(&quot;resetallcontrollers&quot;, <var class="var">channel</var>, <var class="var">timestamp</var>)</code><a class="copiable-link" href='#index-midimsg-18'></a></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn" id="index-midimsg-19"><span class="category-def">: </span><span><code class="def-type"><var class="var">msg</var> =</code> <strong class="def-name">midimsg</strong> <code class="def-code-arguments">(&quot;start&quot;, <var class="var">timestamp</var>)</code><a class="copiable-link" href='#index-midimsg-19'></a></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn" id="index-midimsg-20"><span class="category-def">: </span><span><code class="def-type"><var class="var">msg</var> =</code> <strong class="def-name">midimsg</strong> <code class="def-code-arguments">(&quot;stop&quot;, <var class="var">timestamp</var>)</code><a class="copiable-link" href='#index-midimsg-20'></a></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn" id="index-midimsg-21"><span class="category-def">: </span><span><code class="def-type"><var class="var">msg</var> =</code> <strong class="def-name">midimsg</strong> <code class="def-code-arguments">(&quot;continue&quot;, <var class="var">timestamp</var>)</code><a class="copiable-link" href='#index-midimsg-21'></a></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn" id="index-midimsg-22"><span class="category-def">: </span><span><code class="def-type"><var class="var">msg</var> =</code> <strong class="def-name">midimsg</strong> <code class="def-code-arguments">(&quot;systemreset&quot;, <var class="var">timestamp</var>)</code><a class="copiable-link" href='#index-midimsg-22'></a></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn" id="index-midimsg-23"><span class="category-def">: </span><span><code class="def-type"><var class="var">msg</var> =</code> <strong class="def-name">midimsg</strong> <code class="def-code-arguments">(&quot;activesensing&quot;, <var class="var">timestamp</var>)</code><a class="copiable-link" href='#index-midimsg-23'></a></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn" id="index-midimsg-24"><span class="category-def">: </span><span><code class="def-type"><var class="var">msg</var> =</code> <strong class="def-name">midimsg</strong> <code class="def-code-arguments">(&quot;timingclock&quot;, <var class="var">timestamp</var>)</code><a class="copiable-link" href='#index-midimsg-24'></a></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn" id="index-midimsg-25"><span class="category-def">: </span><span><code class="def-type"><var class="var">msg</var> =</code> <strong class="def-name">midimsg</strong> <code class="def-code-arguments">(&quot;systemexclusive&quot;, <var class="var">timestamp</var>)</code><a class="copiable-link" href='#index-midimsg-25'></a></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn" id="index-midimsg-26"><span class="category-def">: </span><span><code class="def-type"><var class="var">msg</var> =</code> <strong class="def-name">midimsg</strong> <code class="def-code-arguments">(&quot;systemexclusive&quot;, <var class="var">bytes</var>, <var class="var">timestamp</var>)</code><a class="copiable-link" href='#index-midimsg-26'></a></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn" id="index-midimsg-27"><span class="category-def">: </span><span><code class="def-type"><var class="var">msg</var> =</code> <strong class="def-name">midimsg</strong> <code class="def-code-arguments">(&quot;eox&quot;, <var class="var">timestamp</var>)</code><a class="copiable-link" href='#index-midimsg-27'></a></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn" id="index-midimsg-28"><span class="category-def">: </span><span><code class="def-type"><var class="var">msg</var> =</code> <strong class="def-name">midimsg</strong> <code class="def-code-arguments">(&quot;data&quot;, <var class="var">bytes</var>, <var class="var">timestamp</var>)</code><a class="copiable-link" href='#index-midimsg-28'></a></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn" id="index-midimsg-29"><span class="category-def">: </span><span><code class="def-type"><var class="var">msg</var> =</code> <strong class="def-name">midimsg</strong> <code class="def-code-arguments">(&quot;songselect&quot;, <var class="var">song</var>, <var class="var">timestamp</var>)</code><a class="copiable-link" href='#index-midimsg-29'></a></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn" id="index-midimsg-30"><span class="category-def">: </span><span><code class="def-type"><var class="var">msg</var> =</code> <strong class="def-name">midimsg</strong> <code class="def-code-arguments">(&quot;songpositionpointer&quot;, <var class="var">songposition</var>, <var class="var">timestamp</var>)</code><a class="copiable-link" href='#index-midimsg-30'></a></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn" id="index-midimsg-31"><span class="category-def">: </span><span><code class="def-type"><var class="var">msg</var> =</code> <strong class="def-name">midimsg</strong> <code class="def-code-arguments">(&quot;tunerequest&quot;, <var class="var">timestamp</var>)</code><a class="copiable-link" href='#index-midimsg-31'></a></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn" id="index-midimsg-32"><span class="category-def">: </span><span><code class="def-type"><var class="var">msg</var> =</code> <strong class="def-name">midimsg</strong> <code class="def-code-arguments">(&quot;miditimecodequarterframe&quot;, <var class="var">timeseq</var>, <var class="var">timevalue</var>, <var class="var">timestamp</var>)</code><a class="copiable-link" href='#index-midimsg-32'></a></span></dt>
 <dd><p>Create a midimsg object
 </p>
 <p>If the input parameter is 0, create an empty midi message object
@@ -426,89 +485,89 @@ Next: <a href="#MIDI-Controller-Interface" accesskey="n" rel="next">MIDI Control
 </p>
 <p>For each message type, the timestamp value is optional.
 </p>
-<span id="Inputs-4"></span><h4 class="subsubheading">Inputs</h4>
-<p><var>type</var> - string message type or a midimsgtype.<br>
- <var>timestamp</var> - optional seconds time stamp for the event<br>
- <var>channel</var> - the channel to use for the message (1..16)<br>
- <var>note</var> - the value of the note to play/stop<br>
- <var>velocity</var> - the velocity value for a note on/off, with 0 stopping a note from sounding.<br>
- <var>duration</var> - seconds between starting and stopping a note when created a &rsquo;note&rsquo; message.<br>
- <var>prog</var> - program number when doing a program change message.<br>
- <var>ccnum</var> - control change control number.<br>
- <var>ccval</var> - control change control value.<br>
- <var>keypressure</var> - key pressure value when creating a key pressure message.<br>
- <var>chanpressure</var> - channel pressure value when creating a channelpressure message.<br>
- <var>pitchchange</var> - pitch change value when creating a pitch bend message.<br>
- <var>localcontrol</var> - boolean value when creating a localcontrol message.<br>
- <var>monochannels</var> - channels specified for a mono on message.<br>
- <var>bytes</var> - array of data in range of 0 to 127 specified as part of a data message or
+<h4 class="subsubheading" id="Inputs-4">Inputs</h4>
+<p><var class="var">type</var> - string message type or a midimsgtype.<br>
+<var class="var">timestamp</var> - optional seconds time stamp for the event<br>
+<var class="var">channel</var> - the channel to use for the message (1..16)<br>
+<var class="var">note</var> - the value of the note to play/stop<br>
+<var class="var">velocity</var> - the velocity value for a note on/off, with 0 stopping a note from sounding.<br>
+<var class="var">duration</var> - seconds between starting and stopping a note when created a &rsquo;note&rsquo; message.<br>
+<var class="var">prog</var> - program number when doing a program change message.<br>
+<var class="var">ccnum</var> - control change control number.<br>
+<var class="var">ccval</var> - control change control value.<br>
+<var class="var">keypressure</var> - key pressure value when creating a key pressure message.<br>
+<var class="var">chanpressure</var> - channel pressure value when creating a channelpressure message.<br>
+<var class="var">pitchchange</var> - pitch change value when creating a pitch bend message.<br>
+<var class="var">localcontrol</var> - boolean value when creating a localcontrol message.<br>
+<var class="var">monochannels</var> - channels specified for a mono on message.<br>
+<var class="var">bytes</var> - array of data in range of 0 to 127 specified as part of a data message or
  system exclusive message.<br>
- <var>song</var> - song selection number for a song selection message.<br>
- <var>songposition</var> - song position value for a song position message.<br>
- <var>timeseq</var> - timecode sequence number for a miditimecodequarterframe message.<br>
- <var>timevalue</var> - timecode value number for a miditimecodequarterframe message.<br>
+<var class="var">song</var> - song selection number for a song selection message.<br>
+<var class="var">songposition</var> - song position value for a song position message.<br>
+<var class="var">timeseq</var> - timecode sequence number for a miditimecodequarterframe message.<br>
+<var class="var">timevalue</var> - timecode value number for a miditimecodequarterframe message.<br>
 </p>
-<span id="Outputs-4"></span><h4 class="subsubheading">Outputs</h4>
-<p><var>msg</var> - a midimsg object containing the midi data of the message
+<h4 class="subsubheading" id="Outputs-4">Outputs</h4>
+<p><var class="var">msg</var> - a midimsg object containing the midi data of the message
 </p>
-<span id="Properties-1"></span><h4 class="subsubheading">Properties</h4>
-<p><var>timestamp</var> - timestamp of the message, or an array or timestamps if the the message is a
+<h4 class="subsubheading" id="Properties-1">Properties</h4>
+<p><var class="var">timestamp</var> - timestamp of the message, or an array or timestamps if the the message is a
  compound message.<br>
- <var>msgbytes</var> - the raw message bytes that make up the MIDI message.<br>
- <var>nummsgbytes</var> - the number of message bytes that make up the MIDI message.<br>
- <var>type</var> - string or midimsgtype that represents the message type.<br>
- <var>channel</var> - the channel number for message.<br>
- <var>note</var> - the note value for message (Only valid for noteon/off and polykeypressure).<br>
- <var>velocity</var> - the velocity value for message (Only valid for noteon/off).<br>
- <var>keypressure</var> - the keypressure value for message (Only valid for polykeypressure).<br>
- <var>channelpressure</var> - the chanpressure value for message (Only valid for channelpressure).<br>
- <var>localcontrol</var> - the localcontrol value for message (Only valid for localcontrol messages).<br>
- <var>monochannels</var> - channels specified for a mono on message.<br>
- <var>program</var> - program number specified for a program change message.<br>
- <var>ccnumber</var> - control change number specified for a control change message.<br>
- <var>ccvalue</var> - control change value specified for a control change message.<br>
- <var>song</var> - song number for a song selection message.<br>
- <var>songposition</var> - song position value for a song position message.<br>
- <var>pitchchange</var> - pitch change value for a pitch bend message.<br>
- <var>timecodesequence</var> - timecode sequence number for a miditimecodequarterframe message.<br>
- <var>timecodevalue</var> - timecode value number for a miditimecodequarterframe message.<br>
+<var class="var">msgbytes</var> - the raw message bytes that make up the MIDI message.<br>
+<var class="var">nummsgbytes</var> - the number of message bytes that make up the MIDI message.<br>
+<var class="var">type</var> - string or midimsgtype that represents the message type.<br>
+<var class="var">channel</var> - the channel number for message.<br>
+<var class="var">note</var> - the note value for message (Only valid for noteon/off and polykeypressure).<br>
+<var class="var">velocity</var> - the velocity value for message (Only valid for noteon/off).<br>
+<var class="var">keypressure</var> - the keypressure value for message (Only valid for polykeypressure).<br>
+<var class="var">channelpressure</var> - the chanpressure value for message (Only valid for channelpressure).<br>
+<var class="var">localcontrol</var> - the localcontrol value for message (Only valid for localcontrol messages).<br>
+<var class="var">monochannels</var> - channels specified for a mono on message.<br>
+<var class="var">program</var> - program number specified for a program change message.<br>
+<var class="var">ccnumber</var> - control change number specified for a control change message.<br>
+<var class="var">ccvalue</var> - control change value specified for a control change message.<br>
+<var class="var">song</var> - song number for a song selection message.<br>
+<var class="var">songposition</var> - song position value for a song position message.<br>
+<var class="var">pitchchange</var> - pitch change value for a pitch bend message.<br>
+<var class="var">timecodesequence</var> - timecode sequence number for a miditimecodequarterframe message.<br>
+<var class="var">timecodevalue</var> - timecode value number for a miditimecodequarterframe message.<br>
 </p>
-<span id="Examples-3"></span><h4 class="subsubheading">Examples</h4>
+<h4 class="subsubheading" id="Examples-3">Examples</h4>
 <p>Create a note on/off pair with a duration of 1.5 seconds
- </p><div class="example">
-<pre class="example"> msg = midimsg('note', 1, 60, 100, 1.5)
- </pre></div>
+</p><div class="example">
+<pre class="example-preformatted"> msg = midimsg('note', 1, 60, 100, 1.5)
+</pre></div>
 <p>Create a separate note on/off pair with a time between them of 1.5 seconds
- </p><div class="example">
-<pre class="example"> msg = [midimsg('noteon', 1, 60, 100, 0), midimsg('noteoff', 1, 60, 0, 1.5)]
- </pre></div>
+</p><div class="example">
+<pre class="example-preformatted"> msg = [midimsg('noteon', 1, 60, 100, 0), midimsg('noteoff', 1, 60, 0, 1.5)]
+</pre></div>
 <p>Create a system reset message
- </p><div class="example">
-<pre class="example"> msg = midimsg('systemreset')
- </pre></div>
-<p><strong>See also:</strong> midifileread, midisend, midireceive, midimsgtype.
- </p></dd></dl>
+</p><div class="example">
+<pre class="example-preformatted"> msg = midimsg('systemreset')
+</pre></div>
+<p><strong class="strong">See also:</strong> midifileread, midisend, midireceive, midimsgtype.
+</p></dd></dl>
 </div>
-<div class="subsection" id="midireceive">
+<div class="subsection-level-extent" id="midireceive">
 <h4 class="subsection">3.1.6 midireceive</h4>
-<span id="index-midireceive"></span>
-<dl class="def">
-<dt id="index-midireceive-1"><span class="category">: </span><span><em><var>midimsg</var> =</em> <strong>midireceive</strong> <em>(<var>dev</var>)</em><a href='#index-midireceive-1' class='copiable-anchor'></a></span></dt>
-<dt id="index-midireceive-2"><span class="category">: </span><span><em><var>midimsg</var> =</em> <strong>midireceive</strong> <em>(<var>dev</var>, <var>maxmsg</var>)</em><a href='#index-midireceive-2' class='copiable-anchor'></a></span></dt>
+<a class="index-entry-id" id="index-midireceive"></a>
+<dl class="first-deftypefn">
+<dt class="deftypefn" id="index-midireceive-1"><span class="category-def">: </span><span><code class="def-type"><var class="var">midimsg</var> =</code> <strong class="def-name">midireceive</strong> <code class="def-code-arguments">(<var class="var">dev</var>)</code><a class="copiable-link" href='#index-midireceive-1'></a></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn" id="index-midireceive-2"><span class="category-def">: </span><span><code class="def-type"><var class="var">midimsg</var> =</code> <strong class="def-name">midireceive</strong> <code class="def-code-arguments">(<var class="var">dev</var>, <var class="var">maxmsg</var>)</code><a class="copiable-link" href='#index-midireceive-2'></a></span></dt>
 <dd><p>Attempt to receive midi messages from a midi device.
 </p>
-<span id="Inputs-5"></span><h4 class="subsubheading">Inputs</h4>
-<p><var>dev</var> - a octave midi device opened using mididevice.<br>
- <var>maxmsg</var> - Maximum number of messages to retrieve. If not specified, the function will attempt to get all pending.<br>
+<h4 class="subsubheading" id="Inputs-5">Inputs</h4>
+<p><var class="var">dev</var> - a octave midi device opened using mididevice.<br>
+<var class="var">maxmsg</var> - Maximum number of messages to retrieve. If not specified, the function will attempt to get all pending.<br>
 </p>
-<span id="Outputs-5"></span><h4 class="subsubheading">Outputs</h4>
-<p><var>midimsg</var> - a midimsg containing the messages retrieved from the device.<br>
- If no messages are available, <var>midimsg</var> will be empty.
+<h4 class="subsubheading" id="Outputs-5">Outputs</h4>
+<p><var class="var">midimsg</var> - a midimsg containing the messages retrieved from the device.<br>
+ If no messages are available, <var class="var">midimsg</var> will be empty.
 </p>
-<span id="Examples-4"></span><h4 class="subsubheading">Examples</h4>
+<h4 class="subsubheading" id="Examples-4">Examples</h4>
 <p>Open device 0, and poll and display read messages
- </p><div class="example">
-<pre class="example"> dev = mididevice(0);
+</p><div class="example">
+<pre class="example-preformatted"> dev = mididevice(0);
  while true
     mx = midireceive(dev);
     if !isempty(mx)
@@ -516,354 +575,354 @@ Next: <a href="#MIDI-Controller-Interface" accesskey="n" rel="next">MIDI Control
       mx
     endif
  endwhile
- </pre></div>
-<p><strong>See also:</strong> mididevice, midisend.
- </p></dd></dl>
+</pre></div>
+<p><strong class="strong">See also:</strong> mididevice, midisend.
+</p></dd></dl>
 </div>
-<div class="subsection" id="midisend">
+<div class="subsection-level-extent" id="midisend">
 <h4 class="subsection">3.1.7 midisend</h4>
-<span id="index-midisend"></span>
-<dl class="def">
-<dt id="index-midisend-1"><span class="category">: </span><span><em></em> <strong>midisend</strong> <em>(<var>dev</var>, <var>msg</var>)</em><a href='#index-midisend-1' class='copiable-anchor'></a></span></dt>
-<dt id="index-midisend-2"><span class="category">: </span><span><em></em> <strong>midisend</strong> <em>(<var>dev</var>, ...)</em><a href='#index-midisend-2' class='copiable-anchor'></a></span></dt>
+<a class="index-entry-id" id="index-midisend"></a>
+<dl class="first-deftypefn">
+<dt class="deftypefn" id="index-midisend-1"><span class="category-def">: </span><span><strong class="def-name">midisend</strong> <code class="def-code-arguments">(<var class="var">dev</var>, <var class="var">msg</var>)</code><a class="copiable-link" href='#index-midisend-1'></a></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn" id="index-midisend-2"><span class="category-def">: </span><span><strong class="def-name">midisend</strong> <code class="def-code-arguments">(<var class="var">dev</var>, ...)</code><a class="copiable-link" href='#index-midisend-2'></a></span></dt>
 <dd><p>Send a midimsg to a midi device
 </p>
-<span id="Inputs-6"></span><h4 class="subsubheading">Inputs</h4>
-<p><var>dev</var> - midi device opened using mididevice<br>
- <var>msg</var> - a midi message class with messages to send to the midi device<br>
+<h4 class="subsubheading" id="Inputs-6">Inputs</h4>
+<p><var class="var">dev</var> - midi device opened using mididevice<br>
+<var class="var">msg</var> - a midi message class with messages to send to the midi device<br>
  If the msg isn&rsquo;t a midimsg class, the input data is expected to be in same format as the inputs to a midimsg object.
 </p>
-<span id="Outputs-6"></span><h4 class="subsubheading">Outputs</h4>
+<h4 class="subsubheading" id="Outputs-6">Outputs</h4>
 <p>None
 </p>
-<span id="Examples-5"></span><h4 class="subsubheading">Examples</h4>
-<p>Send a note on/off command to a opened midi device <var>dev</var>
- </p><div class="example">
-<pre class="example"> midisend(dev, midimsg(&quot;note&quot;, 1, 60, 100, 2.0));
- </pre></div>
-<p><strong>See also:</strong> midimsg, mididevice, midireceive.
- </p></dd></dl>
+<h4 class="subsubheading" id="Examples-5">Examples</h4>
+<p>Send a note on/off command to a opened midi device <var class="var">dev</var>
+</p><div class="example">
+<pre class="example-preformatted"> midisend(dev, midimsg(&quot;note&quot;, 1, 60, 100, 2.0));
+</pre></div>
+<p><strong class="strong">See also:</strong> midimsg, mididevice, midireceive.
+</p></dd></dl>
 <hr>
 </div>
 </div>
-<div class="section" id="MIDI-Controller-Interface">
-<div class="header">
+<div class="section-level-extent" id="MIDI-Controller-Interface">
+<div class="nav-panel">
 <p>
 Next: <a href="#MIDI-File-I_002fO" accesskey="n" rel="next">MIDI File I/O</a>, Previous: <a href="#MIDI-Device-Interface" accesskey="p" rel="prev">MIDI Device Interface</a>, Up: <a href="#Function-Reference" accesskey="u" rel="up">Function Reference</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="#Index" title="Index" rel="index">Index</a>]</p>
 </div>
-<span id="MIDI-Controller-Interface-1"></span><h3 class="section">3.2 MIDI Controller Interface</h3>
-<span id="index-MIDI-Controller-Interface"></span>
-<ul class="section-toc">
+<h3 class="section" id="MIDI-Controller-Interface-1">3.2 MIDI Controller Interface</h3>
+<a class="index-entry-id" id="index-MIDI-Controller-Interface"></a>
+<ul class="mini-toc">
 <li><a href="#midicallback" accesskey="1">midicallback</a></li>
 <li><a href="#midicontrols" accesskey="2">midicontrols</a></li>
 <li><a href="#midiid" accesskey="3">midiid</a></li>
 <li><a href="#midiread" accesskey="4">midiread</a></li>
 <li><a href="#midisync" accesskey="5">midisync</a></li>
 </ul>
-<div class="subsection" id="midicallback">
+<div class="subsection-level-extent" id="midicallback">
 <h4 class="subsection">3.2.1 midicallback</h4>
-<span id="index-midicallback"></span>
-<dl class="def">
-<dt id="index-midicallback-1"><span class="category">: </span><span><em><var>oldhandle</var> =</em> <strong>midicallback</strong> <em>(<var>midicontrolsObj</var>, <var>functionHandle</var>)</em><a href='#index-midicallback-1' class='copiable-anchor'></a></span></dt>
-<dt id="index-midicallback-2"><span class="category">: </span><span><em><var>oldhandle</var> =</em> <strong>midicallback</strong> <em>(<var>midicontrolsObj</var>, [])</em><a href='#index-midicallback-2' class='copiable-anchor'></a></span></dt>
-<dt id="index-midicallback-3"><span class="category">: </span><span><em><var>currhandle</var> =</em> <strong>midicallback</strong> <em>(<var>midicontrolsObj</var>)</em><a href='#index-midicallback-3' class='copiable-anchor'></a></span></dt>
+<a class="index-entry-id" id="index-midicallback"></a>
+<dl class="first-deftypefn">
+<dt class="deftypefn" id="index-midicallback-1"><span class="category-def">: </span><span><code class="def-type"><var class="var">oldhandle</var> =</code> <strong class="def-name">midicallback</strong> <code class="def-code-arguments">(<var class="var">midicontrolsObj</var>, <var class="var">functionHandle</var>)</code><a class="copiable-link" href='#index-midicallback-1'></a></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn" id="index-midicallback-2"><span class="category-def">: </span><span><code class="def-type"><var class="var">oldhandle</var> =</code> <strong class="def-name">midicallback</strong> <code class="def-code-arguments">(<var class="var">midicontrolsObj</var>, [])</code><a class="copiable-link" href='#index-midicallback-2'></a></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn" id="index-midicallback-3"><span class="category-def">: </span><span><code class="def-type"><var class="var">currhandle</var> =</code> <strong class="def-name">midicallback</strong> <code class="def-code-arguments">(<var class="var">midicontrolsObj</var>)</code><a class="copiable-link" href='#index-midicallback-3'></a></span></dt>
 <dd><p>Get, set or clear the midicontrol object callback.
 </p>
-<span id="Inputs-7"></span><h4 class="subsubheading">Inputs</h4>
-<p><var>midicontrolObj</var> - control object created using midicontrols.
+<h4 class="subsubheading" id="Inputs-7">Inputs</h4>
+<p><var class="var">midicontrolObj</var> - control object created using midicontrols.
 </p>
-<p><var>functionHandle</var> - function handle to set for call back. If it is [],
+<p><var class="var">functionHandle</var> - function handle to set for call back. If it is [],
  the callback function will be cleared.
 </p>
-<p><strong>NOTE</strong>: currently anonymous functions will not work.
+<p><strong class="strong">NOTE</strong>: currently anonymous functions will not work.
 </p>
-<p><strong>NOTE</strong>: callbacks should be cleared before losing all references to the midicontrols
+<p><strong class="strong">NOTE</strong>: callbacks should be cleared before losing all references to the midicontrols
  object.
 </p>
-<span id="Outputs-7"></span><h4 class="subsubheading">Outputs</h4>
-<p><var>oldhandle</var> The previously set midicallback function handle when setting a new callback.
+<h4 class="subsubheading" id="Outputs-7">Outputs</h4>
+<p><var class="var">oldhandle</var> The previously set midicallback function handle when setting a new callback.
 </p>
-<p><var>currhandle</var> The current set midicallback function handle.
+<p><var class="var">currhandle</var> The current set midicallback function handle.
 </p>
-<span id="Examples-6"></span><h4 class="subsubheading">Examples</h4>
+<h4 class="subsubheading" id="Examples-6">Examples</h4>
 <p>Set a callback on a midicontrols object
- </p><div class="example">
-<pre class="example"> ctrl = midicontrols(2001)
+</p><div class="example">
+<pre class="example-preformatted"> ctrl = midicontrols(2001)
  function dispCallback(ctrl),disp(midiread(ctrl)),endfunction;
  midicallback(ctrl, @dispCallback);
- </pre></div>
+</pre></div>
 <p>Clear the callback on a midicontrols object
- </p><div class="example">
-<pre class="example"> ctrl = midicontrols(2001)
+</p><div class="example">
+<pre class="example-preformatted"> ctrl = midicontrols(2001)
  midicallback(ctrl, []);
- </pre></div>
+</pre></div>
 <p>Get the current callback on a midicontrols object
- </p><div class="example">
-<pre class="example"> ctrl = midicontrols(2001)
+</p><div class="example">
+<pre class="example-preformatted"> ctrl = midicontrols(2001)
  cb = midicallback(ctrl);
- </pre></div>
-<p><strong>See also:</strong> midicontrols, midisync, midiread.
- </p></dd></dl>
+</pre></div>
+<p><strong class="strong">See also:</strong> midicontrols, midisync, midiread.
+</p></dd></dl>
 </div>
-<div class="subsection" id="midicontrols">
+<div class="subsection-level-extent" id="midicontrols">
 <h4 class="subsection">3.2.2 midicontrols</h4>
-<span id="index-midicontrols"></span>
-<dl class="def">
-<dt id="index-midicontrols-1"><span class="category">: </span><span><em><var>obj</var> =</em> <strong>midicontrols</strong> <em>()</em><a href='#index-midicontrols-1' class='copiable-anchor'></a></span></dt>
-<dt id="index-midicontrols-2"><span class="category">: </span><span><em><var>obj</var> =</em> <strong>midicontrols</strong> <em>(<var>ctrlid</var>)</em><a href='#index-midicontrols-2' class='copiable-anchor'></a></span></dt>
-<dt id="index-midicontrols-3"><span class="category">: </span><span><em><var>obj</var> =</em> <strong>midicontrols</strong> <em>(<var>ctrlid</var>, <var>initialvalues</var>)</em><a href='#index-midicontrols-3' class='copiable-anchor'></a></span></dt>
-<dt id="index-midicontrols-4"><span class="category">: </span><span><em><var>obj</var> =</em> <strong>midicontrols</strong> <em>(__, <var>propertyname</var>, <var>propertyvalue</var>)</em><a href='#index-midicontrols-4' class='copiable-anchor'></a></span></dt>
+<a class="index-entry-id" id="index-midicontrols"></a>
+<dl class="first-deftypefn">
+<dt class="deftypefn" id="index-midicontrols-1"><span class="category-def">: </span><span><code class="def-type"><var class="var">obj</var> =</code> <strong class="def-name">midicontrols</strong> <code class="def-code-arguments">()</code><a class="copiable-link" href='#index-midicontrols-1'></a></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn" id="index-midicontrols-2"><span class="category-def">: </span><span><code class="def-type"><var class="var">obj</var> =</code> <strong class="def-name">midicontrols</strong> <code class="def-code-arguments">(<var class="var">ctrlid</var>)</code><a class="copiable-link" href='#index-midicontrols-2'></a></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn" id="index-midicontrols-3"><span class="category-def">: </span><span><code class="def-type"><var class="var">obj</var> =</code> <strong class="def-name">midicontrols</strong> <code class="def-code-arguments">(<var class="var">ctrlid</var>, <var class="var">initialvalues</var>)</code><a class="copiable-link" href='#index-midicontrols-3'></a></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn" id="index-midicontrols-4"><span class="category-def">: </span><span><code class="def-type"><var class="var">obj</var> =</code> <strong class="def-name">midicontrols</strong> <code class="def-code-arguments">(__, <var class="var">propertyname</var>, <var class="var">propertyvalue</var>)</code><a class="copiable-link" href='#index-midicontrols-4'></a></span></dt>
 <dd><p>Create a midi controls object
 </p>
-<span id="Inputs-8"></span><h4 class="subsubheading">Inputs</h4>
-<p><var>ctrlid</var> - single control id or array of control ids to monitor, or [] to use any controller.<br>
- <var>initialvalues</var> - initial values to use for controls. It should be the same size as <var>ctrlid</var><br>
- <var>propertyname</var>, <var>propertyvalue</var> - properties to set on the controller. If a device is not specified
+<h4 class="subsubheading" id="Inputs-8">Inputs</h4>
+<p><var class="var">ctrlid</var> - single control id or array of control ids to monitor, or [] to use any controller.<br>
+<var class="var">initialvalues</var> - initial values to use for controls. It should be the same size as <var class="var">ctrlid</var><br>
+<var class="var">propertyname</var>, <var class="var">propertyvalue</var> - properties to set on the controller. If a device is not specified
  the value from getpref(&quot;midi&quot;, &quot;DefaultDevice&quot;, 0) will be used.<br>
 </p>
 <p>Known properties are:
- </p><dl compact="compact">
-<dt><span>mididevice</span></dt>
+</p><dl class="table">
+<dt>mididevice</dt>
 <dd><p>name of the mididevice to monitor.
- </p></dd>
-<dt><span>outputmode</span></dt>
+</p></dd>
+<dt>outputmode</dt>
 <dd><p>the scaling mode for values: &rsquo;rawmidi&rsquo; will return values between 0 .. 127,
  &rsquo;normalized&rsquo; will use values between 0 .. 1.
- </p></dd>
+</p></dd>
 </dl>
-<span id="Outputs-8"></span><h4 class="subsubheading">Outputs</h4>
-<p><var>obj</var> - returns a midicontrols object
+<h4 class="subsubheading" id="Outputs-8">Outputs</h4>
+<p><var class="var">obj</var> - returns a midicontrols object
 </p>
-<span id="Examples-7"></span><h4 class="subsubheading">Examples</h4>
+<h4 class="subsubheading" id="Examples-7">Examples</h4>
 <p>Create a midicontrols object monitoring control id 2001 on the default midi device
- </p><div class="example">
-<pre class="example"> ctrl = midicontrols(2001)
- </pre></div>
+</p><div class="example">
+<pre class="example-preformatted"> ctrl = midicontrols(2001)
+</pre></div>
 <p>Create a midicontrols object monitoring control id 2001 on a a non default device
- </p><div class="example">
-<pre class="example"> ctrl = midicontrols(2001, 'mididevice', 1)
- </pre></div>
-<p><strong>See also:</strong> midiread, midisync.
- </p></dd></dl>
+</p><div class="example">
+<pre class="example-preformatted"> ctrl = midicontrols(2001, 'mididevice', 1)
+</pre></div>
+<p><strong class="strong">See also:</strong> midiread, midisync.
+</p></dd></dl>
 </div>
-<div class="subsection" id="midiid">
+<div class="subsection-level-extent" id="midiid">
 <h4 class="subsection">3.2.3 midiid</h4>
-<span id="index-midiid"></span>
-<dl class="def">
-<dt id="index-midiid-1"><span class="category">: </span><span><em>[<var>ctrlid</var>, <var>dev</var>] =</em> <strong>midiid</strong> <em>()</em><a href='#index-midiid-1' class='copiable-anchor'></a></span></dt>
+<a class="index-entry-id" id="index-midiid"></a>
+<dl class="first-deftypefn">
+<dt class="deftypefn" id="index-midiid-1"><span class="category-def">: </span><span><code class="def-type">[<var class="var">ctrlid</var>, <var class="var">dev</var>] =</code> <strong class="def-name">midiid</strong> <code class="def-code-arguments">()</code><a class="copiable-link" href='#index-midiid-1'></a></span></dt>
 <dd><p>Scan for control messages from midi devices to get the id of the device
 </p>
 <p>Function will display a prompt for the user to move the midi control and return when
  a control messages is detected or ctrl-C is pressed.
 </p>
-<span id="Inputs-9"></span><h4 class="subsubheading">Inputs</h4>
+<h4 class="subsubheading" id="Inputs-9">Inputs</h4>
 <p>None
 </p>
-<span id="Outputs-9"></span><h4 class="subsubheading">Outputs</h4>
-<p><var>ctrlid</var> - control id made from the controller channel * 1000 + controller number.<br>
- <var>dev</var> = name of the midi device the controller was detected on.
+<h4 class="subsubheading" id="Outputs-9">Outputs</h4>
+<p><var class="var">ctrlid</var> - control id made from the controller channel * 1000 + controller number.<br>
+<var class="var">dev</var> = name of the midi device the controller was detected on.
 </p>
-<span id="Examples-8"></span><h4 class="subsubheading">Examples</h4>
+<h4 class="subsubheading" id="Examples-8">Examples</h4>
 <p>Monitor midi devices for first moving controller
- </p><div class="example">
-<pre class="example"> [ctrlid, devname] = midiid()
- </pre></div>
-<p><strong>See also:</strong> mididevinfo, midicontrols.
- </p></dd></dl>
+</p><div class="example">
+<pre class="example-preformatted"> [ctrlid, devname] = midiid()
+</pre></div>
+<p><strong class="strong">See also:</strong> mididevinfo, midicontrols.
+</p></dd></dl>
 </div>
-<div class="subsection" id="midiread">
+<div class="subsection-level-extent" id="midiread">
 <h4 class="subsection">3.2.4 midiread</h4>
-<span id="index-midiread"></span>
-<dl class="def">
-<dt id="index-midiread-1"><span class="category">: </span><span><em><var>val</var> =</em> <strong>midiread</strong> <em>(<var>midicontrolsObj</var>)</em><a href='#index-midiread-1' class='copiable-anchor'></a></span></dt>
+<a class="index-entry-id" id="index-midiread"></a>
+<dl class="first-deftypefn">
+<dt class="deftypefn" id="index-midiread-1"><span class="category-def">: </span><span><code class="def-type"><var class="var">val</var> =</code> <strong class="def-name">midiread</strong> <code class="def-code-arguments">(<var class="var">midicontrolsObj</var>)</code><a class="copiable-link" href='#index-midiread-1'></a></span></dt>
 <dd><p>Read current values of midi controls
 </p>
-<span id="Inputs-10"></span><h4 class="subsubheading">Inputs</h4>
-<p><var>midicontrolObj</var> - control object created using midicontrols<br>
+<h4 class="subsubheading" id="Inputs-10">Inputs</h4>
+<p><var class="var">midicontrolObj</var> - control object created using midicontrols<br>
 </p>
-<span id="Outputs-10"></span><h4 class="subsubheading">Outputs</h4>
-<p><var>val</var> single value or array of current values from the midi device.
+<h4 class="subsubheading" id="Outputs-10">Outputs</h4>
+<p><var class="var">val</var> single value or array of current values from the midi device.
 </p>
-<span id="Examples-9"></span><h4 class="subsubheading">Examples</h4>
+<h4 class="subsubheading" id="Examples-9">Examples</h4>
 <p>Read current value of midicontrols with a ctrlid 2001 on the default midi device.
- </p><div class="example">
-<pre class="example"> ctrl = midicontrols(2001)
+</p><div class="example">
+<pre class="example-preformatted"> ctrl = midicontrols(2001)
  val = midiread(ctrl);
- </pre></div>
+</pre></div>
 <p>Read current value of midicontrols with a ctrlid 2001 on a non default midi device.
- </p><div class="example">
-<pre class="example"> ctrl = midicontrols(2001, 'mididevice', 1)
+</p><div class="example">
+<pre class="example-preformatted"> ctrl = midicontrols(2001, 'mididevice', 1)
  val = midiread(ctrl);
- </pre></div>
-<p><strong>See also:</strong> midicontrols, midisync.
- </p></dd></dl>
+</pre></div>
+<p><strong class="strong">See also:</strong> midicontrols, midisync.
+</p></dd></dl>
 </div>
-<div class="subsection" id="midisync">
+<div class="subsection-level-extent" id="midisync">
 <h4 class="subsection">3.2.5 midisync</h4>
-<span id="index-midisync"></span>
-<dl class="def">
-<dt id="index-midisync-1"><span class="category">: </span><span><em></em> <strong>midisync</strong> <em>(<var>midicontrolsObj</var>)</em><a href='#index-midisync-1' class='copiable-anchor'></a></span></dt>
-<dt id="index-midisync-2"><span class="category">: </span><span><em></em> <strong>midisync</strong> <em>(<var>midicontrolsObj</var>, <var>ctrlvalues</var>)</em><a href='#index-midisync-2' class='copiable-anchor'></a></span></dt>
-<dd><p>Send the values of control object to the control, using <var>ctrlvalues</var> values
+<a class="index-entry-id" id="index-midisync"></a>
+<dl class="first-deftypefn">
+<dt class="deftypefn" id="index-midisync-1"><span class="category-def">: </span><span><strong class="def-name">midisync</strong> <code class="def-code-arguments">(<var class="var">midicontrolsObj</var>)</code><a class="copiable-link" href='#index-midisync-1'></a></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn" id="index-midisync-2"><span class="category-def">: </span><span><strong class="def-name">midisync</strong> <code class="def-code-arguments">(<var class="var">midicontrolsObj</var>, <var class="var">ctrlvalues</var>)</code><a class="copiable-link" href='#index-midisync-2'></a></span></dt>
+<dd><p>Send the values of control object to the control, using <var class="var">ctrlvalues</var> values
  if specified instead
 </p>
-<span id="Inputs-11"></span><h4 class="subsubheading">Inputs</h4>
-<p><var>midicontrolObj</var> - control object created using midicontrols<br>
- <var>ctrlvalues</var> - values to send to the controls instead of initial values
+<h4 class="subsubheading" id="Inputs-11">Inputs</h4>
+<p><var class="var">midicontrolObj</var> - control object created using midicontrols<br>
+<var class="var">ctrlvalues</var> - values to send to the controls instead of initial values
 </p>
-<span id="Outputs-11"></span><h4 class="subsubheading">Outputs</h4>
+<h4 class="subsubheading" id="Outputs-11">Outputs</h4>
 <p>None
 </p>
-<span id="Examples-10"></span><h4 class="subsubheading">Examples</h4>
+<h4 class="subsubheading" id="Examples-10">Examples</h4>
 <p>Send sync command to a midicontrols with a ctrlid 2001 to set a value of 1
- </p><div class="example">
-<pre class="example"> ctrl = midicontrols(2001)
+</p><div class="example">
+<pre class="example-preformatted"> ctrl = midicontrols(2001)
  midisync(ctrl, 1);
- </pre></div>
-<p><strong>See also:</strong> midicontrols.
- </p></dd></dl>
+</pre></div>
+<p><strong class="strong">See also:</strong> midicontrols.
+</p></dd></dl>
 <hr>
 </div>
 </div>
-<div class="section" id="MIDI-File-I_002fO">
-<div class="header">
+<div class="section-level-extent" id="MIDI-File-I_002fO">
+<div class="nav-panel">
 <p>
 Next: <a href="#Enumerations" accesskey="n" rel="next">Enumerations</a>, Previous: <a href="#MIDI-Controller-Interface" accesskey="p" rel="prev">MIDI Controller Interface</a>, Up: <a href="#Function-Reference" accesskey="u" rel="up">Function Reference</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="#Index" title="Index" rel="index">Index</a>]</p>
 </div>
-<span id="MIDI-File-I_002fO-1"></span><h3 class="section">3.3 MIDI File I/O</h3>
-<span id="index-MIDI-File-I_002fO"></span>
-<ul class="section-toc">
+<h3 class="section" id="MIDI-File-I_002fO-1">3.3 MIDI File I/O</h3>
+<a class="index-entry-id" id="index-MIDI-File-I_002fO"></a>
+<ul class="mini-toc">
 <li><a href="#ismidifile" accesskey="1">ismidifile</a></li>
 <li><a href="#midifileinfo" accesskey="2">midifileinfo</a></li>
 <li><a href="#midifileread" accesskey="3">midifileread</a></li>
 <li><a href="#midifilewrite" accesskey="4">midifilewrite</a></li>
 </ul>
-<div class="subsection" id="ismidifile">
+<div class="subsection-level-extent" id="ismidifile">
 <h4 class="subsection">3.3.1 ismidifile</h4>
-<span id="index-ismidifile"></span>
-<dl class="def">
-<dt id="index-ismidifile-1"><span class="category">: </span><span><em><var>ismidi</var> =</em> <strong>ismidifile</strong> <em>(<var>filename</var>)</em><a href='#index-ismidifile-1' class='copiable-anchor'></a></span></dt>
-<dd><p>Check if <var>filename</var> is a midi file.
+<a class="index-entry-id" id="index-ismidifile"></a>
+<dl class="first-deftypefn">
+<dt class="deftypefn" id="index-ismidifile-1"><span class="category-def">: </span><span><code class="def-type"><var class="var">ismidi</var> =</code> <strong class="def-name">ismidifile</strong> <code class="def-code-arguments">(<var class="var">filename</var>)</code><a class="copiable-link" href='#index-ismidifile-1'></a></span></dt>
+<dd><p>Check if <var class="var">filename</var> is a midi file.
 </p>
 <p>The function only checks whether it is an existing file and the
  file starts with a valid &rsquo;MThd&rsquo; header.
 </p>
 <p>Non existing files, or files that do not meet the header criteria will return false.
 </p>
-<span id="Inputs-12"></span><h4 class="subsubheading">Inputs</h4>
-<p><var>filename</var> - filename of file to check.<br>
+<h4 class="subsubheading" id="Inputs-12">Inputs</h4>
+<p><var class="var">filename</var> - filename of file to check.<br>
 </p>
-<span id="Outputs-12"></span><h4 class="subsubheading">Outputs</h4>
-<p><var>ismidi</var> - true if it is a midi file, false otherwise
+<h4 class="subsubheading" id="Outputs-12">Outputs</h4>
+<p><var class="var">ismidi</var> - true if it is a midi file, false otherwise
 </p>
-<p><strong>See also:</strong> midifileread, midifilewrite.
- </p></dd></dl>
+<p><strong class="strong">See also:</strong> midifileread, midifilewrite.
+</p></dd></dl>
 </div>
-<div class="subsection" id="midifileinfo">
+<div class="subsection-level-extent" id="midifileinfo">
 <h4 class="subsection">3.3.2 midifileinfo</h4>
-<span id="index-midifileinfo"></span>
-<dl class="def">
-<dt id="index-midifileinfo-1"><span class="category">: </span><span><em><var>info</var> =</em> <strong>midifileinfo</strong> <em>(<var>filename</var>)</em><a href='#index-midifileinfo-1' class='copiable-anchor'></a></span></dt>
+<a class="index-entry-id" id="index-midifileinfo"></a>
+<dl class="first-deftypefn">
+<dt class="deftypefn" id="index-midifileinfo-1"><span class="category-def">: </span><span><code class="def-type"><var class="var">info</var> =</code> <strong class="def-name">midifileinfo</strong> <code class="def-code-arguments">(<var class="var">filename</var>)</code><a class="copiable-link" href='#index-midifileinfo-1'></a></span></dt>
 <dd><p>Read MIDI file and display information about the tracks and data
 </p>
-<span id="Inputs-13"></span><h4 class="subsubheading">Inputs</h4>
-<p><var>filename</var> - filename of file to open.<br>
+<h4 class="subsubheading" id="Inputs-13">Inputs</h4>
+<p><var class="var">filename</var> - filename of file to open.<br>
 </p>
-<span id="Outputs-13"></span><h4 class="subsubheading">Outputs</h4>
-<p><var>info</var> - structure of the midi file data
+<h4 class="subsubheading" id="Outputs-13">Outputs</h4>
+<p><var class="var">info</var> - structure of the midi file data
  with the following fields:<br>
- </p><dl compact="compact">
-<dt><span>filename</span></dt>
+</p><dl class="table">
+<dt>filename</dt>
 <dd><p>the name of the file
- </p></dd>
-<dt><span>header</span></dt>
+</p></dd>
+<dt>header</dt>
 <dd><p>The header block information
- </p></dd>
-<dt><span>track</span></dt>
+</p></dd>
+<dt>track</dt>
 <dd><p>An array of tracks read from the file
- </p></dd>
-<dt><span>other</span></dt>
+</p></dd>
+<dt>other</dt>
 <dd><p>An array of non-track midi blocks read from the file
- </p></dd>
+</p></dd>
 </dl>
-<p><strong>See also:</strong> midifileread.
- </p></dd></dl>
+<p><strong class="strong">See also:</strong> midifileread.
+</p></dd></dl>
 </div>
-<div class="subsection" id="midifileread">
+<div class="subsection-level-extent" id="midifileread">
 <h4 class="subsection">3.3.3 midifileread</h4>
-<span id="index-midifileread"></span>
-<dl class="def">
-<dt id="index-midifileread-1"><span class="category">: </span><span><em><var>msg</var> =</em> <strong>midifileread</strong> <em>(<var>filename</var>, [propertyname, propertyvalue &hellip;])</em><a href='#index-midifileread-1' class='copiable-anchor'></a></span></dt>
+<a class="index-entry-id" id="index-midifileread"></a>
+<dl class="first-deftypefn">
+<dt class="deftypefn" id="index-midifileread-1"><span class="category-def">: </span><span><code class="def-type"><var class="var">msg</var> =</code> <strong class="def-name">midifileread</strong> <code class="def-code-arguments">(<var class="var">filename</var>, [propertyname, propertyvalue &hellip;])</code><a class="copiable-link" href='#index-midifileread-1'></a></span></dt>
 <dd><p>Read MIDI file into a midimsg
 </p>
-<span id="Inputs-14"></span><h4 class="subsubheading">Inputs</h4>
-<p><var>filename</var> - filename of file to open.<br>
- <var>propertyname</var>, <var>properyvalue</var> - optional propertyname/value pairs.<br>
+<h4 class="subsubheading" id="Inputs-14">Inputs</h4>
+<p><var class="var">filename</var> - filename of file to open.<br>
+<var class="var">propertyname</var>, <var class="var">properyvalue</var> - optional propertyname/value pairs.<br>
 </p>
 <p>Known property values are:
- </p><dl compact="compact">
-<dt><span>includemetaevents</span></dt>
+</p><dl class="table">
+<dt>includemetaevents</dt>
 <dd><p>A True/False value to include MetaEvents in the out message list.
- </p></dd>
+</p></dd>
 </dl>
-<span id="Outputs-14"></span><h4 class="subsubheading">Outputs</h4>
-<p><var>msg</var> - a midimsg struct containing the messages read from the file<br>
- </p>
-<p><strong>See also:</strong> midifileinfo, midimsg.
- </p></dd></dl>
+<h4 class="subsubheading" id="Outputs-14">Outputs</h4>
+<p><var class="var">msg</var> - a midimsg struct containing the messages read from the file<br>
+</p>
+<p><strong class="strong">See also:</strong> midifileinfo, midimsg.
+</p></dd></dl>
 </div>
-<div class="subsection" id="midifilewrite">
+<div class="subsection-level-extent" id="midifilewrite">
 <h4 class="subsection">3.3.4 midifilewrite</h4>
-<span id="index-midifilewrite"></span>
-<dl class="def">
-<dt id="index-midifilewrite-1"><span class="category">: </span><span><em></em> <strong>midifilewrite</strong> <em>(<var>filename</var>, <var>msgs</var>)</em><a href='#index-midifilewrite-1' class='copiable-anchor'></a></span></dt>
-<dt id="index-midifilewrite-2"><span class="category">: </span><span><em></em> <strong>midifilewrite</strong> <em>(<var>filename</var>, <var>msgs</var>, <var>optionname</var>, <var>optionvalue</var>)</em><a href='#index-midifilewrite-2' class='copiable-anchor'></a></span></dt>
+<a class="index-entry-id" id="index-midifilewrite"></a>
+<dl class="first-deftypefn">
+<dt class="deftypefn" id="index-midifilewrite-1"><span class="category-def">: </span><span><strong class="def-name">midifilewrite</strong> <code class="def-code-arguments">(<var class="var">filename</var>, <var class="var">msgs</var>)</code><a class="copiable-link" href='#index-midifilewrite-1'></a></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn" id="index-midifilewrite-2"><span class="category-def">: </span><span><strong class="def-name">midifilewrite</strong> <code class="def-code-arguments">(<var class="var">filename</var>, <var class="var">msgs</var>, <var class="var">optionname</var>, <var class="var">optionvalue</var>)</code><a class="copiable-link" href='#index-midifilewrite-2'></a></span></dt>
 <dd><p>Write a midifile
 </p>
-<span id="Inputs-15"></span><h4 class="subsubheading">Inputs</h4>
-<p><var>filename</var> - filename of file to open.<br>
- <var>msg</var> - a midimsg struct or a cell array of midimsg containing data to write to file<br>
- <var>optionname</var>, <var>optionvalue</var> - option value/name pairs<br>
+<h4 class="subsubheading" id="Inputs-15">Inputs</h4>
+<p><var class="var">filename</var> - filename of file to open.<br>
+<var class="var">msg</var> - a midimsg struct or a cell array of midimsg containing data to write to file<br>
+<var class="var">optionname</var>, <var class="var">optionvalue</var> - option value/name pairs<br>
 </p>
 <p>Known options are:
- </p><dl compact="compact">
-<dt><span>format</span></dt>
+</p><dl class="table">
+<dt>format</dt>
 <dd><p>MIDI file format number. (0 (default), 1, 2)
- </p></dd>
+</p></dd>
 </dl>
 <p>Where format is 0, if a cell array is passed to midifilewrite, the midimsg values will
  be concatenated together before saving.
 </p>
 <p>Were format is not 0, the cell array is treated as tracks of misimsg.
 </p>
-<span id="Outputs-15"></span><h4 class="subsubheading">Outputs</h4>
+<h4 class="subsubheading" id="Outputs-15">Outputs</h4>
 <p>None
- </p>
-<p><strong>See also:</strong> midifileread, midimsg.
- </p></dd></dl>
+</p>
+<p><strong class="strong">See also:</strong> midifileread, midimsg.
+</p></dd></dl>
 <hr>
 </div>
 </div>
-<div class="section" id="Enumerations">
-<div class="header">
+<div class="section-level-extent" id="Enumerations">
+<div class="nav-panel">
 <p>
-Previous: <a href="#MIDI-File-I_002fO" accesskey="p" rel="prev">MIDI File I/O</a>, Up: <a href="#Function-Reference" accesskey="u" rel="up">Function Reference</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="#Index" title="Index" rel="index">Index</a>]</p>
+Next: <a href="#Waveform-Generation" accesskey="n" rel="next">Waveform Generation</a>, Previous: <a href="#MIDI-File-I_002fO" accesskey="p" rel="prev">MIDI File I/O</a>, Up: <a href="#Function-Reference" accesskey="u" rel="up">Function Reference</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="#Index" title="Index" rel="index">Index</a>]</p>
 </div>
-<span id="Enumerations-1"></span><h3 class="section">3.4 Enumerations</h3>
-<span id="index-Enumerations"></span>
-<ul class="section-toc">
+<h3 class="section" id="Enumerations-1">3.4 Enumerations</h3>
+<a class="index-entry-id" id="index-Enumerations"></a>
+<ul class="mini-toc">
 <li><a href="#midimsgtype" accesskey="1">midimsgtype</a></li>
 </ul>
-<div class="subsection" id="midimsgtype">
+<div class="subsection-level-extent" id="midimsgtype">
 <h4 class="subsection">3.4.1 midimsgtype</h4>
-<span id="index-midimsgtype"></span>
-<dl class="def">
-<dt id="index-midimsgtype-1"><span class="category">: </span><span><em></em> <strong>midimsgtype</strong><a href='#index-midimsgtype-1' class='copiable-anchor'></a></span></dt>
+<a class="index-entry-id" id="index-midimsgtype"></a>
+<dl class="first-deftypefn">
+<dt class="deftypefn" id="index-midimsgtype-1"><span class="category-def">: </span><span><strong class="def-name">midimsgtype</strong><a class="copiable-link" href='#index-midimsgtype-1'></a></span></dt>
 <dd><p>A midimsg type enumeration for values of the midimsg type.
 </p>
 <p>Enumeration values are:
- </p><table>
-<tr><td width="20%">Data</td><td width="40%">Stop</td><td width="30%">SongPositionPointer</td></tr>
+</p><table class="multitable">
+<tbody><tr><td width="20%">Data</td><td width="40%">Stop</td><td width="30%">SongPositionPointer</td></tr>
 <tr><td width="20%">PolyOn</td><td width="40%">PolyKeyPressure</td><td width="30%">NoteOff</td></tr>
 <tr><td width="20%">EOX</td><td width="40%">ActiveSensing</td><td width="30%">SongSelect</td></tr>
 <tr><td width="20%">MonoOn</td><td width="40%">ChannelPressure</td><td width="30%">ControlChange</td></tr>
@@ -873,40 +932,305 @@ Previous: <a href="#MIDI-File-I_002fO" accesskey="p" rel="prev">MIDI File I/O</a
 <tr><td width="20%">OmniOff</td><td width="40%">Undefined</td><td width="30%">SystemExclusive</td></tr>
 <tr><td width="20%">Continue</td><td width="40%">MIDITimeCodeQuarterFrame</td><td width="30%">LocalControl</td></tr>
 <tr><td width="20%">AllNotesOff</td><td width="40%">MetaEvent</td><td width="30%"></td></tr>
+</tbody>
 </table>
 <p>The enumeration value can be used instead of a string in midimsg creation.
 </p>
-<span id="Examples-11"></span><h4 class="subsubheading">Examples</h4>
+<h4 class="subsubheading" id="Examples-11">Examples</h4>
 <p>Use both a string and a midimsgtype for the type parameter of a midimsg.
- </p><div class="example">
-<pre class="example"> <code>
+</p><div class="example">
+<pre class="example-preformatted"><code class="code">
  # both statements are equivalent
  msg = midimsg('NoteOn', 1, 60, 100);
  msg = midimsg(midimsgtype.NoteOn, 1, 60, 100);
  </code>
- </pre></div>
-<p><strong>See also:</strong> midimsg.
- </p></dd></dl>
+</pre></div>
+<p><strong class="strong">See also:</strong> midimsg.
+</p></dd></dl>
+<hr>
+</div>
+</div>
+<div class="section-level-extent" id="Waveform-Generation">
+<div class="nav-panel">
+<p>
+Next: <a href="#Measurements" accesskey="n" rel="next">Measurements</a>, Previous: <a href="#Enumerations" accesskey="p" rel="prev">Enumerations</a>, Up: <a href="#Function-Reference" accesskey="u" rel="up">Function Reference</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="#Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Waveform-Generation-2">3.5 Waveform Generation</h3>
+<a class="index-entry-id" id="index-Waveform-Generation-1"></a>
+<ul class="mini-toc">
+<li><a href="#audioOscillator" accesskey="1">audioOscillator</a></li>
+</ul>
+<div class="subsection-level-extent" id="audioOscillator">
+<h4 class="subsection">3.5.1 audioOscillator</h4>
+<a class="index-entry-id" id="index-audioOscillator"></a>
+<dl class="first-deftypefn">
+<dt class="deftypefn" id="index-audioOscillator-1"><span class="category-def">: </span><span><strong class="def-name">audioOscillator</strong><a class="copiable-link" href='#index-audioOscillator-1'></a></span></dt>
+<dd><p>Generate sine, sawtool and square waveforms
+</p></dd></dl>
+<h4 class="subheading" id="Methods">Methods</h4>
+<dl class="first-deftypefn">
+<dt class="deftypefn" id="index-audioOscillator-2"><span class="category-def">: </span><span><code class="def-type"><var class="var">obj</var> =</code> <strong class="def-name">audioOscillator</strong> <code class="def-code-arguments">()</code><a class="copiable-link" href='#index-audioOscillator-2'></a></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn" id="index-audioOscillator-3"><span class="category-def">: </span><span><code class="def-type"><var class="var">obj</var> =</code> <strong class="def-name">audioOscillator</strong> <code class="def-code-arguments">(<var class="var">signalTypeValue</var>)</code><a class="copiable-link" href='#index-audioOscillator-3'></a></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn" id="index-audioOscillator-4"><span class="category-def">: </span><span><code class="def-type"><var class="var">obj</var> =</code> <strong class="def-name">audioOscillator</strong> <code class="def-code-arguments">(<var class="var">signalTypeValue</var>, <var class="var">frequencyValue</var>)</code><a class="copiable-link" href='#index-audioOscillator-4'></a></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn" id="index-audioOscillator-5"><span class="category-def">: </span><span><code class="def-type"><var class="var">obj</var> =</code> <strong class="def-name">audioOscillator</strong> <code class="def-code-arguments">(__, <var class="var">propertyname</var>, <var class="var">propertyvalue</var>)</code><a class="copiable-link" href='#index-audioOscillator-5'></a></span></dt>
+<dd><p>Create a audioOscillator object
+</p>
+<h4 class="subsubheading" id="Inputs-16">Inputs</h4>
+<p><var class="var">signalTypeValue</var> - signal type of &quot;sine&quot; (default), &quot;square&quot;, &quot;sawtooth&quot;.<br>
+<var class="var">frequencyValue</var> - hz frequency value of waveform (default 100).<br>
+<var class="var">propertyname</var>, <var class="var">propertyvalue</var> - properties to set on the object.
+</p>
+<p>Known properties are:
+</p><dl class="table">
+<dt>SignalType</dt>
+<dd><p>signal type of &quot;sine&quot; (default), &quot;square&quot; or &quot;sawtooth&quot;. (readonly)
+</p></dd>
+<dt>Frequency</dt>
+<dd><p>frequency of the waveform (default 100)
+</p></dd>
+<dt>Amplitude</dt>
+<dd><p>amplitude of the signal (default 1)
+</p></dd>
+<dt>SampleRate</dt>
+<dd><p>sample rate of the signal (default 44100)
+</p></dd>
+<dt>PhaseOffset</dt>
+<dd><p>phase offset of signal 0 (default) - 1 (readonly)
+</p></dd>
+<dt>DutyCycle</dt>
+<dd><p>dutycycle of the signal 0 - 1 (default 0.5) when signal is a square wave.
+</p></dd>
+<dt>SamplePerFrame</dt>
+<dd><p>Samples per frame as returned from () (default 512)
+</p></dd>
+<dt>MaxSamplePerFrame</dt>
+<dd><p>Max samples per frame (default 192000)
+</p></dd>
+<dt>DCOffset</dt>
+<dd><p>DC Offset of signal (default 0)
+</p></dd>
+<dt>Width</dt>
+<dd><p>Width of sawtooth (default 1)
+</p></dd>
+<dt>OutputDataType</dt>
+<dd><p>Output data type of &rsquo;single&rsquo; or &rsquo;double&rsquo; (default &rsquo;double&rsquo;)
+</p></dd>
+</dl>
+<h4 class="subsubheading" id="Outputs-16">Outputs</h4>
+<p><var class="var">obj</var> - signalGenerator object
+</p>
+<h4 class="subsubheading" id="Examples-12">Examples</h4>
+<p>Create a 100 hz sine wave and plot first 512 samples
+</p><div class="example">
+<pre class="example-preformatted"> sinosc = audioOscillator
+ data = sinosc();
+ plot(data);
+</pre></div>
+<p>Create a 2 hz square wave with duty cycle of 0.5
+</p><div class="example">
+<pre class="example-preformatted"> sqosc = audioOscillator('square', 'DutyCycle', 0.50,  'Frequency', 2);
+</pre></div>
+</dd></dl>
+<dl class="first-deftypefn">
+<dt class="deftypefn" id="index-obj_0028_0029"><span class="category-def">: </span><span><code class="def-type"><var class="var">data</var> =</code> <strong class="def-name"><var class="var">obj</var>()</strong><a class="copiable-link" href='#index-obj_0028_0029'></a></span></dt>
+<dd><p>Generate a frame of waveform data from the generator function
+</p>
+<h4 class="subsubheading" id="Inputs-17">Inputs</h4>
+<p><var class="var">obj</var> - signalGenerator object
+</p>
+<h4 class="subsubheading" id="Outputs-17">Outputs</h4>
+<p><var class="var">data</var> - waveform data
+</p></dd></dl>
+<dl class="first-deftypefn">
+<dt class="deftypefn" id="index-release_0028obj_0029"><span class="category-def">: </span><span><strong class="def-name">release(<var class="var">obj</var>)</strong><a class="copiable-link" href='#index-release_0028obj_0029'></a></span></dt>
+<dd><p>Release resources of generator
+</p>
+<h4 class="subsubheading" id="Inputs-18">Inputs</h4>
+<p><var class="var">obj</var> - signalGenerator object
+</p>
+<h4 class="subsubheading" id="Outputs-18">Outputs</h4>
+<p>None
+</p></dd></dl>
+<hr>
+</div>
+</div>
+<div class="section-level-extent" id="Measurements">
+<div class="nav-panel">
+<p>
+Previous: <a href="#Waveform-Generation" accesskey="p" rel="prev">Waveform Generation</a>, Up: <a href="#Function-Reference" accesskey="u" rel="up">Function Reference</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="#Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Measurements-1">3.6 Measurements</h3>
+<a class="index-entry-id" id="index-Measurements"></a>
+<ul class="mini-toc">
+<li><a href="#bark2hz" accesskey="1">bark2hz</a></li>
+<li><a href="#erb2hz" accesskey="2">erb2hz</a></li>
+<li><a href="#hz2bark" accesskey="3">hz2bark</a></li>
+<li><a href="#hz2erb" accesskey="4">hz2erb</a></li>
+<li><a href="#hz2mel" accesskey="5">hz2mel</a></li>
+<li><a href="#mel2hz" accesskey="6">mel2hz</a></li>
+</ul>
+<div class="subsection-level-extent" id="bark2hz">
+<h4 class="subsection">3.6.1 bark2hz</h4>
+<a class="index-entry-id" id="index-bark2hz"></a>
+<dl class="first-deftypefn">
+<dt class="deftypefn" id="index-bark2hz-1"><span class="category-def">: </span><span><code class="def-type"><var class="var">hz</var> =</code> <strong class="def-name">bark2hz</strong> <code class="def-code-arguments">(<var class="var">bark</var>)</code><a class="copiable-link" href='#index-bark2hz-1'></a></span></dt>
+<dd><p>Convert equivalent Bark Frequency to Hz.
+</p>
+<h4 class="subsubheading" id="Inputs-19">Inputs</h4>
+<p><var class="var">bark</var> - input frequency in bark.
+</p>
+<h4 class="subsubheading" id="Outputs-19">Outputs</h4>
+<p><var class="var">hz</var> - Output frequency in Hz.
+</p>
+<h4 class="subsubheading" id="References">References</h4>
+<p>Traunmüller, Hartmut. <cite class="cite">Analytical Expressions for the Tonotopic Sensory Scale.
+ Journal of the Acoustical Society of America. Vol. 88, Issue 1, 1990</cite>
+</p>
+<p><strong class="strong">See also:</strong> hz2bark.
+</p></dd></dl>
+</div>
+<div class="subsection-level-extent" id="erb2hz">
+<h4 class="subsection">3.6.2 erb2hz</h4>
+<a class="index-entry-id" id="index-erb2hz"></a>
+<dl class="first-deftypefn">
+<dt class="deftypefn" id="index-erb2hz-1"><span class="category-def">: </span><span><code class="def-type"><var class="var">hz</var> =</code> <strong class="def-name">erb2hz</strong> <code class="def-code-arguments">(<var class="var">erb</var>)</code><a class="copiable-link" href='#index-erb2hz-1'></a></span></dt>
+<dd><p>Convert equivalent rectangular bandwidth (ERB) to Hz.
+</p>
+<h4 class="subsubheading" id="Inputs-20">Inputs</h4>
+<p><var class="var">erb</var> - input frequency in erb.
+</p>
+<h4 class="subsubheading" id="Outputs-20">Outputs</h4>
+<p><var class="var">hz</var> - Output frequency in Hz.
+</p>
+<h4 class="subsubheading" id="References-1">References</h4>
+<p>Glasberg and Moore. <cite class="cite">Derivation of Auditory Filter Shapes from Notched-Noise Data.
+ Hearing Research. Vol. 47, 1990</cite>
+</p>
+<p><strong class="strong">See also:</strong> hz2erb.
+</p></dd></dl>
+</div>
+<div class="subsection-level-extent" id="hz2bark">
+<h4 class="subsection">3.6.3 hz2bark</h4>
+<a class="index-entry-id" id="index-hz2bark"></a>
+<dl class="first-deftypefn">
+<dt class="deftypefn" id="index-hz2bark-1"><span class="category-def">: </span><span><code class="def-type"><var class="var">bark</var> =</code> <strong class="def-name">hz2bark</strong> <code class="def-code-arguments">(<var class="var">hz</var>)</code><a class="copiable-link" href='#index-hz2bark-1'></a></span></dt>
+<dd><p>Convert hz to equivalent bark frequency
+</p>
+<h4 class="subsubheading" id="Inputs-21">Inputs</h4>
+<p><var class="var">hz</var> - input frequency in Hz.
+</p>
+<h4 class="subsubheading" id="Outputs-21">Outputs</h4>
+<p><var class="var">bark</var> - Output frequency as a bark value
+</p>
+<h4 class="subsubheading" id="Examples-13">Examples</h4>
+<p>Convert 4000 Hz to erb
+</p><div class="example">
+<pre class="example-preformatted"><code class="code">erb = hz2erb(4000)</code>
+</pre></div>
+<h4 class="subsubheading" id="References-2">References</h4>
+<p>Traunmüller, Hartmut. <cite class="cite">Analytical Expressions for the Tonotopic Sensory Scale.
+ Journal of the Acoustical Society of America. Vol. 88, Issue 1, 1990</cite>
+</p>
+<p><strong class="strong">See also:</strong> bark2hz.
+</p></dd></dl>
+</div>
+<div class="subsection-level-extent" id="hz2erb">
+<h4 class="subsection">3.6.4 hz2erb</h4>
+<a class="index-entry-id" id="index-hz2erb"></a>
+<dl class="first-deftypefn">
+<dt class="deftypefn" id="index-hz2erb-1"><span class="category-def">: </span><span><code class="def-type"><var class="var">erb</var> =</code> <strong class="def-name">hz2erb</strong> <code class="def-code-arguments">(<var class="var">hz</var>)</code><a class="copiable-link" href='#index-hz2erb-1'></a></span></dt>
+<dd><p>Convert hz to equivalent rectangular bandwidth (ERB)
+</p>
+<h4 class="subsubheading" id="Inputs-22">Inputs</h4>
+<p><var class="var">hz</var> - input frequency in Hz.
+</p>
+<h4 class="subsubheading" id="Outputs-22">Outputs</h4>
+<p><var class="var">erb</var> - Output frequency as a erb value
+</p>
+<h4 class="subsubheading" id="Examples-14">Examples</h4>
+<p>Convert 4000 Hz to erb
+</p><div class="example">
+<pre class="example-preformatted"><code class="code">erb = hz2erb(4000)</code>
+</pre></div>
+<p>Convert a range of Hz to erb
+</p><div class="example">
+<pre class="example-preformatted"><code class="code">erb = hz2erb(4000:100:5000)</code>
+</pre></div>
+<h4 class="subsubheading" id="References-3">References</h4>
+<p>Glasberg and Moore. <cite class="cite">Derivation of Auditory Filter Shapes from Notched-Noise Data.
+ Hearing Research. Vol. 47, 1990</cite>
+</p>
+<p><strong class="strong">See also:</strong> erb2hz.
+</p></dd></dl>
+</div>
+<div class="subsection-level-extent" id="hz2mel">
+<h4 class="subsection">3.6.5 hz2mel</h4>
+<a class="index-entry-id" id="index-hz2mel"></a>
+<dl class="first-deftypefn">
+<dt class="deftypefn" id="index-hz2mel-1"><span class="category-def">: </span><span><code class="def-type"><var class="var">mel</var> =</code> <strong class="def-name">hz2mel</strong> <code class="def-code-arguments">(<var class="var">hz</var>)</code><a class="copiable-link" href='#index-hz2mel-1'></a></span></dt>
+<dd><p>Convert hz to equivalent mel frequency.
+</p>
+<h4 class="subsubheading" id="Inputs-23">Inputs</h4>
+<p><var class="var">hz</var> - input frequency in Hz.
+</p>
+<h4 class="subsubheading" id="Outputs-23">Outputs</h4>
+<p><var class="var">mel</var> - Output frequency as a mel value
+</p>
+<h4 class="subsubheading" id="Examples-15">Examples</h4>
+<p>Convert 4000 Hz to mel
+</p><div class="example">
+<pre class="example-preformatted"><code class="code">mel = hz2mel(4000)</code>
+</pre></div>
+<p>Convert a range of Hz to mel
+</p><div class="example">
+<pre class="example-preformatted"><code class="code">mel = hz2erb(4000:100:5000)</code>
+</pre></div>
+<h4 class="subsubheading" id="References-4">References</h4>
+<p>O&rsquo;Shaghnessy, Douglas. <cite class="cite">Speech Communication: Human and Machine. Reading, MA:
+ Addison-Wesley Publishing Company, 1987</cite>
+</p>
+<p><strong class="strong">See also:</strong> mel2hz.
+</p></dd></dl>
+</div>
+<div class="subsection-level-extent" id="mel2hz">
+<h4 class="subsection">3.6.6 mel2hz</h4>
+<a class="index-entry-id" id="index-mel2hz"></a>
+<dl class="first-deftypefn">
+<dt class="deftypefn" id="index-mel2hz-1"><span class="category-def">: </span><span><code class="def-type"><var class="var">hz</var> =</code> <strong class="def-name">mel2hz</strong> <code class="def-code-arguments">(<var class="var">mel</var>)</code><a class="copiable-link" href='#index-mel2hz-1'></a></span></dt>
+<dd><p>Convert equivalent mel frequency to Hz.
+</p>
+<h4 class="subsubheading" id="Inputs-24">Inputs</h4>
+<p><var class="var">mel</var> - input frequency in mel.
+</p>
+<h4 class="subsubheading" id="Outputs-24">Outputs</h4>
+<p><var class="var">hz</var> - Output frequency in Hz.
+</p>
+<h4 class="subsubheading" id="References-5">References</h4>
+<p>O&rsquo;Shaghnessy, Douglas. <cite class="cite">Speech Communication: Human and Machine. Reading, MA:
+ Addison-Wesley Publishing Company, 1987</cite>
+</p>
+<p><strong class="strong">See also:</strong> hz2mel.
+</p></dd></dl>
 <hr>
 </div>
 </div>
 </div>
-<div class="appendix" id="Copying">
-<div class="header">
+<div class="appendix-level-extent" id="Copying">
+<div class="nav-panel">
 <p>
 Next: <a href="#Index" accesskey="n" rel="next">Index</a>, Previous: <a href="#Function-Reference" accesskey="p" rel="prev">Function Reference</a>, Up: <a href="#Top" accesskey="u" rel="up">Introduction</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="#Index" title="Index" rel="index">Index</a>]</p>
 </div>
-<span id="GNU-General-Public-License"></span><h2 class="appendix">Appendix A GNU General Public License</h2>
-<span id="index-warranty"></span>
-<span id="index-copyright"></span>
-<div align="center">Version 3, 29 June 2007
+<h2 class="appendix" id="GNU-General-Public-License">Appendix A GNU General Public License</h2>
+<a class="index-entry-id" id="index-warranty"></a>
+<a class="index-entry-id" id="index-copyright"></a>
+<div class="center">Version 3, 29 June 2007
 </div>
 <div class="display">
-<pre class="display">Copyright &copy; 2007 Free Software Foundation, Inc. <a href="http://fsf.org/">http://fsf.org/</a>
+<pre class="display-preformatted">Copyright &copy; 2007 Free Software Foundation, Inc. <a class="url" href="http://fsf.org/">http://fsf.org/</a>
 Everyone is permitted to copy and distribute verbatim copies of this
 license document, but changing it is not allowed.
 </pre></div>
-<span id="Preamble"></span><h3 class="heading">Preamble</h3>
+<h3 class="heading" id="Preamble">Preamble</h3>
 <p>The GNU General Public License is a free, copyleft license for
 software and other kinds of works.
 </p>
@@ -970,8 +1294,8 @@ assures that patents cannot be used to render the program non-free.
 <p>The precise terms and conditions for copying, distribution and
 modification follow.
 </p>
-<span id="TERMS-AND-CONDITIONS"></span><h3 class="heading">TERMS AND CONDITIONS</h3>
-<ol start="0">
+<h3 class="heading" id="TERMS-AND-CONDITIONS">TERMS AND CONDITIONS</h3>
+<ol class="enumerate" start="0">
 <li> Definitions.
 <p>&ldquo;This License&rdquo; refers to version 3 of the GNU General Public License.
 </p>
@@ -1108,7 +1432,7 @@ produce it from the Program, in the form of source code under the
 terms of section 4, provided that you also meet all of these
 conditions:
 </p>
-<ol type="a" start="1">
+<ol class="enumerate" type="a" start="1">
 <li> The work must carry prominent notices stating that you modified it,
 and giving a relevant date.
 </li><li> The work must carry prominent notices stating that it is released
@@ -1143,7 +1467,7 @@ sections 4 and 5, provided that you also convey the machine-readable
 Corresponding Source under the terms of this License, in one of these
 ways:
 </p>
-<ol type="a" start="1">
+<ol class="enumerate" type="a" start="1">
 <li> Convey the object code in, or embodied in, a physical product
 (including a physical distribution medium), accompanied by the
 Corresponding Source fixed on a durable physical medium customarily
@@ -1253,7 +1577,7 @@ for which you have or can give appropriate copyright permission.
 add to a covered work, you may (if authorized by the copyright holders
 of that material) supplement the terms of this License with terms:
 </p>
-<ol type="a" start="1">
+<ol class="enumerate" type="a" start="1">
 <li> Disclaiming warranty or limiting liability differently from the terms
 of sections 15 and 16 of this License; or
 </li><li> Requiring preservation of specified reasonable legal notices or author
@@ -1498,8 +1822,8 @@ Program, unless a warranty or assumption of liability accompanies a
 copy of the Program in return for a fee.
 </p>
 </li></ol>
-<span id="END-OF-TERMS-AND-CONDITIONS"></span><h3 class="heading">END OF TERMS AND CONDITIONS</h3>
-<span id="How-to-Apply-These-Terms-to-Your-New-Programs"></span><h3 class="heading">How to Apply These Terms to Your New Programs</h3>
+<h3 class="heading" id="END-OF-TERMS-AND-CONDITIONS">END OF TERMS AND CONDITIONS</h3>
+<h3 class="heading" id="How-to-Apply-These-Terms-to-Your-New-Programs">How to Apply These Terms to Your New Programs</h3>
 <p>If you develop a new program, and you want it to be of the greatest
 possible use to the public, the best way to achieve this is to make it
 free software which everyone can redistribute and change under these
@@ -1510,9 +1834,9 @@ to attach them to the start of each source file to most effectively
 state the exclusion of warranty; and each file should have at least
 the &ldquo;copyright&rdquo; line and a pointer to where the full notice is found.
 </p>
-<div class="example">
-<pre class="example"><var>one line to give the program's name and a brief idea of what it does.</var>  
-Copyright (C) <var>year</var> <var>name of author</var>
+<div class="example smallexample">
+<pre class="example-preformatted"><var class="var">one line to give the program's name and a brief idea of what it does.</var>  
+Copyright (C) <var class="var">year</var> <var class="var">name of author</var>
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
 the Free Software Foundation, either version 3 of the License, or (at
@@ -1522,20 +1846,20 @@ WITHOUT ANY WARRANTY; without even the implied warranty of
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
 General Public License for more details.
 You should have received a copy of the GNU General Public License
-along with this program.  If not, see <a href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>.
+along with this program.  If not, see <a class="url" href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>.
 </pre></div>
 <p>Also add information on how to contact you by electronic and paper mail.
 </p>
 <p>If the program does terminal interaction, make it output a short
 notice like this when it starts in an interactive mode:
 </p>
-<div class="example">
-<pre class="example"><var>program</var> Copyright (C) <var>year</var> <var>name of author</var> 
-This program comes with ABSOLUTELY NO WARRANTY; for details type &lsquo;<samp>show w</samp>&rsquo;.
+<div class="example smallexample">
+<pre class="example-preformatted"><var class="var">program</var> Copyright (C) <var class="var">year</var> <var class="var">name of author</var> 
+This program comes with ABSOLUTELY NO WARRANTY; for details type &lsquo;<samp class="samp">show w</samp>&rsquo;.
 This is free software, and you are welcome to redistribute it
-under certain conditions; type &lsquo;<samp>show c</samp>&rsquo; for details.
+under certain conditions; type &lsquo;<samp class="samp">show c</samp>&rsquo; for details.
 </pre></div>
-<p>The hypothetical commands &lsquo;<samp>show w</samp>&rsquo; and &lsquo;<samp>show c</samp>&rsquo; should show
+<p>The hypothetical commands &lsquo;<samp class="samp">show w</samp>&rsquo; and &lsquo;<samp class="samp">show c</samp>&rsquo; should show
 the appropriate parts of the General Public License.  Of course, your
 program&rsquo;s commands might be different; for a GUI interface, you would
 use an &ldquo;about box&rdquo;.
@@ -1543,120 +1867,140 @@ use an &ldquo;about box&rdquo;.
 <p>You should also get your employer (if you work as a programmer) or school,
 if any, to sign a &ldquo;copyright disclaimer&rdquo; for the program, if necessary.
 For more information on this, and how to apply and follow the GNU GPL, see
-<a href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>.
+<a class="url" href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>.
 </p>
 <p>The GNU General Public License does not permit incorporating your
 program into proprietary programs.  If your program is a subroutine
 library, you may consider it more useful to permit linking proprietary
 applications with the library.  If this is what you want to do, use
 the GNU Lesser General Public License instead of this License.  But
-first, please read <a href="http://www.gnu.org/philosophy/why-not-lgpl.html">http://www.gnu.org/philosophy/why-not-lgpl.html</a>.
+first, please read <a class="url" href="http://www.gnu.org/philosophy/why-not-lgpl.html">http://www.gnu.org/philosophy/why-not-lgpl.html</a>.
 </p>
 <hr>
 </div>
-<div class="unnumbered" id="Index">
-<div class="header">
+<div class="unnumbered-level-extent" id="Index">
+<div class="nav-panel">
 <p>
 Previous: <a href="#Copying" accesskey="p" rel="prev">GNU General Public License</a>, Up: <a href="#Top" accesskey="u" rel="up">Introduction</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="#Index" title="Index" rel="index">Index</a>]</p>
 </div>
-<span id="Index-1"></span><h2 class="unnumbered">Index</h2>
+<h2 class="unnumbered" id="Index-1">Index</h2>
  
-<table><tr><th valign="top">Jump to: &nbsp; </th><td><a class="summary-letter" href="#Index_cp_letter-B"><b>B</b></a>
+<div class="printindex cp-printindex">
+<table class="cp-letters-header-printindex"><tr><th>Jump to: &nbsp; </th><td><a class="summary-letter-printindex" href="#Index_cp_letter-A"><b>A</b></a>
  &nbsp; 
-<a class="summary-letter" href="#Index_cp_letter-C"><b>C</b></a>
+<a class="summary-letter-printindex" href="#Index_cp_letter-B"><b>B</b></a>
  &nbsp; 
-<a class="summary-letter" href="#Index_cp_letter-E"><b>E</b></a>
+<a class="summary-letter-printindex" href="#Index_cp_letter-C"><b>C</b></a>
  &nbsp; 
-<a class="summary-letter" href="#Index_cp_letter-F"><b>F</b></a>
+<a class="summary-letter-printindex" href="#Index_cp_letter-E"><b>E</b></a>
  &nbsp; 
-<a class="summary-letter" href="#Index_cp_letter-H"><b>H</b></a>
+<a class="summary-letter-printindex" href="#Index_cp_letter-F"><b>F</b></a>
  &nbsp; 
-<a class="summary-letter" href="#Index_cp_letter-I"><b>I</b></a>
+<a class="summary-letter-printindex" href="#Index_cp_letter-H"><b>H</b></a>
  &nbsp; 
-<a class="summary-letter" href="#Index_cp_letter-L"><b>L</b></a>
+<a class="summary-letter-printindex" href="#Index_cp_letter-I"><b>I</b></a>
  &nbsp; 
-<a class="summary-letter" href="#Index_cp_letter-M"><b>M</b></a>
+<a class="summary-letter-printindex" href="#Index_cp_letter-L"><b>L</b></a>
  &nbsp; 
-<a class="summary-letter" href="#Index_cp_letter-O"><b>O</b></a>
+<a class="summary-letter-printindex" href="#Index_cp_letter-M"><b>M</b></a>
  &nbsp; 
-<a class="summary-letter" href="#Index_cp_letter-W"><b>W</b></a>
+<a class="summary-letter-printindex" href="#Index_cp_letter-O"><b>O</b></a>
+ &nbsp; 
+<a class="summary-letter-printindex" href="#Index_cp_letter-W"><b>W</b></a>
  &nbsp; 
 </td></tr></table>
-<table class="index-cp" border="0">
-<tr><td></td><th align="left">Index Entry</th><td>&nbsp;</td><th align="left"> Section</th></tr>
+<table class="cp-entries-printindex" border="0">
+<tr><td></td><th class="entries-header-printindex">Index Entry</th><td>&nbsp;</td><th class="sections-header-printindex"> Section</th></tr>
+<tr><td colspan="4"> <hr></td></tr>
+<tr><th id="Index_cp_letter-A">A</th><td></td><td></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-audioOscillator">audioOscillator</a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Waveform-Generation">Waveform Generation</a></td></tr>
 <tr><td colspan="4"> <hr></td></tr>
 <tr><th id="Index_cp_letter-B">B</th><td></td><td></td></tr>
-<tr><td></td><td valign="top"><a href="#index-Basic-Usage-Overview">Basic Usage Overview</a>:</td><td>&nbsp;</td><td valign="top"><a href="#Basic-Usage-Overview">Basic Usage Overview</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-bark2hz">bark2hz</a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Measurements">Measurements</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-Basic-Usage-Overview">Basic Usage Overview</a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Basic-Usage-Overview">Basic Usage Overview</a></td></tr>
 <tr><td colspan="4"> <hr></td></tr>
 <tr><th id="Index_cp_letter-C">C</th><td></td><td></td></tr>
-<tr><td></td><td valign="top"><a href="#index-copyright">copyright</a>:</td><td>&nbsp;</td><td valign="top"><a href="#Copying">Copying</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-Conversion-Functionality">Conversion Functionality</a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Basic-Usage-Overview">Basic Usage Overview</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-copyright">copyright</a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Copying">Copying</a></td></tr>
 <tr><td colspan="4"> <hr></td></tr>
 <tr><th id="Index_cp_letter-E">E</th><td></td><td></td></tr>
-<tr><td></td><td valign="top"><a href="#index-Enumerations">Enumerations</a>:</td><td>&nbsp;</td><td valign="top"><a href="#Enumerations">Enumerations</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-Enumerations">Enumerations</a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Enumerations">Enumerations</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-erb2hz">erb2hz</a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Measurements">Measurements</a></td></tr>
 <tr><td colspan="4"> <hr></td></tr>
 <tr><th id="Index_cp_letter-F">F</th><td></td><td></td></tr>
-<tr><td></td><td valign="top"><a href="#index-Function-Reference">Function Reference</a>:</td><td>&nbsp;</td><td valign="top"><a href="#Function-Reference">Function Reference</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-Function-Reference">Function Reference</a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Function-Reference">Function Reference</a></td></tr>
 <tr><td colspan="4"> <hr></td></tr>
 <tr><th id="Index_cp_letter-H">H</th><td></td><td></td></tr>
-<tr><td></td><td valign="top"><a href="#index-hasdata">hasdata</a>:</td><td>&nbsp;</td><td valign="top"><a href="#MIDI-Device-Interface">MIDI Device Interface</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-hasdata">hasdata</a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#MIDI-Device-Interface">MIDI Device Interface</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-hz2bark">hz2bark</a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Measurements">Measurements</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-hz2erb">hz2erb</a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Measurements">Measurements</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-hz2mel">hz2mel</a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Measurements">Measurements</a></td></tr>
 <tr><td colspan="4"> <hr></td></tr>
 <tr><th id="Index_cp_letter-I">I</th><td></td><td></td></tr>
-<tr><td></td><td valign="top"><a href="#index-Installing-and-loading">Installing and loading</a>:</td><td>&nbsp;</td><td valign="top"><a href="#Installing-and-loading">Installing and loading</a></td></tr>
-<tr><td></td><td valign="top"><a href="#index-ismidifile">ismidifile</a>:</td><td>&nbsp;</td><td valign="top"><a href="#MIDI-File-I_002fO">MIDI File I/O</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-Installing-and-loading">Installing and loading</a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Installing-and-loading">Installing and loading</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-ismidifile">ismidifile</a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#MIDI-File-I_002fO">MIDI File I/O</a></td></tr>
 <tr><td colspan="4"> <hr></td></tr>
 <tr><th id="Index_cp_letter-L">L</th><td></td><td></td></tr>
-<tr><td></td><td valign="top"><a href="#index-Loading">Loading</a>:</td><td>&nbsp;</td><td valign="top"><a href="#Installing-and-loading">Installing and loading</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-Loading">Loading</a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Installing-and-loading">Installing and loading</a></td></tr>
 <tr><td colspan="4"> <hr></td></tr>
 <tr><th id="Index_cp_letter-M">M</th><td></td><td></td></tr>
-<tr><td></td><td valign="top"><a href="#index-MIDI-Controller-Interface">MIDI Controller Interface</a>:</td><td>&nbsp;</td><td valign="top"><a href="#MIDI-Controller-Interface">MIDI Controller Interface</a></td></tr>
-<tr><td></td><td valign="top"><a href="#index-MIDI-Device-Interface">MIDI Device Interface</a>:</td><td>&nbsp;</td><td valign="top"><a href="#MIDI-Device-Interface">MIDI Device Interface</a></td></tr>
-<tr><td></td><td valign="top"><a href="#index-MIDI-File-I_002fO">MIDI File I/O</a>:</td><td>&nbsp;</td><td valign="top"><a href="#MIDI-File-I_002fO">MIDI File I/O</a></td></tr>
-<tr><td></td><td valign="top"><a href="#index-midicallback">midicallback</a>:</td><td>&nbsp;</td><td valign="top"><a href="#MIDI-Controller-Interface">MIDI Controller Interface</a></td></tr>
-<tr><td></td><td valign="top"><a href="#index-midicontrols">midicontrols</a>:</td><td>&nbsp;</td><td valign="top"><a href="#MIDI-Controller-Interface">MIDI Controller Interface</a></td></tr>
-<tr><td></td><td valign="top"><a href="#index-mididevice">mididevice</a>:</td><td>&nbsp;</td><td valign="top"><a href="#MIDI-Device-Interface">MIDI Device Interface</a></td></tr>
-<tr><td></td><td valign="top"><a href="#index-mididevinfo">mididevinfo</a>:</td><td>&nbsp;</td><td valign="top"><a href="#MIDI-Device-Interface">MIDI Device Interface</a></td></tr>
-<tr><td></td><td valign="top"><a href="#index-midifileinfo">midifileinfo</a>:</td><td>&nbsp;</td><td valign="top"><a href="#MIDI-File-I_002fO">MIDI File I/O</a></td></tr>
-<tr><td></td><td valign="top"><a href="#index-midifileread">midifileread</a>:</td><td>&nbsp;</td><td valign="top"><a href="#MIDI-File-I_002fO">MIDI File I/O</a></td></tr>
-<tr><td></td><td valign="top"><a href="#index-midifilewrite">midifilewrite</a>:</td><td>&nbsp;</td><td valign="top"><a href="#MIDI-File-I_002fO">MIDI File I/O</a></td></tr>
-<tr><td></td><td valign="top"><a href="#index-midiflush">midiflush</a>:</td><td>&nbsp;</td><td valign="top"><a href="#MIDI-Device-Interface">MIDI Device Interface</a></td></tr>
-<tr><td></td><td valign="top"><a href="#index-midiid">midiid</a>:</td><td>&nbsp;</td><td valign="top"><a href="#MIDI-Controller-Interface">MIDI Controller Interface</a></td></tr>
-<tr><td></td><td valign="top"><a href="#index-midimsg">midimsg</a>:</td><td>&nbsp;</td><td valign="top"><a href="#MIDI-Device-Interface">MIDI Device Interface</a></td></tr>
-<tr><td></td><td valign="top"><a href="#index-midimsgtype">midimsgtype</a>:</td><td>&nbsp;</td><td valign="top"><a href="#Enumerations">Enumerations</a></td></tr>
-<tr><td></td><td valign="top"><a href="#index-midiread">midiread</a>:</td><td>&nbsp;</td><td valign="top"><a href="#MIDI-Controller-Interface">MIDI Controller Interface</a></td></tr>
-<tr><td></td><td valign="top"><a href="#index-midireceive">midireceive</a>:</td><td>&nbsp;</td><td valign="top"><a href="#MIDI-Device-Interface">MIDI Device Interface</a></td></tr>
-<tr><td></td><td valign="top"><a href="#index-midisend">midisend</a>:</td><td>&nbsp;</td><td valign="top"><a href="#MIDI-Device-Interface">MIDI Device Interface</a></td></tr>
-<tr><td></td><td valign="top"><a href="#index-midisync">midisync</a>:</td><td>&nbsp;</td><td valign="top"><a href="#MIDI-Controller-Interface">MIDI Controller Interface</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-Measurements">Measurements</a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Measurements">Measurements</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-mel2hz">mel2hz</a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Measurements">Measurements</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-MIDI-Controller-Interface">MIDI Controller Interface</a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#MIDI-Controller-Interface">MIDI Controller Interface</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-MIDI-Device-Interface">MIDI Device Interface</a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#MIDI-Device-Interface">MIDI Device Interface</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-MIDI-File-I_002fO">MIDI File I/O</a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#MIDI-File-I_002fO">MIDI File I/O</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-MIDI-Functionality">MIDI Functionality</a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Basic-Usage-Overview">Basic Usage Overview</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-midicallback">midicallback</a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#MIDI-Controller-Interface">MIDI Controller Interface</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-midicontrols">midicontrols</a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#MIDI-Controller-Interface">MIDI Controller Interface</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-mididevice">mididevice</a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#MIDI-Device-Interface">MIDI Device Interface</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-mididevinfo">mididevinfo</a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#MIDI-Device-Interface">MIDI Device Interface</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-midifileinfo">midifileinfo</a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#MIDI-File-I_002fO">MIDI File I/O</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-midifileread">midifileread</a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#MIDI-File-I_002fO">MIDI File I/O</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-midifilewrite">midifilewrite</a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#MIDI-File-I_002fO">MIDI File I/O</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-midiflush">midiflush</a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#MIDI-Device-Interface">MIDI Device Interface</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-midiid">midiid</a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#MIDI-Controller-Interface">MIDI Controller Interface</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-midimsg">midimsg</a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#MIDI-Device-Interface">MIDI Device Interface</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-midimsgtype">midimsgtype</a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Enumerations">Enumerations</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-midiread">midiread</a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#MIDI-Controller-Interface">MIDI Controller Interface</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-midireceive">midireceive</a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#MIDI-Device-Interface">MIDI Device Interface</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-midisend">midisend</a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#MIDI-Device-Interface">MIDI Device Interface</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-midisync">midisync</a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#MIDI-Controller-Interface">MIDI Controller Interface</a></td></tr>
 <tr><td colspan="4"> <hr></td></tr>
 <tr><th id="Index_cp_letter-O">O</th><td></td><td></td></tr>
-<tr><td></td><td valign="top"><a href="#index-Off_002dline-install">Off-line install</a>:</td><td>&nbsp;</td><td valign="top"><a href="#Installing-and-loading">Installing and loading</a></td></tr>
-<tr><td></td><td valign="top"><a href="#index-Online-install">Online install</a>:</td><td>&nbsp;</td><td valign="top"><a href="#Installing-and-loading">Installing and loading</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-Off_002dline-install">Off-line install</a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Installing-and-loading">Installing and loading</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-Online-install">Online install</a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Installing-and-loading">Installing and loading</a></td></tr>
 <tr><td colspan="4"> <hr></td></tr>
 <tr><th id="Index_cp_letter-W">W</th><td></td><td></td></tr>
-<tr><td></td><td valign="top"><a href="#index-warranty">warranty</a>:</td><td>&nbsp;</td><td valign="top"><a href="#Copying">Copying</a></td></tr>
-<tr><td></td><td valign="top"><a href="#index-Windows-install">Windows install</a>:</td><td>&nbsp;</td><td valign="top"><a href="#Installing-and-loading">Installing and loading</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-warranty">warranty</a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Copying">Copying</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-Waveform-Generation">Waveform Generation</a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Basic-Usage-Overview">Basic Usage Overview</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-Waveform-Generation-1">Waveform Generation</a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Waveform-Generation">Waveform Generation</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-Windows-install">Windows install</a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Installing-and-loading">Installing and loading</a></td></tr>
 <tr><td colspan="4"> <hr></td></tr>
 </table>
-<table><tr><th valign="top">Jump to: &nbsp; </th><td><a class="summary-letter" href="#Index_cp_letter-B"><b>B</b></a>
+<table class="cp-letters-footer-printindex"><tr><th>Jump to: &nbsp; </th><td><a class="summary-letter-printindex" href="#Index_cp_letter-A"><b>A</b></a>
  &nbsp; 
-<a class="summary-letter" href="#Index_cp_letter-C"><b>C</b></a>
+<a class="summary-letter-printindex" href="#Index_cp_letter-B"><b>B</b></a>
  &nbsp; 
-<a class="summary-letter" href="#Index_cp_letter-E"><b>E</b></a>
+<a class="summary-letter-printindex" href="#Index_cp_letter-C"><b>C</b></a>
  &nbsp; 
-<a class="summary-letter" href="#Index_cp_letter-F"><b>F</b></a>
+<a class="summary-letter-printindex" href="#Index_cp_letter-E"><b>E</b></a>
  &nbsp; 
-<a class="summary-letter" href="#Index_cp_letter-H"><b>H</b></a>
+<a class="summary-letter-printindex" href="#Index_cp_letter-F"><b>F</b></a>
  &nbsp; 
-<a class="summary-letter" href="#Index_cp_letter-I"><b>I</b></a>
+<a class="summary-letter-printindex" href="#Index_cp_letter-H"><b>H</b></a>
  &nbsp; 
-<a class="summary-letter" href="#Index_cp_letter-L"><b>L</b></a>
+<a class="summary-letter-printindex" href="#Index_cp_letter-I"><b>I</b></a>
  &nbsp; 
-<a class="summary-letter" href="#Index_cp_letter-M"><b>M</b></a>
+<a class="summary-letter-printindex" href="#Index_cp_letter-L"><b>L</b></a>
  &nbsp; 
-<a class="summary-letter" href="#Index_cp_letter-O"><b>O</b></a>
+<a class="summary-letter-printindex" href="#Index_cp_letter-M"><b>M</b></a>
  &nbsp; 
-<a class="summary-letter" href="#Index_cp_letter-W"><b>W</b></a>
+<a class="summary-letter-printindex" href="#Index_cp_letter-O"><b>O</b></a>
+ &nbsp; 
+<a class="summary-letter-printindex" href="#Index_cp_letter-W"><b>W</b></a>
  &nbsp; 
 </td></tr></table>
+</div>
  
 </div>
 </div>
