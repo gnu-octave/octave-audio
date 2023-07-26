@@ -2,7 +2,7 @@
 layout: "default"
 permalink: "/functions/8_midisync/"
 pkg_name: "audio"
-pkg_version: "2.0.6"
+pkg_version: "2.0.7"
 pkg_description: "Audio and MIDI Toolbox for GNU Octave"
 title: "Audio Toolkit - midisync"
 category: "MIDI Controller Interface"

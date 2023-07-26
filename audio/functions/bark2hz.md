@@ -2,7 +2,7 @@
 layout: "default"
 permalink: "/functions/7_bark2hz/"
 pkg_name: "audio"
-pkg_version: "2.0.6"
+pkg_version: "2.0.7"
 pkg_description: "Audio and MIDI Toolbox for GNU Octave"
 title: "Audio Toolkit - bark2hz"
 category: "Measurements"

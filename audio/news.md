@@ -3,7 +3,7 @@ layout: "default"
 permalink: "/news/"
 title: "Audio Toolkit - News"
 pkg_name: "audio"
-version: "2.0.6"
+version: "2.0.7"
 description: "Audio and MIDI Toolbox for GNU Octave"
 navigation:
 - id: "overview"
@@ -20,6 +20,14 @@ navigation:
 ---
 <pre>
 Summary of important user-visible changes for releases of the audio package
+
+===============================================================================
+audio-2.0.7   Release Date: 2023-07-26
+===============================================================================
+
+  ** bugfix crash on create mididevice without a midisystem
+
+  ** minor updates to documentation
 
 ===============================================================================
 audio-2.0.6   Release Date: 2023-07-20
