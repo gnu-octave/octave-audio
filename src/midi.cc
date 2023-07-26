@@ -184,23 +184,31 @@ open_midi (const std::string &inname, const std::string &outname)
 {
   midi_device * dev = new midi_device ();
 
-  midi_device_list devs;
-  get_midi_devices(devs);
-
-  dev->in_info = devs.get_name (inname, false);
-  dev->out_info = devs.get_name (outname, true);
-
-  if (dev->in_info.isvalid ())
+  try
     {
-      dev->in->openPort (dev->in_info.devid);
-      dev->in->setCallback( mycallback, (void *)dev );
-      // Don't ignore sysex, timing, or active sensing messages.
-      dev->in->ignoreTypes( false, false, false );
+      midi_device_list devs;
+      get_midi_devices(devs);
+
+      dev->in_info = devs.get_name (inname, false);
+      dev->out_info = devs.get_name (outname, true);
+
+      if (dev->in_info.isvalid ())
+        {
+          dev->in->openPort (dev->in_info.devid);
+          dev->in->setCallback( mycallback, (void *)dev );
+          // Don't ignore sysex, timing, or active sensing messages.
+          dev->in->ignoreTypes( false, false, false );
+        }
+
+      if (dev->out_info.isvalid ())
+        dev->out->openPort (dev->out_info.devid);
     }
-
-  if (dev->out_info.isvalid ())
-    dev->out->openPort (dev->out_info.devid);
-
+  catch (RtMidiError &err)
+    {
+      error ("Error opening midi: '%s'", err.getMessage ().c_str ());
+      delete dev;
+      dev = 0;
+    }
   return dev;
 }
 

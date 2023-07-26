@@ -78,7 +78,7 @@ octave_midi::create (const std::string &inname, const std::string &outname)
 
   dev = open_midi (inname, outname);
 
-  return true;
+  return dev != 0;
 }
 
 bool
