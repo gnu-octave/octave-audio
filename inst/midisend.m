@@ -56,25 +56,19 @@ function midisend (dev, varargin)
     msg = midimsg(varargin{2:end});
   endif
 
-  msg_data = msg.msgbytes;
-  msg_ts = msg.timestamp;
-
-  if !iscell(msg_ts)
-    msg_data = { msg_data };
-    msg_ts = { msg_ts };
-  endif
-
   # TODO: determine if is 'recent' or not for what timestamp to use
   # currently, we 'assume' that the 1st midi msg must go NOW
-  if length(msg_ts) > 0
-    timestamp = msg_ts{1};
+  if length(msg) > 0
+    timestamp = msg(1).timestamp;
   else
     timestamp = 0;
   endif
 
   # loop thru data and send each message
-  for i=1:length(msg_ts)
-     ts = msg_ts{i};
+  for i=1:length(msg)
+     m = msg(i);
+     ts = m.timestamp;
+     data = m.msgbytes;
 
      if ts < timestamp
        ts = timestamp - ts;
@@ -86,8 +80,6 @@ function midisend (dev, varargin)
      endif
 
      pause(delta);
-
-     data = msg_data{i};
 
      # if we have metaevents, dont send them length would be FF type encodedsize data
      if length(data) < 3 || data(1) != 0xff
