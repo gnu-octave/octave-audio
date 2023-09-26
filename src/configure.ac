@@ -27,7 +27,11 @@ AH_TOP([#include "undef-ah-octave.h"])
 
 AC_CONFIG_MACRO_DIRS([m4])
 
+AC_CANONICAL_HOST
+AC_CANONICAL_TARGET
+
 # Checks for programs.
+AC_PROG_SED
 AC_PROG_CXX
 AC_LANG(C++)
 
@@ -36,6 +40,21 @@ if [ test "$MKOCTFILE" = "none" ]; then
   AC_MSG_ERROR([mkoctfile required to install $PACKAGE_NAME])
 fi
 
+# try get around possible spaces in the path
+if test "X${IGNORE_MINGW_PATH_MODIFICATION}" == "X"; then
+case $host_os in
+  mingw*)
+    # try demangle spaces in escaped input strings
+    MKOCTFILE=`echo $MKOCTFILE | $SED "s,\\\\\ ,?,g"`
+    ;;
+  *)
+    ;;
+esac
+fi
+
+# Check for RTMIDI
+save_CXXFLAGS="$CXXFLAGS"
+save_LIBS="$LIBS"
 PKG_CHECK_MODULES(RTMIDI,rtmidi,[have_rtmidi=yes],[have_rtmidi=no])
 if test "$have_rtmidi" = "yes"; then
   AC_DEFINE(HAVE_RTMIDI, 1, [Define to 1 to use the rtmidi library.])
@@ -58,10 +77,14 @@ AC_COMPILE_IFELSE([AC_LANG_PROGRAM([[
   have_api_name=yes],
  [AC_MSG_RESULT([no])]
 )
+CXXFLAGS=$save_CXXFLAGS
+LIBS=$save_LIBS
 
 if test $have_get_api_name = yes; then
   AC_DEFINE([HAVE_RTMIDI_GETAPINAME], [1], [have the RtMidi::getApiName function])
 fi
+
+# Check for pthreads
 
 AX_PTHREAD([],[AC_MSG_ERROR([thread library is needed to install $PACKAGE_NAME])])
 
@@ -71,10 +94,34 @@ save_altsyms_CXX="$CXX"
 save_altsyms_CXXFLAGS="$CXXFLAGS"
 save_altsyms_LDFLAGS="$LDFLAGS"
 save_altsyms_LIBS="$LIBS"
-OCTINCLUDEDIR=${OCTINCLUDEDIR:-`$MKOCTFILE -p INCFLAGS`}
+OCTINCLUDEDIR="${OCTINCLUDEDIR:-`$MKOCTFILE -p OCTINCLUDEDIR`}/.."
 OCTLIBDIR=${OCTLIBDIR:-`$MKOCTFILE -p OCTLIBDIR`}
+
+if test "X${IGNORE_MINGW_PATH_MODIFICATION}" == "X"; then
+  MSYSTEM="${MSYSTEM}"
+else
+  MSYSTEM="none"
+fi
+
+case X$MSYSTEM in
+  XMINGW64*)
+    OCTAVE_HOME=`${MKOCTFILE} -p OCTAVE_HOME | $SED 's,\\\\,/,g'`
+    # change \ to / and replace octave home part with mingw part
+    OCTINCLUDEDIR=`echo $OCTINCLUDEDIR | $SED -e 's,\\\\,/,g' -e "s,${OCTAVE_HOME},/mingw64,g"`
+    OCTLIBDIR=`echo $OCTLIBDIR | $SED -e 's,\\\\,/,g' -e "s,${OCTAVE_HOME},/mingw64,g"`
+    ;;
+  XMINGW32*)
+    OCTAVE_HOME=`${MKOCTFILE} -p OCTAVE_HOME | $SED 's,\\\\,/,g'`
+    # change \ to / and replace octave home part with mingw part
+    OCTINCLUDEDIR=`echo $OCTINCLUDEDIR | $SED -e 's,\\\\,/,g' -e "s,${OCTAVE_HOME},/mingw32,g"`
+    OCTLIBDIR=`echo $OCTLIBDIR | $SED -e 's,\\\\,/,g -e "s,${OCTAVE_HOME},/mingw32,g"'`
+    ;;
+  *)
+    ;;
+esac
+
 CXX=`${MKOCTFILE} -p CXX`
-CXXFLAGS="$OCTINCLUDEDIR $CXXFLAGS"
+CXXFLAGS="-I$OCTINCLUDEDIR $CXXFLAGS"
 LDFLAGS="-L$OCTLIBDIR $LDFLAGS"
 LIBS="-loctinterp $LIBS"
 
@@ -198,7 +245,7 @@ AC_OUTPUT
 AC_MSG_NOTICE([
 
 $PACKAGE_NAME is configured with:
-  LIBS:     $LIBS
-  CXXFLAGS: $CXXFLAGS $DEFS
+  LIBS:     $LIBS $RTMIDI_LIBS $PTHREAD_LIBS
+  CXXFLAGS: $CXXFLAGS $RTMIDI_CFLAGS@ $PTHREAD_CFLAGS $DEFS
 ])
 
