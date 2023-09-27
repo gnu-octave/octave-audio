@@ -155,8 +155,12 @@ classdef audioOscillator < handle
             propstart = 3;
             this.Frequency = varargin{2};
           endif
-        elseif !any(strcmpi(varargin{1}, properties(this)))
+        elseif !is_property(this, varargin{1})
           error ("Expected first input argument to be signal type or property name.")
+        endif
+
+        if mod(length(varargin)-propstart, 2) != 1
+          error ("Expected property name/value pairs.")
         endif
 
         # handle the properties
@@ -360,7 +364,32 @@ classdef audioOscillator < handle
 
 
   endmethods
+
+  methods (Access = private)
+    function y = is_property(this, value)
+      y = false;
+      if exist ("properties")
+        props_f = str2func("properties");
+        props = props_f(this);
+      else
+        # no properties function so manually look at classinfo
+        props_all = metaclass(this).Properties;
+        props = {};
+        for idx=1:length(props_all)
+          p = props_all{idx};
+          if strcmp(p.GetAccess, "public")
+            props{end+1} = p.Name;
+          endif
+        endfor
+      endif
+
+      if any(strcmpi(value, props))
+        y = true;
+      endif
  
+    endfunction
+  endmethods
+
 endclassdef
 
 %!error audioOscillator(1)
