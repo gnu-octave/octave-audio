@@ -18,7 +18,7 @@
 ### <http://www.gnu.org/licenses/>.
 
 AC_PREREQ([2.67])
-AC_INIT([octave audio package], [2.0.7])
+AC_INIT([octave audio package], [2.0.8])
 AC_CONFIG_HEADERS([config.h])
 
 # Avoid warnings for redefining AH-generated preprocessor symbols of
@@ -246,6 +246,6 @@ AC_MSG_NOTICE([
 
 $PACKAGE_NAME is configured with:
   LIBS:     $LIBS $RTMIDI_LIBS $PTHREAD_LIBS
-  CXXFLAGS: $CXXFLAGS $RTMIDI_CFLAGS@ $PTHREAD_CFLAGS $DEFS
+  CXXFLAGS: $CXXFLAGS $RTMIDI_CFLAGS $PTHREAD_CFLAGS $DEFS
 ])
 
