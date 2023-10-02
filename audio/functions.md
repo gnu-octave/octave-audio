@@ -3,7 +3,7 @@ layout: "function_list"
 permalink: "/functions/"
 title: "Audio Toolkit - Functions"
 pkg_name: "audio"
-version: "2.0.7"
+version: "2.0.8"
 description: "Audio and MIDI Toolbox for GNU Octave"
 categories:
 - id: "21_MIDIDeviceInterface"

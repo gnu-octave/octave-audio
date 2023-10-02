@@ -2,7 +2,7 @@
 layout: "default"
 permalink: "/functions/11_mididevinfo/"
 pkg_name: "audio"
-pkg_version: "2.0.7"
+pkg_version: "2.0.8"
 pkg_description: "Audio and MIDI Toolbox for GNU Octave"
 title: "Audio Toolkit - mididevinfo"
 category: "MIDI Device Interface"

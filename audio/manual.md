@@ -3,7 +3,7 @@ layout: "default"
 permalink: "/manual/"
 title: "Audio Toolkit - Manual"
 pkg_name: "audio"
-version: "2.0.7"
+version: "2.0.8"
 description: "Audio and MIDI Toolbox for GNU Octave"
 navigation:
 - id: "overview"
@@ -160,7 +160,7 @@ octave-forge using the following command within <abbr class="acronym">GNU</abbr>
 <abbr class="acronym">GNU</abbr> Octave, the package can be installed using the following command within <abbr class="acronym">GNU</abbr> Octave:
 </p>
 <div class="example">
-<pre class="example-preformatted">pkg install audio-2.0.7.tar.gz
+<pre class="example-preformatted">pkg install audio-2.0.8.tar.gz
 </pre></div>
 </div>
 <div class="section-level-extent" id="Loading">

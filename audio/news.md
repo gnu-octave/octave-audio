@@ -3,7 +3,7 @@ layout: "default"
 permalink: "/news/"
 title: "Audio Toolkit - News"
 pkg_name: "audio"
-version: "2.0.7"
+version: "2.0.8"
 description: "Audio and MIDI Toolbox for GNU Octave"
 navigation:
 - id: "overview"
@@ -20,6 +20,16 @@ navigation:
 ---
 <pre>
 Summary of important user-visible changes for releases of the audio package
+
+===============================================================================
+audio-2.0.8   Release Date: 2023-10-02
+===============================================================================
+
+  ** bugfix midisend with multiple messages
+
+  ** audioOscillator: update to allow functioning in < octave 6
+
+  ** minor updated for Octave 9+ compatibility
 
 ===============================================================================
 audio-2.0.7   Release Date: 2023-07-26
