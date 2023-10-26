@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Copyright 2023 John Donoghue
+
+Copying and distribution of this file, with or without modification,
+are permitted in any medium without royalty provided the copyright
+notice and this notice are preserved.  This file is offered as-is,
+without any warranty.
+-->
+<component type="addon">
+  <id>octave-audio</id>
+  <extends>www.octave.org-octave.desktop</extends>
+  <name>Audio Toolkit</name>
+  <summary>Octave Audio toolkit</summary>
+  <description>
+    <p>Toolkit for MIDI and additional audio functions</p>
+  </description>
+  <keywords>
+    <keyword>audio</keyword>
+    <keyword>MIDI</keyword>
+    <keyword>scientific</keyword>
+  </keywords>
+  <url type="homepage">https://gnu-octave.github.io/octave-audio/</url>
+  <url type="bugtracker">https://github.com/gnu-octave/octave-audio/issues</url>
+  <project_license>GPL-3.0+</project_license>
+  <developer_name>Octave-Forge Community</developer_name>
+  <update_contact>octave-maintainers@gnu.org</update_contact>
+  <metadata_license>FSFAP</metadata_license>
+</component>
