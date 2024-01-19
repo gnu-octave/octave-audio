@@ -167,7 +167,8 @@ endif
 	$(MAKE) -C "$@" docs
 #	cd "$@" && $(MAKE) tests
 	# remove dev stuff
-	cd "$@" && $(RM) -rf "devel" && $(RM) -f doc/mkfuncdocs.py doc/mkqhcp.py
+	cd "$@" && $(RM) -rf "devel" 
+	# && $(RM) -f doc/mkfuncdocs.py doc/mkqhcp.py
 	${FIX_PERMISSIONS} "$@"
 
 .PHONY: docs
