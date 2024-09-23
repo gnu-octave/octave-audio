@@ -43,6 +43,7 @@ package := $(shell $(GREP) "^Name: " DESCRIPTION | $(CUT) -f2 -d" " | \
 $(TR) '[:upper:]' '[:lower:]')
 version := $(shell $(GREP) "^Version: " DESCRIPTION | $(CUT) -f2 -d" ")
 pkg_date := $(shell $(GREP) "^Date: " DESCRIPTION | $(CUT) -f2 -d" ")
+pkg_year := $(shell $(GREP) "^Date: " DESCRIPTION | $(CUT) -f2 -d" " | $(CUT) -f1 -d"-")
 
 ## These are the paths that will be created for the releases.
 target_dir       := target
@@ -191,6 +192,7 @@ doc/version.texi: $(release_dir_dep)
 	@echo "@set VERSION $(version)" >> $@
 	@echo "@set PACKAGE $(package)" >> $@
 	@echo "@set DATE $(pkg_date)" >> $@
+	@echo "@set YEAR $(pkg_year)" >> $@
 
 doc/$(package).pdf: doc/$(package).texi doc/functions.texi doc/version.texi
 	cd doc && SOURCE_DATE_EPOCH=$(REPO_TIMESTAMP) $(TEXI2PDF) $(package).texi
