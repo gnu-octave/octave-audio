@@ -201,9 +201,13 @@ doc/$(package).html: doc/$(package).texi doc/functions.texi doc/version.texi
 	cd doc && SOURCE_DATE_EPOCH=$(REPO_TIMESTAMP) $(MAKEINFO) --html --css-ref=$(package).css $(MAKEINFO_HTML_OPTIONS) $(package).texi
 
 doc/$(package).qhc: doc/$(package).html
+ifeq ($(QHELPGENERATOR),true)
+	$(warning No QHELPGENERATOR ... skipping QT doc build)
+else
 	# try also create qch file if can
 	cd doc && ./mkqhcp.py $(package) && $(QHELPGENERATOR) $(package).qhcp -o $(package).qhc
 	cd doc && $(RM) -f $(package).qhcp $(package).qhp
+endif
 
 doc/$(package).info: doc/$(package).texi doc/functions.texi doc/version.texi
 	cd doc && $(MAKEINFO) $(package).texi
