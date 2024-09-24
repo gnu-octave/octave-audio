@@ -162,7 +162,7 @@ help mididevice
 @section Conversion Functionality
 @cindex  Conversion Functionality
 
-The following functions are available to convert to and from Hz frequency:
+The following functions are available to convert between audio domains:
 @table @asis
 @item hz2erb, erb2hz
 Conversion between hz and equivalent rectangular bandwidths (ERP) frequency scales
@@ -170,6 +170,8 @@ Conversion between hz and equivalent rectangular bandwidths (ERP) frequency scal
 Conversion between hz and equivalent mel frequency scales
 @item hz2bark, bark2hz
 Conversion between hz and equivalent bark frequency scales
+@item phon2sone, sone2phone
+Conversion between sone and phon loudness scales
 @end table
 
 @section Waveform Generation
