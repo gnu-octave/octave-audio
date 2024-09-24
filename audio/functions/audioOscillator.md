@@ -2,7 +2,7 @@
 layout: "default"
 permalink: "/functions/15_audioOscillator/"
 pkg_name: "audio"
-pkg_version: "2.0.8"
+pkg_version: "2.0.9"
 pkg_description: "Audio and MIDI Toolbox for GNU Octave"
 title: "Audio Toolkit - audioOscillator"
 category: "Waveform Generation"
@@ -29,9 +29,9 @@ navigation:
 - id: "19_WaveformGeneration"
   name: "&nbsp;&nbsp;Waveform Generation"
   url: "/functions/#19_WaveformGeneration"
-- id: "12_Measurements"
-  name: "&nbsp;&nbsp;Measurements"
-  url: "/functions/#12_Measurements"
+- id: "17_DomainConversion"
+  name: "&nbsp;&nbsp;Domain Conversion"
+  url: "/functions/#17_DomainConversion"
 - id: "news"
   name: "News"
   url: "/news"
@@ -40,19 +40,19 @@ navigation:
   url: "/manual"
 ---
 <dl class="first-deftypefn">
-<dt class="deftypefn" id="index-audioOscillator"><span class="category-def">: </span><span><strong class="def-name">audioOscillator</strong><a class="copiable-link" href='#index-audioOscillator'></a></span></dt>
+<dt class="deftypefn" id="index-audioOscillator"><span class="category-def">: </span><span><strong class="def-name">audioOscillator</strong><a class="copiable-link" href="#index-audioOscillator"></a></span></dt>
 <dd><p>Generate sine, sawtool and square waveforms
  </p></dd></dl>
 
-<h4 class="subheading" id="Methods">Methods</h4>
+<h4 class="subheading" id="Methods"><span>Methods<a class="copiable-link" href="#Methods"></a></span></h4>
 <dl class="first-deftypefn">
-<dt class="deftypefn" id="index-audioOscillator-1"><span class="category-def">: </span><span><code class="def-type"><var class="var">obj</var> =</code> <strong class="def-name">audioOscillator</strong> <code class="def-code-arguments">()</code><a class="copiable-link" href='#index-audioOscillator-1'></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn" id="index-audioOscillator-2"><span class="category-def">: </span><span><code class="def-type"><var class="var">obj</var> =</code> <strong class="def-name">audioOscillator</strong> <code class="def-code-arguments">(<var class="var">signalTypeValue</var>)</code><a class="copiable-link" href='#index-audioOscillator-2'></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn" id="index-audioOscillator-3"><span class="category-def">: </span><span><code class="def-type"><var class="var">obj</var> =</code> <strong class="def-name">audioOscillator</strong> <code class="def-code-arguments">(<var class="var">signalTypeValue</var>, <var class="var">frequencyValue</var>)</code><a class="copiable-link" href='#index-audioOscillator-3'></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn" id="index-audioOscillator-4"><span class="category-def">: </span><span><code class="def-type"><var class="var">obj</var> =</code> <strong class="def-name">audioOscillator</strong> <code class="def-code-arguments">(__, <var class="var">propertyname</var>, <var class="var">propertyvalue</var>)</code><a class="copiable-link" href='#index-audioOscillator-4'></a></span></dt>
+<dt class="deftypefn" id="index-audioOscillator-1"><span class="category-def">: </span><span><code class="def-type"><var class="var">obj</var> =</code> <strong class="def-name">audioOscillator</strong> <code class="def-code-arguments">()</code><a class="copiable-link" href="#index-audioOscillator-1"></a></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn" id="index-audioOscillator-2"><span class="category-def">: </span><span><code class="def-type"><var class="var">obj</var> =</code> <strong class="def-name">audioOscillator</strong> <code class="def-code-arguments">(<var class="var">signalTypeValue</var>)</code><a class="copiable-link" href="#index-audioOscillator-2"></a></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn" id="index-audioOscillator-3"><span class="category-def">: </span><span><code class="def-type"><var class="var">obj</var> =</code> <strong class="def-name">audioOscillator</strong> <code class="def-code-arguments">(<var class="var">signalTypeValue</var>, <var class="var">frequencyValue</var>)</code><a class="copiable-link" href="#index-audioOscillator-3"></a></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn" id="index-audioOscillator-4"><span class="category-def">: </span><span><code class="def-type"><var class="var">obj</var> =</code> <strong class="def-name">audioOscillator</strong> <code class="def-code-arguments">(__, <var class="var">propertyname</var>, <var class="var">propertyvalue</var>)</code><a class="copiable-link" href="#index-audioOscillator-4"></a></span></dt>
 <dd><p>Create a audioOscillator object
 </p>
-<h4 class="subsubheading" id="Inputs">Inputs</h4>
+<h4 class="subsubheading" id="Inputs"><span>Inputs<a class="copiable-link" href="#Inputs"></a></span></h4>
 <p><var class="var">signalTypeValue</var> - signal type of &quot;sine&quot; (default), &quot;square&quot;, &quot;sawtooth&quot;.<br>
  <var class="var">frequencyValue</var> - hz frequency value of waveform (default 100).<br>
  <var class="var">propertyname</var>, <var class="var">propertyvalue</var> - properties to set on the object. 
@@ -94,10 +94,10 @@ navigation:
  </p></dd>
 </dl>
 
-<h4 class="subsubheading" id="Outputs">Outputs</h4>
+<h4 class="subsubheading" id="Outputs"><span>Outputs<a class="copiable-link" href="#Outputs"></a></span></h4>
 <p><var class="var">obj</var> - signalGenerator object
 </p>
-<h4 class="subsubheading" id="Examples">Examples</h4>
+<h4 class="subsubheading" id="Examples"><span>Examples<a class="copiable-link" href="#Examples"></a></span></h4>
 <p>Create a 100 hz sine wave and plot first 512 samples
  </p><div class="example">
 <pre class="example-preformatted"> sinosc = audioOscillator
@@ -113,23 +113,23 @@ navigation:
 </dd></dl>
 
 <dl class="first-deftypefn">
-<dt class="deftypefn" id="index-obj_0028_0029"><span class="category-def">: </span><span><code class="def-type"><var class="var">data</var> =</code> <strong class="def-name"><var class="var">obj</var>()</strong><a class="copiable-link" href='#index-obj_0028_0029'></a></span></dt>
+<dt class="deftypefn" id="index-obj_0028_0029"><span class="category-def">: </span><span><code class="def-type"><var class="var">data</var> =</code> <strong class="def-name"><var class="var">obj</var>()</strong><a class="copiable-link" href="#index-obj_0028_0029"></a></span></dt>
 <dd><p>Generate a frame of waveform data from the generator function
 </p>
-<h4 class="subsubheading" id="Inputs-1">Inputs</h4>
+<h4 class="subsubheading" id="Inputs-1"><span>Inputs<a class="copiable-link" href="#Inputs-1"></a></span></h4>
 <p><var class="var">obj</var> - signalGenerator object
 </p>
-<h4 class="subsubheading" id="Outputs-1">Outputs</h4>
+<h4 class="subsubheading" id="Outputs-1"><span>Outputs<a class="copiable-link" href="#Outputs-1"></a></span></h4>
 <p><var class="var">data</var> - waveform data
  </p></dd></dl>
 
 <dl class="first-deftypefn">
-<dt class="deftypefn" id="index-release_0028obj_0029"><span class="category-def">: </span><span><strong class="def-name">release(<var class="var">obj</var>)</strong><a class="copiable-link" href='#index-release_0028obj_0029'></a></span></dt>
+<dt class="deftypefn" id="index-release_0028obj_0029"><span class="category-def">: </span><span><strong class="def-name">release(<var class="var">obj</var>)</strong><a class="copiable-link" href="#index-release_0028obj_0029"></a></span></dt>
 <dd><p>Release resources of generator
 </p>
-<h4 class="subsubheading" id="Inputs-2">Inputs</h4>
+<h4 class="subsubheading" id="Inputs-2"><span>Inputs<a class="copiable-link" href="#Inputs-2"></a></span></h4>
 <p><var class="var">obj</var> - signalGenerator object
 </p>
-<h4 class="subsubheading" id="Outputs-2">Outputs</h4>
+<h4 class="subsubheading" id="Outputs-2"><span>Outputs<a class="copiable-link" href="#Outputs-2"></a></span></h4>
 <p>None
  </p></dd></dl>

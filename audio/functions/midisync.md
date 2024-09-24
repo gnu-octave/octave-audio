@@ -2,7 +2,7 @@
 layout: "default"
 permalink: "/functions/8_midisync/"
 pkg_name: "audio"
-pkg_version: "2.0.8"
+pkg_version: "2.0.9"
 pkg_description: "Audio and MIDI Toolbox for GNU Octave"
 title: "Audio Toolkit - midisync"
 category: "MIDI Controller Interface"
@@ -29,9 +29,9 @@ navigation:
 - id: "19_WaveformGeneration"
   name: "&nbsp;&nbsp;Waveform Generation"
   url: "/functions/#19_WaveformGeneration"
-- id: "12_Measurements"
-  name: "&nbsp;&nbsp;Measurements"
-  url: "/functions/#12_Measurements"
+- id: "17_DomainConversion"
+  name: "&nbsp;&nbsp;Domain Conversion"
+  url: "/functions/#17_DomainConversion"
 - id: "news"
   name: "News"
   url: "/news"
@@ -40,19 +40,19 @@ navigation:
   url: "/manual"
 ---
 <dl class="first-deftypefn">
-<dt class="deftypefn" id="index-midisync"><span class="category-def">: </span><span><strong class="def-name">midisync</strong> <code class="def-code-arguments">(<var class="var">midicontrolsObj</var>)</code><a class="copiable-link" href='#index-midisync'></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn" id="index-midisync-1"><span class="category-def">: </span><span><strong class="def-name">midisync</strong> <code class="def-code-arguments">(<var class="var">midicontrolsObj</var>, <var class="var">ctrlvalues</var>)</code><a class="copiable-link" href='#index-midisync-1'></a></span></dt>
+<dt class="deftypefn" id="index-midisync"><span class="category-def">: </span><span><strong class="def-name">midisync</strong> <code class="def-code-arguments">(<var class="var">midicontrolsObj</var>)</code><a class="copiable-link" href="#index-midisync"></a></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn" id="index-midisync-1"><span class="category-def">: </span><span><strong class="def-name">midisync</strong> <code class="def-code-arguments">(<var class="var">midicontrolsObj</var>, <var class="var">ctrlvalues</var>)</code><a class="copiable-link" href="#index-midisync-1"></a></span></dt>
 <dd><p>Send the values of control object to the control, using <var class="var">ctrlvalues</var> values
  if specified instead
 </p> 
-<h4 class="subsubheading" id="Inputs">Inputs</h4>
+<h4 class="subsubheading" id="Inputs"><span>Inputs<a class="copiable-link" href="#Inputs"></a></span></h4>
 <p><var class="var">midicontrolObj</var> - control object created using midicontrols<br>
  <var class="var">ctrlvalues</var> - values to send to the controls instead of initial values
 </p>
-<h4 class="subsubheading" id="Outputs">Outputs</h4>
+<h4 class="subsubheading" id="Outputs"><span>Outputs<a class="copiable-link" href="#Outputs"></a></span></h4>
 <p>None
 </p>
-<h4 class="subsubheading" id="Examples">Examples</h4>
+<h4 class="subsubheading" id="Examples"><span>Examples<a class="copiable-link" href="#Examples"></a></span></h4>
 <p>Send sync command to a midicontrols with a ctrlid 2001 to set a value of 1
  </p><div class="example">
 <pre class="example-preformatted"> ctrl = midicontrols(2001)

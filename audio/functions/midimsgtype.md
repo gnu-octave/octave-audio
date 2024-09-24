@@ -2,7 +2,7 @@
 layout: "default"
 permalink: "/functions/11_midimsgtype/"
 pkg_name: "audio"
-pkg_version: "2.0.8"
+pkg_version: "2.0.9"
 pkg_description: "Audio and MIDI Toolbox for GNU Octave"
 title: "Audio Toolkit - midimsgtype"
 category: "Enumerations"
@@ -29,9 +29,9 @@ navigation:
 - id: "19_WaveformGeneration"
   name: "&nbsp;&nbsp;Waveform Generation"
   url: "/functions/#19_WaveformGeneration"
-- id: "12_Measurements"
-  name: "&nbsp;&nbsp;Measurements"
-  url: "/functions/#12_Measurements"
+- id: "17_DomainConversion"
+  name: "&nbsp;&nbsp;Domain Conversion"
+  url: "/functions/#17_DomainConversion"
 - id: "news"
   name: "News"
   url: "/news"
@@ -40,7 +40,7 @@ navigation:
   url: "/manual"
 ---
 <dl class="first-deftypefn">
-<dt class="deftypefn" id="index-midimsgtype"><span class="category-def">: </span><span><strong class="def-name">midimsgtype</strong><a class="copiable-link" href='#index-midimsgtype'></a></span></dt>
+<dt class="deftypefn" id="index-midimsgtype"><span class="category-def">: </span><span><strong class="def-name">midimsgtype</strong><a class="copiable-link" href="#index-midimsgtype"></a></span></dt>
 <dd><p>A midimsg type enumeration for values of the midimsg type.
 </p>
 <p>Enumeration values are:
@@ -61,7 +61,7 @@ navigation:
 
 <p>The enumeration value can be used instead of a string in midimsg creation.
 </p>
-<h4 class="subsubheading" id="Examples">Examples</h4>
+<h4 class="subsubheading" id="Examples"><span>Examples<a class="copiable-link" href="#Examples"></a></span></h4>
 <p>Use both a string and a midimsgtype for the type parameter of a midimsg.
  </p><div class="example">
 <pre class="example-preformatted"> <code class="code">

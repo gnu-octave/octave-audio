@@ -2,7 +2,7 @@
 layout: "default"
 permalink: "/functions/11_midireceive/"
 pkg_name: "audio"
-pkg_version: "2.0.8"
+pkg_version: "2.0.9"
 pkg_description: "Audio and MIDI Toolbox for GNU Octave"
 title: "Audio Toolkit - midireceive"
 category: "MIDI Device Interface"
@@ -29,9 +29,9 @@ navigation:
 - id: "19_WaveformGeneration"
   name: "&nbsp;&nbsp;Waveform Generation"
   url: "/functions/#19_WaveformGeneration"
-- id: "12_Measurements"
-  name: "&nbsp;&nbsp;Measurements"
-  url: "/functions/#12_Measurements"
+- id: "17_DomainConversion"
+  name: "&nbsp;&nbsp;Domain Conversion"
+  url: "/functions/#17_DomainConversion"
 - id: "news"
   name: "News"
   url: "/news"
@@ -40,19 +40,19 @@ navigation:
   url: "/manual"
 ---
 <dl class="first-deftypefn">
-<dt class="deftypefn" id="index-midireceive"><span class="category-def">: </span><span><code class="def-type"><var class="var">midimsg</var> =</code> <strong class="def-name">midireceive</strong> <code class="def-code-arguments">(<var class="var">dev</var>)</code><a class="copiable-link" href='#index-midireceive'></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn" id="index-midireceive-1"><span class="category-def">: </span><span><code class="def-type"><var class="var">midimsg</var> =</code> <strong class="def-name">midireceive</strong> <code class="def-code-arguments">(<var class="var">dev</var>, <var class="var">maxmsg</var>)</code><a class="copiable-link" href='#index-midireceive-1'></a></span></dt>
+<dt class="deftypefn" id="index-midireceive"><span class="category-def">: </span><span><code class="def-type"><var class="var">midimsg</var> =</code> <strong class="def-name">midireceive</strong> <code class="def-code-arguments">(<var class="var">dev</var>)</code><a class="copiable-link" href="#index-midireceive"></a></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn" id="index-midireceive-1"><span class="category-def">: </span><span><code class="def-type"><var class="var">midimsg</var> =</code> <strong class="def-name">midireceive</strong> <code class="def-code-arguments">(<var class="var">dev</var>, <var class="var">maxmsg</var>)</code><a class="copiable-link" href="#index-midireceive-1"></a></span></dt>
 <dd><p>Attempt to receive midi messages from a midi device.
 </p>
-<h4 class="subsubheading" id="Inputs">Inputs</h4>
+<h4 class="subsubheading" id="Inputs"><span>Inputs<a class="copiable-link" href="#Inputs"></a></span></h4>
 <p><var class="var">dev</var> - a octave midi device opened using mididevice.<br>
  <var class="var">maxmsg</var> - Maximum number of messages to retrieve. If not specified, the function will attempt to get all pending.<br>
 </p>
-<h4 class="subsubheading" id="Outputs">Outputs</h4>
+<h4 class="subsubheading" id="Outputs"><span>Outputs<a class="copiable-link" href="#Outputs"></a></span></h4>
 <p><var class="var">midimsg</var> - a midimsg containing the messages retrieved from the device.<br>
  If no messages are available, <var class="var">midimsg</var> will be empty.
 </p>
-<h4 class="subsubheading" id="Examples">Examples</h4>
+<h4 class="subsubheading" id="Examples"><span>Examples<a class="copiable-link" href="#Examples"></a></span></h4>
 <p>Open device 0, and poll and display read messages
  </p><div class="example">
 <pre class="example-preformatted"> dev = mididevice(0);

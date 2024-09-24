@@ -2,7 +2,7 @@
 layout: "default"
 permalink: "/functions/12_midicontrols/"
 pkg_name: "audio"
-pkg_version: "2.0.8"
+pkg_version: "2.0.9"
 pkg_description: "Audio and MIDI Toolbox for GNU Octave"
 title: "Audio Toolkit - midicontrols"
 category: "MIDI Controller Interface"
@@ -29,9 +29,9 @@ navigation:
 - id: "19_WaveformGeneration"
   name: "&nbsp;&nbsp;Waveform Generation"
   url: "/functions/#19_WaveformGeneration"
-- id: "12_Measurements"
-  name: "&nbsp;&nbsp;Measurements"
-  url: "/functions/#12_Measurements"
+- id: "17_DomainConversion"
+  name: "&nbsp;&nbsp;Domain Conversion"
+  url: "/functions/#17_DomainConversion"
 - id: "news"
   name: "News"
   url: "/news"
@@ -40,13 +40,13 @@ navigation:
   url: "/manual"
 ---
 <dl class="first-deftypefn">
-<dt class="deftypefn" id="index-midicontrols"><span class="category-def">: </span><span><code class="def-type"><var class="var">obj</var> =</code> <strong class="def-name">midicontrols</strong> <code class="def-code-arguments">()</code><a class="copiable-link" href='#index-midicontrols'></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn" id="index-midicontrols-1"><span class="category-def">: </span><span><code class="def-type"><var class="var">obj</var> =</code> <strong class="def-name">midicontrols</strong> <code class="def-code-arguments">(<var class="var">ctrlid</var>)</code><a class="copiable-link" href='#index-midicontrols-1'></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn" id="index-midicontrols-2"><span class="category-def">: </span><span><code class="def-type"><var class="var">obj</var> =</code> <strong class="def-name">midicontrols</strong> <code class="def-code-arguments">(<var class="var">ctrlid</var>, <var class="var">initialvalues</var>)</code><a class="copiable-link" href='#index-midicontrols-2'></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn" id="index-midicontrols-3"><span class="category-def">: </span><span><code class="def-type"><var class="var">obj</var> =</code> <strong class="def-name">midicontrols</strong> <code class="def-code-arguments">(__, <var class="var">propertyname</var>, <var class="var">propertyvalue</var>)</code><a class="copiable-link" href='#index-midicontrols-3'></a></span></dt>
+<dt class="deftypefn" id="index-midicontrols"><span class="category-def">: </span><span><code class="def-type"><var class="var">obj</var> =</code> <strong class="def-name">midicontrols</strong> <code class="def-code-arguments">()</code><a class="copiable-link" href="#index-midicontrols"></a></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn" id="index-midicontrols-1"><span class="category-def">: </span><span><code class="def-type"><var class="var">obj</var> =</code> <strong class="def-name">midicontrols</strong> <code class="def-code-arguments">(<var class="var">ctrlid</var>)</code><a class="copiable-link" href="#index-midicontrols-1"></a></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn" id="index-midicontrols-2"><span class="category-def">: </span><span><code class="def-type"><var class="var">obj</var> =</code> <strong class="def-name">midicontrols</strong> <code class="def-code-arguments">(<var class="var">ctrlid</var>, <var class="var">initialvalues</var>)</code><a class="copiable-link" href="#index-midicontrols-2"></a></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn" id="index-midicontrols-3"><span class="category-def">: </span><span><code class="def-type"><var class="var">obj</var> =</code> <strong class="def-name">midicontrols</strong> <code class="def-code-arguments">(__, <var class="var">propertyname</var>, <var class="var">propertyvalue</var>)</code><a class="copiable-link" href="#index-midicontrols-3"></a></span></dt>
 <dd><p>Create a midi controls object
 </p>
-<h4 class="subsubheading" id="Inputs">Inputs</h4>
+<h4 class="subsubheading" id="Inputs"><span>Inputs<a class="copiable-link" href="#Inputs"></a></span></h4>
 <p><var class="var">ctrlid</var> - single control id or array of control ids to monitor, or [] to use any controller.<br>
  <var class="var">initialvalues</var> - initial values to use for controls. It should be the same size as <var class="var">ctrlid</var><br>
  <var class="var">propertyname</var>, <var class="var">propertyvalue</var> - properties to set on the controller. If a device is not specified
@@ -64,10 +64,10 @@ navigation:
  </p></dd>
 </dl>
 
-<h4 class="subsubheading" id="Outputs">Outputs</h4>
+<h4 class="subsubheading" id="Outputs"><span>Outputs<a class="copiable-link" href="#Outputs"></a></span></h4>
 <p><var class="var">obj</var> - returns a midicontrols object
 </p>
-<h4 class="subsubheading" id="Examples">Examples</h4>
+<h4 class="subsubheading" id="Examples"><span>Examples<a class="copiable-link" href="#Examples"></a></span></h4>
 <p>Create a midicontrols object monitoring control id 2001 on the default midi device 
  </p><div class="example">
 <pre class="example-preformatted"> ctrl = midicontrols(2001)

@@ -2,10 +2,10 @@
 layout: "default"
 permalink: "/functions/6_mel2hz/"
 pkg_name: "audio"
-pkg_version: "2.0.8"
+pkg_version: "2.0.9"
 pkg_description: "Audio and MIDI Toolbox for GNU Octave"
 title: "Audio Toolkit - mel2hz"
-category: "Measurements"
+category: "Domain Conversion"
 func_name: "mel2hz"
 navigation:
 - id: "overview"
@@ -29,9 +29,9 @@ navigation:
 - id: "19_WaveformGeneration"
   name: "&nbsp;&nbsp;Waveform Generation"
   url: "/functions/#19_WaveformGeneration"
-- id: "12_Measurements"
-  name: "&nbsp;&nbsp;Measurements"
-  url: "/functions/#12_Measurements"
+- id: "17_DomainConversion"
+  name: "&nbsp;&nbsp;Domain Conversion"
+  url: "/functions/#17_DomainConversion"
 - id: "news"
   name: "News"
   url: "/news"
@@ -40,16 +40,16 @@ navigation:
   url: "/manual"
 ---
 <dl class="first-deftypefn">
-<dt class="deftypefn" id="index-mel2hz"><span class="category-def">: </span><span><code class="def-type"><var class="var">hz</var> =</code> <strong class="def-name">mel2hz</strong> <code class="def-code-arguments">(<var class="var">mel</var>)</code><a class="copiable-link" href='#index-mel2hz'></a></span></dt>
+<dt class="deftypefn" id="index-mel2hz"><span class="category-def">: </span><span><code class="def-type"><var class="var">hz</var> =</code> <strong class="def-name">mel2hz</strong> <code class="def-code-arguments">(<var class="var">mel</var>)</code><a class="copiable-link" href="#index-mel2hz"></a></span></dt>
 <dd><p>Convert equivalent mel frequency to Hz.
 </p>
-<h4 class="subsubheading" id="Inputs">Inputs</h4>
+<h4 class="subsubheading" id="Inputs"><span>Inputs<a class="copiable-link" href="#Inputs"></a></span></h4>
 <p><var class="var">mel</var> - input frequency in mel.
 </p>
-<h4 class="subsubheading" id="Outputs">Outputs</h4>
+<h4 class="subsubheading" id="Outputs"><span>Outputs<a class="copiable-link" href="#Outputs"></a></span></h4>
 <p><var class="var">hz</var> - Output frequency in Hz.
 </p>
-<h4 class="subsubheading" id="References">References</h4>
+<h4 class="subsubheading" id="References"><span>References<a class="copiable-link" href="#References"></a></span></h4>
 <p>O&rsquo;Shaghnessy, Douglas. <cite class="cite">Speech Communication: Human and Machine. Reading, MA:
  Addison-Wesley Publishing Company, 1987</cite>
 </p>
