@@ -22,7 +22,7 @@
 ## @subsubheading Inputs
 ## @var{phon} - Loudness level in phon
 ##
-## @var{standard} - Standard to use in converstion. Options are
+## @var{standard} - Standard to use in conversion. Options are
 ## 'ISO 532-1' or 'ISO 532-2'.
 ##
 ## 'ISO 532-1' is used if no standard is provided.
