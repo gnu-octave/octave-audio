@@ -18,7 +18,7 @@
 ### <http://www.gnu.org/licenses/>.
 
 AC_PREREQ([2.67])
-AC_INIT([octave audio package], [2.0.8])
+AC_INIT([octave audio package], [2.0.9])
 AC_CONFIG_HEADERS([config.h])
 
 # Avoid warnings for redefining AH-generated preprocessor symbols of
