@@ -33,7 +33,7 @@
 ## @subsubheading Examples
 ## Convert 100 sone to phon
 ## @example
-## @code{sone = sone2phon(100)}
+## @code{phon = sone2phon(100)}
 ## @end example
 ##
 ## @subsubheading References
