@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 
 ## mkqhcp.py
-## Version 1.0.4
+## Version 1.0.5
 
 ## Copyright 2022-2023 John Donoghue
 ##
@@ -67,6 +67,7 @@ def process(name):
   tag_match4 = re.compile(r'.*<div class="appendix-level-extent" id="(?P<tag>[^"]+)"[^>]*>.*')
   tag_match5 = re.compile(r'.*<div class="unnumbered-level-extent" id="(?P<tag>[^"]+)"[^>]*>.*')
   index_match = re.compile(r'.*<h4 class="subsection"[^>]*>[\d\.\s]*(?P<name>[^<]+)</h4>.*')
+  index_match2 = re.compile(r'.*<h4 class="subsection"[^>]*><span>[\d\.\s]*(?P<name>[^<]+)<.*')
 
   tag = "top"
   has_h2 = False 
@@ -139,10 +140,14 @@ def process(name):
           e = tag_match1.match(line)
           if not e:
               e = tag_match2.match(line)
+
           if e:
               tag = e.group("tag")
 
+
           e = index_match.match(line)
+          if not e:
+              e = index_match2.match(line)
           if e:
               f.write('      <keyword name="{}" ref="{}.html#{}"></keyword>\n'.format(e.group("name"), name, tag))
 
