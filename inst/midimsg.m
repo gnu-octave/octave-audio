@@ -594,6 +594,10 @@ classdef midimsg
       e = length(this.data);
     endfunction
 
+    function e = size (this)
+      e = size(this.data);
+    endfunction
+
     function this = subsasgn (this, s, rhs)
       if isempty(s)
         error ("midimsg.subsref missing index");
