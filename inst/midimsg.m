@@ -17,6 +17,7 @@
 classdef midimsg
   ## -*- texinfo -*- 
   ## @deftypefn {} {@var{msg} =} midimsg (0)
+  ## @deftypefnx {} {@var{msg} =} midimsg ()
   ## @deftypefnx {} {@var{msg} =} midimsg (@var{type} ....)
   ## @deftypefnx {} {@var{msg} =} midimsg ("note", @var{channel}, @var{note}, @var{velocity}, @var{duration}, @var{timestamp})
   ## @deftypefnx {} {@var{msg} =} midimsg ("noteon", @var{channel}, @var{note}, @var{velocity}, @var{timestamp})
@@ -78,6 +79,8 @@ classdef midimsg
   ## @var{timeseq} - timecode sequence number for a miditimecodequarterframe message.@*
   ## @var{timevalue} - timecode value number for a miditimecodequarterframe message.@*
   ##
+  ## In the case where no inputs are provides, a midimsg 'data' message is created.
+  ##
   ## @subsubheading Outputs
   ## @var{msg} - a midimsg object containing the midi data of the message
   ##
@@ -137,7 +140,12 @@ classdef midimsg
       this.data = {};
       this.timestamp = {};
 
-      if nargin < 1 || (! ischar (typev) && !isscalar (typev) && ! (class(typev) == "midimsgtype"))
+      if nargin == 0
+        this.timestamp{end+1} = 0;
+        this.data{end+1} = uint8([0 0 0 0 0 0 0 0]);
+        return
+
+      elif nargin < 1 || (! ischar (typev) && !isscalar (typev) && ! (class(typev) == "midimsgtype"))
         error ("Expected midi type or size");
       endif
 
@@ -1549,7 +1557,13 @@ endclassdef
 
 %!fail midimsg('badtype')
 
-%!fail midimsg
+%!test
+%! a = midimsg;
+%! assert(isa(a, "midimsg"));
+%! assert(length(a) == 1);
+%! assert(a.type == "Data");
+%! assert(a.nummsgbytes, 8);
+%! assert(a.msgbytes, uint8([0x00 0x00 0x00 0x00 0x00 0x00]));
 
 %!test
 %! a = midimsg(0);
