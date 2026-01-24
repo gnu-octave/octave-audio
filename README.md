@@ -1,7 +1,8 @@
 Introduction
 ============
 
-The Octave Audio package provides MIDI device functions for GNU Octave
+The Octave Audio package provides MIDI device functions and some basic
+sound measurement routines for GNU Octave
 
 Requirements
 ============
@@ -47,4 +48,6 @@ Read the Octave [Octave audio package wiki](https://wiki.octave.org/Audio_packag
 
 Known limitations and bugs
 ==========================
+
+Report bugs on the [issue tracker](https://github.com/gnu-octave/octave-audio/issues)
 
