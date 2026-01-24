@@ -12,3 +12,4 @@ Autoload: no
 License: GPLv3+
 Url: https://gnu-octave.github.io/octave-audio/
 Repository: https://github.com/gnu-octave/octave-audio/
+Tracker: https://github.com/gnu-octave/octave-audio/issues
