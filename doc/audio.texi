@@ -1,5 +1,5 @@
 \input texinfo @c -*-texinfo-*-
-@c Copyright (c) 2019-2024, John Donoghue <john.donoghue@ieee.org>
+@c Copyright (c) 2019-2026, John Donoghue <john.donoghue@ieee.org>
 @c Octave Audio - Audio Toolkit for GNU octave.
 
 @c For manually generating the documentation use

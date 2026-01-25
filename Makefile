@@ -2,7 +2,7 @@
 ## Copyright 2015-2016 Oliver Heimlich
 ## Copyright 2017 Julien Bect <jbect@users.sf.net>
 ## Copyright 2017 Olaf Till <i7tiol@t-online.de>
-## Copyright 2019-2022 John Donoghue <john.donoghue@ieee.org>
+## Copyright 2019-2026 John Donoghue <john.donoghue@ieee.org>
 ##
 ## Copying and distribution of this file, with or without modification,
 ## are permitted in any medium without royalty provided the copyright
