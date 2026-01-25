@@ -46,20 +46,20 @@ navigation:
   url: "/manual"
 ---
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-midiid"><span><code class="def-type">[<var class="var">ctrlid</var>, <var class="var">devname</var>] =</code> <strong class="def-name">midiid</strong> <code class="def-code-arguments">()</code><a class="copiable-link" href="#index-midiid"></a></span></dt>
+<dt class="deftypefn def-line" id="index-midiid"><span><code class="def-type">[<var class="var">ctrlid</var>, <var class="var">devname</var>] =</code> <strong class="def-name">midiid</strong> <code class="def-code-arguments">()</code></span></dt>
 <dd><p>Scan for control messages from midi devices to get the id of the device
 </p> 
 <p>Function will display a prompt for the user to move the midi control and return when
  a control messages is detected or ctrl-C is pressed.
 </p>
-<h4 class="subsubheading" id="Inputs"><span>Inputs<a class="copiable-link" href="#Inputs"></a></span></h4>
+<h4 class="subsubheading" id="Inputs"><span>Inputs</span></h4>
 <p>None
 </p>
-<h4 class="subsubheading" id="Outputs"><span>Outputs<a class="copiable-link" href="#Outputs"></a></span></h4>
+<h4 class="subsubheading" id="Outputs"><span>Outputs</span></h4>
 <p><var class="var">ctrlid</var> - control id made from the controller channel * 1000 + controller number.<br>
  <var class="var">devname</var> = name of the midi device the controller was detected on.
 </p>
-<h4 class="subsubheading" id="Examples"><span>Examples<a class="copiable-link" href="#Examples"></a></span></h4>
+<h4 class="subsubheading" id="Examples"><span>Examples</span></h4>
 <p>Monitor midi devices for first moving controller
  </p><div class="example">
 <pre class="example-preformatted"> [ctrlid, devname] = midiid()

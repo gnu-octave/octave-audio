@@ -46,16 +46,16 @@ navigation:
   url: "/manual"
 ---
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-bark2hz"><span><code class="def-type"><var class="var">hz</var> =</code> <strong class="def-name">bark2hz</strong> <code class="def-code-arguments">(<var class="var">bark</var>)</code><a class="copiable-link" href="#index-bark2hz"></a></span></dt>
+<dt class="deftypefn def-line" id="index-bark2hz"><span><code class="def-type"><var class="var">hz</var> =</code> <strong class="def-name">bark2hz</strong> <code class="def-code-arguments">(<var class="var">bark</var>)</code></span></dt>
 <dd><p>Convert equivalent Bark Frequency to Hz.
 </p>
-<h4 class="subsubheading" id="Inputs"><span>Inputs<a class="copiable-link" href="#Inputs"></a></span></h4>
+<h4 class="subsubheading" id="Inputs"><span>Inputs</span></h4>
 <p><var class="var">bark</var> - input frequency in bark.
 </p>
-<h4 class="subsubheading" id="Outputs"><span>Outputs<a class="copiable-link" href="#Outputs"></a></span></h4>
+<h4 class="subsubheading" id="Outputs"><span>Outputs</span></h4>
 <p><var class="var">hz</var> - Output frequency in Hz.
 </p>
-<h4 class="subsubheading" id="References"><span>References<a class="copiable-link" href="#References"></a></span></h4>
+<h4 class="subsubheading" id="References"><span>References</span></h4>
 <p>Traunmüller, Hartmut. <cite class="cite">Analytical Expressions for the Tonotopic Sensory Scale.
  Journal of the Acoustical Society of America. Vol. 88, Issue 1, 1990</cite>
 </p>

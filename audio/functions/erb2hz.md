@@ -46,16 +46,16 @@ navigation:
   url: "/manual"
 ---
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-erb2hz"><span><code class="def-type"><var class="var">hz</var> =</code> <strong class="def-name">erb2hz</strong> <code class="def-code-arguments">(<var class="var">erb</var>)</code><a class="copiable-link" href="#index-erb2hz"></a></span></dt>
+<dt class="deftypefn def-line" id="index-erb2hz"><span><code class="def-type"><var class="var">hz</var> =</code> <strong class="def-name">erb2hz</strong> <code class="def-code-arguments">(<var class="var">erb</var>)</code></span></dt>
 <dd><p>Convert equivalent rectangular bandwidth (ERB) to Hz.
 </p>
-<h4 class="subsubheading" id="Inputs"><span>Inputs<a class="copiable-link" href="#Inputs"></a></span></h4>
+<h4 class="subsubheading" id="Inputs"><span>Inputs</span></h4>
 <p><var class="var">erb</var> - input frequency in erb.
 </p>
-<h4 class="subsubheading" id="Outputs"><span>Outputs<a class="copiable-link" href="#Outputs"></a></span></h4>
+<h4 class="subsubheading" id="Outputs"><span>Outputs</span></h4>
 <p><var class="var">hz</var> - Output frequency in Hz.
 </p>
-<h4 class="subsubheading" id="References"><span>References<a class="copiable-link" href="#References"></a></span></h4>
+<h4 class="subsubheading" id="References"><span>References</span></h4>
 <p>Glasberg and Moore. <cite class="cite">Derivation of Auditory Filter Shapes from Notched-Noise Data.
  Hearing Research. Vol. 47, 1990</cite>
 </p>

@@ -46,20 +46,20 @@ navigation:
   url: "/manual"
 ---
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-mididevinfo"><span><code class="def-type"><var class="var">devlist</var> =</code> <strong class="def-name">mididevinfo</strong> <code class="def-code-arguments">()</code><a class="copiable-link" href="#index-mididevinfo"></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-mididevinfo-1"><span><strong class="def-name">mididevinfo</strong> <code class="def-code-arguments">()</code><a class="copiable-link" href="#index-mididevinfo-1"></a></span></dt>
+<dt class="deftypefn def-line" id="index-mididevinfo"><span><code class="def-type"><var class="var">devlist</var> =</code> <strong class="def-name">mididevinfo</strong> <code class="def-code-arguments">()</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-mididevinfo-1"><span><strong class="def-name">mididevinfo</strong> <code class="def-code-arguments">()</code></span></dt>
 <dd><p>Retrieve the midi devices detected within the system.
 </p>
 <p>The list will be stored with variable <var class="var">devlist</var> as either a input or output device.
  If no output variable is provided, the devices will be displayed.
 </p>
-<h4 class="subsubheading" id="Inputs"><span>Inputs<a class="copiable-link" href="#Inputs"></a></span></h4>
+<h4 class="subsubheading" id="Inputs"><span>Inputs</span></h4>
 <p>None
 </p>
-<h4 class="subsubheading" id="Outputs"><span>Outputs<a class="copiable-link" href="#Outputs"></a></span></h4>
+<h4 class="subsubheading" id="Outputs"><span>Outputs</span></h4>
 <p><var class="var">devlist</var> - a structure containing the midi device information
 </p>
-<h4 class="subsubheading" id="Examples"><span>Examples<a class="copiable-link" href="#Examples"></a></span></h4>
+<h4 class="subsubheading" id="Examples"><span>Examples</span></h4>
 <p>Display the known devices of the system.
  </p><div class="example">
 <pre class="example-preformatted"> <code class="command">&gt;</code> mididevinfo

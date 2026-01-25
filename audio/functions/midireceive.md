@@ -46,19 +46,19 @@ navigation:
   url: "/manual"
 ---
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-midireceive"><span><code class="def-type"><var class="var">midimsg</var> =</code> <strong class="def-name">midireceive</strong> <code class="def-code-arguments">(<var class="var">dev</var>)</code><a class="copiable-link" href="#index-midireceive"></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-midireceive-1"><span><code class="def-type"><var class="var">midimsg</var> =</code> <strong class="def-name">midireceive</strong> <code class="def-code-arguments">(<var class="var">dev</var>, <var class="var">maxmsg</var>)</code><a class="copiable-link" href="#index-midireceive-1"></a></span></dt>
+<dt class="deftypefn def-line" id="index-midireceive"><span><code class="def-type"><var class="var">midimsg</var> =</code> <strong class="def-name">midireceive</strong> <code class="def-code-arguments">(<var class="var">dev</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-midireceive-1"><span><code class="def-type"><var class="var">midimsg</var> =</code> <strong class="def-name">midireceive</strong> <code class="def-code-arguments">(<var class="var">dev</var>, <var class="var">maxmsg</var>)</code></span></dt>
 <dd><p>Attempt to receive midi messages from a midi device.
 </p>
-<h4 class="subsubheading" id="Inputs"><span>Inputs<a class="copiable-link" href="#Inputs"></a></span></h4>
+<h4 class="subsubheading" id="Inputs"><span>Inputs</span></h4>
 <p><var class="var">dev</var> - a octave midi device opened using mididevice.<br>
  <var class="var">maxmsg</var> - Maximum number of messages to retrieve. If not specified, the function will attempt to get all pending.<br>
 </p>
-<h4 class="subsubheading" id="Outputs"><span>Outputs<a class="copiable-link" href="#Outputs"></a></span></h4>
+<h4 class="subsubheading" id="Outputs"><span>Outputs</span></h4>
 <p><var class="var">midimsg</var> - a midimsg containing the messages retrieved from the device.<br>
  If no messages are available, <var class="var">midimsg</var> will be empty.
 </p>
-<h4 class="subsubheading" id="Examples"><span>Examples<a class="copiable-link" href="#Examples"></a></span></h4>
+<h4 class="subsubheading" id="Examples"><span>Examples</span></h4>
 <p>Open device 0, and poll and display read messages
  </p><div class="example">
 <pre class="example-preformatted"> dev = mididevice(0);

@@ -46,19 +46,19 @@ navigation:
   url: "/manual"
 ---
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-midisend"><span><strong class="def-name">midisend</strong> <code class="def-code-arguments">(<var class="var">dev</var>, <var class="var">msg</var>)</code><a class="copiable-link" href="#index-midisend"></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-midisend-1"><span><strong class="def-name">midisend</strong> <code class="def-code-arguments">(<var class="var">dev</var>, ...)</code><a class="copiable-link" href="#index-midisend-1"></a></span></dt>
+<dt class="deftypefn def-line" id="index-midisend"><span><strong class="def-name">midisend</strong> <code class="def-code-arguments">(<var class="var">dev</var>, <var class="var">msg</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-midisend-1"><span><strong class="def-name">midisend</strong> <code class="def-code-arguments">(<var class="var">dev</var>, ...)</code></span></dt>
 <dd><p>Send a midimsg to a midi device
 </p>
-<h4 class="subsubheading" id="Inputs"><span>Inputs<a class="copiable-link" href="#Inputs"></a></span></h4>
+<h4 class="subsubheading" id="Inputs"><span>Inputs</span></h4>
 <p><var class="var">dev</var> - midi device opened using mididevice<br>
  <var class="var">msg</var> - a midi message class with messages to send to the midi device<br>
  If the msg isn&rsquo;t a midimsg class, the input data is expected to be in same format as the inputs to a midimsg object.
 </p>
-<h4 class="subsubheading" id="Outputs"><span>Outputs<a class="copiable-link" href="#Outputs"></a></span></h4>
+<h4 class="subsubheading" id="Outputs"><span>Outputs</span></h4>
 <p>None
 </p>
-<h4 class="subsubheading" id="Examples"><span>Examples<a class="copiable-link" href="#Examples"></a></span></h4>
+<h4 class="subsubheading" id="Examples"><span>Examples</span></h4>
 <p>Send a note on/off command to a opened midi device <var class="var">dev</var>
  </p><div class="example">
 <pre class="example-preformatted"> midisend(dev, midimsg(&quot;note&quot;, 1, 60, 100, 2.0));

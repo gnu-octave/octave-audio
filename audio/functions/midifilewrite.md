@@ -46,11 +46,11 @@ navigation:
   url: "/manual"
 ---
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-midifilewrite"><span><strong class="def-name">midifilewrite</strong> <code class="def-code-arguments">(<var class="var">filename</var>, <var class="var">msgs</var>)</code><a class="copiable-link" href="#index-midifilewrite"></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-midifilewrite-1"><span><strong class="def-name">midifilewrite</strong> <code class="def-code-arguments">(<var class="var">filename</var>, <var class="var">msgs</var>, <var class="var">optionname</var>, <var class="var">optionvalue</var>)</code><a class="copiable-link" href="#index-midifilewrite-1"></a></span></dt>
+<dt class="deftypefn def-line" id="index-midifilewrite"><span><strong class="def-name">midifilewrite</strong> <code class="def-code-arguments">(<var class="var">filename</var>, <var class="var">msgs</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-midifilewrite-1"><span><strong class="def-name">midifilewrite</strong> <code class="def-code-arguments">(<var class="var">filename</var>, <var class="var">msgs</var>, <var class="var">optionname</var>, <var class="var">optionvalue</var>)</code></span></dt>
 <dd><p>Write a midifile
 </p>
-<h4 class="subsubheading" id="Inputs"><span>Inputs<a class="copiable-link" href="#Inputs"></a></span></h4>
+<h4 class="subsubheading" id="Inputs"><span>Inputs</span></h4>
 <p><var class="var">filename</var> - filename of file to open.<br>
  <var class="var">msg</var> - a midimsg struct or a cell array of midimsg containing data to write to file<br>
  <var class="var">optionname</var>, <var class="var">optionvalue</var> - option value/name pairs<br>
@@ -67,7 +67,7 @@ navigation:
 </p>
 <p>Were format is not 0, the cell array is treated as tracks of misimsg.
 </p>
-<h4 class="subsubheading" id="Outputs"><span>Outputs<a class="copiable-link" href="#Outputs"></a></span></h4>
+<h4 class="subsubheading" id="Outputs"><span>Outputs</span></h4>
 <p>None
  </p>
 <p><strong class="strong">See also:</strong> midifileread, midimsg.

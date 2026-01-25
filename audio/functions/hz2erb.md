@@ -46,16 +46,16 @@ navigation:
   url: "/manual"
 ---
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-hz2erb"><span><code class="def-type"><var class="var">erb</var> =</code> <strong class="def-name">hz2erb</strong> <code class="def-code-arguments">(<var class="var">hz</var>)</code><a class="copiable-link" href="#index-hz2erb"></a></span></dt>
+<dt class="deftypefn def-line" id="index-hz2erb"><span><code class="def-type"><var class="var">erb</var> =</code> <strong class="def-name">hz2erb</strong> <code class="def-code-arguments">(<var class="var">hz</var>)</code></span></dt>
 <dd><p>Convert hz to equivalent rectangular bandwidth (ERB)
 </p>
-<h4 class="subsubheading" id="Inputs"><span>Inputs<a class="copiable-link" href="#Inputs"></a></span></h4>
+<h4 class="subsubheading" id="Inputs"><span>Inputs</span></h4>
 <p><var class="var">hz</var> - input frequency in Hz.
 </p>
-<h4 class="subsubheading" id="Outputs"><span>Outputs<a class="copiable-link" href="#Outputs"></a></span></h4>
+<h4 class="subsubheading" id="Outputs"><span>Outputs</span></h4>
 <p><var class="var">erb</var> - Output frequency as a erb value
 </p>
-<h4 class="subsubheading" id="Examples"><span>Examples<a class="copiable-link" href="#Examples"></a></span></h4>
+<h4 class="subsubheading" id="Examples"><span>Examples</span></h4>
 <p>Convert 4000 Hz to erb
  </p><div class="example">
 <pre class="example-preformatted"> <code class="code">erb = hz2erb(4000)</code>
@@ -66,7 +66,7 @@ navigation:
 <pre class="example-preformatted"> <code class="code">erb = hz2erb(4000:100:5000)</code>
  </pre></div>
 
-<h4 class="subsubheading" id="References"><span>References<a class="copiable-link" href="#References"></a></span></h4>
+<h4 class="subsubheading" id="References"><span>References</span></h4>
 <p>Glasberg and Moore. <cite class="cite">Derivation of Auditory Filter Shapes from Notched-Noise Data.
  Hearing Research. Vol. 47, 1990</cite>
 </p>

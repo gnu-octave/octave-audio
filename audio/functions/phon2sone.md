@@ -46,11 +46,11 @@ navigation:
   url: "/manual"
 ---
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-phon2sone"><span><code class="def-type"><var class="var">sone</var> =</code> <strong class="def-name">phon2sone</strong> <code class="def-code-arguments">(<var class="var">phon</var>)</code><a class="copiable-link" href="#index-phon2sone"></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-phon2sone-1"><span><code class="def-type"><var class="var">sone</var> =</code> <strong class="def-name">phon2sone</strong> <code class="def-code-arguments">(<var class="var">phon</var>, <var class="var">standard</var>)</code><a class="copiable-link" href="#index-phon2sone-1"></a></span></dt>
+<dt class="deftypefn def-line" id="index-phon2sone"><span><code class="def-type"><var class="var">sone</var> =</code> <strong class="def-name">phon2sone</strong> <code class="def-code-arguments">(<var class="var">phon</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-phon2sone-1"><span><code class="def-type"><var class="var">sone</var> =</code> <strong class="def-name">phon2sone</strong> <code class="def-code-arguments">(<var class="var">phon</var>, <var class="var">standard</var>)</code></span></dt>
 <dd><p>Convert from phon to sone
 </p>
-<h4 class="subsubheading" id="Inputs"><span>Inputs<a class="copiable-link" href="#Inputs"></a></span></h4>
+<h4 class="subsubheading" id="Inputs"><span>Inputs</span></h4>
 <p><var class="var">phon</var> - Loudness level in phon
 </p>
 <p><var class="var">standard</var> - Standard to use in conversion. Options are
@@ -58,16 +58,16 @@ navigation:
 </p>
 <p>&rsquo;ISO 532-1&rsquo; is used if no standard is provided.
 </p>
-<h4 class="subsubheading" id="Outputs"><span>Outputs<a class="copiable-link" href="#Outputs"></a></span></h4>
+<h4 class="subsubheading" id="Outputs"><span>Outputs</span></h4>
 <p><var class="var">sone</var> - Loudness level in sone
 </p>
-<h4 class="subsubheading" id="Examples"><span>Examples<a class="copiable-link" href="#Examples"></a></span></h4>
+<h4 class="subsubheading" id="Examples"><span>Examples</span></h4>
 <p>Convert 100 phon to sone
  </p><div class="example">
 <pre class="example-preformatted"> <code class="code">sone = phon2sone(100)</code>
  </pre></div>
 
-<h4 class="subsubheading" id="References"><span>References<a class="copiable-link" href="#References"></a></span></h4>
+<h4 class="subsubheading" id="References"><span>References</span></h4>
 <p>International Organization for Standardization., <cite class="cite">ISO 532-1 Acoustics – Methods for calculating loudness – Part 1: Zwicker method.</cite>
 </p>
 <p>International Organization for Standardization., <cite class="cite">ISO 532-2 Acoustics – Methods for calculating loudness – Part 2: Moore-Glasberg method.</cite>

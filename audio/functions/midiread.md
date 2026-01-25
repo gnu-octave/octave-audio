@@ -46,16 +46,16 @@ navigation:
   url: "/manual"
 ---
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-midiread"><span><code class="def-type"><var class="var">val</var> =</code> <strong class="def-name">midiread</strong> <code class="def-code-arguments">(<var class="var">midicontrolsObj</var>)</code><a class="copiable-link" href="#index-midiread"></a></span></dt>
+<dt class="deftypefn def-line" id="index-midiread"><span><code class="def-type"><var class="var">val</var> =</code> <strong class="def-name">midiread</strong> <code class="def-code-arguments">(<var class="var">midicontrolsObj</var>)</code></span></dt>
 <dd><p>Read current values of midi controls
 </p> 
-<h4 class="subsubheading" id="Inputs"><span>Inputs<a class="copiable-link" href="#Inputs"></a></span></h4>
+<h4 class="subsubheading" id="Inputs"><span>Inputs</span></h4>
 <p><var class="var">midicontrolObj</var> - control object created using midicontrols<br>
 </p>
-<h4 class="subsubheading" id="Outputs"><span>Outputs<a class="copiable-link" href="#Outputs"></a></span></h4>
+<h4 class="subsubheading" id="Outputs"><span>Outputs</span></h4>
 <p><var class="var">val</var> single value or array of current values from the midi device.
 </p>
-<h4 class="subsubheading" id="Examples"><span>Examples<a class="copiable-link" href="#Examples"></a></span></h4>
+<h4 class="subsubheading" id="Examples"><span>Examples</span></h4>
 <p>Read current value of midicontrols with a ctrlid 2001 on the default midi device.
  </p><div class="example">
 <pre class="example-preformatted"> ctrl = midicontrols(2001)

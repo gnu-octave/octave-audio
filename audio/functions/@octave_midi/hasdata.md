@@ -46,13 +46,13 @@ navigation:
   url: "/manual"
 ---
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-hasdata"><span><code class="def-type"><var class="var">tf</var> =</code> <strong class="def-name">hasdata</strong> <code class="def-code-arguments">(<var class="var">dev</var>)</code><a class="copiable-link" href="#index-hasdata"></a></span></dt>
+<dt class="deftypefn def-line" id="index-hasdata"><span><code class="def-type"><var class="var">tf</var> =</code> <strong class="def-name">hasdata</strong> <code class="def-code-arguments">(<var class="var">dev</var>)</code></span></dt>
 <dd><p>Return whether there is data available to read
 </p>
-<h4 class="subsubheading" id="Inputs"><span>Inputs<a class="copiable-link" href="#Inputs"></a></span></h4>
+<h4 class="subsubheading" id="Inputs"><span>Inputs</span></h4>
 <p><var class="var">dev</var> - a octave midi device opened using mididevice.<br>
 </p>
-<h4 class="subsubheading" id="Outputs"><span>Outputs<a class="copiable-link" href="#Outputs"></a></span></h4>
+<h4 class="subsubheading" id="Outputs"><span>Outputs</span></h4>
 <p><var class="var">tf</var> - true if device has data available to read<br>
 </p>
 

@@ -46,7 +46,7 @@ navigation:
   url: "/manual"
 ---
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-ismidifile"><span><code class="def-type"><var class="var">ismidi</var> =</code> <strong class="def-name">ismidifile</strong> <code class="def-code-arguments">(<var class="var">filename</var>)</code><a class="copiable-link" href="#index-ismidifile"></a></span></dt>
+<dt class="deftypefn def-line" id="index-ismidifile"><span><code class="def-type"><var class="var">ismidi</var> =</code> <strong class="def-name">ismidifile</strong> <code class="def-code-arguments">(<var class="var">filename</var>)</code></span></dt>
 <dd><p>Check if <var class="var">filename</var> is a midi file.
 </p>
 <p>The function only checks whether it is an existing file and the
@@ -54,10 +54,10 @@ navigation:
 </p>
 <p>Non existing files, or files that do not meet the header criteria will return false.
 </p>
-<h4 class="subsubheading" id="Inputs"><span>Inputs<a class="copiable-link" href="#Inputs"></a></span></h4>
+<h4 class="subsubheading" id="Inputs"><span>Inputs</span></h4>
 <p><var class="var">filename</var> - filename of file to check.<br>
 </p>
-<h4 class="subsubheading" id="Outputs"><span>Outputs<a class="copiable-link" href="#Outputs"></a></span></h4>
+<h4 class="subsubheading" id="Outputs"><span>Outputs</span></h4>
 <p><var class="var">ismidi</var> - true if it is a midi file, false otherwise
 </p>
 

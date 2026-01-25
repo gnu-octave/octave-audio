@@ -46,7 +46,7 @@ navigation:
   url: "/manual"
 ---
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-midimsgtype"><span><strong class="def-name">midimsgtype</strong><a class="copiable-link" href="#index-midimsgtype"></a></span></dt>
+<dt class="deftypefn def-line" id="index-midimsgtype"><span><strong class="def-name">midimsgtype</strong></span></dt>
 <dd><p>A midimsg type enumeration for values of the midimsg type.
 </p>
 <p>Enumeration values are:
@@ -67,7 +67,7 @@ navigation:
 
 <p>The enumeration value can be used instead of a string in midimsg creation.
 </p>
-<h4 class="subsubheading" id="Examples"><span>Examples<a class="copiable-link" href="#Examples"></a></span></h4>
+<h4 class="subsubheading" id="Examples"><span>Examples</span></h4>
 <p>Use both a string and a midimsgtype for the type parameter of a midimsg.
  </p><div class="example">
 <pre class="example-preformatted"> <code class="code">

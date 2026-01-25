@@ -46,12 +46,12 @@ navigation:
   url: "/manual"
 ---
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-midicallback"><span><code class="def-type"><var class="var">oldhandle</var> =</code> <strong class="def-name">midicallback</strong> <code class="def-code-arguments">(<var class="var">midicontrolsObj</var>, <var class="var">functionHandle</var>)</code><a class="copiable-link" href="#index-midicallback"></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-midicallback-1"><span><code class="def-type"><var class="var">oldhandle</var> =</code> <strong class="def-name">midicallback</strong> <code class="def-code-arguments">(<var class="var">midicontrolsObj</var>, [])</code><a class="copiable-link" href="#index-midicallback-1"></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-midicallback-2"><span><code class="def-type"><var class="var">currhandle</var> =</code> <strong class="def-name">midicallback</strong> <code class="def-code-arguments">(<var class="var">midicontrolsObj</var>)</code><a class="copiable-link" href="#index-midicallback-2"></a></span></dt>
+<dt class="deftypefn def-line" id="index-midicallback"><span><code class="def-type"><var class="var">oldhandle</var> =</code> <strong class="def-name">midicallback</strong> <code class="def-code-arguments">(<var class="var">midicontrolsObj</var>, <var class="var">functionHandle</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-midicallback-1"><span><code class="def-type"><var class="var">oldhandle</var> =</code> <strong class="def-name">midicallback</strong> <code class="def-code-arguments">(<var class="var">midicontrolsObj</var>, [])</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-midicallback-2"><span><code class="def-type"><var class="var">currhandle</var> =</code> <strong class="def-name">midicallback</strong> <code class="def-code-arguments">(<var class="var">midicontrolsObj</var>)</code></span></dt>
 <dd><p>Get, set or clear the midicontrol object callback.
 </p> 
-<h4 class="subsubheading" id="Inputs"><span>Inputs<a class="copiable-link" href="#Inputs"></a></span></h4>
+<h4 class="subsubheading" id="Inputs"><span>Inputs</span></h4>
 <p><var class="var">midicontrolObj</var> - control object created using midicontrols.
 </p>
 <p><var class="var">functionHandle</var> - function handle to set for call back. If it is [],
@@ -62,12 +62,12 @@ navigation:
 <p><strong class="strong">NOTE</strong>: callbacks should be cleared before losing all references to the midicontrols 
  object.
 </p>
-<h4 class="subsubheading" id="Outputs"><span>Outputs<a class="copiable-link" href="#Outputs"></a></span></h4>
+<h4 class="subsubheading" id="Outputs"><span>Outputs</span></h4>
 <p><var class="var">oldhandle</var> The previously set midicallback function handle when setting a new callback.
 </p>
 <p><var class="var">currhandle</var> The current set midicallback function handle.
 </p>
-<h4 class="subsubheading" id="Examples"><span>Examples<a class="copiable-link" href="#Examples"></a></span></h4>
+<h4 class="subsubheading" id="Examples"><span>Examples</span></h4>
 <p>Set a callback on a midicontrols object
  </p><div class="example">
 <pre class="example-preformatted"> ctrl = midicontrols(2001)

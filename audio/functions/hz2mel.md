@@ -46,16 +46,16 @@ navigation:
   url: "/manual"
 ---
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-hz2mel"><span><code class="def-type"><var class="var">mel</var> =</code> <strong class="def-name">hz2mel</strong> <code class="def-code-arguments">(<var class="var">hz</var>)</code><a class="copiable-link" href="#index-hz2mel"></a></span></dt>
+<dt class="deftypefn def-line" id="index-hz2mel"><span><code class="def-type"><var class="var">mel</var> =</code> <strong class="def-name">hz2mel</strong> <code class="def-code-arguments">(<var class="var">hz</var>)</code></span></dt>
 <dd><p>Convert hz to equivalent mel frequency.
 </p>
-<h4 class="subsubheading" id="Inputs"><span>Inputs<a class="copiable-link" href="#Inputs"></a></span></h4>
+<h4 class="subsubheading" id="Inputs"><span>Inputs</span></h4>
 <p><var class="var">hz</var> - input frequency in Hz.
 </p>
-<h4 class="subsubheading" id="Outputs"><span>Outputs<a class="copiable-link" href="#Outputs"></a></span></h4>
+<h4 class="subsubheading" id="Outputs"><span>Outputs</span></h4>
 <p><var class="var">mel</var> - Output frequency as a mel value
 </p>
-<h4 class="subsubheading" id="Examples"><span>Examples<a class="copiable-link" href="#Examples"></a></span></h4>
+<h4 class="subsubheading" id="Examples"><span>Examples</span></h4>
 <p>Convert 4000 Hz to mel
  </p><div class="example">
 <pre class="example-preformatted"> <code class="code">mel = hz2mel(4000)</code>
@@ -66,7 +66,7 @@ navigation:
 <pre class="example-preformatted"> <code class="code">mel = hz2erb(4000:100:5000)</code>
  </pre></div>
 
-<h4 class="subsubheading" id="References"><span>References<a class="copiable-link" href="#References"></a></span></h4>
+<h4 class="subsubheading" id="References"><span>References</span></h4>
 <p>O&rsquo;Shaghnessy, Douglas. <cite class="cite">Speech Communication: Human and Machine. Reading, MA:
  Addison-Wesley Publishing Company, 1987</cite>
 </p>

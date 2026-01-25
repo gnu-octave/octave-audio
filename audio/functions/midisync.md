@@ -46,19 +46,19 @@ navigation:
   url: "/manual"
 ---
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-midisync"><span><strong class="def-name">midisync</strong> <code class="def-code-arguments">(<var class="var">midicontrolsObj</var>)</code><a class="copiable-link" href="#index-midisync"></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-midisync-1"><span><strong class="def-name">midisync</strong> <code class="def-code-arguments">(<var class="var">midicontrolsObj</var>, <var class="var">ctrlvalues</var>)</code><a class="copiable-link" href="#index-midisync-1"></a></span></dt>
+<dt class="deftypefn def-line" id="index-midisync"><span><strong class="def-name">midisync</strong> <code class="def-code-arguments">(<var class="var">midicontrolsObj</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-midisync-1"><span><strong class="def-name">midisync</strong> <code class="def-code-arguments">(<var class="var">midicontrolsObj</var>, <var class="var">ctrlvalues</var>)</code></span></dt>
 <dd><p>Send the values of control object to the control, using <var class="var">ctrlvalues</var> values
  if specified instead
 </p> 
-<h4 class="subsubheading" id="Inputs"><span>Inputs<a class="copiable-link" href="#Inputs"></a></span></h4>
+<h4 class="subsubheading" id="Inputs"><span>Inputs</span></h4>
 <p><var class="var">midicontrolObj</var> - control object created using midicontrols<br>
  <var class="var">ctrlvalues</var> - values to send to the controls instead of initial values
 </p>
-<h4 class="subsubheading" id="Outputs"><span>Outputs<a class="copiable-link" href="#Outputs"></a></span></h4>
+<h4 class="subsubheading" id="Outputs"><span>Outputs</span></h4>
 <p>None
 </p>
-<h4 class="subsubheading" id="Examples"><span>Examples<a class="copiable-link" href="#Examples"></a></span></h4>
+<h4 class="subsubheading" id="Examples"><span>Examples</span></h4>
 <p>Send sync command to a midicontrols with a ctrlid 2001 to set a value of 1
  </p><div class="example">
 <pre class="example-preformatted"> ctrl = midicontrols(2001)
