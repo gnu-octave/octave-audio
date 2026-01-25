@@ -19,7 +19,8 @@ CUT ?= cut
 TR ?= tr
 TEXI2PDF  ?= texi2pdf -q
 MAKEINFO  ?= makeinfo
-MAKEINFO_HTML_OPTIONS := --no-headers --set-customization-variable 'COPIABLE_LINKS 0' --set-customization-variable 'COPIABLE_ANCHORS 0' --no-split 
+MAKEINFO_HTML_OPTIONS := --no-headers --no-split 
+MAKEINFO_HTML_FILTER :=  $(SED) 's|<span class="category[^"]*">: </span>||g' | $(SED) 's|<a[^>]*class=.copiable[^>]*> &para;</a>||g' | $(SED) 's|<span>\([^<]*\)</span>|\1|g'
 
 # work out a possible help generator
 ifeq ($(strip $(QHELPGENERATOR)),)
@@ -200,7 +201,7 @@ doc/$(package).pdf: doc/$(package).texi doc/functions.texi doc/version.texi
 	cd doc && $(RM) -f $(package).aux  $(package).cp  $(package).cps  $(package).fn  $(package).fns  $(package).log  $(package).toc
 
 doc/$(package).html: doc/$(package).texi doc/functions.texi doc/version.texi
-	cd doc && SOURCE_DATE_EPOCH=$(REPO_TIMESTAMP) $(MAKEINFO) --html --css-ref=$(package).css $(MAKEINFO_HTML_OPTIONS) $(package).texi
+	cd doc && SOURCE_DATE_EPOCH=$(REPO_TIMESTAMP) $(MAKEINFO) --html --css-ref=octave.css $(MAKEINFO_HTML_OPTIONS) $(package).texi -o - | $(MAKEINFO_HTML_FILTER) > $(package).html
 
 doc/$(package).qhc: doc/$(package).html
 ifeq ($(QHELPGENERATOR),true)
