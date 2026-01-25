@@ -1502,6 +1502,70 @@ classdef midimsg
       v = char(this.type_enum(data));
     endfunction
 
+    function props = __properties__(this)
+      # all have timestamp and type
+      props{1} = "Timestamp";
+      props{2} = "Type";
+      props{3} = "MsgBytes";
+      props{4} = "NumMsgBytes";
+
+      # props based on type
+      if length(this.timestamp) > 0
+        data = this.data{1};
+        cmd = bitand(data(1), 0xF0);
+        if cmd == 0xF0
+          cmd = data(1);
+        endif
+
+        if cmd != 0x00 && cmd < 0xF0
+          props{end+1} = "Channel";
+        endif
+        if cmd == 0x80 || cmd == 0x90 || cmd == 0xA0
+          props{end+1} = "Note";
+        endif
+        if cmd == 0x80 || cmd == 0x90
+          props{end+1} = "Velocity";
+        endif
+        if cmd == 0xA0
+          props{end+1} = "KeyPressure";
+        endif
+        if cmd == 0xD0
+          props{end+1} = "ChannelPressure";
+        endif
+        if cmd == 0xB0 && data(2) == 122
+          props{end+1} = "LocalControl";
+        endif
+        if cmd == 0xB0 && data(2) == 126
+          props{end+1} = "MonoChannel";
+        endif
+        if cmd == 0xC0
+          props{end+1} = "Program";
+        endif
+        if cmd == 0xB0 && data(2) <= 119
+          props{end+1} = "CCNumber";
+          props{end+1} = "CCValue";
+        endif
+        if cmd == 0xF3
+          props{end+1} = "Song";
+        endif
+        if cmd == 0xF2
+          props{end+1} = "SongPosition";
+        endif
+        if cmd == 0xE0
+          props{end+1} = "PitchChange";
+        endif
+        if cmd == 0xF1
+          props{end+1} = "TimeCodeSequence";
+          props{end+1} = "TimeCodeValue";
+        endif
+        if cmd == 0xFF && length(data) > 1
+          props{end+1} = "MetaType";
+          props{end+1} = "MetaData";
+        endif
+      endif
+    endfunction
+
+
   endmethods
 
   methods (Static=true)
@@ -1567,7 +1631,7 @@ endclassdef
 %! assert(length(a) == 1);
 %! assert(a.type == "Data");
 %! assert(a.nummsgbytes, 8);
-%! assert(a.msgbytes, uint8([0x00 0x00 0x00 0x00 0x00 0x00]));
+%! assert(a.msgbytes, uint8([0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00]));
 
 %!test
 %! a = midimsg(0);
@@ -2048,3 +2112,13 @@ endclassdef
 %! assert(smsgs(1).Note, 81)
 %! assert(smsgs(2).Note, 80)
 %! assert(smsgs(3).Note, 82)
+
+%!test
+%! # Propertes function
+%! msg = midimsg('SongPositionPointer',1);
+%! props = {'Timestamp', 'Type', 'MsgBytes', 'NumMsgBytes', 'SongPosition'};
+%! assert(properties(msg), props);
+%! 
+%! msg = midimsg('PitchBend',1,7192,4.01);
+%! props = {'Timestamp', 'Type', 'MsgBytes', 'NumMsgBytes', 'Channel', 'PitchChange'};
+%! assert(properties(msg), props);
