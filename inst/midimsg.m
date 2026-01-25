@@ -598,6 +598,10 @@ classdef midimsg
       e = size(this.data);
     endfunction
 
+    function e = isprop(this, prop)
+      e = ismember(lower(prop), lower(properties(this)));
+    endfunction
+
     function this = subsasgn (this, s, rhs)
       if isempty(s)
         error ("midimsg.subsref missing index");
@@ -2122,3 +2126,12 @@ endclassdef
 %! msg = midimsg('PitchBend',1,7192,4.01);
 %! props = {'Timestamp', 'Type', 'MsgBytes', 'NumMsgBytes', 'Channel', 'PitchChange'};
 %! assert(properties(msg), props);
+
+%!test
+%! msg = midimsg('SongPositionPointer',1);
+%! assert(isprop(msg, "Timestamp"));
+%! assert(isprop(msg, "SongPosition"));
+%! assert(isprop(msg, "songposition"));
+%! assert(!isprop(msg, "NotAProperty"));
+%! assert(isprop(msg, ["timestamp"; "NotAProperty"]), [true; false]);
+%! assert(isprop(msg, {"timestamp" "NotAProperty"}), [true false]);
