@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 ## mkqhcp.py
-## Version 1.0.5
+## Version 1.0.6
 
 ## Copyright 2022-2025 John Donoghue
 ##
@@ -60,18 +60,20 @@ def process(name):
 
   h3_match = re.compile(r'.*<h3 class="section"[^>]*>(?P<title>[^<]+)</h3>.*')
   h4_match = re.compile(r'.*<h4 class="subsection"[^>]*>(?P<title>[^<]+)</h4>.*')
+  h5_match = re.compile(r'.*<h4 class="subsubsection"[^>]*>(?P<title>[^<]+)</h4>.*')
   tag_match1 = re.compile(r'.*<span id="(?P<tag>[^"]+)"[^>]*></span>.*')
   #tag_match2 = re.compile(r'.*<div class="[sub]*section" id="(?P<tag>[^"]+)"[^>]*>.*')
   tag_match2 = re.compile(r'.*<div class="[sub]*section[^"]*" id="(?P<tag>[^"]+)"[^>]*>.*')
   tag_match3 = re.compile(r'.*<div class="chapter-level-extent" id="(?P<tag>[^"]+)"[^>]*>.*')
   tag_match4 = re.compile(r'.*<div class="appendix-level-extent" id="(?P<tag>[^"]+)"[^>]*>.*')
   tag_match5 = re.compile(r'.*<div class="unnumbered-level-extent" id="(?P<tag>[^"]+)"[^>]*>.*')
-  index_match = re.compile(r'.*<h4 class="subsection"[^>]*>[\d\.\s]*(?P<name>[^<]+)</h4>.*')
-  index_match2 = re.compile(r'.*<h4 class="subsection"[^>]*><span>[\d\.\s]*(?P<name>[^<]+)<.*')
+  index_match = re.compile(r'.*<h4 class="[sub]+section"[^>]*>[\d\.\s]*(?P<name>[^<]+)</h4>.*')
+  index_match2 = re.compile(r'.*<h4 class="[sub]+section"[^>]*><span>[\d\.\s]*(?P<name>[^<]+)<.*')
 
   tag = "top"
   has_h2 = False 
   has_h3 = False 
+  has_h4 = False 
 
   #pat_match = re.compile(r'.*<span id="(?P<tag>[^"])"></span>(?P<title>[.]+)$')
   with open(name + ".html", 'rt') as fin:
@@ -104,6 +106,9 @@ def process(name):
           if not e:
               e = h2i_match.match(line)
           if e:
+              if has_h4:
+                  f.write('            </section>\n')
+                  has_h4 = False
               if has_h3:
                   f.write('          </section>\n')
                   has_h3 = False
@@ -114,6 +119,9 @@ def process(name):
 
           e = h3_match.match(line)
           if e:
+              if has_h4:
+                  f.write('            </section>\n')
+                  has_h4 = False
               if has_h3:
                   f.write('          </section>\n')
               has_h3 = True
@@ -122,9 +130,20 @@ def process(name):
 
           e = h4_match.match(line)
           if e:
-              f.write('            <section title="{}" ref="{}.html#{}"></section>\n'.format(e.group("title"), name, tag))
+              if has_h4:
+                  f.write('            </section>\n')
+              has_h4 = True
+
+              #f.write('              <section title="{}" ref="{}.html#{}"></section>\n'.format(e.group("title"), name, tag))
+              f.write('              <section title="{}" ref="{}.html#{}">\n'.format(e.group("title"), name, tag))
+
+          e = h5_match.match(line)
+          if e:
+              f.write('                <section title="{}" ref="{}.html#{}"></section>\n'.format(e.group("title"), name, tag))
 
 
+      if has_h4:
+        f.write('            </section>\n')
       if has_h3:
         f.write('          </section>\n')
       if has_h2:
@@ -154,7 +173,11 @@ def process(name):
       f.write('    </keywords>\n')
       f.write('    <files>\n')
       f.write('      <file>{}.html</file>\n'.format(name))
-      f.write('      <file>{}.css</file>\n'.format(name))
+      # include octave.css if we have it
+      if os.path.exists("octave.css"):
+          f.write('      <file>octave.css</file>\n')
+      if os.path.exists("{}.css".format(name)):
+          f.write('      <file>{}.css</file>\n'.format(name))
       f.write('    </files>\n')
       f.write('  </filterSection>\n')
       f.write('</QtHelpProject>\n')
