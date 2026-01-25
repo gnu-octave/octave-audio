@@ -46,8 +46,8 @@ navigation:
   url: "/manual"
 ---
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-midisync"><span class="category-def">: </span><span><strong class="def-name">midisync</strong> <code class="def-code-arguments">(<var class="var">midicontrolsObj</var>)</code><a class="copiable-link" href="#index-midisync"></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-midisync-1"><span class="category-def">: </span><span><strong class="def-name">midisync</strong> <code class="def-code-arguments">(<var class="var">midicontrolsObj</var>, <var class="var">ctrlvalues</var>)</code><a class="copiable-link" href="#index-midisync-1"></a></span></dt>
+<dt class="deftypefn def-line" id="index-midisync"><span><strong class="def-name">midisync</strong> <code class="def-code-arguments">(<var class="var">midicontrolsObj</var>)</code><a class="copiable-link" href="#index-midisync"></a></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-midisync-1"><span><strong class="def-name">midisync</strong> <code class="def-code-arguments">(<var class="var">midicontrolsObj</var>, <var class="var">ctrlvalues</var>)</code><a class="copiable-link" href="#index-midisync-1"></a></span></dt>
 <dd><p>Send the values of control object to the control, using <var class="var">ctrlvalues</var> values
  if specified instead
 </p> 

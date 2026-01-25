@@ -46,8 +46,8 @@ navigation:
   url: "/manual"
 ---
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-phon2sone"><span class="category-def">: </span><span><code class="def-type"><var class="var">sone</var> =</code> <strong class="def-name">phon2sone</strong> <code class="def-code-arguments">(<var class="var">phon</var>)</code><a class="copiable-link" href="#index-phon2sone"></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-phon2sone-1"><span class="category-def">: </span><span><code class="def-type"><var class="var">sone</var> =</code> <strong class="def-name">phon2sone</strong> <code class="def-code-arguments">(<var class="var">phon</var>, <var class="var">standard</var>)</code><a class="copiable-link" href="#index-phon2sone-1"></a></span></dt>
+<dt class="deftypefn def-line" id="index-phon2sone"><span><code class="def-type"><var class="var">sone</var> =</code> <strong class="def-name">phon2sone</strong> <code class="def-code-arguments">(<var class="var">phon</var>)</code><a class="copiable-link" href="#index-phon2sone"></a></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-phon2sone-1"><span><code class="def-type"><var class="var">sone</var> =</code> <strong class="def-name">phon2sone</strong> <code class="def-code-arguments">(<var class="var">phon</var>, <var class="var">standard</var>)</code><a class="copiable-link" href="#index-phon2sone-1"></a></span></dt>
 <dd><p>Convert from phon to sone
 </p>
 <h4 class="subsubheading" id="Inputs"><span>Inputs<a class="copiable-link" href="#Inputs"></a></span></h4>

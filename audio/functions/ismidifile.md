@@ -46,7 +46,7 @@ navigation:
   url: "/manual"
 ---
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-ismidifile"><span class="category-def">: </span><span><code class="def-type"><var class="var">ismidi</var> =</code> <strong class="def-name">ismidifile</strong> <code class="def-code-arguments">(<var class="var">filename</var>)</code><a class="copiable-link" href="#index-ismidifile"></a></span></dt>
+<dt class="deftypefn def-line" id="index-ismidifile"><span><code class="def-type"><var class="var">ismidi</var> =</code> <strong class="def-name">ismidifile</strong> <code class="def-code-arguments">(<var class="var">filename</var>)</code><a class="copiable-link" href="#index-ismidifile"></a></span></dt>
 <dd><p>Check if <var class="var">filename</var> is a midi file.
 </p>
 <p>The function only checks whether it is an existing file and the

@@ -46,7 +46,7 @@ navigation:
   url: "/manual"
 ---
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-midiid"><span class="category-def">: </span><span><code class="def-type">[<var class="var">ctrlid</var>, <var class="var">devname</var>] =</code> <strong class="def-name">midiid</strong> <code class="def-code-arguments">()</code><a class="copiable-link" href="#index-midiid"></a></span></dt>
+<dt class="deftypefn def-line" id="index-midiid"><span><code class="def-type">[<var class="var">ctrlid</var>, <var class="var">devname</var>] =</code> <strong class="def-name">midiid</strong> <code class="def-code-arguments">()</code><a class="copiable-link" href="#index-midiid"></a></span></dt>
 <dd><p>Scan for control messages from midi devices to get the id of the device
 </p> 
 <p>Function will display a prompt for the user to move the midi control and return when

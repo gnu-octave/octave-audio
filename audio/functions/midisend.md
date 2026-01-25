@@ -46,8 +46,8 @@ navigation:
   url: "/manual"
 ---
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-midisend"><span class="category-def">: </span><span><strong class="def-name">midisend</strong> <code class="def-code-arguments">(<var class="var">dev</var>, <var class="var">msg</var>)</code><a class="copiable-link" href="#index-midisend"></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-midisend-1"><span class="category-def">: </span><span><strong class="def-name">midisend</strong> <code class="def-code-arguments">(<var class="var">dev</var>, ...)</code><a class="copiable-link" href="#index-midisend-1"></a></span></dt>
+<dt class="deftypefn def-line" id="index-midisend"><span><strong class="def-name">midisend</strong> <code class="def-code-arguments">(<var class="var">dev</var>, <var class="var">msg</var>)</code><a class="copiable-link" href="#index-midisend"></a></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-midisend-1"><span><strong class="def-name">midisend</strong> <code class="def-code-arguments">(<var class="var">dev</var>, ...)</code><a class="copiable-link" href="#index-midisend-1"></a></span></dt>
 <dd><p>Send a midimsg to a midi device
 </p>
 <h4 class="subsubheading" id="Inputs"><span>Inputs<a class="copiable-link" href="#Inputs"></a></span></h4>

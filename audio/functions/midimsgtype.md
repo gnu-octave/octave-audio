@@ -46,7 +46,7 @@ navigation:
   url: "/manual"
 ---
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-midimsgtype"><span class="category-def">: </span><span><strong class="def-name">midimsgtype</strong><a class="copiable-link" href="#index-midimsgtype"></a></span></dt>
+<dt class="deftypefn def-line" id="index-midimsgtype"><span><strong class="def-name">midimsgtype</strong><a class="copiable-link" href="#index-midimsgtype"></a></span></dt>
 <dd><p>A midimsg type enumeration for values of the midimsg type.
 </p>
 <p>Enumeration values are:

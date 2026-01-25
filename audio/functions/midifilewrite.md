@@ -46,8 +46,8 @@ navigation:
   url: "/manual"
 ---
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-midifilewrite"><span class="category-def">: </span><span><strong class="def-name">midifilewrite</strong> <code class="def-code-arguments">(<var class="var">filename</var>, <var class="var">msgs</var>)</code><a class="copiable-link" href="#index-midifilewrite"></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-midifilewrite-1"><span class="category-def">: </span><span><strong class="def-name">midifilewrite</strong> <code class="def-code-arguments">(<var class="var">filename</var>, <var class="var">msgs</var>, <var class="var">optionname</var>, <var class="var">optionvalue</var>)</code><a class="copiable-link" href="#index-midifilewrite-1"></a></span></dt>
+<dt class="deftypefn def-line" id="index-midifilewrite"><span><strong class="def-name">midifilewrite</strong> <code class="def-code-arguments">(<var class="var">filename</var>, <var class="var">msgs</var>)</code><a class="copiable-link" href="#index-midifilewrite"></a></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-midifilewrite-1"><span><strong class="def-name">midifilewrite</strong> <code class="def-code-arguments">(<var class="var">filename</var>, <var class="var">msgs</var>, <var class="var">optionname</var>, <var class="var">optionvalue</var>)</code><a class="copiable-link" href="#index-midifilewrite-1"></a></span></dt>
 <dd><p>Write a midifile
 </p>
 <h4 class="subsubheading" id="Inputs"><span>Inputs<a class="copiable-link" href="#Inputs"></a></span></h4>

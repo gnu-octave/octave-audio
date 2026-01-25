@@ -46,7 +46,7 @@ navigation:
   url: "/manual"
 ---
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-mel2hz"><span class="category-def">: </span><span><code class="def-type"><var class="var">hz</var> =</code> <strong class="def-name">mel2hz</strong> <code class="def-code-arguments">(<var class="var">mel</var>)</code><a class="copiable-link" href="#index-mel2hz"></a></span></dt>
+<dt class="deftypefn def-line" id="index-mel2hz"><span><code class="def-type"><var class="var">hz</var> =</code> <strong class="def-name">mel2hz</strong> <code class="def-code-arguments">(<var class="var">mel</var>)</code><a class="copiable-link" href="#index-mel2hz"></a></span></dt>
 <dd><p>Convert equivalent mel frequency to Hz.
 </p>
 <h4 class="subsubheading" id="Inputs"><span>Inputs<a class="copiable-link" href="#Inputs"></a></span></h4>

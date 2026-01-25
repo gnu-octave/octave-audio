@@ -46,8 +46,8 @@ navigation:
   url: "/manual"
 ---
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-mididevinfo"><span class="category-def">: </span><span><code class="def-type"><var class="var">devlist</var> =</code> <strong class="def-name">mididevinfo</strong> <code class="def-code-arguments">()</code><a class="copiable-link" href="#index-mididevinfo"></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-mididevinfo-1"><span class="category-def">: </span><span><strong class="def-name">mididevinfo</strong> <code class="def-code-arguments">()</code><a class="copiable-link" href="#index-mididevinfo-1"></a></span></dt>
+<dt class="deftypefn def-line" id="index-mididevinfo"><span><code class="def-type"><var class="var">devlist</var> =</code> <strong class="def-name">mididevinfo</strong> <code class="def-code-arguments">()</code><a class="copiable-link" href="#index-mididevinfo"></a></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-mididevinfo-1"><span><strong class="def-name">mididevinfo</strong> <code class="def-code-arguments">()</code><a class="copiable-link" href="#index-mididevinfo-1"></a></span></dt>
 <dd><p>Retrieve the midi devices detected within the system.
 </p>
 <p>The list will be stored with variable <var class="var">devlist</var> as either a input or output device.

@@ -46,9 +46,9 @@ navigation:
   url: "/manual"
 ---
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-mididevice"><span class="category-def">: </span><span><code class="def-type"><var class="var">dev</var> =</code> <strong class="def-name">mididevice</strong> <code class="def-code-arguments">(<var class="var">mididev</var>)</code><a class="copiable-link" href="#index-mididevice"></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-mididevice-1"><span class="category-def">: </span><span><code class="def-type"><var class="var">dev</var> =</code> <strong class="def-name">mididevice</strong> <code class="def-code-arguments">(<var class="var">mididir</var>, <var class="var">mididev</var>)</code><a class="copiable-link" href="#index-mididevice-1"></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-mididevice-2"><span class="category-def">: </span><span><code class="def-type"><var class="var">dev</var> =</code> <strong class="def-name">mididevice</strong> <code class="def-code-arguments">(&quot;input&quot;, <var class="var">midiindev</var>, &quot;output&quot;, <var class="var">midioutdev</var>)</code><a class="copiable-link" href="#index-mididevice-2"></a></span></dt>
+<dt class="deftypefn def-line" id="index-mididevice"><span><code class="def-type"><var class="var">dev</var> =</code> <strong class="def-name">mididevice</strong> <code class="def-code-arguments">(<var class="var">mididev</var>)</code><a class="copiable-link" href="#index-mididevice"></a></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-mididevice-1"><span><code class="def-type"><var class="var">dev</var> =</code> <strong class="def-name">mididevice</strong> <code class="def-code-arguments">(<var class="var">mididir</var>, <var class="var">mididev</var>)</code><a class="copiable-link" href="#index-mididevice-1"></a></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-mididevice-2"><span><code class="def-type"><var class="var">dev</var> =</code> <strong class="def-name">mididevice</strong> <code class="def-code-arguments">(&quot;input&quot;, <var class="var">midiindev</var>, &quot;output&quot;, <var class="var">midioutdev</var>)</code><a class="copiable-link" href="#index-mididevice-2"></a></span></dt>
 <dd><p>Create a midi device using the input parameters.
 </p>
 <p>When a single device name or id is provided, attempt to create the midi device using the same name for both input and output.

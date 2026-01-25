@@ -46,8 +46,8 @@ navigation:
   url: "/manual"
 ---
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-midireceive"><span class="category-def">: </span><span><code class="def-type"><var class="var">midimsg</var> =</code> <strong class="def-name">midireceive</strong> <code class="def-code-arguments">(<var class="var">dev</var>)</code><a class="copiable-link" href="#index-midireceive"></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-midireceive-1"><span class="category-def">: </span><span><code class="def-type"><var class="var">midimsg</var> =</code> <strong class="def-name">midireceive</strong> <code class="def-code-arguments">(<var class="var">dev</var>, <var class="var">maxmsg</var>)</code><a class="copiable-link" href="#index-midireceive-1"></a></span></dt>
+<dt class="deftypefn def-line" id="index-midireceive"><span><code class="def-type"><var class="var">midimsg</var> =</code> <strong class="def-name">midireceive</strong> <code class="def-code-arguments">(<var class="var">dev</var>)</code><a class="copiable-link" href="#index-midireceive"></a></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-midireceive-1"><span><code class="def-type"><var class="var">midimsg</var> =</code> <strong class="def-name">midireceive</strong> <code class="def-code-arguments">(<var class="var">dev</var>, <var class="var">maxmsg</var>)</code><a class="copiable-link" href="#index-midireceive-1"></a></span></dt>
 <dd><p>Attempt to receive midi messages from a midi device.
 </p>
 <h4 class="subsubheading" id="Inputs"><span>Inputs<a class="copiable-link" href="#Inputs"></a></span></h4>

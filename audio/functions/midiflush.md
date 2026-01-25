@@ -46,7 +46,7 @@ navigation:
   url: "/manual"
 ---
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-midiflush"><span class="category-def">: </span><span><strong class="def-name">midiflush</strong> <code class="def-code-arguments">(<var class="var">dev</var>)</code><a class="copiable-link" href="#index-midiflush"></a></span></dt>
+<dt class="deftypefn def-line" id="index-midiflush"><span><strong class="def-name">midiflush</strong> <code class="def-code-arguments">(<var class="var">dev</var>)</code><a class="copiable-link" href="#index-midiflush"></a></span></dt>
 <dd><p>Flush the receive buffers on a midi device
 </p>
 <h4 class="subsubheading" id="Inputs"><span>Inputs<a class="copiable-link" href="#Inputs"></a></span></h4>

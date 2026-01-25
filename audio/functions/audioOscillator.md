@@ -46,16 +46,16 @@ navigation:
   url: "/manual"
 ---
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-audioOscillator"><span class="category-def">: </span><span><strong class="def-name">audioOscillator</strong><a class="copiable-link" href="#index-audioOscillator"></a></span></dt>
+<dt class="deftypefn def-line" id="index-audioOscillator"><span><strong class="def-name">audioOscillator</strong><a class="copiable-link" href="#index-audioOscillator"></a></span></dt>
 <dd><p>Generate sine, sawtool and square waveforms
  </p></dd></dl>
 
 <h4 class="subheading" id="Methods"><span>Methods<a class="copiable-link" href="#Methods"></a></span></h4>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-audioOscillator-1"><span class="category-def">: </span><span><code class="def-type"><var class="var">obj</var> =</code> <strong class="def-name">audioOscillator</strong> <code class="def-code-arguments">()</code><a class="copiable-link" href="#index-audioOscillator-1"></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-audioOscillator-2"><span class="category-def">: </span><span><code class="def-type"><var class="var">obj</var> =</code> <strong class="def-name">audioOscillator</strong> <code class="def-code-arguments">(<var class="var">signalTypeValue</var>)</code><a class="copiable-link" href="#index-audioOscillator-2"></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-audioOscillator-3"><span class="category-def">: </span><span><code class="def-type"><var class="var">obj</var> =</code> <strong class="def-name">audioOscillator</strong> <code class="def-code-arguments">(<var class="var">signalTypeValue</var>, <var class="var">frequencyValue</var>)</code><a class="copiable-link" href="#index-audioOscillator-3"></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-audioOscillator-4"><span class="category-def">: </span><span><code class="def-type"><var class="var">obj</var> =</code> <strong class="def-name">audioOscillator</strong> <code class="def-code-arguments">(__, <var class="var">propertyname</var>, <var class="var">propertyvalue</var>)</code><a class="copiable-link" href="#index-audioOscillator-4"></a></span></dt>
+<dt class="deftypefn def-line" id="index-audioOscillator-1"><span><code class="def-type"><var class="var">obj</var> =</code> <strong class="def-name">audioOscillator</strong> <code class="def-code-arguments">()</code><a class="copiable-link" href="#index-audioOscillator-1"></a></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-audioOscillator-2"><span><code class="def-type"><var class="var">obj</var> =</code> <strong class="def-name">audioOscillator</strong> <code class="def-code-arguments">(<var class="var">signalTypeValue</var>)</code><a class="copiable-link" href="#index-audioOscillator-2"></a></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-audioOscillator-3"><span><code class="def-type"><var class="var">obj</var> =</code> <strong class="def-name">audioOscillator</strong> <code class="def-code-arguments">(<var class="var">signalTypeValue</var>, <var class="var">frequencyValue</var>)</code><a class="copiable-link" href="#index-audioOscillator-3"></a></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-audioOscillator-4"><span><code class="def-type"><var class="var">obj</var> =</code> <strong class="def-name">audioOscillator</strong> <code class="def-code-arguments">(__, <var class="var">propertyname</var>, <var class="var">propertyvalue</var>)</code><a class="copiable-link" href="#index-audioOscillator-4"></a></span></dt>
 <dd><p>Create a audioOscillator object
 </p>
 <h4 class="subsubheading" id="Inputs"><span>Inputs<a class="copiable-link" href="#Inputs"></a></span></h4>
@@ -119,7 +119,7 @@ navigation:
 </dd></dl>
 
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-obj_0028_0029"><span class="category-def">: </span><span><code class="def-type"><var class="var">data</var> =</code> <strong class="def-name"><var class="var">obj</var>()</strong><a class="copiable-link" href="#index-obj_0028_0029"></a></span></dt>
+<dt class="deftypefn def-line" id="index-obj_0028_0029"><span><code class="def-type"><var class="var">data</var> =</code> <strong class="def-name"><var class="var">obj</var>()</strong><a class="copiable-link" href="#index-obj_0028_0029"></a></span></dt>
 <dd><p>Generate a frame of waveform data from the generator function
 </p>
 <h4 class="subsubheading" id="Inputs-1"><span>Inputs<a class="copiable-link" href="#Inputs-1"></a></span></h4>
@@ -130,7 +130,7 @@ navigation:
  </p></dd></dl>
 
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-release_0028obj_0029"><span class="category-def">: </span><span><strong class="def-name">release(<var class="var">obj</var>)</strong><a class="copiable-link" href="#index-release_0028obj_0029"></a></span></dt>
+<dt class="deftypefn def-line" id="index-release_0028obj_0029"><span><strong class="def-name">release(<var class="var">obj</var>)</strong><a class="copiable-link" href="#index-release_0028obj_0029"></a></span></dt>
 <dd><p>Release resources of generator
 </p>
 <h4 class="subsubheading" id="Inputs-2"><span>Inputs<a class="copiable-link" href="#Inputs-2"></a></span></h4>

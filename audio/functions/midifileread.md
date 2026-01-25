@@ -46,7 +46,7 @@ navigation:
   url: "/manual"
 ---
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-midifileread"><span class="category-def">: </span><span><code class="def-type"><var class="var">msg</var> =</code> <strong class="def-name">midifileread</strong> <code class="def-code-arguments">(<var class="var">filename</var>, [propertyname, propertyvalue &hellip;])</code><a class="copiable-link" href="#index-midifileread"></a></span></dt>
+<dt class="deftypefn def-line" id="index-midifileread"><span><code class="def-type"><var class="var">msg</var> =</code> <strong class="def-name">midifileread</strong> <code class="def-code-arguments">(<var class="var">filename</var>, [propertyname, propertyvalue &hellip;])</code><a class="copiable-link" href="#index-midifileread"></a></span></dt>
 <dd><p>Read MIDI file into a midimsg
 </p>
 <h4 class="subsubheading" id="Inputs"><span>Inputs<a class="copiable-link" href="#Inputs"></a></span></h4>

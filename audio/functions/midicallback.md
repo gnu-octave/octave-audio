@@ -46,9 +46,9 @@ navigation:
   url: "/manual"
 ---
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-midicallback"><span class="category-def">: </span><span><code class="def-type"><var class="var">oldhandle</var> =</code> <strong class="def-name">midicallback</strong> <code class="def-code-arguments">(<var class="var">midicontrolsObj</var>, <var class="var">functionHandle</var>)</code><a class="copiable-link" href="#index-midicallback"></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-midicallback-1"><span class="category-def">: </span><span><code class="def-type"><var class="var">oldhandle</var> =</code> <strong class="def-name">midicallback</strong> <code class="def-code-arguments">(<var class="var">midicontrolsObj</var>, [])</code><a class="copiable-link" href="#index-midicallback-1"></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-midicallback-2"><span class="category-def">: </span><span><code class="def-type"><var class="var">currhandle</var> =</code> <strong class="def-name">midicallback</strong> <code class="def-code-arguments">(<var class="var">midicontrolsObj</var>)</code><a class="copiable-link" href="#index-midicallback-2"></a></span></dt>
+<dt class="deftypefn def-line" id="index-midicallback"><span><code class="def-type"><var class="var">oldhandle</var> =</code> <strong class="def-name">midicallback</strong> <code class="def-code-arguments">(<var class="var">midicontrolsObj</var>, <var class="var">functionHandle</var>)</code><a class="copiable-link" href="#index-midicallback"></a></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-midicallback-1"><span><code class="def-type"><var class="var">oldhandle</var> =</code> <strong class="def-name">midicallback</strong> <code class="def-code-arguments">(<var class="var">midicontrolsObj</var>, [])</code><a class="copiable-link" href="#index-midicallback-1"></a></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-midicallback-2"><span><code class="def-type"><var class="var">currhandle</var> =</code> <strong class="def-name">midicallback</strong> <code class="def-code-arguments">(<var class="var">midicontrolsObj</var>)</code><a class="copiable-link" href="#index-midicallback-2"></a></span></dt>
 <dd><p>Get, set or clear the midicontrol object callback.
 </p> 
 <h4 class="subsubheading" id="Inputs"><span>Inputs<a class="copiable-link" href="#Inputs"></a></span></h4>

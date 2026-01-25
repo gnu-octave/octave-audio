@@ -46,7 +46,7 @@ navigation:
   url: "/manual"
 ---
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-hz2bark"><span class="category-def">: </span><span><code class="def-type"><var class="var">bark</var> =</code> <strong class="def-name">hz2bark</strong> <code class="def-code-arguments">(<var class="var">hz</var>)</code><a class="copiable-link" href="#index-hz2bark"></a></span></dt>
+<dt class="deftypefn def-line" id="index-hz2bark"><span><code class="def-type"><var class="var">bark</var> =</code> <strong class="def-name">hz2bark</strong> <code class="def-code-arguments">(<var class="var">hz</var>)</code><a class="copiable-link" href="#index-hz2bark"></a></span></dt>
 <dd><p>Convert hz to equivalent bark frequency
 </p>
 <h4 class="subsubheading" id="Inputs"><span>Inputs<a class="copiable-link" href="#Inputs"></a></span></h4>
