@@ -2,10 +2,10 @@
 layout: "default"
 permalink: "/functions/9_midiflush/"
 pkg_name: "audio"
-pkg_version: "2.0.9"
+pkg_version: "2.0.10"
 pkg_description: "Audio and MIDI Toolbox for GNU Octave"
 title: "Audio Toolkit - midiflush"
-category: "MIDI Device Interface"
+category: "Domain Conversion"
 func_name: "midiflush"
 navigation:
 - id: "overview"
@@ -17,21 +17,27 @@ navigation:
 - id: "21_MIDIDeviceInterface"
   name: "&nbsp;&nbsp;MIDI Device Interface"
   url: "/functions/#21_MIDIDeviceInterface"
+  subitems:
 - id: "25_MIDIControllerInterface"
   name: "&nbsp;&nbsp;MIDI Controller Interface"
   url: "/functions/#25_MIDIControllerInterface"
+  subitems:
 - id: "13_MIDIFileIO"
   name: "&nbsp;&nbsp;MIDI File I/O"
   url: "/functions/#13_MIDIFileIO"
+  subitems:
 - id: "12_Enumerations"
   name: "&nbsp;&nbsp;Enumerations"
   url: "/functions/#12_Enumerations"
+  subitems:
 - id: "19_WaveformGeneration"
   name: "&nbsp;&nbsp;Waveform Generation"
   url: "/functions/#19_WaveformGeneration"
+  subitems:
 - id: "17_DomainConversion"
   name: "&nbsp;&nbsp;Domain Conversion"
   url: "/functions/#17_DomainConversion"
+  subitems:
 - id: "news"
   name: "News"
   url: "/news"
@@ -39,8 +45,8 @@ navigation:
   name: "Manual"
   url: "/manual"
 ---
-<dl class="first-deftypefn">
-<dt class="deftypefn" id="index-midiflush"><span class="category-def">: </span><span><strong class="def-name">midiflush</strong> <code class="def-code-arguments">(<var class="var">dev</var>)</code><a class="copiable-link" href="#index-midiflush"></a></span></dt>
+<dl class="first-deftypefn def-block">
+<dt class="deftypefn def-line" id="index-midiflush"><span class="category-def">: </span><span><strong class="def-name">midiflush</strong> <code class="def-code-arguments">(<var class="var">dev</var>)</code><a class="copiable-link" href="#index-midiflush"></a></span></dt>
 <dd><p>Flush the receive buffers on a midi device
 </p>
 <h4 class="subsubheading" id="Inputs"><span>Inputs<a class="copiable-link" href="#Inputs"></a></span></h4>

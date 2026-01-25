@@ -3,7 +3,7 @@ layout: "default"
 permalink: "/manual/"
 title: "Audio Toolkit - Manual"
 pkg_name: "audio"
-version: "2.0.9"
+version: "2.0.10"
 description: "Audio and MIDI Toolbox for GNU Octave"
 navigation:
 - id: "overview"
@@ -31,26 +31,26 @@ navigation:
 <h1 class="top" id="Introduction">Introduction</h1>
 <p>The Audio toolkit is a set of functions for manipulating MIDI devices and files for GNU Octave
 </p>
-<div class="element-contents" id="SEC_Contents">
+<div class="region-contents" id="SEC_Contents">
 <h2 class="contents-heading">Table of Contents</h2>
 <div class="contents">
 <ul class="toc-numbered-mark">
-  <li><a id="toc-Installing-and-loading-1" href="#Installing-and-loading">1 Installing and loading</a>
+  <li><a id="toc-Installing-and-loading" href="#Installing-and-loading">1 Installing and loading</a>
   <ul class="toc-numbered-mark">
     <li><a id="toc-Windows-install" href="#Windows-install">1.1 Windows install</a></li>
     <li><a id="toc-Online-Direct-install" href="#Online-Direct-install">1.2 Online Direct install</a></li>
     <li><a id="toc-Off_002dline-install" href="#Off_002dline-install">1.3 Off-line install</a></li>
     <li><a id="toc-Loading" href="#Loading">1.4 Loading</a></li>
   </ul></li>
-  <li><a id="toc-Basic-Usage-Overview-1" href="#Basic-Usage-Overview">2 Basic Usage Overview</a>
+  <li><a id="toc-Basic-Usage-Overview" href="#Basic-Usage-Overview">2 Basic Usage Overview</a>
   <ul class="toc-numbered-mark">
     <li><a id="toc-Conversion-Functionality" href="#Conversion-Functionality">2.1 Conversion Functionality</a></li>
-    <li><a id="toc-Waveform-Generation-1" href="#Waveform-Generation-1">2.2 Waveform Generation</a></li>
+    <li><a id="toc-Waveform-Generation" href="#Waveform-Generation-1">2.2 Waveform Generation</a></li>
     <li><a id="toc-MIDI-Functionality" href="#MIDI-Functionality">2.3 MIDI Functionality</a></li>
   </ul></li>
-  <li><a id="toc-Function-Reference-1" href="#Function-Reference">3 Function Reference</a>
+  <li><a id="toc-Function-Reference" href="#Function-Reference">3 Function Reference</a>
   <ul class="toc-numbered-mark">
-    <li><a id="toc-MIDI-Device-Interface-1" href="#MIDI-Device-Interface">3.1 MIDI Device Interface</a>
+    <li><a id="toc-MIDI-Device-Interface" href="#MIDI-Device-Interface">3.1 MIDI Device Interface</a>
     <ul class="toc-numbered-mark">
       <li><a id="toc-_0040octave_005fmidi_002fhasdata" href="#g_t_0040octave_005fmidi_002fhasdata">3.1.1 @octave_midi/hasdata</a></li>
       <li><a id="toc-mididevice" href="#mididevice">3.1.2 mididevice</a></li>
@@ -60,7 +60,7 @@ navigation:
       <li><a id="toc-midireceive" href="#midireceive">3.1.6 midireceive</a></li>
       <li><a id="toc-midisend" href="#midisend">3.1.7 midisend</a></li>
     </ul></li>
-    <li><a id="toc-MIDI-Controller-Interface-1" href="#MIDI-Controller-Interface">3.2 MIDI Controller Interface</a>
+    <li><a id="toc-MIDI-Controller-Interface" href="#MIDI-Controller-Interface">3.2 MIDI Controller Interface</a>
     <ul class="toc-numbered-mark">
       <li><a id="toc-midicallback" href="#midicallback">3.2.1 midicallback</a></li>
       <li><a id="toc-midicontrols" href="#midicontrols">3.2.2 midicontrols</a></li>
@@ -68,22 +68,22 @@ navigation:
       <li><a id="toc-midiread" href="#midiread">3.2.4 midiread</a></li>
       <li><a id="toc-midisync" href="#midisync">3.2.5 midisync</a></li>
     </ul></li>
-    <li><a id="toc-MIDI-File-I_002fO-1" href="#MIDI-File-I_002fO">3.3 MIDI File I/O</a>
+    <li><a id="toc-MIDI-File-I_002fO" href="#MIDI-File-I_002fO">3.3 MIDI File I/O</a>
     <ul class="toc-numbered-mark">
       <li><a id="toc-ismidifile" href="#ismidifile">3.3.1 ismidifile</a></li>
       <li><a id="toc-midifileinfo" href="#midifileinfo">3.3.2 midifileinfo</a></li>
       <li><a id="toc-midifileread" href="#midifileread">3.3.3 midifileread</a></li>
       <li><a id="toc-midifilewrite" href="#midifilewrite">3.3.4 midifilewrite</a></li>
     </ul></li>
-    <li><a id="toc-Enumerations-1" href="#Enumerations">3.4 Enumerations</a>
+    <li><a id="toc-Enumerations" href="#Enumerations">3.4 Enumerations</a>
     <ul class="toc-numbered-mark">
       <li><a id="toc-midimsgtype" href="#midimsgtype">3.4.1 midimsgtype</a></li>
     </ul></li>
-    <li><a id="toc-Waveform-Generation-2" href="#Waveform-Generation">3.5 Waveform Generation</a>
+    <li><a id="toc-Waveform-Generation-1" href="#Waveform-Generation">3.5 Waveform Generation</a>
     <ul class="toc-numbered-mark">
       <li><a id="toc-audioOscillator" href="#audioOscillator">3.5.1 audioOscillator</a></li>
     </ul></li>
-    <li><a id="toc-Domain-Conversion-1" href="#Domain-Conversion">3.6 Domain Conversion</a>
+    <li><a id="toc-Domain-Conversion" href="#Domain-Conversion">3.6 Domain Conversion</a>
     <ul class="toc-numbered-mark">
       <li><a id="toc-bark2hz" href="#bark2hz">3.6.1 bark2hz</a></li>
       <li><a id="toc-erb2hz" href="#erb2hz">3.6.2 erb2hz</a></li>
@@ -96,7 +96,7 @@ navigation:
     </ul></li>
   </ul></li>
   <li><a id="toc-GNU-General-Public-License" href="#Copying">Appendix A GNU General Public License</a></li>
-  <li><a id="toc-Index-1" href="#Index" rel="index">Index</a></li>
+  <li><a id="toc-Index" href="#Index" rel="index">Index</a></li>
 </ul>
 </div>
 </div>
@@ -148,7 +148,7 @@ octave-forge using the following command within <abbr class="acronym">GNU</abbr>
 <abbr class="acronym">GNU</abbr> Octave, the package can be installed using the following command within <abbr class="acronym">GNU</abbr> Octave:
 </p>
 <div class="example">
-<pre class="example-preformatted">pkg install audio-2.0.9.tar.gz
+<pre class="example-preformatted">pkg install audio-2.0.10.tar.gz
 </pre></div>
 </div>
 <div class="section-level-extent" id="Loading">
@@ -263,8 +263,8 @@ endwhile
 <div class="subsection-level-extent" id="g_t_0040octave_005fmidi_002fhasdata">
 <h4 class="subsection">3.1.1 @octave_midi/hasdata</h4>
 <a class="index-entry-id" id="index-hasdata"></a>
-<dl class="first-deftypefn">
-<dt class="deftypefn" id="index-hasdata-1"><span class="category-def">: </span><code class="def-type"><var class="var">tf</var> =</code> <strong class="def-name">hasdata</strong> <code class="def-code-arguments">(<var class="var">dev</var>)</code></dt>
+<dl class="first-deftypefn def-block">
+<dt class="deftypefn def-line" id="index-hasdata-1"><span><code class="def-type"><var class="var">tf</var> =</code> <strong class="def-name">hasdata</strong> <code class="def-code-arguments">(<var class="var">dev</var>)</code></span></dt>
 <dd><p>Return whether there is data available to read
 </p>
 <h4 class="subsubheading" id="Inputs">Inputs</h4>
@@ -279,10 +279,10 @@ endwhile
 <div class="subsection-level-extent" id="mididevice">
 <h4 class="subsection">3.1.2 mididevice</h4>
 <a class="index-entry-id" id="index-mididevice"></a>
-<dl class="first-deftypefn">
-<dt class="deftypefn" id="index-mididevice-1"><span class="category-def">: </span><code class="def-type"><var class="var">dev</var> =</code> <strong class="def-name">mididevice</strong> <code class="def-code-arguments">(<var class="var">mididev</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn" id="index-mididevice-2"><span class="category-def">: </span><code class="def-type"><var class="var">dev</var> =</code> <strong class="def-name">mididevice</strong> <code class="def-code-arguments">(<var class="var">mididir</var>, <var class="var">mididev</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn" id="index-mididevice-3"><span class="category-def">: </span><code class="def-type"><var class="var">dev</var> =</code> <strong class="def-name">mididevice</strong> <code class="def-code-arguments">(&quot;input&quot;, <var class="var">midiindev</var>, &quot;output&quot;, <var class="var">midioutdev</var>)</code></dt>
+<dl class="first-deftypefn def-block">
+<dt class="deftypefn def-line" id="index-mididevice-1"><span><code class="def-type"><var class="var">dev</var> =</code> <strong class="def-name">mididevice</strong> <code class="def-code-arguments">(<var class="var">mididev</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-mididevice-2"><span><code class="def-type"><var class="var">dev</var> =</code> <strong class="def-name">mididevice</strong> <code class="def-code-arguments">(<var class="var">mididir</var>, <var class="var">mididev</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-mididevice-3"><span><code class="def-type"><var class="var">dev</var> =</code> <strong class="def-name">mididevice</strong> <code class="def-code-arguments">(&quot;input&quot;, <var class="var">midiindev</var>, &quot;output&quot;, <var class="var">midioutdev</var>)</code></span></dt>
 <dd><p>Create a midi device using the input parameters.
 </p>
 <p>When a single device name or id is provided, attempt to create the midi device using the same name for both input and output.
@@ -325,9 +325,9 @@ endwhile
 <div class="subsection-level-extent" id="mididevinfo">
 <h4 class="subsection">3.1.3 mididevinfo</h4>
 <a class="index-entry-id" id="index-mididevinfo"></a>
-<dl class="first-deftypefn">
-<dt class="deftypefn" id="index-mididevinfo-1"><span class="category-def">: </span><code class="def-type"><var class="var">devlist</var> =</code> <strong class="def-name">mididevinfo</strong> <code class="def-code-arguments">()</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn" id="index-mididevinfo-2"><span class="category-def">: </span><strong class="def-name">mididevinfo</strong> <code class="def-code-arguments">()</code></dt>
+<dl class="first-deftypefn def-block">
+<dt class="deftypefn def-line" id="index-mididevinfo-1"><span><code class="def-type"><var class="var">devlist</var> =</code> <strong class="def-name">mididevinfo</strong> <code class="def-code-arguments">()</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-mididevinfo-2"><span><strong class="def-name">mididevinfo</strong> <code class="def-code-arguments">()</code></span></dt>
 <dd><p>Retrieve the midi devices detected within the system.
 </p>
 <p>The list will be stored with variable <var class="var">devlist</var> as either a input or output device.
@@ -380,8 +380,8 @@ endwhile
 <div class="subsection-level-extent" id="midiflush">
 <h4 class="subsection">3.1.4 midiflush</h4>
 <a class="index-entry-id" id="index-midiflush"></a>
-<dl class="first-deftypefn">
-<dt class="deftypefn" id="index-midiflush-1"><span class="category-def">: </span><strong class="def-name">midiflush</strong> <code class="def-code-arguments">(<var class="var">dev</var>)</code></dt>
+<dl class="first-deftypefn def-block">
+<dt class="deftypefn def-line" id="index-midiflush-1"><span><strong class="def-name">midiflush</strong> <code class="def-code-arguments">(<var class="var">dev</var>)</code></span></dt>
 <dd><p>Flush the receive buffers on a midi device
 </p>
 <h4 class="subsubheading" id="Inputs-3">Inputs</h4>
@@ -401,39 +401,40 @@ endwhile
 <div class="subsection-level-extent" id="midimsg">
 <h4 class="subsection">3.1.5 midimsg</h4>
 <a class="index-entry-id" id="index-midimsg"></a>
-<dl class="first-deftypefn">
-<dt class="deftypefn" id="index-midimsg-1"><span class="category-def">: </span><code class="def-type"><var class="var">msg</var> =</code> <strong class="def-name">midimsg</strong> <code class="def-code-arguments">(0)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn" id="index-midimsg-2"><span class="category-def">: </span><code class="def-type"><var class="var">msg</var> =</code> <strong class="def-name">midimsg</strong> <code class="def-code-arguments">(<var class="var">type</var> ....)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn" id="index-midimsg-3"><span class="category-def">: </span><code class="def-type"><var class="var">msg</var> =</code> <strong class="def-name">midimsg</strong> <code class="def-code-arguments">(&quot;note&quot;, <var class="var">channel</var>, <var class="var">note</var>, <var class="var">velocity</var>, <var class="var">duration</var>, <var class="var">timestamp</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn" id="index-midimsg-4"><span class="category-def">: </span><code class="def-type"><var class="var">msg</var> =</code> <strong class="def-name">midimsg</strong> <code class="def-code-arguments">(&quot;noteon&quot;, <var class="var">channel</var>, <var class="var">note</var>, <var class="var">velocity</var>, <var class="var">timestamp</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn" id="index-midimsg-5"><span class="category-def">: </span><code class="def-type"><var class="var">msg</var> =</code> <strong class="def-name">midimsg</strong> <code class="def-code-arguments">(&quot;noteoff&quot;, <var class="var">channel</var>, <var class="var">note</var>, <var class="var">velocity</var>, <var class="var">timestamp</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn" id="index-midimsg-6"><span class="category-def">: </span><code class="def-type"><var class="var">msg</var> =</code> <strong class="def-name">midimsg</strong> <code class="def-code-arguments">(&quot;programchange&quot;, <var class="var">channel</var>, <var class="var">prog</var>, <var class="var">timestamp</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn" id="index-midimsg-7"><span class="category-def">: </span><code class="def-type"><var class="var">msg</var> =</code> <strong class="def-name">midimsg</strong> <code class="def-code-arguments">(&quot;controlchange&quot;, <var class="var">channel</var>, <var class="var">ccnum</var>, <var class="var">ccval</var>, <var class="var">timestamp</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn" id="index-midimsg-8"><span class="category-def">: </span><code class="def-type"><var class="var">msg</var> =</code> <strong class="def-name">midimsg</strong> <code class="def-code-arguments">(&quot;polykeypressure&quot;, <var class="var">channel</var>, <var class="var">note</var>, <var class="var">keypressure</var>, <var class="var">timestamp</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn" id="index-midimsg-9"><span class="category-def">: </span><code class="def-type"><var class="var">msg</var> =</code> <strong class="def-name">midimsg</strong> <code class="def-code-arguments">(&quot;channelpressure&quot;, <var class="var">channel</var>, <var class="var">chanpressure</var>, <var class="var">timestamp</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn" id="index-midimsg-10"><span class="category-def">: </span><code class="def-type"><var class="var">msg</var> =</code> <strong class="def-name">midimsg</strong> <code class="def-code-arguments">(&quot;localcontrol&quot;, <var class="var">channel</var>, <var class="var">localcontrol</var>, <var class="var">timestamp</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn" id="index-midimsg-11"><span class="category-def">: </span><code class="def-type"><var class="var">msg</var> =</code> <strong class="def-name">midimsg</strong> <code class="def-code-arguments">(&quot;pitchbend&quot;, <var class="var">channel</var>, <var class="var">pitchchange</var>, <var class="var">timestamp</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn" id="index-midimsg-12"><span class="category-def">: </span><code class="def-type"><var class="var">msg</var> =</code> <strong class="def-name">midimsg</strong> <code class="def-code-arguments">(&quot;polyon&quot;, <var class="var">channel</var>, <var class="var">timestamp</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn" id="index-midimsg-13"><span class="category-def">: </span><code class="def-type"><var class="var">msg</var> =</code> <strong class="def-name">midimsg</strong> <code class="def-code-arguments">(&quot;monoon&quot;, <var class="var">channel</var>, <var class="var">monochannels</var>, <var class="var">timestamp</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn" id="index-midimsg-14"><span class="category-def">: </span><code class="def-type"><var class="var">msg</var> =</code> <strong class="def-name">midimsg</strong> <code class="def-code-arguments">(&quot;omnion&quot;, <var class="var">channel</var>, <var class="var">timestamp</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn" id="index-midimsg-15"><span class="category-def">: </span><code class="def-type"><var class="var">msg</var> =</code> <strong class="def-name">midimsg</strong> <code class="def-code-arguments">(&quot;omnioff&quot;, <var class="var">channel</var>, <var class="var">timestamp</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn" id="index-midimsg-16"><span class="category-def">: </span><code class="def-type"><var class="var">msg</var> =</code> <strong class="def-name">midimsg</strong> <code class="def-code-arguments">(&quot;allsoundoff&quot;, <var class="var">channel</var>, <var class="var">timestamp</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn" id="index-midimsg-17"><span class="category-def">: </span><code class="def-type"><var class="var">msg</var> =</code> <strong class="def-name">midimsg</strong> <code class="def-code-arguments">(&quot;allnotesoff&quot;, <var class="var">channel</var>, <var class="var">timestamp</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn" id="index-midimsg-18"><span class="category-def">: </span><code class="def-type"><var class="var">msg</var> =</code> <strong class="def-name">midimsg</strong> <code class="def-code-arguments">(&quot;resetallcontrollers&quot;, <var class="var">channel</var>, <var class="var">timestamp</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn" id="index-midimsg-19"><span class="category-def">: </span><code class="def-type"><var class="var">msg</var> =</code> <strong class="def-name">midimsg</strong> <code class="def-code-arguments">(&quot;start&quot;, <var class="var">timestamp</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn" id="index-midimsg-20"><span class="category-def">: </span><code class="def-type"><var class="var">msg</var> =</code> <strong class="def-name">midimsg</strong> <code class="def-code-arguments">(&quot;stop&quot;, <var class="var">timestamp</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn" id="index-midimsg-21"><span class="category-def">: </span><code class="def-type"><var class="var">msg</var> =</code> <strong class="def-name">midimsg</strong> <code class="def-code-arguments">(&quot;continue&quot;, <var class="var">timestamp</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn" id="index-midimsg-22"><span class="category-def">: </span><code class="def-type"><var class="var">msg</var> =</code> <strong class="def-name">midimsg</strong> <code class="def-code-arguments">(&quot;systemreset&quot;, <var class="var">timestamp</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn" id="index-midimsg-23"><span class="category-def">: </span><code class="def-type"><var class="var">msg</var> =</code> <strong class="def-name">midimsg</strong> <code class="def-code-arguments">(&quot;activesensing&quot;, <var class="var">timestamp</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn" id="index-midimsg-24"><span class="category-def">: </span><code class="def-type"><var class="var">msg</var> =</code> <strong class="def-name">midimsg</strong> <code class="def-code-arguments">(&quot;timingclock&quot;, <var class="var">timestamp</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn" id="index-midimsg-25"><span class="category-def">: </span><code class="def-type"><var class="var">msg</var> =</code> <strong class="def-name">midimsg</strong> <code class="def-code-arguments">(&quot;systemexclusive&quot;, <var class="var">timestamp</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn" id="index-midimsg-26"><span class="category-def">: </span><code class="def-type"><var class="var">msg</var> =</code> <strong class="def-name">midimsg</strong> <code class="def-code-arguments">(&quot;systemexclusive&quot;, <var class="var">bytes</var>, <var class="var">timestamp</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn" id="index-midimsg-27"><span class="category-def">: </span><code class="def-type"><var class="var">msg</var> =</code> <strong class="def-name">midimsg</strong> <code class="def-code-arguments">(&quot;eox&quot;, <var class="var">timestamp</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn" id="index-midimsg-28"><span class="category-def">: </span><code class="def-type"><var class="var">msg</var> =</code> <strong class="def-name">midimsg</strong> <code class="def-code-arguments">(&quot;data&quot;, <var class="var">bytes</var>, <var class="var">timestamp</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn" id="index-midimsg-29"><span class="category-def">: </span><code class="def-type"><var class="var">msg</var> =</code> <strong class="def-name">midimsg</strong> <code class="def-code-arguments">(&quot;songselect&quot;, <var class="var">song</var>, <var class="var">timestamp</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn" id="index-midimsg-30"><span class="category-def">: </span><code class="def-type"><var class="var">msg</var> =</code> <strong class="def-name">midimsg</strong> <code class="def-code-arguments">(&quot;songpositionpointer&quot;, <var class="var">songposition</var>, <var class="var">timestamp</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn" id="index-midimsg-31"><span class="category-def">: </span><code class="def-type"><var class="var">msg</var> =</code> <strong class="def-name">midimsg</strong> <code class="def-code-arguments">(&quot;tunerequest&quot;, <var class="var">timestamp</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn" id="index-midimsg-32"><span class="category-def">: </span><code class="def-type"><var class="var">msg</var> =</code> <strong class="def-name">midimsg</strong> <code class="def-code-arguments">(&quot;miditimecodequarterframe&quot;, <var class="var">timeseq</var>, <var class="var">timevalue</var>, <var class="var">timestamp</var>)</code></dt>
+<dl class="first-deftypefn def-block">
+<dt class="deftypefn def-line" id="index-midimsg-1"><span><code class="def-type"><var class="var">msg</var> =</code> <strong class="def-name">midimsg</strong> <code class="def-code-arguments">(0)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-midimsg-2"><span><code class="def-type"><var class="var">msg</var> =</code> <strong class="def-name">midimsg</strong> <code class="def-code-arguments">()</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-midimsg-3"><span><code class="def-type"><var class="var">msg</var> =</code> <strong class="def-name">midimsg</strong> <code class="def-code-arguments">(<var class="var">type</var> ....)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-midimsg-4"><span><code class="def-type"><var class="var">msg</var> =</code> <strong class="def-name">midimsg</strong> <code class="def-code-arguments">(&quot;note&quot;, <var class="var">channel</var>, <var class="var">note</var>, <var class="var">velocity</var>, <var class="var">duration</var>, <var class="var">timestamp</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-midimsg-5"><span><code class="def-type"><var class="var">msg</var> =</code> <strong class="def-name">midimsg</strong> <code class="def-code-arguments">(&quot;noteon&quot;, <var class="var">channel</var>, <var class="var">note</var>, <var class="var">velocity</var>, <var class="var">timestamp</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-midimsg-6"><span><code class="def-type"><var class="var">msg</var> =</code> <strong class="def-name">midimsg</strong> <code class="def-code-arguments">(&quot;noteoff&quot;, <var class="var">channel</var>, <var class="var">note</var>, <var class="var">velocity</var>, <var class="var">timestamp</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-midimsg-7"><span><code class="def-type"><var class="var">msg</var> =</code> <strong class="def-name">midimsg</strong> <code class="def-code-arguments">(&quot;programchange&quot;, <var class="var">channel</var>, <var class="var">prog</var>, <var class="var">timestamp</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-midimsg-8"><span><code class="def-type"><var class="var">msg</var> =</code> <strong class="def-name">midimsg</strong> <code class="def-code-arguments">(&quot;controlchange&quot;, <var class="var">channel</var>, <var class="var">ccnum</var>, <var class="var">ccval</var>, <var class="var">timestamp</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-midimsg-9"><span><code class="def-type"><var class="var">msg</var> =</code> <strong class="def-name">midimsg</strong> <code class="def-code-arguments">(&quot;polykeypressure&quot;, <var class="var">channel</var>, <var class="var">note</var>, <var class="var">keypressure</var>, <var class="var">timestamp</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-midimsg-10"><span><code class="def-type"><var class="var">msg</var> =</code> <strong class="def-name">midimsg</strong> <code class="def-code-arguments">(&quot;channelpressure&quot;, <var class="var">channel</var>, <var class="var">chanpressure</var>, <var class="var">timestamp</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-midimsg-11"><span><code class="def-type"><var class="var">msg</var> =</code> <strong class="def-name">midimsg</strong> <code class="def-code-arguments">(&quot;localcontrol&quot;, <var class="var">channel</var>, <var class="var">localcontrol</var>, <var class="var">timestamp</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-midimsg-12"><span><code class="def-type"><var class="var">msg</var> =</code> <strong class="def-name">midimsg</strong> <code class="def-code-arguments">(&quot;pitchbend&quot;, <var class="var">channel</var>, <var class="var">pitchchange</var>, <var class="var">timestamp</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-midimsg-13"><span><code class="def-type"><var class="var">msg</var> =</code> <strong class="def-name">midimsg</strong> <code class="def-code-arguments">(&quot;polyon&quot;, <var class="var">channel</var>, <var class="var">timestamp</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-midimsg-14"><span><code class="def-type"><var class="var">msg</var> =</code> <strong class="def-name">midimsg</strong> <code class="def-code-arguments">(&quot;monoon&quot;, <var class="var">channel</var>, <var class="var">monochannels</var>, <var class="var">timestamp</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-midimsg-15"><span><code class="def-type"><var class="var">msg</var> =</code> <strong class="def-name">midimsg</strong> <code class="def-code-arguments">(&quot;omnion&quot;, <var class="var">channel</var>, <var class="var">timestamp</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-midimsg-16"><span><code class="def-type"><var class="var">msg</var> =</code> <strong class="def-name">midimsg</strong> <code class="def-code-arguments">(&quot;omnioff&quot;, <var class="var">channel</var>, <var class="var">timestamp</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-midimsg-17"><span><code class="def-type"><var class="var">msg</var> =</code> <strong class="def-name">midimsg</strong> <code class="def-code-arguments">(&quot;allsoundoff&quot;, <var class="var">channel</var>, <var class="var">timestamp</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-midimsg-18"><span><code class="def-type"><var class="var">msg</var> =</code> <strong class="def-name">midimsg</strong> <code class="def-code-arguments">(&quot;allnotesoff&quot;, <var class="var">channel</var>, <var class="var">timestamp</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-midimsg-19"><span><code class="def-type"><var class="var">msg</var> =</code> <strong class="def-name">midimsg</strong> <code class="def-code-arguments">(&quot;resetallcontrollers&quot;, <var class="var">channel</var>, <var class="var">timestamp</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-midimsg-20"><span><code class="def-type"><var class="var">msg</var> =</code> <strong class="def-name">midimsg</strong> <code class="def-code-arguments">(&quot;start&quot;, <var class="var">timestamp</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-midimsg-21"><span><code class="def-type"><var class="var">msg</var> =</code> <strong class="def-name">midimsg</strong> <code class="def-code-arguments">(&quot;stop&quot;, <var class="var">timestamp</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-midimsg-22"><span><code class="def-type"><var class="var">msg</var> =</code> <strong class="def-name">midimsg</strong> <code class="def-code-arguments">(&quot;continue&quot;, <var class="var">timestamp</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-midimsg-23"><span><code class="def-type"><var class="var">msg</var> =</code> <strong class="def-name">midimsg</strong> <code class="def-code-arguments">(&quot;systemreset&quot;, <var class="var">timestamp</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-midimsg-24"><span><code class="def-type"><var class="var">msg</var> =</code> <strong class="def-name">midimsg</strong> <code class="def-code-arguments">(&quot;activesensing&quot;, <var class="var">timestamp</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-midimsg-25"><span><code class="def-type"><var class="var">msg</var> =</code> <strong class="def-name">midimsg</strong> <code class="def-code-arguments">(&quot;timingclock&quot;, <var class="var">timestamp</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-midimsg-26"><span><code class="def-type"><var class="var">msg</var> =</code> <strong class="def-name">midimsg</strong> <code class="def-code-arguments">(&quot;systemexclusive&quot;, <var class="var">timestamp</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-midimsg-27"><span><code class="def-type"><var class="var">msg</var> =</code> <strong class="def-name">midimsg</strong> <code class="def-code-arguments">(&quot;systemexclusive&quot;, <var class="var">bytes</var>, <var class="var">timestamp</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-midimsg-28"><span><code class="def-type"><var class="var">msg</var> =</code> <strong class="def-name">midimsg</strong> <code class="def-code-arguments">(&quot;eox&quot;, <var class="var">timestamp</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-midimsg-29"><span><code class="def-type"><var class="var">msg</var> =</code> <strong class="def-name">midimsg</strong> <code class="def-code-arguments">(&quot;data&quot;, <var class="var">bytes</var>, <var class="var">timestamp</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-midimsg-30"><span><code class="def-type"><var class="var">msg</var> =</code> <strong class="def-name">midimsg</strong> <code class="def-code-arguments">(&quot;songselect&quot;, <var class="var">song</var>, <var class="var">timestamp</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-midimsg-31"><span><code class="def-type"><var class="var">msg</var> =</code> <strong class="def-name">midimsg</strong> <code class="def-code-arguments">(&quot;songpositionpointer&quot;, <var class="var">songposition</var>, <var class="var">timestamp</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-midimsg-32"><span><code class="def-type"><var class="var">msg</var> =</code> <strong class="def-name">midimsg</strong> <code class="def-code-arguments">(&quot;tunerequest&quot;, <var class="var">timestamp</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-midimsg-33"><span><code class="def-type"><var class="var">msg</var> =</code> <strong class="def-name">midimsg</strong> <code class="def-code-arguments">(&quot;miditimecodequarterframe&quot;, <var class="var">timeseq</var>, <var class="var">timevalue</var>, <var class="var">timestamp</var>)</code></span></dt>
 <dd><p>Create a midimsg object
 </p>
 <p>If the input parameter is 0, create an empty midi message object
@@ -463,6 +464,8 @@ endwhile
 <var class="var">songposition</var> - song position value for a song position message.<br>
 <var class="var">timeseq</var> - timecode sequence number for a miditimecodequarterframe message.<br>
 <var class="var">timevalue</var> - timecode value number for a miditimecodequarterframe message.<br>
+</p>
+<p>In the case where no inputs are provides, a midimsg &rsquo;data&rsquo; message is created.
 </p>
 <h4 class="subsubheading" id="Outputs-4">Outputs</h4>
 <p><var class="var">msg</var> - a midimsg object containing the midi data of the message
@@ -508,9 +511,9 @@ endwhile
 <div class="subsection-level-extent" id="midireceive">
 <h4 class="subsection">3.1.6 midireceive</h4>
 <a class="index-entry-id" id="index-midireceive"></a>
-<dl class="first-deftypefn">
-<dt class="deftypefn" id="index-midireceive-1"><span class="category-def">: </span><code class="def-type"><var class="var">midimsg</var> =</code> <strong class="def-name">midireceive</strong> <code class="def-code-arguments">(<var class="var">dev</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn" id="index-midireceive-2"><span class="category-def">: </span><code class="def-type"><var class="var">midimsg</var> =</code> <strong class="def-name">midireceive</strong> <code class="def-code-arguments">(<var class="var">dev</var>, <var class="var">maxmsg</var>)</code></dt>
+<dl class="first-deftypefn def-block">
+<dt class="deftypefn def-line" id="index-midireceive-1"><span><code class="def-type"><var class="var">midimsg</var> =</code> <strong class="def-name">midireceive</strong> <code class="def-code-arguments">(<var class="var">dev</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-midireceive-2"><span><code class="def-type"><var class="var">midimsg</var> =</code> <strong class="def-name">midireceive</strong> <code class="def-code-arguments">(<var class="var">dev</var>, <var class="var">maxmsg</var>)</code></span></dt>
 <dd><p>Attempt to receive midi messages from a midi device.
 </p>
 <h4 class="subsubheading" id="Inputs-5">Inputs</h4>
@@ -539,9 +542,9 @@ endwhile
 <div class="subsection-level-extent" id="midisend">
 <h4 class="subsection">3.1.7 midisend</h4>
 <a class="index-entry-id" id="index-midisend"></a>
-<dl class="first-deftypefn">
-<dt class="deftypefn" id="index-midisend-1"><span class="category-def">: </span><strong class="def-name">midisend</strong> <code class="def-code-arguments">(<var class="var">dev</var>, <var class="var">msg</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn" id="index-midisend-2"><span class="category-def">: </span><strong class="def-name">midisend</strong> <code class="def-code-arguments">(<var class="var">dev</var>, ...)</code></dt>
+<dl class="first-deftypefn def-block">
+<dt class="deftypefn def-line" id="index-midisend-1"><span><strong class="def-name">midisend</strong> <code class="def-code-arguments">(<var class="var">dev</var>, <var class="var">msg</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-midisend-2"><span><strong class="def-name">midisend</strong> <code class="def-code-arguments">(<var class="var">dev</var>, ...)</code></span></dt>
 <dd><p>Send a midimsg to a midi device
 </p>
 <h4 class="subsubheading" id="Inputs-6">Inputs</h4>
@@ -568,10 +571,10 @@ endwhile
 <div class="subsection-level-extent" id="midicallback">
 <h4 class="subsection">3.2.1 midicallback</h4>
 <a class="index-entry-id" id="index-midicallback"></a>
-<dl class="first-deftypefn">
-<dt class="deftypefn" id="index-midicallback-1"><span class="category-def">: </span><code class="def-type"><var class="var">oldhandle</var> =</code> <strong class="def-name">midicallback</strong> <code class="def-code-arguments">(<var class="var">midicontrolsObj</var>, <var class="var">functionHandle</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn" id="index-midicallback-2"><span class="category-def">: </span><code class="def-type"><var class="var">oldhandle</var> =</code> <strong class="def-name">midicallback</strong> <code class="def-code-arguments">(<var class="var">midicontrolsObj</var>, [])</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn" id="index-midicallback-3"><span class="category-def">: </span><code class="def-type"><var class="var">currhandle</var> =</code> <strong class="def-name">midicallback</strong> <code class="def-code-arguments">(<var class="var">midicontrolsObj</var>)</code></dt>
+<dl class="first-deftypefn def-block">
+<dt class="deftypefn def-line" id="index-midicallback-1"><span><code class="def-type"><var class="var">oldhandle</var> =</code> <strong class="def-name">midicallback</strong> <code class="def-code-arguments">(<var class="var">midicontrolsObj</var>, <var class="var">functionHandle</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-midicallback-2"><span><code class="def-type"><var class="var">oldhandle</var> =</code> <strong class="def-name">midicallback</strong> <code class="def-code-arguments">(<var class="var">midicontrolsObj</var>, [])</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-midicallback-3"><span><code class="def-type"><var class="var">currhandle</var> =</code> <strong class="def-name">midicallback</strong> <code class="def-code-arguments">(<var class="var">midicontrolsObj</var>)</code></span></dt>
 <dd><p>Get, set or clear the midicontrol object callback.
 </p>
 <h4 class="subsubheading" id="Inputs-7">Inputs</h4>
@@ -613,11 +616,11 @@ endwhile
 <div class="subsection-level-extent" id="midicontrols">
 <h4 class="subsection">3.2.2 midicontrols</h4>
 <a class="index-entry-id" id="index-midicontrols"></a>
-<dl class="first-deftypefn">
-<dt class="deftypefn" id="index-midicontrols-1"><span class="category-def">: </span><code class="def-type"><var class="var">obj</var> =</code> <strong class="def-name">midicontrols</strong> <code class="def-code-arguments">()</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn" id="index-midicontrols-2"><span class="category-def">: </span><code class="def-type"><var class="var">obj</var> =</code> <strong class="def-name">midicontrols</strong> <code class="def-code-arguments">(<var class="var">ctrlid</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn" id="index-midicontrols-3"><span class="category-def">: </span><code class="def-type"><var class="var">obj</var> =</code> <strong class="def-name">midicontrols</strong> <code class="def-code-arguments">(<var class="var">ctrlid</var>, <var class="var">initialvalues</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn" id="index-midicontrols-4"><span class="category-def">: </span><code class="def-type"><var class="var">obj</var> =</code> <strong class="def-name">midicontrols</strong> <code class="def-code-arguments">(__, <var class="var">propertyname</var>, <var class="var">propertyvalue</var>)</code></dt>
+<dl class="first-deftypefn def-block">
+<dt class="deftypefn def-line" id="index-midicontrols-1"><span><code class="def-type"><var class="var">obj</var> =</code> <strong class="def-name">midicontrols</strong> <code class="def-code-arguments">()</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-midicontrols-2"><span><code class="def-type"><var class="var">obj</var> =</code> <strong class="def-name">midicontrols</strong> <code class="def-code-arguments">(<var class="var">ctrlid</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-midicontrols-3"><span><code class="def-type"><var class="var">obj</var> =</code> <strong class="def-name">midicontrols</strong> <code class="def-code-arguments">(<var class="var">ctrlid</var>, <var class="var">initialvalues</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-midicontrols-4"><span><code class="def-type"><var class="var">obj</var> =</code> <strong class="def-name">midicontrols</strong> <code class="def-code-arguments">(__, <var class="var">propertyname</var>, <var class="var">propertyvalue</var>)</code></span></dt>
 <dd><p>Create a midi controls object
 </p>
 <h4 class="subsubheading" id="Inputs-8">Inputs</h4>
@@ -654,8 +657,8 @@ endwhile
 <div class="subsection-level-extent" id="midiid">
 <h4 class="subsection">3.2.3 midiid</h4>
 <a class="index-entry-id" id="index-midiid"></a>
-<dl class="first-deftypefn">
-<dt class="deftypefn" id="index-midiid-1"><span class="category-def">: </span><code class="def-type">[<var class="var">ctrlid</var>, <var class="var">dev</var>] =</code> <strong class="def-name">midiid</strong> <code class="def-code-arguments">()</code></dt>
+<dl class="first-deftypefn def-block">
+<dt class="deftypefn def-line" id="index-midiid-1"><span><code class="def-type">[<var class="var">ctrlid</var>, <var class="var">devname</var>] =</code> <strong class="def-name">midiid</strong> <code class="def-code-arguments">()</code></span></dt>
 <dd><p>Scan for control messages from midi devices to get the id of the device
 </p>
 <p>Function will display a prompt for the user to move the midi control and return when
@@ -666,7 +669,7 @@ endwhile
 </p>
 <h4 class="subsubheading" id="Outputs-9">Outputs</h4>
 <p><var class="var">ctrlid</var> - control id made from the controller channel * 1000 + controller number.<br>
-<var class="var">dev</var> = name of the midi device the controller was detected on.
+<var class="var">devname</var> = name of the midi device the controller was detected on.
 </p>
 <h4 class="subsubheading" id="Examples-8">Examples</h4>
 <p>Monitor midi devices for first moving controller
@@ -679,8 +682,8 @@ endwhile
 <div class="subsection-level-extent" id="midiread">
 <h4 class="subsection">3.2.4 midiread</h4>
 <a class="index-entry-id" id="index-midiread"></a>
-<dl class="first-deftypefn">
-<dt class="deftypefn" id="index-midiread-1"><span class="category-def">: </span><code class="def-type"><var class="var">val</var> =</code> <strong class="def-name">midiread</strong> <code class="def-code-arguments">(<var class="var">midicontrolsObj</var>)</code></dt>
+<dl class="first-deftypefn def-block">
+<dt class="deftypefn def-line" id="index-midiread-1"><span><code class="def-type"><var class="var">val</var> =</code> <strong class="def-name">midiread</strong> <code class="def-code-arguments">(<var class="var">midicontrolsObj</var>)</code></span></dt>
 <dd><p>Read current values of midi controls
 </p>
 <h4 class="subsubheading" id="Inputs-10">Inputs</h4>
@@ -706,9 +709,9 @@ endwhile
 <div class="subsection-level-extent" id="midisync">
 <h4 class="subsection">3.2.5 midisync</h4>
 <a class="index-entry-id" id="index-midisync"></a>
-<dl class="first-deftypefn">
-<dt class="deftypefn" id="index-midisync-1"><span class="category-def">: </span><strong class="def-name">midisync</strong> <code class="def-code-arguments">(<var class="var">midicontrolsObj</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn" id="index-midisync-2"><span class="category-def">: </span><strong class="def-name">midisync</strong> <code class="def-code-arguments">(<var class="var">midicontrolsObj</var>, <var class="var">ctrlvalues</var>)</code></dt>
+<dl class="first-deftypefn def-block">
+<dt class="deftypefn def-line" id="index-midisync-1"><span><strong class="def-name">midisync</strong> <code class="def-code-arguments">(<var class="var">midicontrolsObj</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-midisync-2"><span><strong class="def-name">midisync</strong> <code class="def-code-arguments">(<var class="var">midicontrolsObj</var>, <var class="var">ctrlvalues</var>)</code></span></dt>
 <dd><p>Send the values of control object to the control, using <var class="var">ctrlvalues</var> values
  if specified instead
 </p>
@@ -736,8 +739,8 @@ endwhile
 <div class="subsection-level-extent" id="ismidifile">
 <h4 class="subsection">3.3.1 ismidifile</h4>
 <a class="index-entry-id" id="index-ismidifile"></a>
-<dl class="first-deftypefn">
-<dt class="deftypefn" id="index-ismidifile-1"><span class="category-def">: </span><code class="def-type"><var class="var">ismidi</var> =</code> <strong class="def-name">ismidifile</strong> <code class="def-code-arguments">(<var class="var">filename</var>)</code></dt>
+<dl class="first-deftypefn def-block">
+<dt class="deftypefn def-line" id="index-ismidifile-1"><span><code class="def-type"><var class="var">ismidi</var> =</code> <strong class="def-name">ismidifile</strong> <code class="def-code-arguments">(<var class="var">filename</var>)</code></span></dt>
 <dd><p>Check if <var class="var">filename</var> is a midi file.
 </p>
 <p>The function only checks whether it is an existing file and the
@@ -757,8 +760,8 @@ endwhile
 <div class="subsection-level-extent" id="midifileinfo">
 <h4 class="subsection">3.3.2 midifileinfo</h4>
 <a class="index-entry-id" id="index-midifileinfo"></a>
-<dl class="first-deftypefn">
-<dt class="deftypefn" id="index-midifileinfo-1"><span class="category-def">: </span><code class="def-type"><var class="var">info</var> =</code> <strong class="def-name">midifileinfo</strong> <code class="def-code-arguments">(<var class="var">filename</var>)</code></dt>
+<dl class="first-deftypefn def-block">
+<dt class="deftypefn def-line" id="index-midifileinfo-1"><span><code class="def-type"><var class="var">info</var> =</code> <strong class="def-name">midifileinfo</strong> <code class="def-code-arguments">(<var class="var">filename</var>)</code></span></dt>
 <dd><p>Read MIDI file and display information about the tracks and data
 </p>
 <h4 class="subsubheading" id="Inputs-13">Inputs</h4>
@@ -787,8 +790,8 @@ endwhile
 <div class="subsection-level-extent" id="midifileread">
 <h4 class="subsection">3.3.3 midifileread</h4>
 <a class="index-entry-id" id="index-midifileread"></a>
-<dl class="first-deftypefn">
-<dt class="deftypefn" id="index-midifileread-1"><span class="category-def">: </span><code class="def-type"><var class="var">msg</var> =</code> <strong class="def-name">midifileread</strong> <code class="def-code-arguments">(<var class="var">filename</var>, [propertyname, propertyvalue &hellip;])</code></dt>
+<dl class="first-deftypefn def-block">
+<dt class="deftypefn def-line" id="index-midifileread-1"><span><code class="def-type"><var class="var">msg</var> =</code> <strong class="def-name">midifileread</strong> <code class="def-code-arguments">(<var class="var">filename</var>, [propertyname, propertyvalue &hellip;])</code></span></dt>
 <dd><p>Read MIDI file into a midimsg
 </p>
 <h4 class="subsubheading" id="Inputs-14">Inputs</h4>
@@ -810,9 +813,9 @@ endwhile
 <div class="subsection-level-extent" id="midifilewrite">
 <h4 class="subsection">3.3.4 midifilewrite</h4>
 <a class="index-entry-id" id="index-midifilewrite"></a>
-<dl class="first-deftypefn">
-<dt class="deftypefn" id="index-midifilewrite-1"><span class="category-def">: </span><strong class="def-name">midifilewrite</strong> <code class="def-code-arguments">(<var class="var">filename</var>, <var class="var">msgs</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn" id="index-midifilewrite-2"><span class="category-def">: </span><strong class="def-name">midifilewrite</strong> <code class="def-code-arguments">(<var class="var">filename</var>, <var class="var">msgs</var>, <var class="var">optionname</var>, <var class="var">optionvalue</var>)</code></dt>
+<dl class="first-deftypefn def-block">
+<dt class="deftypefn def-line" id="index-midifilewrite-1"><span><strong class="def-name">midifilewrite</strong> <code class="def-code-arguments">(<var class="var">filename</var>, <var class="var">msgs</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-midifilewrite-2"><span><strong class="def-name">midifilewrite</strong> <code class="def-code-arguments">(<var class="var">filename</var>, <var class="var">msgs</var>, <var class="var">optionname</var>, <var class="var">optionvalue</var>)</code></span></dt>
 <dd><p>Write a midifile
 </p>
 <h4 class="subsubheading" id="Inputs-15">Inputs</h4>
@@ -845,8 +848,8 @@ endwhile
 <div class="subsection-level-extent" id="midimsgtype">
 <h4 class="subsection">3.4.1 midimsgtype</h4>
 <a class="index-entry-id" id="index-midimsgtype"></a>
-<dl class="first-deftypefn">
-<dt class="deftypefn" id="index-midimsgtype-1"><span class="category-def">: </span><strong class="def-name">midimsgtype</strong></dt>
+<dl class="first-deftypefn def-block">
+<dt class="deftypefn def-line" id="index-midimsgtype-1"><span><strong class="def-name">midimsgtype</strong></span></dt>
 <dd><p>A midimsg type enumeration for values of the midimsg type.
 </p>
 <p>Enumeration values are:
@@ -885,16 +888,16 @@ endwhile
 <div class="subsection-level-extent" id="audioOscillator">
 <h4 class="subsection">3.5.1 audioOscillator</h4>
 <a class="index-entry-id" id="index-audioOscillator"></a>
-<dl class="first-deftypefn">
-<dt class="deftypefn" id="index-audioOscillator-1"><span class="category-def">: </span><strong class="def-name">audioOscillator</strong></dt>
+<dl class="first-deftypefn def-block">
+<dt class="deftypefn def-line" id="index-audioOscillator-1"><span><strong class="def-name">audioOscillator</strong></span></dt>
 <dd><p>Generate sine, sawtool and square waveforms
 </p></dd></dl>
 <h4 class="subheading" id="Methods">Methods</h4>
-<dl class="first-deftypefn">
-<dt class="deftypefn" id="index-audioOscillator-2"><span class="category-def">: </span><code class="def-type"><var class="var">obj</var> =</code> <strong class="def-name">audioOscillator</strong> <code class="def-code-arguments">()</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn" id="index-audioOscillator-3"><span class="category-def">: </span><code class="def-type"><var class="var">obj</var> =</code> <strong class="def-name">audioOscillator</strong> <code class="def-code-arguments">(<var class="var">signalTypeValue</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn" id="index-audioOscillator-4"><span class="category-def">: </span><code class="def-type"><var class="var">obj</var> =</code> <strong class="def-name">audioOscillator</strong> <code class="def-code-arguments">(<var class="var">signalTypeValue</var>, <var class="var">frequencyValue</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn" id="index-audioOscillator-5"><span class="category-def">: </span><code class="def-type"><var class="var">obj</var> =</code> <strong class="def-name">audioOscillator</strong> <code class="def-code-arguments">(__, <var class="var">propertyname</var>, <var class="var">propertyvalue</var>)</code></dt>
+<dl class="first-deftypefn def-block">
+<dt class="deftypefn def-line" id="index-audioOscillator-2"><span><code class="def-type"><var class="var">obj</var> =</code> <strong class="def-name">audioOscillator</strong> <code class="def-code-arguments">()</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-audioOscillator-3"><span><code class="def-type"><var class="var">obj</var> =</code> <strong class="def-name">audioOscillator</strong> <code class="def-code-arguments">(<var class="var">signalTypeValue</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-audioOscillator-4"><span><code class="def-type"><var class="var">obj</var> =</code> <strong class="def-name">audioOscillator</strong> <code class="def-code-arguments">(<var class="var">signalTypeValue</var>, <var class="var">frequencyValue</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-audioOscillator-5"><span><code class="def-type"><var class="var">obj</var> =</code> <strong class="def-name">audioOscillator</strong> <code class="def-code-arguments">(__, <var class="var">propertyname</var>, <var class="var">propertyvalue</var>)</code></span></dt>
 <dd><p>Create a audioOscillator object
 </p>
 <h4 class="subsubheading" id="Inputs-16">Inputs</h4>
@@ -953,8 +956,8 @@ endwhile
 <pre class="example-preformatted"> sqosc = audioOscillator('square', 'DutyCycle', 0.50,  'Frequency', 2);
 </pre></div>
 </dd></dl>
-<dl class="first-deftypefn">
-<dt class="deftypefn" id="index-obj_0028_0029"><span class="category-def">: </span><code class="def-type"><var class="var">data</var> =</code> <strong class="def-name"><var class="var">obj</var>()</strong></dt>
+<dl class="first-deftypefn def-block">
+<dt class="deftypefn def-line" id="index-obj_0028_0029"><span><code class="def-type"><var class="var">data</var> =</code> <strong class="def-name"><var class="var">obj</var>()</strong></span></dt>
 <dd><p>Generate a frame of waveform data from the generator function
 </p>
 <h4 class="subsubheading" id="Inputs-17">Inputs</h4>
@@ -963,8 +966,8 @@ endwhile
 <h4 class="subsubheading" id="Outputs-17">Outputs</h4>
 <p><var class="var">data</var> - waveform data
 </p></dd></dl>
-<dl class="first-deftypefn">
-<dt class="deftypefn" id="index-release_0028obj_0029"><span class="category-def">: </span><strong class="def-name">release(<var class="var">obj</var>)</strong></dt>
+<dl class="first-deftypefn def-block">
+<dt class="deftypefn def-line" id="index-release_0028obj_0029"><span><strong class="def-name">release(<var class="var">obj</var>)</strong></span></dt>
 <dd><p>Release resources of generator
 </p>
 <h4 class="subsubheading" id="Inputs-18">Inputs</h4>
@@ -982,8 +985,8 @@ endwhile
 <div class="subsection-level-extent" id="bark2hz">
 <h4 class="subsection">3.6.1 bark2hz</h4>
 <a class="index-entry-id" id="index-bark2hz"></a>
-<dl class="first-deftypefn">
-<dt class="deftypefn" id="index-bark2hz-1"><span class="category-def">: </span><code class="def-type"><var class="var">hz</var> =</code> <strong class="def-name">bark2hz</strong> <code class="def-code-arguments">(<var class="var">bark</var>)</code></dt>
+<dl class="first-deftypefn def-block">
+<dt class="deftypefn def-line" id="index-bark2hz-1"><span><code class="def-type"><var class="var">hz</var> =</code> <strong class="def-name">bark2hz</strong> <code class="def-code-arguments">(<var class="var">bark</var>)</code></span></dt>
 <dd><p>Convert equivalent Bark Frequency to Hz.
 </p>
 <h4 class="subsubheading" id="Inputs-19">Inputs</h4>
@@ -1002,8 +1005,8 @@ endwhile
 <div class="subsection-level-extent" id="erb2hz">
 <h4 class="subsection">3.6.2 erb2hz</h4>
 <a class="index-entry-id" id="index-erb2hz"></a>
-<dl class="first-deftypefn">
-<dt class="deftypefn" id="index-erb2hz-1"><span class="category-def">: </span><code class="def-type"><var class="var">hz</var> =</code> <strong class="def-name">erb2hz</strong> <code class="def-code-arguments">(<var class="var">erb</var>)</code></dt>
+<dl class="first-deftypefn def-block">
+<dt class="deftypefn def-line" id="index-erb2hz-1"><span><code class="def-type"><var class="var">hz</var> =</code> <strong class="def-name">erb2hz</strong> <code class="def-code-arguments">(<var class="var">erb</var>)</code></span></dt>
 <dd><p>Convert equivalent rectangular bandwidth (ERB) to Hz.
 </p>
 <h4 class="subsubheading" id="Inputs-20">Inputs</h4>
@@ -1022,8 +1025,8 @@ endwhile
 <div class="subsection-level-extent" id="hz2bark">
 <h4 class="subsection">3.6.3 hz2bark</h4>
 <a class="index-entry-id" id="index-hz2bark"></a>
-<dl class="first-deftypefn">
-<dt class="deftypefn" id="index-hz2bark-1"><span class="category-def">: </span><code class="def-type"><var class="var">bark</var> =</code> <strong class="def-name">hz2bark</strong> <code class="def-code-arguments">(<var class="var">hz</var>)</code></dt>
+<dl class="first-deftypefn def-block">
+<dt class="deftypefn def-line" id="index-hz2bark-1"><span><code class="def-type"><var class="var">bark</var> =</code> <strong class="def-name">hz2bark</strong> <code class="def-code-arguments">(<var class="var">hz</var>)</code></span></dt>
 <dd><p>Convert hz to equivalent bark frequency
 </p>
 <h4 class="subsubheading" id="Inputs-21">Inputs</h4>
@@ -1047,8 +1050,8 @@ endwhile
 <div class="subsection-level-extent" id="hz2erb">
 <h4 class="subsection">3.6.4 hz2erb</h4>
 <a class="index-entry-id" id="index-hz2erb"></a>
-<dl class="first-deftypefn">
-<dt class="deftypefn" id="index-hz2erb-1"><span class="category-def">: </span><code class="def-type"><var class="var">erb</var> =</code> <strong class="def-name">hz2erb</strong> <code class="def-code-arguments">(<var class="var">hz</var>)</code></dt>
+<dl class="first-deftypefn def-block">
+<dt class="deftypefn def-line" id="index-hz2erb-1"><span><code class="def-type"><var class="var">erb</var> =</code> <strong class="def-name">hz2erb</strong> <code class="def-code-arguments">(<var class="var">hz</var>)</code></span></dt>
 <dd><p>Convert hz to equivalent rectangular bandwidth (ERB)
 </p>
 <h4 class="subsubheading" id="Inputs-22">Inputs</h4>
@@ -1076,8 +1079,8 @@ endwhile
 <div class="subsection-level-extent" id="hz2mel">
 <h4 class="subsection">3.6.5 hz2mel</h4>
 <a class="index-entry-id" id="index-hz2mel"></a>
-<dl class="first-deftypefn">
-<dt class="deftypefn" id="index-hz2mel-1"><span class="category-def">: </span><code class="def-type"><var class="var">mel</var> =</code> <strong class="def-name">hz2mel</strong> <code class="def-code-arguments">(<var class="var">hz</var>)</code></dt>
+<dl class="first-deftypefn def-block">
+<dt class="deftypefn def-line" id="index-hz2mel-1"><span><code class="def-type"><var class="var">mel</var> =</code> <strong class="def-name">hz2mel</strong> <code class="def-code-arguments">(<var class="var">hz</var>)</code></span></dt>
 <dd><p>Convert hz to equivalent mel frequency.
 </p>
 <h4 class="subsubheading" id="Inputs-23">Inputs</h4>
@@ -1105,8 +1108,8 @@ endwhile
 <div class="subsection-level-extent" id="mel2hz">
 <h4 class="subsection">3.6.6 mel2hz</h4>
 <a class="index-entry-id" id="index-mel2hz"></a>
-<dl class="first-deftypefn">
-<dt class="deftypefn" id="index-mel2hz-1"><span class="category-def">: </span><code class="def-type"><var class="var">hz</var> =</code> <strong class="def-name">mel2hz</strong> <code class="def-code-arguments">(<var class="var">mel</var>)</code></dt>
+<dl class="first-deftypefn def-block">
+<dt class="deftypefn def-line" id="index-mel2hz-1"><span><code class="def-type"><var class="var">hz</var> =</code> <strong class="def-name">mel2hz</strong> <code class="def-code-arguments">(<var class="var">mel</var>)</code></span></dt>
 <dd><p>Convert equivalent mel frequency to Hz.
 </p>
 <h4 class="subsubheading" id="Inputs-24">Inputs</h4>
@@ -1125,9 +1128,9 @@ endwhile
 <div class="subsection-level-extent" id="phon2sone">
 <h4 class="subsection">3.6.7 phon2sone</h4>
 <a class="index-entry-id" id="index-phon2sone"></a>
-<dl class="first-deftypefn">
-<dt class="deftypefn" id="index-phon2sone-1"><span class="category-def">: </span><code class="def-type"><var class="var">sone</var> =</code> <strong class="def-name">phon2sone</strong> <code class="def-code-arguments">(<var class="var">phon</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn" id="index-phon2sone-2"><span class="category-def">: </span><code class="def-type"><var class="var">sone</var> =</code> <strong class="def-name">phon2sone</strong> <code class="def-code-arguments">(<var class="var">phon</var>, <var class="var">standard</var>)</code></dt>
+<dl class="first-deftypefn def-block">
+<dt class="deftypefn def-line" id="index-phon2sone-1"><span><code class="def-type"><var class="var">sone</var> =</code> <strong class="def-name">phon2sone</strong> <code class="def-code-arguments">(<var class="var">phon</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-phon2sone-2"><span><code class="def-type"><var class="var">sone</var> =</code> <strong class="def-name">phon2sone</strong> <code class="def-code-arguments">(<var class="var">phon</var>, <var class="var">standard</var>)</code></span></dt>
 <dd><p>Convert from phon to sone
 </p>
 <h4 class="subsubheading" id="Inputs-25">Inputs</h4>
@@ -1159,9 +1162,9 @@ endwhile
 <div class="subsection-level-extent" id="sone2phon">
 <h4 class="subsection">3.6.8 sone2phon</h4>
 <a class="index-entry-id" id="index-sone2phon"></a>
-<dl class="first-deftypefn">
-<dt class="deftypefn" id="index-sone2phon-1"><span class="category-def">: </span><code class="def-type"><var class="var">phon</var> =</code> <strong class="def-name">sone2phon</strong> <code class="def-code-arguments">(<var class="var">sone</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn" id="index-sone2phon-2"><span class="category-def">: </span><code class="def-type"><var class="var">phon</var> =</code> <strong class="def-name">sone2phon</strong> <code class="def-code-arguments">(<var class="var">sone</var>, <var class="var">standard</var>)</code></dt>
+<dl class="first-deftypefn def-block">
+<dt class="deftypefn def-line" id="index-sone2phon-1"><span><code class="def-type"><var class="var">phon</var> =</code> <strong class="def-name">sone2phon</strong> <code class="def-code-arguments">(<var class="var">sone</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-sone2phon-2"><span><code class="def-type"><var class="var">phon</var> =</code> <strong class="def-name">sone2phon</strong> <code class="def-code-arguments">(<var class="var">sone</var>, <var class="var">standard</var>)</code></span></dt>
 <dd><p>Convert from sone to phon.
 </p>
 <h4 class="subsubheading" id="Inputs-26">Inputs</h4>
@@ -1885,7 +1888,7 @@ first, please read <a class="url" href="http://www.gnu.org/philosophy/why-not-lg
 <a class="summary-letter-printindex" href="#Index_cp_letter-W"><b>W</b></a>
  &nbsp; 
 </td></tr></table>
-<table class="cp-entries-printindex" border="0">
+<table class="cp-entries-printindex">
 <tr><td></td><th class="entries-header-printindex">Index Entry</th><th class="sections-header-printindex">Section</th></tr>
 <tr><td colspan="3"><hr></td></tr>
 <tr><th id="Index_cp_letter-A">A</th></tr>

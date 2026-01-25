@@ -3,7 +3,7 @@ layout: "function_list"
 permalink: "/functions/"
 title: "Audio Toolkit - Functions"
 pkg_name: "audio"
-version: "2.0.9"
+version: "2.0.10"
 description: "Audio and MIDI Toolbox for GNU Octave"
 categories:
 - id: "21_MIDIDeviceInterface"
@@ -37,6 +37,7 @@ categories:
     name: "@octave_midi/hasdata"
     description: "Return whether there is data available to read"
     url: "/functions/@octave_midi/20_octavemidihasdata/"
+  groups:
 - id: "25_MIDIControllerInterface"
   description: "MIDI Controller Interface"
   functions:
@@ -60,6 +61,7 @@ categories:
     name: "midicallback"
     description: "Get, set or clear the midicontrol object callback."
     url: "/functions/12_midicallback/"
+  groups:
 - id: "13_MIDIFileIO"
   description: "MIDI File I/O"
   functions:
@@ -79,6 +81,7 @@ categories:
     name: "ismidifile"
     description: "Check if FILENAME is a midi file."
     url: "/functions/10_ismidifile/"
+  groups:
 - id: "12_Enumerations"
   description: "Enumerations"
   functions:
@@ -86,6 +89,7 @@ categories:
     name: "midimsgtype"
     description: "A midimsg type enumeration for values of the midimsg type."
     url: "/functions/11_midimsgtype/"
+  groups:
 - id: "19_WaveformGeneration"
   description: "Waveform Generation"
   functions:
@@ -93,6 +97,7 @@ categories:
     name: "audioOscillator"
     description: "Generate sine, sawtool and square waveforms"
     url: "/functions/15_audioOscillator/"
+  groups:
 - id: "17_DomainConversion"
   description: "Domain Conversion"
   functions:
@@ -128,6 +133,7 @@ categories:
     name: "sone2phon"
     description: "Convert from sone to phon."
     url: "/functions/9_sone2phon/"
+  groups:
 navigation:
 - id: "overview"
   name: "Overview"
@@ -137,21 +143,27 @@ navigation:
 - id: "21_MIDIDeviceInterface"
   name: "&nbsp;&nbsp;MIDI Device Interface"
   url: "/functions/#21_MIDIDeviceInterface"
+  subitems:
 - id: "25_MIDIControllerInterface"
   name: "&nbsp;&nbsp;MIDI Controller Interface"
   url: "/functions/#25_MIDIControllerInterface"
+  subitems:
 - id: "13_MIDIFileIO"
   name: "&nbsp;&nbsp;MIDI File I/O"
   url: "/functions/#13_MIDIFileIO"
+  subitems:
 - id: "12_Enumerations"
   name: "&nbsp;&nbsp;Enumerations"
   url: "/functions/#12_Enumerations"
+  subitems:
 - id: "19_WaveformGeneration"
   name: "&nbsp;&nbsp;Waveform Generation"
   url: "/functions/#19_WaveformGeneration"
+  subitems:
 - id: "17_DomainConversion"
   name: "&nbsp;&nbsp;Domain Conversion"
   url: "/functions/#17_DomainConversion"
+  subitems:
 - id: "news"
   name: "News"
   url: "/news"

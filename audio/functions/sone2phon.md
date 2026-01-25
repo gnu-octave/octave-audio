@@ -2,7 +2,7 @@
 layout: "default"
 permalink: "/functions/9_sone2phon/"
 pkg_name: "audio"
-pkg_version: "2.0.9"
+pkg_version: "2.0.10"
 pkg_description: "Audio and MIDI Toolbox for GNU Octave"
 title: "Audio Toolkit - sone2phon"
 category: "Domain Conversion"
@@ -17,21 +17,27 @@ navigation:
 - id: "21_MIDIDeviceInterface"
   name: "&nbsp;&nbsp;MIDI Device Interface"
   url: "/functions/#21_MIDIDeviceInterface"
+  subitems:
 - id: "25_MIDIControllerInterface"
   name: "&nbsp;&nbsp;MIDI Controller Interface"
   url: "/functions/#25_MIDIControllerInterface"
+  subitems:
 - id: "13_MIDIFileIO"
   name: "&nbsp;&nbsp;MIDI File I/O"
   url: "/functions/#13_MIDIFileIO"
+  subitems:
 - id: "12_Enumerations"
   name: "&nbsp;&nbsp;Enumerations"
   url: "/functions/#12_Enumerations"
+  subitems:
 - id: "19_WaveformGeneration"
   name: "&nbsp;&nbsp;Waveform Generation"
   url: "/functions/#19_WaveformGeneration"
+  subitems:
 - id: "17_DomainConversion"
   name: "&nbsp;&nbsp;Domain Conversion"
   url: "/functions/#17_DomainConversion"
+  subitems:
 - id: "news"
   name: "News"
   url: "/news"
@@ -39,9 +45,9 @@ navigation:
   name: "Manual"
   url: "/manual"
 ---
-<dl class="first-deftypefn">
-<dt class="deftypefn" id="index-sone2phon"><span class="category-def">: </span><span><code class="def-type"><var class="var">phon</var> =</code> <strong class="def-name">sone2phon</strong> <code class="def-code-arguments">(<var class="var">sone</var>)</code><a class="copiable-link" href="#index-sone2phon"></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn" id="index-sone2phon-1"><span class="category-def">: </span><span><code class="def-type"><var class="var">phon</var> =</code> <strong class="def-name">sone2phon</strong> <code class="def-code-arguments">(<var class="var">sone</var>, <var class="var">standard</var>)</code><a class="copiable-link" href="#index-sone2phon-1"></a></span></dt>
+<dl class="first-deftypefn def-block">
+<dt class="deftypefn def-line" id="index-sone2phon"><span class="category-def">: </span><span><code class="def-type"><var class="var">phon</var> =</code> <strong class="def-name">sone2phon</strong> <code class="def-code-arguments">(<var class="var">sone</var>)</code><a class="copiable-link" href="#index-sone2phon"></a></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-sone2phon-1"><span class="category-def">: </span><span><code class="def-type"><var class="var">phon</var> =</code> <strong class="def-name">sone2phon</strong> <code class="def-code-arguments">(<var class="var">sone</var>, <var class="var">standard</var>)</code><a class="copiable-link" href="#index-sone2phon-1"></a></span></dt>
 <dd><p>Convert from sone to phon.
 </p>
 <h4 class="subsubheading" id="Inputs"><span>Inputs<a class="copiable-link" href="#Inputs"></a></span></h4>
