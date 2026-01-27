@@ -125,15 +125,12 @@ classdef midimsg
   ## @seealso{midifileread, midisend, midireceive, midimsgtype}
   ## @end deftypefn
 
-  properties (SetAccess = private, GetAccess = public)
+  # private data, public accessed b subsref and properties()
+  properties (Access = private)
    data = {};
    timestamp = {};
   endproperties
  
-  properties (SetAccess = private, GetAccess = public)
-    type; 
-  endproperties
-
   methods
     
     function this = midimsg (typev, varargin)
