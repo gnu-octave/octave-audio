@@ -24,7 +24,11 @@ classdef midicontrols < handle
   ##
   ## @subsubheading Inputs
   ## @var{ctrlid} - single control id or array of control ids to monitor, or [] to use any controller.@*
-  ## @var{initialvalues} - initial values to use for controls. It should be the same size as @var{ctrlid}@*
+  ##
+  ## @var{initialvalues} - initial values to use for controls. It should be the same size as @var{ctrlid}
+  ## or a single value (default 0)@*
+  ## If output mode is 'normalized', the initial value range is [0,1] otherwise it is [0,127].@*
+  ##
   ## @var{propertyname}, @var{propertyvalue} - properties to set on the controller. If a device is not specified
   ## the value from getpref("midi", "DefaultDevice", 0) will be used.@*
   ##
@@ -35,7 +39,7 @@ classdef midicontrols < handle
   ## name of the mididevice to monitor.
   ## @item outputmode
   ## the scaling mode for values: 'rawmidi' will return values between 0 .. 127,
-  ## 'normalized' will use values between 0 .. 1.
+  ## 'normalized' (default) will use values between 0 .. 1.
   ## @end table
   ##
   ## @subsubheading Outputs
@@ -68,8 +72,11 @@ classdef midicontrols < handle
     
     function this = midicontrols (varargin)
       devicename = "";
+      propstart = 1;
+      initvals = [0];
 
-      if nargin > 0
+      if nargin == 1
+        # single arg of controls only
         controls = varargin{1};
         if !isnumeric(controls)
           error ("Expected numeric controls ids");
@@ -79,54 +86,72 @@ classdef midicontrols < handle
         else
           this.controls = controls;
         endif
-      endif
-
-      if nargin > 1
-        if ischar (varargin{2})
-          propstart = 2;
-          initvals = [0];
-        else
-          propstart = 3;
-          initvals = varargin{2};
-
-          if !isnumeric (initvals)
-            error ("Expected numeric initial values");
+        propstart = 2;
+      elseif nargin > 1
+        # maybe controls 
+        if ! ischar (varargin{1})
+          controls = varargin{1};
+          if !isnumeric(controls)
+            error ("Expected numeric controls ids");
           endif
-          if isscalar (initvals)
-            initvals = [initvals];
-          endif
-        endif
-
-        if mod (nargin-propstart + 1, 2) != 0
-          error ("midicontrols: expected property name, value pairs");
-        endif
-        if !iscellstr (varargin (propstart:2:nargin))
-          error ("midicontrols: expected property names to be strings");
-        endif
-
-        for i = propstart:2:nargin
-          propname = tolower (varargin{i});
-          propvalue = varargin{i+1};
-
-          if strcmp (propname, "outputmode")
-            if !ischar (propvalue)
-              error ("output mode should be 'normalized' or 'rawmidi'")
-            elseif strcmpi (propvalue, "normalized")
-              this.outscale = 1;
-            elseif strcmpi (propvalue, "rawmidi")
-              this.outscale = 127;
-            else
-              error ("output mode should be 'normalized' or 'rawmidi'")
-            endif
-          elseif strcmp (propname, "mididevice")
-            devicename = propvalue;
+          if isscalar(controls)
+            this.controls = [controls];
           else
-            error ("unknown property '%s'", propname)
+            this.controls = controls;
           endif
-        endfor
 
-        this.initialvalue = initvals/this.outscale;
+          # maybe initial values ?
+          if ! ischar (varargin{2})
+            propstart = 3;
+            initvals = varargin{2};
+
+            if !isnumeric (initvals)
+              error ("Expected numeric initial values");
+            endif
+            if isscalar (initvals)
+              initvals = [initvals];
+            endif
+ 
+          else
+            propstart = 2;
+          endif
+        endif
+ 
       endif
+
+      if mod (nargin-propstart + 1, 2) != 0
+         error ("midicontrols: expected property name, value pairs");
+      endif
+      if !iscellstr (varargin (propstart:2:nargin))
+        error ("midicontrols: expected property names to be strings");
+      endif
+
+      for i = propstart:2:nargin
+        propname = tolower (varargin{i});
+        propvalue = varargin{i+1};
+
+        if strcmp (propname, "outputmode")
+          if !ischar (propvalue)
+            error ("output mode should be 'normalized' or 'rawmidi'")
+          elseif strcmpi (propvalue, "normalized")
+            this.outscale = 1;
+          elseif strcmpi (propvalue, "rawmidi")
+            this.outscale = 127;
+          else
+            error ("output mode should be 'normalized' or 'rawmidi'")
+          endif
+        elseif strcmp (propname, "mididevice")
+          devicename = propvalue;
+        else
+          error ("unknown property '%s'", propname)
+        endif
+      endfor
+
+      if any(initvals < 0 || initvals > this.outscale)
+        error ("Initial values are outside the output range")
+      endif
+
+      this.initialvalue = initvals/this.outscale;
 
       if length (this.controls) > 0
         this.currentvalue = zeros (length(this.controls), 1);
@@ -264,3 +289,30 @@ endclassdef
 %!test
 %! a = midicontrols();
 %! assert(isa(a, "midicontrols"));
+
+%!test
+%! a = midicontrols(1001);
+%! assert(isa(a, "midicontrols"));
+
+%!test
+%! a = midicontrols([1001 1002]);
+%! assert(isa(a, "midicontrols"));
+
+%!test
+%! a = midicontrols([1001 1002], 0.3);
+%! assert(isa(a, "midicontrols"));
+
+%!test
+%! a = midicontrols([1001 1002], 'OutputMode', 'normalized');
+%! assert(isa(a, "midicontrols"));
+%! a = midicontrols([1001 1002], 'OutputMode', 'rawmidi');
+%! assert(isa(a, "midicontrols"));
+
+%!test
+%! a = midicontrols('OutputMode', 'normalized');
+%! assert(isa(a, "midicontrols"));
+
+
+%!error midicontrols('OutputMode')
+# out of normalized range
+%!error midicontrols(1001, 10)
