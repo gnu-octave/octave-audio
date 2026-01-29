@@ -184,6 +184,11 @@ classdef midicontrols < handle
         if isscalar(values)
           values = [values];
         endif
+
+        if any(values < 0 || values > this.outscale)
+          error ("values are outside the output range")
+        endif
+
         values = values/this.outscale;
       endif
 
