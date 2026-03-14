@@ -48,3 +48,7 @@ function ret = midiread (ctrlobj)
 
 endfunction
 
+%!test
+%! assert (exist("midiread"), 2)
+%!error midiread()
+%!error midiread("hello")

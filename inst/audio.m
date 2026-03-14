@@ -91,3 +91,8 @@ function audio()
   help audio;
 endfunction
 
+%!test
+%! # nothing to test ?
+%! s = evalc("audio();");
+%! assert(!isempty(strfind(s, "The Audio package provides")))
+

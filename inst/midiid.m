@@ -84,3 +84,5 @@ function [ctrlid, devname] = midiid ()
 
 endfunction
 
+%!test
+%! assert (exist("midiid"), 2)

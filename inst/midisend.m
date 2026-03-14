@@ -90,3 +90,9 @@ function midisend (dev, varargin)
   endfor
 
 endfunction
+
+%!test
+%! assert (exist("midisend"), 2)
+%!error midisend()
+%!error midisend("test")
+%!error midisend("test", "test")

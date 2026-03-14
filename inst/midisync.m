@@ -49,3 +49,7 @@ function midisync (ctrlobj, values)
 
 endfunction
 
+%!test
+%! assert (exist("midisync"), 2)
+%!error midisync()
+%!error midisync("hello")

@@ -67,3 +67,8 @@ function msg = midireceive (dev, maxmsg=0)
   endwhile
 
 endfunction
+
+%!test
+%! assert (exist("midireceive"), 2)
+%!error midireceive()
+%!error midireceive("hello")
