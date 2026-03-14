@@ -38,3 +38,6 @@ function __load_audio__ ()
     # do nothing
   end_try_catch
 endfunction
+
+%!test
+%! # private load function - no test
