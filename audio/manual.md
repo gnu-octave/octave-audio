@@ -3,7 +3,7 @@ layout: "default"
 permalink: "/manual/"
 title: "Audio Toolkit - Manual"
 pkg_name: "audio"
-version: "2.0.10"
+version: "2.0.11"
 description: "Audio and MIDI Toolbox for GNU Octave"
 navigation:
 - id: "overview"
@@ -148,7 +148,7 @@ octave-forge using the following command within <abbr class="acronym">GNU</abbr>
 <abbr class="acronym">GNU</abbr> Octave, the package can be installed using the following command within <abbr class="acronym">GNU</abbr> Octave:
 </p>
 <div class="example">
-<pre class="example-preformatted">pkg install audio-2.0.10.tar.gz
+<pre class="example-preformatted">pkg install audio-2.0.11.tar.gz
 </pre></div>
 </div>
 <div class="section-level-extent" id="Loading">
@@ -625,8 +625,12 @@ endwhile
 </p>
 <h4 class="subsubheading" id="Inputs-8">Inputs</h4>
 <p><var class="var">ctrlid</var> - single control id or array of control ids to monitor, or [] to use any controller.<br>
-<var class="var">initialvalues</var> - initial values to use for controls. It should be the same size as <var class="var">ctrlid</var><br>
-<var class="var">propertyname</var>, <var class="var">propertyvalue</var> - properties to set on the controller. If a device is not specified
+</p>
+<p><var class="var">initialvalues</var> - initial values to use for controls. It should be the same size as <var class="var">ctrlid</var>
+ or a single value (default 0)<br>
+ If output mode is &rsquo;normalized&rsquo;, the initial value range is [0,1] otherwise it is [0,127].<br>
+</p>
+<p><var class="var">propertyname</var>, <var class="var">propertyvalue</var> - properties to set on the controller. If a device is not specified
  the value from getpref(&quot;midi&quot;, &quot;DefaultDevice&quot;, 0) will be used.<br>
 </p>
 <p>Known properties are:
@@ -636,7 +640,7 @@ endwhile
 </p></dd>
 <dt>outputmode</dt>
 <dd><p>the scaling mode for values: &rsquo;rawmidi&rsquo; will return values between 0 .. 127,
- &rsquo;normalized&rsquo; will use values between 0 .. 1.
+ &rsquo;normalized&rsquo; (default) will use values between 0 .. 1.
 </p></dd>
 </dl>
 <h4 class="subsubheading" id="Outputs-8">Outputs</h4>

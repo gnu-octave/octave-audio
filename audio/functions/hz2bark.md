@@ -2,7 +2,7 @@
 layout: "default"
 permalink: "/functions/7_hz2bark/"
 pkg_name: "audio"
-pkg_version: "2.0.10"
+pkg_version: "2.0.11"
 pkg_description: "Audio and MIDI Toolbox for GNU Octave"
 title: "Audio Toolkit - hz2bark"
 category: "Domain Conversion"

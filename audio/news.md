@@ -3,7 +3,7 @@ layout: "default"
 permalink: "/news/"
 title: "Audio Toolkit - News"
 pkg_name: "audio"
-version: "2.0.10"
+version: "2.0.11"
 description: "Audio and MIDI Toolbox for GNU Octave"
 navigation:
 - id: "overview"
@@ -20,6 +20,18 @@ navigation:
 ---
 <pre>
 Summary of important user-visible changes for releases of the audio package
+
+===============================================================================
+audio-2.0.11   Release Date: 2026-03-16
+===============================================================================
+
+  ** minor updates to documentation
+
+  ** added additional BIST
+
+  ** midicontrols: minor updates to construction and value checking
+
+  ** midimsg: clean up internal data structures, add isprop override
 
 ===============================================================================
 audio-2.0.10   Release Date: 2026-01-25

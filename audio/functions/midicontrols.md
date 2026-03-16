@@ -2,7 +2,7 @@
 layout: "default"
 permalink: "/functions/12_midicontrols/"
 pkg_name: "audio"
-pkg_version: "2.0.10"
+pkg_version: "2.0.11"
 pkg_description: "Audio and MIDI Toolbox for GNU Octave"
 title: "Audio Toolkit - midicontrols"
 category: "Domain Conversion"
@@ -54,8 +54,12 @@ navigation:
 </p>
 <h4 class="subsubheading" id="Inputs"><span>Inputs</span></h4>
 <p><var class="var">ctrlid</var> - single control id or array of control ids to monitor, or [] to use any controller.<br>
- <var class="var">initialvalues</var> - initial values to use for controls. It should be the same size as <var class="var">ctrlid</var><br>
- <var class="var">propertyname</var>, <var class="var">propertyvalue</var> - properties to set on the controller. If a device is not specified
+</p>
+<p><var class="var">initialvalues</var> - initial values to use for controls. It should be the same size as <var class="var">ctrlid</var>
+ or a single value (default 0)<br>
+ If output mode is &rsquo;normalized&rsquo;, the initial value range is [0,1] otherwise it is [0,127].<br>
+</p>
+<p><var class="var">propertyname</var>, <var class="var">propertyvalue</var> - properties to set on the controller. If a device is not specified
  the value from getpref(&quot;midi&quot;, &quot;DefaultDevice&quot;, 0) will be used.<br>
 </p>
 
@@ -66,7 +70,7 @@ navigation:
  </p></dd>
 <dt>outputmode</dt>
 <dd><p>the scaling mode for values: &rsquo;rawmidi&rsquo; will return values between 0 .. 127,
- &rsquo;normalized&rsquo; will use values between 0 .. 1.
+ &rsquo;normalized&rsquo; (default) will use values between 0 .. 1.
  </p></dd>
 </dl>
 
