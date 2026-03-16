@@ -596,7 +596,7 @@ classdef midimsg
     endfunction
 
     function e = isprop(this, prop)
-      e = ismember(lower(prop), lower(properties(this)));
+      e = ismember(lower(prop), lower(__properties__(this)));
     endfunction
 
     function this = subsasgn (this, s, rhs)
