@@ -310,13 +310,13 @@ endclassdef
 %!test
 %! a = midicontrols([1001 1002], 'OutputMode', 'normalized');
 %! assert(isa(a, "midicontrols"));
+%! clear a;
 %! a = midicontrols([1001 1002], 'OutputMode', 'rawmidi');
 %! assert(isa(a, "midicontrols"));
 
 %!test
 %! a = midicontrols('OutputMode', 'normalized');
 %! assert(isa(a, "midicontrols"));
-
 
 %!error midicontrols('OutputMode')
 # out of normalized range
