@@ -23,6 +23,7 @@ Enumerations
 Waveform Generation
   audioOscillator
   audioEnvelope
+  sweeptone
 Domain Conversion
   bark2hz
   erb2hz
