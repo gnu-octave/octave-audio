@@ -24,6 +24,7 @@ Waveform Generation
   audioOscillator
   audioEnvelope
   sweeptone
+  pinknoise
 Domain Conversion
   bark2hz
   erb2hz
