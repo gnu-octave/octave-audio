@@ -193,4 +193,5 @@ endfunction
 %!test
 %! a = mididevice(0);
 %! assert(isa(a, "octave_midi"));
+%! cnt = hasdata(a);
 

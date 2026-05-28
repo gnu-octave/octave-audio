@@ -27,3 +27,6 @@ function props = properties(this)
   # otherwise will be a syntax error, so currently using separate file for the function
   props = __properties__(this);
 endfunction
+
+%!test
+%! # tested in midimsg

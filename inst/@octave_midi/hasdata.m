@@ -37,3 +37,5 @@ function tf = hasdata(dev)
 
 endfunction
 
+%!test
+%! # no test here
