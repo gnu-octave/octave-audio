@@ -7,6 +7,7 @@ Title: Audio Toolbox
 Description: Audio and MIDI Toolbox for GNU Octave
 Categories: Midi, Audio
 Depends: octave (>= 4.0.0)
+OptionalDepends: signal
 SystemRequirements: rtmidi
 Autoload: no
 License: GPLv3+
