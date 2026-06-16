@@ -269,7 +269,7 @@ classdef AudioFileReader < handle
 
     function this = set.OutputDataType (this, data)
       if ! this.check_odt_value(data)
-        error ("Expected OutputDataType value as positive 'double', 'int16' or 'uint8'");
+        error ("Expected OutputDataType value as positive 'double', 'single', 'int16' or 'uint8'");
       endif
       this.OutputDataType = data;
     endfunction
@@ -288,6 +288,8 @@ classdef AudioFileReader < handle
         data = int16(data*32767);
       elseif strcmp(this.OutputDataType,"uint8")
         data = int8((data*127) + 127);
+      elseif strcmp(this.OutputDataType,"single")
+        data = single(data);
       endif
     endfunction
 
