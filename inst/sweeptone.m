@@ -16,9 +16,9 @@
 
 ## -*- texinfo -*- 
 ## @deftypefn {} {@var{excitation} =} sweeptone()
-## @deftypefnx {} {@var{excitation} =} sweeptone(@var{swDur})
-## @deftypefnx {} {@var{excitation} =} sweeptone(@var{swDur}, @var{siDur})
-## @deftypefnx {} {@var{excitation} =} sweeptone(@var{swDur}, @var{siDur}, @var{fs})
+## @deftypefnx {} {@var{excitation} =} sweeptone(@var{sweepduration})
+## @deftypefnx {} {@var{excitation} =} sweeptone(@var{sweepduration}, @var{silenceduration})
+## @deftypefnx {} {@var{excitation} =} sweeptone(@var{sweepduration}, @var{silenceduration}, @var{fs})
 ## @deftypefnx {} {@var{excitation} =} sweeptone(___, @var{propname}, @var{propvalue} @dots{})
 ## Generate an excitation signal using the exponential swept sine (ESS) technique.
 ##
@@ -26,9 +26,9 @@
 ## sample rate of 44100 Hz.
 ##
 ## @subsubheading Inputs
-## @var{swDur} - Positive scalar sweep duration (default 6)
+## @var{sweepduration} - Positive scalar sweep duration (default 6)
 ##
-## @var{siDur} - scalar silence durtation to follow the sweep (default 4)
+## @var{silenceduration} - scalar silence durtation to follow the sweep (default 4)
 ##
 ## @var{fs} - Sample frequency. (default 44100)
 ##
@@ -66,8 +66,8 @@
 ## @end deftypefn
 
 function excitation = sweeptone(varargin)
-  swDur = 6;
-  siDur = 4;
+  sweepduration = 6;
+  silenceduration = 4;
   fs = 44100;
   excitationlevel = -6;
   sweepfrequencyrange = [];
@@ -75,19 +75,19 @@ function excitation = sweeptone(varargin)
 
   # for the 1st 3 inputs, if they are scalar, assume its input of swdur, sidur and fs
   # otherwise its the start what should be properties 
-  if nargin > 0 && isscalar(varargin{1})
-    swDur = varargin{1};
-    if swDur <= 0
-      error ("Expected swDur as a > 0 scalar")
+  if nargin > 0 && isscalar (varargin{1})
+    sweepduration = varargin{1};
+    if sweepduration <= 0
+      error ("Expected sweepduration as a > 0 scalar")
     endif
     propstart = 2;
-    if nargin > 1 && isscalar(varargin{2})
-      siDur = varargin{2};
-      if siDur < 0
-        error ("Expected siDur as a >= 0 scalar")
+    if nargin > 1 && isscalar (varargin{2})
+      silenceduration = varargin{2};
+      if silenceduration < 0
+        error ("Expected silenceduration as a >= 0 scalar")
       endif
       propstart = 3;
-      if nargin > 2 && isscalar(varargin{3})
+      if nargin > 2 && isscalar (varargin{3})
         fs = varargin{3};
 	if fs <= 0
           error ("Expected fs as a positive scalar")
@@ -99,8 +99,8 @@ function excitation = sweeptone(varargin)
 
   # process any properties
   propargs = varargin(propstart:end);
-  if !isempty(propargs)
-    if mod(length(propargs), 2) != 0
+  if !isempty (propargs)
+    if mod (length (propargs), 2) != 0
       error ("expected property name, value pairs");
     endif
     if !iscellstr (propargs(1:2:length(propargs)))
@@ -108,27 +108,27 @@ function excitation = sweeptone(varargin)
     endif
 
     for idx = 1:2:length(propargs)
-      prop = lower(propargs{idx});
+      prop = lower (propargs{idx});
       val = propargs{idx+1};
       switch(prop)
         case "excitationlevel"
-          if !isscalar(val)
+          if !isscalar (val)
             error ("Expected excitationlevel as a scalar between -4 and 0");
 	  endif
 	  excitationlevel = val;
         case "sweepfrequencyrange"
-          if !isnumeric(val) || !isvector(val) || length(val) != 2
+          if !isnumeric (val) || !isvector (val) || length (val) != 2
             error ("Expected sweepfrequencyrange as a 2 element vector");
           endif
 	  sweepfrequencyrange = val;
         otherwise
-          warning("Unknown property '%s' ignored", prop);
+          warning ("Unknown property '%s' ignored", prop);
       endswitch
     endfor
   endif
 
   # no range set yet
-  if isempty(sweepfrequencyrange)
+  if isempty (sweepfrequencyrange)
     sweepfrequencyrange = [10 22000];
     if sweepfrequencyrange(2) > fs/2
       sweepfrequencyrange(2) = fs/2;
@@ -140,13 +140,13 @@ function excitation = sweeptone(varargin)
   f2 = sweepfrequencyrange(2);
 
   # Sweep duration samples
-  N = round (swDur * fs);
+  N = round (sweepduration * fs);
 
   # Time vector
   t_sweep = (0:N - 1).' / fs;
 
   # ESS parameter
-  L = swDur / log (f2 / f1);
+  L = sweepduration / log (f2 / f1);
 
   # ESS phase
   phase = 2 * pi * f1 * L ...
@@ -160,10 +160,10 @@ function excitation = sweeptone(varargin)
   sweep *= gain;
 
   # Append silence
-  Ns = round (siDur * fs);
+  nsilence = round (silenceduration * fs);
 
   # Output signal is the sweep section followed by silence section
-  excitation = [sweep; zeros(Ns, 1)];
+  excitation = [sweep; zeros(nsilence, 1)];
 
 endfunction
 
