@@ -45,88 +45,86 @@
 ## @example
 ## fs = 44.1e3;
 ## duration = 10;
-## y = pinknoise(duration*fs, 2);
+## y = pinknoise (duration*fs, 2);
 ## @end example
 ##
 ## @seealso{whitenoise}
 ## @end deftypefn
 
-function y = pinknoise(varargin)
-    if nargin < 1
-      print_usage()
-    endif
+function y = pinknoise (varargin)
+  if nargin < 1
+    print_usage ()
+  endif
 
-    # Parse and get inputs
-    p = inputParser(CaseSensitive=false, FunctionName="pinknoise");
-    if nargin > 0 && isvector(varargin{1}) && length(varargin{1}) > 1
-      chk = @(x) assert(isvector(x) && length(x) == 2 && all(x > 0), "Expected sz as 2 element positive vector");
-      p.addRequired("sz", chk);
+  # Parse and get inputs
+  p = inputParser (CaseSensitive=false, FunctionName="pinknoise");
+  if nargin > 0 && isvector (varargin{1}) && length (varargin{1}) > 1
+    chk = @(x) assert(isvector(x) && length(x) == 2 && all(x > 0), "Expected sz as 2 element positive vector");
+    p.addRequired("sz", chk);
+  else
+    chk = @(x) assert(isscalar (x) && isnumeric(x) && (x >= 1), "Expected sz1 as a positive scalar");
+    p.addRequired ("sz1", chk);
+
+    # Only adding if we have a arg thats not a char,
+    # otherwise will kick into parameters when should still be positional arg input
+    if nargin >1 && !ischar (varargin{2})
+      chk = @(x) assert((isscalar(x) && isnumeric(x) && (x >= 1)), "Expected sz2 as a positive scalar");
+      p.addRequired ("sz2", chk);
+    endif
+  endif
+  chk = @(x) ischar (x) && !strcmp(x, "like");
+  p.addOptional ("typename", "double", chk);
+  chk = @(x) assert(ismatrix(x) && any(strcmp(class(x),{"single", "double"})), "Expected p as a matrix of type 'double' or 'single'");
+  p.addParameter ("like", [], chk)
+
+  p.parse (varargin{:});
+
+  if any (strcmp ("sz", p.Parameters))
+    N = p.Results.sz(1);
+    C = p.Results.sz(2);
+  else
+    N = p.Results.sz1;
+    if any (strcmp ("sz2", p.Parameters))
+      C = p.Results.sz2;
     else
-      chk = @(x) assert(isscalar (x) && isnumeric(x) && (x >= 1), "Expected sz1 as a positive scalar");
-      p.addRequired("sz1", chk);
-
-      # Only adding if we have a arg thats not a char,
-      # otherwise will kick into paramters when should still be
-      # postional arg input
-      if nargin >1 && !ischar(varargin{2})
-        chk = @(x) assert((isscalar(x) && isnumeric(x) && (x >= 1)), "Expected sz2 as a positive scalar");
-        p.addRequired("sz2", chk);
-      endif
+      C = 1;
     endif
-    #chk = @(x) assert(ischar (x) && any(strcmp(x,{"single", "double"})), "Expected typename as 'double' or 'single'");
-    chk = @(x) ischar (x) && !strcmp(x, "like");
-    p.addOptional("typename", "double", chk);
-    chk = @(x) assert(ismatrix(x) && any(strcmp(class(x),{"single", "double"})), "Expected p as a matrix of type 'double' or 'single'");
-    p.addParameter("like", [], chk)
+  endif
 
-    p.parse(varargin{:});
+  typename = p.Results.typename;
+  # check type is actually good
+  if !any (strcmp (typename, {"single", "double"}))
+    error("Expected typename as 'double' or 'single'")
+  endif
 
-    if any(strcmp("sz", p.Parameters))
-      N = p.Results.sz(1);
-      C = p.Results.sz(2);
-    else
-      N = p.Results.sz1;
-      if any(strcmp("sz2", p.Parameters))
-        C = p.Results.sz2;
-      else
-        C = 1;
-      endif
-    endif
+  if ! isempty (p.Results.like)
+    typename = class(p.Results.like);
+  endif
 
-    typename = p.Results.typename;
-    # check type is actually good
-    if !any(strcmp(typename,{"single", "double"}))
-      error("Expected typename as 'double' or 'single'")
-    endif
+  # We have a dependancy on some signal functions
+  # so load if we dont have yet
+  if !exist ("sosfilt")
+    pkg load signal;
+  endif
 
-    if ! isempty(p.Results.like)
-      typename = class(p.Results.like);
-    endif
+  # Generate uniform white noise of the required size
+  white_noise = 2 * rand (N, C) - 1;
 
-    # We have a dependancy on some signal functions
-    # so load if we dont have yet
-    if !exist("sosfilt")
-      pkg load signal;
-    endif
+  # create pinking filter coefficients for approximation of -3dB/octave
+  B = [0.049922035, -0.095993537, 0.050612699, -0.004408786];
+  A = [1, -2.494956002, 2.017265875, -0.522189400];
+  sos = zp2sos (roots (B), roots (A), 1);
 
-    # Generate uniform white noise of the required size
-    white_noise = 2 * rand(N, C) - 1;
+  # Filter the white noise
+  pink_raw = sosfilt (sos, white_noise);
 
-    # create pinking filter coefficients for approximation of -3dB/octave [1]
-    B = [0.049922035, -0.095993537, 0.050612699, -0.004408786];
-    A = [1, -2.494956002, 2.017265875, -0.522189400];
-    sos = zp2sos(roots(B), roots(A), 1);
+  # scale to [-1, 1])
+  y = pink_raw / max (abs (pink_raw(:)));
 
-    # Filter the white noise
-    pink_raw = sosfilt(sos, white_noise);
-
-    # scale to [-1, 1])
-    y = pink_raw / max(abs(pink_raw(:)));
-
-    # Convert to single if we need to
-    if strcmp(typename, "single")
-      y = single(y);
-    endif
+  # Convert to single if we need to
+  if strcmp (typename, "single")
+    y = single (y);
+  endif
 
 endfunction
 
