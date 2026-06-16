@@ -285,9 +285,9 @@ classdef AudioFileReader < handle
   methods (Access = private)
     function data = _scale(this, data)
       if strcmp(this.OutputDataType,"int16")
-        data = int16(data*32767);
+        data = int16(data*32768);
       elseif strcmp(this.OutputDataType,"uint8")
-        data = int8((data*127) + 127);
+        data = uint8((data*128) + 128);
       elseif strcmp(this.OutputDataType,"single")
         data = single(data);
       endif
