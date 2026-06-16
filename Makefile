@@ -174,6 +174,9 @@ endif
 	# remove dev stuff
 	cd "$@" && $(RM) -rf "devel" 
 	# && $(RM) -f doc/mkfuncdocs.py doc/mkqhcp.py
+ifneq (,$(wildcard doc/mkdoccache.m))
+	$(MAKE) -C "$@" doc-cache
+endif
 	${FIX_PERMISSIONS} "$@"
 
 .PHONY: docs
@@ -219,6 +222,15 @@ doc/$(package).info: doc/$(package).texi doc/functions.texi doc/version.texi
 
 doc/functions.texi: $(release_dir_dep)
 	cd doc && ./mkfuncdocs.py --src-dir=../inst/ ../INDEX | $(SED) 's/@seealso/@xseealso/g' > functions.texi
+
+# Doc cache
+.PHONY: doc-cache clean-doc-cache
+doc-cache:
+	cd doc && ./mkdoccache.m ../inst
+
+clean-doc-cache:
+	$(RM) -f inst/doc-cache src/doc-cache
+
 
 
 run_in_place = $(OCTAVE) --eval ' pkg ("local_list", "$(package_list)"); ' \
@@ -314,7 +326,7 @@ check: $(install_stamp)
 
 .PHONY: clean
 
-clean: clean-tarballs clean-unpacked-release clean-install clean-docs
+clean: clean-tarballs clean-unpacked-release clean-install clean-docs clean-doc-cache
 	test -e inst/test && rmdir inst/test || true
 	test -e fntests.log && rm -f fntests.log || true
 	@echo "## Removing target directory (if empty)..."
