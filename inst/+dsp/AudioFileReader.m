@@ -141,21 +141,21 @@ classdef AudioFileReader < handle
   endproperties
 
   methods (Access = public)
-    function this = AudioFileReader(varargin)
+    function this = AudioFileReader (varargin)
       # parse args
       if nargin == 1
-        if ! this.check_filename_value(varargin{1})
+        if ! this.check_filename_value (varargin{1})
           error ("Expected filename as string");
         endif
         this.Filename = varargin{1};
       elseif nargin > 1
         # properties instead ?
-        p = inputParser(CaseSensitive=false, FunctionName='dsp.AudioFileReader');
-        p.addParameter('OutputDataType', this.OutputDataType, this.check_odt_value);
-        p.addParameter('PlayCount', this.PlayCount, this.check_playcount_value);
-        p.addParameter('Filename', this.Filename, this.check_filename_value);
-        p.addParameter('ReadRange', this.ReadRange, this.check_readrange_value);
-        p.addParameter('SamplesPerFrame', this.SamplesPerFrame, this.check_spf_value);
+        p = inputParser (CaseSensitive=false, FunctionName='dsp.AudioFileReader');
+        p.addParameter ('OutputDataType', this.OutputDataType, this.check_odt_value);
+        p.addParameter ('PlayCount', this.PlayCount, this.check_playcount_value);
+        p.addParameter ('Filename', this.Filename, this.check_filename_value);
+        p.addParameter ('ReadRange', this.ReadRange, this.check_readrange_value);
+        p.addParameter ('SamplesPerFrame', this.SamplesPerFrame, this.check_spf_value);
 
         p.parse(varargin{:})
 
@@ -238,44 +238,44 @@ classdef AudioFileReader < handle
       this._rundata.pos = 0;
     endfunction
 
-    function varargout = subsref(this, S)
+    function varargout = subsref (this, S)
       if nargin == 1 || (S(1).type == "()" && isempty(S(1).subs))
         # ofr ()
 	S = S(2:end);
-	[y,  eof] = step(this, 1);
+	[y,  eof] = step (this, 1);
 	varargout{1} = y;
 	varargout{2} = eof;
 	return;
       endif
-      varargout{1} = builtin('subsref',this, S);
+      varargout{1} = builtin ('subsref',this, S);
     endfunction
 
     function this = set.PlayCount (this, data)
-      if ! this.check_playcount_value(data)
+      if ! this.check_playcount_value (data)
         error ("Expected PlayCOunt value as positive numeric");
       endif
-      this.PlayCount = fix(data);
+      this.PlayCount = fix (data);
     endfunction
 
     function this = set.Filename (this, data)
-      if ! this.check_filename_value(data)
+      if ! this.check_filename_value (data)
         error ("Expected Filename value as string");
       endif
-      if !strcmp(this.Filename, data)
+      if !strcmp (this.Filename, data)
         this.Filename = data;
-	this._init_data();
+	this._init_data ();
       endif
     endfunction
 
     function this = set.OutputDataType (this, data)
-      if ! this.check_odt_value(data)
+      if ! this.check_odt_value (data)
         error ("Expected OutputDataType value as positive 'double', 'single', 'int16' or 'uint8'");
       endif
       this.OutputDataType = data;
     endfunction
  
     function this = set.SamplesPerFrame (this, data)
-      if ! this.check_spf_value(data)
+      if ! this.check_spf_value (data)
         error ("Expected SamplesPerFrame value as positive number");
       endif
       this.SamplesPerFrame = data;
@@ -283,31 +283,31 @@ classdef AudioFileReader < handle
   endmethods
 
   methods (Access = private)
-    function data = _scale(this, data)
-      if strcmp(this.OutputDataType,"int16")
-        data = int16(data*32768);
-      elseif strcmp(this.OutputDataType,"uint8")
-        data = uint8((data*128) + 128);
-      elseif strcmp(this.OutputDataType,"single")
-        data = single(data);
+    function data = _scale (this, data)
+      if strcmp (this.OutputDataType,"int16")
+        data = int16 (data*32768);
+      elseif strcmp (this.OutputDataType,"uint8")
+        data = uint8 ((data*128) + 128);
+      elseif strcmp (this.OutputDataType,"single")
+        data = single (data);
       endif
     endfunction
 
-    function this = _init_data(this)
-      if !isempty(this.Filename)
-        ainfo = audioinfo(this.Filename);
-        [data, sr] = audioread(this.Filename, this.ReadRange, this.OutputDataType);
+    function this = _init_data (this)
+      if !isempty (this.Filename)
+        ainfo = audioinfo (this.Filename);
+        [data, sr] = audioread (this.Filename, this.ReadRange);
       else
         ainfo = {};
 	data = [];
 	sr = -1;
       endif
-      ainfo.TotalSamples = rows(data);
+      ainfo.TotalSamples = rows (data);
       this._wavedata = struct ("data", data, "info", ainfo);
-      this._rundata = struct("is_done",false, "play_count", 0, "pos", 0);
+      this._rundata = struct ("is_done",false, "play_count", 0, "pos", 0);
       this.SampleRate = sr;
-      this.NumChannels = columns(this._wavedata.data);
-      this.TotalSamples = rows(this._wavedata.data);
+      this.NumChannels = columns (this._wavedata.data);
+      this.TotalSamples = rows (this._wavedata.data);
       this.TotalDuration = (this.TotalSamples / sr);
     endfunction
   endmethods
