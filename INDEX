@@ -34,3 +34,5 @@ Domain Conversion
   hz2mel
   phon2sone
   sone2phon
+Audio File I/O
+  dsp.AudioFileReader
