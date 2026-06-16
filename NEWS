@@ -1,6 +1,22 @@
 Summary of important user-visible changes for releases of the audio package
 
 ===============================================================================
+audio-2.0.12   Release Date: 2026-06-16
+===============================================================================
+
+  ** NEW FUNCTIONS:
+     - audioEnvelope
+     - sweeptone
+     - pinknoise
+     - dsp.AudioFileReader
+
+  ** minor updates to documentation
+
+  ** added signal as an optional depends
+
+  ** updates for Octave 12+ compatibility
+
+===============================================================================
 audio-2.0.11   Release Date: 2026-03-16
 ===============================================================================
 
