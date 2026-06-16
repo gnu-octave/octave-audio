@@ -3,7 +3,7 @@ layout: "default"
 permalink: "/news/"
 title: "Audio Toolkit - News"
 pkg_name: "audio"
-version: "2.0.11"
+version: "2.0.12"
 description: "Audio and MIDI Toolbox for GNU Octave"
 navigation:
 - id: "overview"
@@ -20,6 +20,22 @@ navigation:
 ---
 <pre>
 Summary of important user-visible changes for releases of the audio package
+
+===============================================================================
+audio-2.0.12   Release Date: 2026-06-16
+===============================================================================
+
+  ** NEW FUNCTIONS:
+     - audioEnvelope
+     - sweeptone
+     - pinknoise
+     - dsp.AudioFileReader
+
+  ** minor updates to documentation
+
+  ** added signal as an optional depends
+
+  ** updates for Octave 12+ compatibility
 
 ===============================================================================
 audio-2.0.11   Release Date: 2026-03-16

@@ -3,7 +3,7 @@ layout: "default"
 permalink: "/manual/"
 title: "Audio Toolkit - Manual"
 pkg_name: "audio"
-version: "2.0.11"
+version: "2.0.12"
 description: "Audio and MIDI Toolbox for GNU Octave"
 navigation:
 - id: "overview"
@@ -81,7 +81,10 @@ navigation:
     </ul></li>
     <li><a id="toc-Waveform-Generation-1" href="#Waveform-Generation">3.5 Waveform Generation</a>
     <ul class="toc-numbered-mark">
-      <li><a id="toc-audioOscillator" href="#audioOscillator">3.5.1 audioOscillator</a></li>
+      <li><a id="toc-audioEnvelope" href="#audioEnvelope">3.5.1 audioEnvelope</a></li>
+      <li><a id="toc-audioOscillator" href="#audioOscillator">3.5.2 audioOscillator</a></li>
+      <li><a id="toc-pinknoise" href="#pinknoise">3.5.3 pinknoise</a></li>
+      <li><a id="toc-sweeptone" href="#sweeptone">3.5.4 sweeptone</a></li>
     </ul></li>
     <li><a id="toc-Domain-Conversion" href="#Domain-Conversion">3.6 Domain Conversion</a>
     <ul class="toc-numbered-mark">
@@ -93,6 +96,10 @@ navigation:
       <li><a id="toc-mel2hz" href="#mel2hz">3.6.6 mel2hz</a></li>
       <li><a id="toc-phon2sone" href="#phon2sone">3.6.7 phon2sone</a></li>
       <li><a id="toc-sone2phon" href="#sone2phon">3.6.8 sone2phon</a></li>
+    </ul></li>
+    <li><a id="toc-Audio-File-I_002fO" href="#Audio-File-I_002fO">3.7 Audio File I/O</a>
+    <ul class="toc-numbered-mark">
+      <li><a id="toc-dsp_002eAudioFileReader" href="#dsp_002eAudioFileReader">3.7.1 dsp.AudioFileReader</a></li>
     </ul></li>
   </ul></li>
   <li><a id="toc-GNU-General-Public-License" href="#Copying">Appendix A GNU General Public License</a></li>
@@ -148,7 +155,7 @@ octave-forge using the following command within <abbr class="acronym">GNU</abbr>
 <abbr class="acronym">GNU</abbr> Octave, the package can be installed using the following command within <abbr class="acronym">GNU</abbr> Octave:
 </p>
 <div class="example">
-<pre class="example-preformatted">pkg install audio-2.0.11.tar.gz
+<pre class="example-preformatted">pkg install audio-2.0.12.tar.gz
 </pre></div>
 </div>
 <div class="section-level-extent" id="Loading">
@@ -889,8 +896,50 @@ endwhile
 <div class="section-level-extent" id="Waveform-Generation">
 <h3 class="section" id="Waveform-Generation-2">3.5 Waveform Generation</h3>
 <a class="index-entry-id" id="index-Waveform-Generation-1"></a>
+<div class="subsection-level-extent" id="audioEnvelope">
+<h4 class="subsection">3.5.1 audioEnvelope</h4>
+<a class="index-entry-id" id="index-audioEnvelope"></a>
+<dl class="first-deftypefn def-block">
+<dt class="deftypefn def-line" id="index-audioEnvelope_0028audiodata_0029"><span><code class="def-type">[<var class="var">minenv</var> ,<var class="var">maxenv</var>, <var class="var">loc</var>, <var class="var">fs</var>] =</code> <strong class="def-name">audioEnvelope(audiodata)</strong></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-audioEnvelope_0028filename_0029"><span><code class="def-type">[<var class="var">minenv</var> ,<var class="var">maxenv</var>, <var class="var">loc</var>, <var class="var">fs</var>] =</code> <strong class="def-name">audioEnvelope(filename)</strong></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-audioEnvelope_0028_005f_005f_005f_002c"><span><code class="def-type">[<var class="var">minenv</var> ,<var class="var">maxenv</var>, <var class="var">loc</var>, <var class="var">fs</var>] =</code> <strong class="def-name">audioEnvelope(___,</strong> <code class="def-code-arguments"><var class="var">propname</var>, <var class="var">propvalue</var> &hellip;)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-audioEnvelope_0028_005f_005f_005f_0029"><span><strong class="def-name">audioEnvelope(___)</strong></span></dt>
+<dd><p>calculate envelope information for a audio signal.
+</p>
+<h4 class="subsubheading" id="Inputs-16">Inputs</h4>
+<p><var class="var">audiodata</var> - input data, as a matrix or column vector where each column is a channel.
+</p>
+<p><var class="var">filename</var> - input audio file to read.
+</p>
+<p># <var class="var">propname</var>, <var class="var">propvalue</var> - property name/value pairs.
+</p>
+<p>Known properties are:
+</p><dl class="table">
+<dt>NumPoints</dt>
+<dd><p>Number of points that make up each envelop (default 1000)
+</p></dd>
+<dt>SampleRate</dt>
+<dd><p>Samplerate of the input data. When a filename is specified, sample
+ rate is taken from the file.
+</p></dd>
+<dt>Range</dt>
+<dd><p>A 2 element vector for the start,end range of input signal to be used.
+</p></dd>
+</dl>
+<h4 class="subsubheading" id="Outputs-16">Outputs</h4>
+<p><var class="var">minenv</var> - minimum values of the envelope as a NumPoints-by-C matrix, where C is the number of channels in the input signal.
+</p>
+<p><var class="var">maxenv</var> - maximum values of the envelope as a NumPoints-by-C matrix, where C is the number of channels in the input signal.
+</p>
+<p><var class="var">loc</var> - Index into the audioodata for each frame.
+</p>
+<p><var class="var">fs</var> - Sample rate. If the input is audiodata, and no sample rate option was provided, fs will be 1.
+</p>
+<p><strong class="strong">See also:</strong> audioread, plot.
+</p></dd></dl>
+</div>
 <div class="subsection-level-extent" id="audioOscillator">
-<h4 class="subsection">3.5.1 audioOscillator</h4>
+<h4 class="subsection">3.5.2 audioOscillator</h4>
 <a class="index-entry-id" id="index-audioOscillator"></a>
 <dl class="first-deftypefn def-block">
 <dt class="deftypefn def-line" id="index-audioOscillator-1"><span><strong class="def-name">audioOscillator</strong></span></dt>
@@ -904,7 +953,7 @@ endwhile
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-audioOscillator-5"><span><code class="def-type"><var class="var">obj</var> =</code> <strong class="def-name">audioOscillator</strong> <code class="def-code-arguments">(__, <var class="var">propertyname</var>, <var class="var">propertyvalue</var>)</code></span></dt>
 <dd><p>Create a audioOscillator object
 </p>
-<h4 class="subsubheading" id="Inputs-16">Inputs</h4>
+<h4 class="subsubheading" id="Inputs-17">Inputs</h4>
 <p><var class="var">signalTypeValue</var> - signal type of &quot;sine&quot; (default), &quot;square&quot;, &quot;sawtooth&quot;.<br>
 <var class="var">frequencyValue</var> - hz frequency value of waveform (default 100).<br>
 <var class="var">propertyname</var>, <var class="var">propertyvalue</var> - properties to set on the object.
@@ -945,7 +994,7 @@ endwhile
 <dd><p>Output data type of &rsquo;single&rsquo; or &rsquo;double&rsquo; (default &rsquo;double&rsquo;)
 </p></dd>
 </dl>
-<h4 class="subsubheading" id="Outputs-16">Outputs</h4>
+<h4 class="subsubheading" id="Outputs-17">Outputs</h4>
 <p><var class="var">obj</var> - signalGenerator object
 </p>
 <h4 class="subsubheading" id="Examples-12">Examples</h4>
@@ -964,22 +1013,113 @@ endwhile
 <dt class="deftypefn def-line" id="index-obj_0028_0029"><span><code class="def-type"><var class="var">data</var> =</code> <strong class="def-name"><var class="var">obj</var>()</strong></span></dt>
 <dd><p>Generate a frame of waveform data from the generator function
 </p>
-<h4 class="subsubheading" id="Inputs-17">Inputs</h4>
+<h4 class="subsubheading" id="Inputs-18">Inputs</h4>
 <p><var class="var">obj</var> - signalGenerator object
 </p>
-<h4 class="subsubheading" id="Outputs-17">Outputs</h4>
+<h4 class="subsubheading" id="Outputs-18">Outputs</h4>
 <p><var class="var">data</var> - waveform data
 </p></dd></dl>
 <dl class="first-deftypefn def-block">
 <dt class="deftypefn def-line" id="index-release_0028obj_0029"><span><strong class="def-name">release(<var class="var">obj</var>)</strong></span></dt>
 <dd><p>Release resources of generator
 </p>
-<h4 class="subsubheading" id="Inputs-18">Inputs</h4>
+<h4 class="subsubheading" id="Inputs-19">Inputs</h4>
 <p><var class="var">obj</var> - signalGenerator object
 </p>
-<h4 class="subsubheading" id="Outputs-18">Outputs</h4>
+<h4 class="subsubheading" id="Outputs-19">Outputs</h4>
 <p>None
 </p></dd></dl>
+</div>
+<div class="subsection-level-extent" id="pinknoise">
+<h4 class="subsection">3.5.3 pinknoise</h4>
+<a class="index-entry-id" id="index-pinknoise"></a>
+<dl class="first-deftypefn def-block">
+<dt class="deftypefn def-line" id="index-pinknoise_0028n_0029"><span><code class="def-type"><var class="var">X</var> =</code> <strong class="def-name">pinknoise(<var class="var">n</var>)</strong></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-pinknoise_0028sz_0029"><span><code class="def-type"><var class="var">X</var> =</code> <strong class="def-name">pinknoise(<var class="var">sz</var>)</strong></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-pinknoise_0028sz1_002c"><span><code class="def-type"><var class="var">X</var> =</code> <strong class="def-name">pinknoise(<var class="var">sz1</var>,</strong> <code class="def-code-arguments"><var class="var">sz2</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-pinknoise_0028_005f_005f_005f_002c"><span><code class="def-type"><var class="var">X</var> =</code> <strong class="def-name">pinknoise(___,</strong> <code class="def-code-arguments"><var class="var">typename</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-pinknoise_0028_005f_005f_005f_002c-1"><span><code class="def-type"><var class="var">X</var> =</code> <strong class="def-name">pinknoise(___,</strong> <code class="def-code-arguments">'like', <var class="var">p</var>)</code></span></dt>
+<dd><p>Create pinknoise using random numbers through a series of randomly initiated SOS filters..
+</p>
+<p>Note: this function uses zp2sos and sosfilt from the signal package, which will be loaded
+ as part of calling this function.
+</p>
+<h4 class="subsubheading" id="Inputs-20">Inputs</h4>
+<p><var class="var">n</var> - scalar value for length of the pinknoise
+</p>
+<p><var class="var">sz</var> - A 2 element vector for [length, number_of_channels]
+</p>
+<p><var class="var">sz1</var>, <var class="var">sz2</var> - scalar length and number of channels.
+</p>
+<p><var class="var">typename</var> - datatype to create - &rsquo;double&rsquo; or &rsquo;single&rsquo;.
+</p>
+<p><var class="var">p</var> - matrix of data to use class type &rsquo;double&rsquo; or &rsquo;single&rsquo;.
+</p>
+<h4 class="subsubheading" id="Outputs-20">Outputs</h4>
+<p><var class="var">X</var> - pinknoise output
+</p>
+<h4 class="subsubheading" id="Examples-13">Examples</h4>
+<p>Create 10 second 2 channel pink noise waveform at 44.1kHz
+</p>
+<div class="example">
+<pre class="example-preformatted"> fs = 44.1e3;
+ duration = 10;
+ y = pinknoise (duration*fs, 2);
+</pre></div>
+<p><strong class="strong">See also:</strong> whitenoise.
+</p></dd></dl>
+</div>
+<div class="subsection-level-extent" id="sweeptone">
+<h4 class="subsection">3.5.4 sweeptone</h4>
+<a class="index-entry-id" id="index-sweeptone"></a>
+<dl class="first-deftypefn def-block">
+<dt class="deftypefn def-line" id="index-sweeptone_0028_0029"><span><code class="def-type"><var class="var">excitation</var> =</code> <strong class="def-name">sweeptone()</strong></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-sweeptone_0028sweepduration_0029"><span><code class="def-type"><var class="var">excitation</var> =</code> <strong class="def-name">sweeptone(<var class="var">sweepduration</var>)</strong></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-sweeptone_0028sweepduration_002c"><span><code class="def-type"><var class="var">excitation</var> =</code> <strong class="def-name">sweeptone(<var class="var">sweepduration</var>,</strong> <code class="def-code-arguments"><var class="var">silenceduration</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-sweeptone_0028sweepduration_002c-1"><span><code class="def-type"><var class="var">excitation</var> =</code> <strong class="def-name">sweeptone(<var class="var">sweepduration</var>,</strong> <code class="def-code-arguments"><var class="var">silenceduration</var>, <var class="var">fs</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-sweeptone_0028_005f_005f_005f_002c"><span><code class="def-type"><var class="var">excitation</var> =</code> <strong class="def-name">sweeptone(___,</strong> <code class="def-code-arguments"><var class="var">propname</var>, <var class="var">propvalue</var> &hellip;)</code></span></dt>
+<dd><p>Generate an excitation signal using the exponential swept sine (ESS) technique.
+</p>
+<p>By default, the signal has a 6-second duration, followed by 4 seconds of silence, for a
+ sample rate of 44100 Hz.
+</p>
+<h4 class="subsubheading" id="Inputs-21">Inputs</h4>
+<p><var class="var">sweepduration</var> - Positive scalar sweep duration (default 6)
+</p>
+<p><var class="var">silenceduration</var> - scalar silence durtation to follow the sweep (default 4)
+</p>
+<p><var class="var">fs</var> - Sample frequency. (default 44100)
+</p>
+<p># <var class="var">propname</var>, <var class="var">propvalue</var> - property name/value pairs.
+</p>
+<p>Known properties are:
+</p><dl class="table">
+<dt>ExcitationLevel</dt>
+<dd><p>Excitation Level scalar in the range of [-42, 0] (default -6)
+</p></dd>
+<dt>SweepFrequencyRange</dt>
+<dd><p>2 element vector for sweep frequency range (default [10 22000]).
+ Max value can be fs/2.
+</p></dd>
+</dl>
+<h4 class="subsubheading" id="Outputs-21">Outputs</h4>
+<p><var class="var">excitation</var> - Output signal using ESS technique.
+</p>
+<h4 class="subsubheading" id="Examples-14">Examples</h4>
+<p>Create a sweep tone excitation signal by using the sweeptone function.
+ sweep duration of 2 seconds, 1 second silence, sample frequency of 44100.
+ Then plot it.
+</p>
+<div class="example">
+<pre class="example-preformatted"> excitation = sweeptone (2, 1, 44100);
+ plot(excitation)
+</pre></div>
+<h4 class="subsubheading" id="References">References</h4>
+<p>[1] Farina, Angelo.
+  <cite class="cite">Advancements in Impulse Response Measurements by Sine Sweeps.</cite>
+ Presented at the Audio Engineering Society 122nd Convention, Vienna, Austria, 2007.
+</p>
+</dd></dl>
 <hr>
 </div>
 </div>
@@ -993,13 +1133,13 @@ endwhile
 <dt class="deftypefn def-line" id="index-bark2hz-1"><span><code class="def-type"><var class="var">hz</var> =</code> <strong class="def-name">bark2hz</strong> <code class="def-code-arguments">(<var class="var">bark</var>)</code></span></dt>
 <dd><p>Convert equivalent Bark Frequency to Hz.
 </p>
-<h4 class="subsubheading" id="Inputs-19">Inputs</h4>
+<h4 class="subsubheading" id="Inputs-22">Inputs</h4>
 <p><var class="var">bark</var> - input frequency in bark.
 </p>
-<h4 class="subsubheading" id="Outputs-19">Outputs</h4>
+<h4 class="subsubheading" id="Outputs-22">Outputs</h4>
 <p><var class="var">hz</var> - Output frequency in Hz.
 </p>
-<h4 class="subsubheading" id="References">References</h4>
+<h4 class="subsubheading" id="References-1">References</h4>
 <p>Traunmüller, Hartmut. <cite class="cite">Analytical Expressions for the Tonotopic Sensory Scale.
  Journal of the Acoustical Society of America. Vol. 88, Issue 1, 1990</cite>
 </p>
@@ -1013,13 +1153,13 @@ endwhile
 <dt class="deftypefn def-line" id="index-erb2hz-1"><span><code class="def-type"><var class="var">hz</var> =</code> <strong class="def-name">erb2hz</strong> <code class="def-code-arguments">(<var class="var">erb</var>)</code></span></dt>
 <dd><p>Convert equivalent rectangular bandwidth (ERB) to Hz.
 </p>
-<h4 class="subsubheading" id="Inputs-20">Inputs</h4>
+<h4 class="subsubheading" id="Inputs-23">Inputs</h4>
 <p><var class="var">erb</var> - input frequency in erb.
 </p>
-<h4 class="subsubheading" id="Outputs-20">Outputs</h4>
+<h4 class="subsubheading" id="Outputs-23">Outputs</h4>
 <p><var class="var">hz</var> - Output frequency in Hz.
 </p>
-<h4 class="subsubheading" id="References-1">References</h4>
+<h4 class="subsubheading" id="References-2">References</h4>
 <p>Glasberg and Moore. <cite class="cite">Derivation of Auditory Filter Shapes from Notched-Noise Data.
  Hearing Research. Vol. 47, 1990</cite>
 </p>
@@ -1033,18 +1173,18 @@ endwhile
 <dt class="deftypefn def-line" id="index-hz2bark-1"><span><code class="def-type"><var class="var">bark</var> =</code> <strong class="def-name">hz2bark</strong> <code class="def-code-arguments">(<var class="var">hz</var>)</code></span></dt>
 <dd><p>Convert hz to equivalent bark frequency
 </p>
-<h4 class="subsubheading" id="Inputs-21">Inputs</h4>
+<h4 class="subsubheading" id="Inputs-24">Inputs</h4>
 <p><var class="var">hz</var> - input frequency in Hz.
 </p>
-<h4 class="subsubheading" id="Outputs-21">Outputs</h4>
+<h4 class="subsubheading" id="Outputs-24">Outputs</h4>
 <p><var class="var">bark</var> - Output frequency as a bark value
 </p>
-<h4 class="subsubheading" id="Examples-13">Examples</h4>
+<h4 class="subsubheading" id="Examples-15">Examples</h4>
 <p>Convert 4000 Hz to erb
 </p><div class="example">
 <pre class="example-preformatted"><code class="code">erb = hz2erb(4000)</code>
 </pre></div>
-<h4 class="subsubheading" id="References-2">References</h4>
+<h4 class="subsubheading" id="References-3">References</h4>
 <p>Traunmüller, Hartmut. <cite class="cite">Analytical Expressions for the Tonotopic Sensory Scale.
  Journal of the Acoustical Society of America. Vol. 88, Issue 1, 1990</cite>
 </p>
@@ -1058,13 +1198,13 @@ endwhile
 <dt class="deftypefn def-line" id="index-hz2erb-1"><span><code class="def-type"><var class="var">erb</var> =</code> <strong class="def-name">hz2erb</strong> <code class="def-code-arguments">(<var class="var">hz</var>)</code></span></dt>
 <dd><p>Convert hz to equivalent rectangular bandwidth (ERB)
 </p>
-<h4 class="subsubheading" id="Inputs-22">Inputs</h4>
+<h4 class="subsubheading" id="Inputs-25">Inputs</h4>
 <p><var class="var">hz</var> - input frequency in Hz.
 </p>
-<h4 class="subsubheading" id="Outputs-22">Outputs</h4>
+<h4 class="subsubheading" id="Outputs-25">Outputs</h4>
 <p><var class="var">erb</var> - Output frequency as a erb value
 </p>
-<h4 class="subsubheading" id="Examples-14">Examples</h4>
+<h4 class="subsubheading" id="Examples-16">Examples</h4>
 <p>Convert 4000 Hz to erb
 </p><div class="example">
 <pre class="example-preformatted"><code class="code">erb = hz2erb(4000)</code>
@@ -1073,7 +1213,7 @@ endwhile
 </p><div class="example">
 <pre class="example-preformatted"><code class="code">erb = hz2erb(4000:100:5000)</code>
 </pre></div>
-<h4 class="subsubheading" id="References-3">References</h4>
+<h4 class="subsubheading" id="References-4">References</h4>
 <p>Glasberg and Moore. <cite class="cite">Derivation of Auditory Filter Shapes from Notched-Noise Data.
  Hearing Research. Vol. 47, 1990</cite>
 </p>
@@ -1087,13 +1227,13 @@ endwhile
 <dt class="deftypefn def-line" id="index-hz2mel-1"><span><code class="def-type"><var class="var">mel</var> =</code> <strong class="def-name">hz2mel</strong> <code class="def-code-arguments">(<var class="var">hz</var>)</code></span></dt>
 <dd><p>Convert hz to equivalent mel frequency.
 </p>
-<h4 class="subsubheading" id="Inputs-23">Inputs</h4>
+<h4 class="subsubheading" id="Inputs-26">Inputs</h4>
 <p><var class="var">hz</var> - input frequency in Hz.
 </p>
-<h4 class="subsubheading" id="Outputs-23">Outputs</h4>
+<h4 class="subsubheading" id="Outputs-26">Outputs</h4>
 <p><var class="var">mel</var> - Output frequency as a mel value
 </p>
-<h4 class="subsubheading" id="Examples-15">Examples</h4>
+<h4 class="subsubheading" id="Examples-17">Examples</h4>
 <p>Convert 4000 Hz to mel
 </p><div class="example">
 <pre class="example-preformatted"><code class="code">mel = hz2mel(4000)</code>
@@ -1102,7 +1242,7 @@ endwhile
 </p><div class="example">
 <pre class="example-preformatted"><code class="code">mel = hz2erb(4000:100:5000)</code>
 </pre></div>
-<h4 class="subsubheading" id="References-4">References</h4>
+<h4 class="subsubheading" id="References-5">References</h4>
 <p>O&rsquo;Shaghnessy, Douglas. <cite class="cite">Speech Communication: Human and Machine. Reading, MA:
  Addison-Wesley Publishing Company, 1987</cite>
 </p>
@@ -1116,13 +1256,13 @@ endwhile
 <dt class="deftypefn def-line" id="index-mel2hz-1"><span><code class="def-type"><var class="var">hz</var> =</code> <strong class="def-name">mel2hz</strong> <code class="def-code-arguments">(<var class="var">mel</var>)</code></span></dt>
 <dd><p>Convert equivalent mel frequency to Hz.
 </p>
-<h4 class="subsubheading" id="Inputs-24">Inputs</h4>
+<h4 class="subsubheading" id="Inputs-27">Inputs</h4>
 <p><var class="var">mel</var> - input frequency in mel.
 </p>
-<h4 class="subsubheading" id="Outputs-24">Outputs</h4>
+<h4 class="subsubheading" id="Outputs-27">Outputs</h4>
 <p><var class="var">hz</var> - Output frequency in Hz.
 </p>
-<h4 class="subsubheading" id="References-5">References</h4>
+<h4 class="subsubheading" id="References-6">References</h4>
 <p>O&rsquo;Shaghnessy, Douglas. <cite class="cite">Speech Communication: Human and Machine. Reading, MA:
  Addison-Wesley Publishing Company, 1987</cite>
 </p>
@@ -1137,7 +1277,7 @@ endwhile
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-phon2sone-2"><span><code class="def-type"><var class="var">sone</var> =</code> <strong class="def-name">phon2sone</strong> <code class="def-code-arguments">(<var class="var">phon</var>, <var class="var">standard</var>)</code></span></dt>
 <dd><p>Convert from phon to sone
 </p>
-<h4 class="subsubheading" id="Inputs-25">Inputs</h4>
+<h4 class="subsubheading" id="Inputs-28">Inputs</h4>
 <p><var class="var">phon</var> - Loudness level in phon
 </p>
 <p><var class="var">standard</var> - Standard to use in conversion. Options are
@@ -1145,15 +1285,15 @@ endwhile
 </p>
 <p>&rsquo;ISO 532-1&rsquo; is used if no standard is provided.
 </p>
-<h4 class="subsubheading" id="Outputs-25">Outputs</h4>
+<h4 class="subsubheading" id="Outputs-28">Outputs</h4>
 <p><var class="var">sone</var> - Loudness level in sone
 </p>
-<h4 class="subsubheading" id="Examples-16">Examples</h4>
+<h4 class="subsubheading" id="Examples-18">Examples</h4>
 <p>Convert 100 phon to sone
 </p><div class="example">
 <pre class="example-preformatted"><code class="code">sone = phon2sone(100)</code>
 </pre></div>
-<h4 class="subsubheading" id="References-6">References</h4>
+<h4 class="subsubheading" id="References-7">References</h4>
 <p>International Organization for Standardization., <cite class="cite">ISO 532-1 Acoustics – Methods for calculating loudness – Part 1: Zwicker method.</cite>
 </p>
 <p>International Organization for Standardization., <cite class="cite">ISO 532-2 Acoustics – Methods for calculating loudness – Part 2: Moore-Glasberg method.</cite>
@@ -1171,7 +1311,7 @@ endwhile
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-sone2phon-2"><span><code class="def-type"><var class="var">phon</var> =</code> <strong class="def-name">sone2phon</strong> <code class="def-code-arguments">(<var class="var">sone</var>, <var class="var">standard</var>)</code></span></dt>
 <dd><p>Convert from sone to phon.
 </p>
-<h4 class="subsubheading" id="Inputs-26">Inputs</h4>
+<h4 class="subsubheading" id="Inputs-29">Inputs</h4>
 <p><var class="var">sone</var> - Loudness level in sone
 </p>
 <p><var class="var">standard</var> - Standard to use in conversion. Options are
@@ -1179,15 +1319,15 @@ endwhile
 </p>
 <p>&rsquo;ISO 532-1&rsquo; is used if no standard is provided.
 </p>
-<h4 class="subsubheading" id="Outputs-26">Outputs</h4>
+<h4 class="subsubheading" id="Outputs-29">Outputs</h4>
 <p><var class="var">sone</var> - Loudness level in sone
 </p>
-<h4 class="subsubheading" id="Examples-17">Examples</h4>
+<h4 class="subsubheading" id="Examples-19">Examples</h4>
 <p>Convert 100 sone to phon
 </p><div class="example">
 <pre class="example-preformatted"><code class="code">phon = sone2phon(100)</code>
 </pre></div>
-<h4 class="subsubheading" id="References-7">References</h4>
+<h4 class="subsubheading" id="References-8">References</h4>
 <p>International Organization for Standardization., <cite class="cite">ISO 532-1 Acoustics – Methods for calculating loudness – Part 1: Zwicker method.</cite>
 </p>
 <p>International Organization for Standardization., <cite class="cite">ISO 532-2 Acoustics – Methods for calculating loudness – Part 2: Moore-Glasberg method.</cite>
@@ -1195,6 +1335,114 @@ endwhile
 <p>https://sengpielaudio.com/calculatorSonephon.htm
 </p>
 <p><strong class="strong">See also:</strong> sone2phon.
+</p></dd></dl>
+<hr>
+</div>
+</div>
+<div class="section-level-extent" id="Audio-File-I_002fO">
+<h3 class="section" id="Audio-File-I_002fO-1">3.7 Audio File I/O</h3>
+<a class="index-entry-id" id="index-Audio-File-I_002fO"></a>
+<div class="subsection-level-extent" id="dsp_002eAudioFileReader">
+<h4 class="subsection">3.7.1 dsp.AudioFileReader</h4>
+<a class="index-entry-id" id="index-AudioFileReader"></a>
+<dl class="first-deftypefn def-block">
+<dt class="deftypefn def-line" id="index-dsp_002eAudioFileReader"><span><strong class="def-name">dsp.AudioFileReader</strong></span></dt>
+<dd><p>Read audio samples from a audio file
+</p></dd></dl>
+<dl class="first-deftypefn def-block">
+<dt class="deftypefn def-line" id="index-AudioFileReader-1"><span><code class="def-type"><var class="var">obj</var> =</code> <strong class="def-name">AudioFileReader</strong> <code class="def-code-arguments">()</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-AudioFileReader-2"><span><code class="def-type"><var class="var">obj</var> =</code> <strong class="def-name">AudioFileReader</strong> <code class="def-code-arguments">(<var class="var">filename</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-AudioFileReader-3"><span><code class="def-type"><var class="var">obj</var> =</code> <strong class="def-name">AudioFileReader</strong> <code class="def-code-arguments">(<var class="var">propertyname</var>, <var class="var">propertyvalue</var> &hellip;)</code></span></dt>
+<dd><p>Create a AudioFileReader object
+</p>
+<h4 class="subsubheading" id="Inputs-30">Inputs</h4>
+<p><var class="var">filename</var> - filename to read<br>
+<var class="var">propertyname</var>, <var class="var">propertyvalue</var> - properties to set on the object.
+</p>
+<h4 class="subsubheading" id="Properties-2">Properties</h4>
+<p>Known creation properties are:
+</p><dl class="table">
+<dt>Filename</dt>
+<dd><p>Filename to load data from.
+</p></dd>
+<dt>OutputDataType</dt>
+<dd><p>Output data type of &rsquo;single&rsquo; or &rsquo;double&rsquo; (default &rsquo;double&rsquo;)
+</p></dd>
+<dt>SamplesPerFrame</dt>
+<dd><p>Samples per frame as returned from () (default 1024)
+</p></dd>
+<dt>PlayCount</dt>
+<dd><p>Number of times to play the file (default 1)
+</p></dd>
+<dt>ReadRange</dt>
+<dd><p>Vector start, stop range of the samples within the file (default [1  Inf])
+</p></dd>
+</dl>
+<p>Read-only properties accessable after file is loaded:
+</p><dl class="table">
+<dt>SampleRate</dt>
+<dd><p>sample rate of the data
+</p></dd>
+<dt>NumChannels</dt>
+<dd><p>Number of channels in the data
+</p></dd>
+<dt>TotalSamples</dt>
+<dd><p>Number of samples in the data
+</p></dd>
+<dt>TotalDuration</dt>
+<dd><p>Approximate time of the data during playback
+</p></dd>
+</dl>
+<h4 class="subsubheading" id="Outputs-30">Outputs</h4>
+<p><var class="var">obj</var> - AudioFileReader object
+</p>
+<h4 class="subsubheading" id="Examples-20">Examples</h4>
+<p>Create a audio reader for reading in a sample file, and then extract each from ntil the file is
+ completed.
+</p><div class="example">
+<pre class="example-preformatted"> afr = dsp.AudioFileReader(&quot;sample.wav&quot;)
+ while ! isDone(afr)
+   data = afr();
+ endwhile
+</pre></div>
+<p>Read in a file using 4096 frames, file playes twice.
+</p><div class="example">
+<pre class="example-preformatted"> afr = dsp.AudioFileReader(&quot;Filename&quot;, &quot;sample.wav&quot;, &quot;SamplesPerFrame&quot;, 4096, &quot;PlayCount&quot;, 2)
+ while ! isDone(afr)
+   data = afr();
+ endwhile
+</pre></div>
+</dd></dl>
+<dl class="first-deftypefn def-block">
+<dt class="deftypefn def-line" id="index-obj_0028_0029-1"><span><code class="def-type">[<var class="var">data</var>. <var class="var">iseof</var>] =</code> <strong class="def-name"><var class="var">obj</var>()</strong></span></dt>
+<dd><p>Generate a frame of waveform data from the generator function,
+ iseof will be true if the end of file was reached at any point during reading the frame.
+</p>
+<h4 class="subsubheading" id="Inputs-31">Inputs</h4>
+<p><var class="var">obj</var> - AudioFileReader object
+</p>
+<h4 class="subsubheading" id="Outputs-31">Outputs</h4>
+<p><var class="var">data</var> - waveform data
+</p></dd></dl>
+<dl class="first-deftypefn def-block">
+<dt class="deftypefn def-line" id="index-release_0028obj_0029-1"><span><strong class="def-name">release(<var class="var">obj</var>)</strong></span></dt>
+<dd><p>Release resources of generator
+</p>
+<h4 class="subsubheading" id="Inputs-32">Inputs</h4>
+<p><var class="var">obj</var> - AudioFileReader object
+</p>
+<h4 class="subsubheading" id="Outputs-32">Outputs</h4>
+<p>None
+</p></dd></dl>
+<dl class="first-deftypefn def-block">
+<dt class="deftypefn def-line" id="index-isDone_0028obj_0029"><span><code class="def-type"><var class="var">tf</var> =</code> <strong class="def-name">isDone(<var class="var">obj</var>)</strong></span></dt>
+<dd><p>Return status of iterating the data.
+</p>
+<h4 class="subsubheading" id="Inputs-33">Inputs</h4>
+<p><var class="var">obj</var> - AudioFileReader object
+</p>
+<h4 class="subsubheading" id="Outputs-33">Outputs</h4>
+<p><var class="var">tf</var> -  true if at end of file and data has been iterated playcount times
 </p></dd></dl>
 <hr>
 </div>
@@ -1896,6 +2144,9 @@ first, please read <a class="url" href="http://www.gnu.org/philosophy/why-not-lg
 <tr><td></td><th class="entries-header-printindex">Index Entry</th><th class="sections-header-printindex">Section</th></tr>
 <tr><td colspan="3"><hr></td></tr>
 <tr><th id="Index_cp_letter-A">A</th></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-Audio-File-I_002fO">Audio File I/O</a></td><td class="printindex-index-section"><a href="#Audio-File-I_002fO">Audio File I/O</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-audioEnvelope">audioEnvelope</a></td><td class="printindex-index-section"><a href="#Waveform-Generation">Waveform Generation</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-AudioFileReader">AudioFileReader</a></td><td class="printindex-index-section"><a href="#Audio-File-I_002fO">Audio File I/O</a></td></tr>
 <tr><td></td><td class="printindex-index-entry"><a href="#index-audioOscillator">audioOscillator</a></td><td class="printindex-index-section"><a href="#Waveform-Generation">Waveform Generation</a></td></tr>
 <tr><td colspan="3"><hr></td></tr>
 <tr><th id="Index_cp_letter-B">B</th></tr>
@@ -1957,9 +2208,11 @@ first, please read <a class="url" href="http://www.gnu.org/philosophy/why-not-lg
 <tr><td colspan="3"><hr></td></tr>
 <tr><th id="Index_cp_letter-P">P</th></tr>
 <tr><td></td><td class="printindex-index-entry"><a href="#index-phon2sone">phon2sone</a></td><td class="printindex-index-section"><a href="#Domain-Conversion">Domain Conversion</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-pinknoise">pinknoise</a></td><td class="printindex-index-section"><a href="#Waveform-Generation">Waveform Generation</a></td></tr>
 <tr><td colspan="3"><hr></td></tr>
 <tr><th id="Index_cp_letter-S">S</th></tr>
 <tr><td></td><td class="printindex-index-entry"><a href="#index-sone2phon">sone2phon</a></td><td class="printindex-index-section"><a href="#Domain-Conversion">Domain Conversion</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-sweeptone">sweeptone</a></td><td class="printindex-index-section"><a href="#Waveform-Generation">Waveform Generation</a></td></tr>
 <tr><td colspan="3"><hr></td></tr>
 <tr><th id="Index_cp_letter-W">W</th></tr>
 <tr><td></td><td class="printindex-index-entry"><a href="#index-warranty">warranty</a></td><td class="printindex-index-section"><a href="#Copying">Copying</a></td></tr>

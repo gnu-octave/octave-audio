@@ -2,10 +2,10 @@
 layout: "default"
 permalink: "/functions/9_sone2phon/"
 pkg_name: "audio"
-pkg_version: "2.0.11"
+pkg_version: "2.0.12"
 pkg_description: "Audio and MIDI Toolbox for GNU Octave"
 title: "Audio Toolkit - sone2phon"
-category: "Domain Conversion"
+category: "Audio File I/O"
 func_name: "sone2phon"
 navigation:
 - id: "overview"
@@ -37,6 +37,10 @@ navigation:
 - id: "17_DomainConversion"
   name: "&nbsp;&nbsp;Domain Conversion"
   url: "/functions/#17_DomainConversion"
+  subitems:
+- id: "14_AudioFileIO"
+  name: "&nbsp;&nbsp;Audio File I/O"
+  url: "/functions/#14_AudioFileIO"
   subitems:
 - id: "news"
   name: "News"

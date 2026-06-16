@@ -3,7 +3,7 @@ layout: "function_list"
 permalink: "/functions/"
 title: "Audio Toolkit - Functions"
 pkg_name: "audio"
-version: "2.0.11"
+version: "2.0.12"
 description: "Audio and MIDI Toolbox for GNU Octave"
 categories:
 - id: "21_MIDIDeviceInterface"
@@ -97,6 +97,18 @@ categories:
     name: "audioOscillator"
     description: "Generate sine, sawtool and square waveforms"
     url: "/functions/15_audioOscillator/"
+  - id: "13_audioEnvelope"
+    name: "audioEnvelope"
+    description: "calculate envelope information for a audio signal."
+    url: "/functions/13_audioEnvelope/"
+  - id: "9_sweeptone"
+    name: "sweeptone"
+    description: "Generate an excitation signal using the exponential swept sine (ESS) technique."
+    url: "/functions/9_sweeptone/"
+  - id: "9_pinknoise"
+    name: "pinknoise"
+    description: "Create pinknoise using random numbers through a series of randomly initiated ..."
+    url: "/functions/9_pinknoise/"
   groups:
 - id: "17_DomainConversion"
   description: "Domain Conversion"
@@ -134,6 +146,14 @@ categories:
     description: "Convert from sone to phon."
     url: "/functions/9_sone2phon/"
   groups:
+- id: "14_AudioFileIO"
+  description: "Audio File I/O"
+  functions:
+  - id: "19_dspAudioFileReader"
+    name: "dsp.AudioFileReader"
+    description: "Read audio samples from a audio file"
+    url: "/functions/19_dspAudioFileReader/"
+  groups:
 navigation:
 - id: "overview"
   name: "Overview"
@@ -163,6 +183,10 @@ navigation:
 - id: "17_DomainConversion"
   name: "&nbsp;&nbsp;Domain Conversion"
   url: "/functions/#17_DomainConversion"
+  subitems:
+- id: "14_AudioFileIO"
+  name: "&nbsp;&nbsp;Audio File I/O"
+  url: "/functions/#14_AudioFileIO"
   subitems:
 - id: "news"
   name: "News"
