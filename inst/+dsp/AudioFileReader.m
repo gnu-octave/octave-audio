@@ -316,7 +316,7 @@ endclassdef
 %!test
 %! filename = file_in_loadpath("data/sample.wav");
 %! ainfo = audioinfo(filename);
-%! afr = AudioFileReader;
+%! afr = dsp.AudioFileReader;
 %! afr.Filename = filename;
 %! assert(afr.SamplesPerFrame, 1024);
 %! assert(afr.Filename, filename);
@@ -336,7 +336,7 @@ endclassdef
 %!test
 %! filename = file_in_loadpath("data/sample.wav");
 %! ainfo = audioinfo(filename);
-%! afr = AudioFileReader(filename);
+%! afr = dsp.AudioFileReader(filename);
 %! assert(afr.SamplesPerFrame, 1024);
 %! assert(afr.Filename, filename);
 %! assert(afr.OutputDataType, "double");
@@ -356,7 +356,7 @@ endclassdef
 %!test
 %! filename = file_in_loadpath("data/sample.wav");
 %! ainfo = audioinfo(filename);
-%! afr = AudioFileReader('Filename', filename, 'SamplesPerFrame', 5000, "OutputDataType", "int16", "ReadRange", [1 5100]);
+%! afr = dsp.AudioFileReader('Filename', filename, 'SamplesPerFrame', 5000, "OutputDataType", "int16", "ReadRange", [1 5100]);
 %! assert(afr.SamplesPerFrame, 5000);
 %! assert(afr.Filename, filename);
 %! assert(afr.OutputDataType, "int16");
@@ -379,7 +379,7 @@ endclassdef
 %!test
 %! filename = file_in_loadpath("data/sample.wav");
 %! ainfo = audioinfo(filename);
-%! afr = AudioFileReader('Filename', filename, 'SamplesPerFrame', 5000, "ReadRange", [1 5100], 'PlayCount', 2);
+%! afr = dsp.AudioFileReader('Filename', filename, 'SamplesPerFrame', 5000, "ReadRange", [1 5100], 'PlayCount', 2);
 %! assert(afr.SamplesPerFrame, 5000);
 %! assert(afr.Filename, filename);
 %! assert(afr.OutputDataType, "double");
